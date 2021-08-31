@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -42.0
+margin_top = -46.0
+margin_right = 42.0
+margin_bottom = 46.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+margin_right = 84.0
+margin_bottom = 20.0
+focus_neighbour_top = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../LoadGameButton")
+text = "New Game"
+
+[node name="LoadGameButton" type="Button" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 84.0
+margin_bottom = 44.0
+focus_neighbour_top = NodePath("../NewGameButton")
+focus_neighbour_bottom = NodePath("../SettingsButton")
+text = "Load Game"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 84.0
+margin_bottom = 68.0
+focus_neighbour_top = NodePath("../LoadGameButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 84.0
+margin_bottom = 92.0
+focus_neighbour_top = NodePath("../SettingsButton")
+focus_neighbour_bottom = NodePath("../NewGameButton")
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
