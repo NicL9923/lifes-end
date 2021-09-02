@@ -1,0 +1,1 @@
+This folder is for sprites and anything else for the game's levels
