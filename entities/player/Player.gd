@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var MAX_SPEED = 130
 var velocity = Vector2.ZERO
 onready var gun = $Position2D/Rifle
+onready var gun_muzzle = $Position2D/Rifle/Muzzle
 onready var gun_rotation_point = $Position2D
 var gun_angle
 
@@ -42,5 +43,5 @@ func gun_handling():
 	if Input.is_action_pressed("shoot"):
 		var bullet = preload("res://objects/Bullet.tscn").instance()
 		bullet.rotation = gun_angle
-		bullet.global_position = $Position2D/Rifle/Muzzle.global_position
-		add_child(bullet)
+		bullet.global_position = gun_muzzle.global_position
+		get_tree().get_root().add_child(bullet)
