@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 600
+export var speed := 600
 var velocity
 
 func _ready():
@@ -10,6 +10,7 @@ func _ready():
 func _process(delta):
 	position += velocity * delta
 
+# These two funcs below are TODO
 func _on_bullet_area_entered(area):
 	queue_free()
 	if area.is_in_group("enemy"):
