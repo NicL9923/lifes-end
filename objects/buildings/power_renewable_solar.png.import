@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/placeholderRifle.png-86fddc65b7b94a556809cd676ed0b09f.stex"
+path="res://.import/power_renewable_solar.png-878c66cd8e1d6c77f372ea6fdd872a2a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/placeholderRifle.png"
-dest_files=[ "res://.import/placeholderRifle.png-86fddc65b7b94a556809cd676ed0b09f.stex" ]
+source_file="res://objects/buildings/power_renewable_solar.png"
+dest_files=[ "res://.import/power_renewable_solar.png-878c66cd8e1d6c77f372ea6fdd872a2a.stex" ]
 
 [params]
 

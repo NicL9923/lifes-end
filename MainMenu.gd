@@ -4,14 +4,8 @@ extends Control
 func _ready():
 	$VBoxContainer/NewGameButton.grab_focus()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _on_NewGameButton_pressed():
-	get_tree().change_scene("res://TestWorld.tscn")
+	get_tree().change_scene("res://CharacterCreation.tscn")
 
 
 func _on_LoadGameButton_pressed():

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet.png-0ddff387f91a3cc8cbe5aa39e972f30e.stex"
+path="res://.import/medbay.png-2de31cd07425f147c15cffe3444caa15.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/bullet.png"
-dest_files=[ "res://.import/bullet.png-0ddff387f91a3cc8cbe5aa39e972f30e.stex" ]
+source_file="res://objects/buildings/medbay.png"
+dest_files=[ "res://.import/medbay.png-2de31cd07425f147c15cffe3444caa15.stex" ]
 
 [params]
 

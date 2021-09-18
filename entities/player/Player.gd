@@ -1,7 +1,14 @@
 extends KinematicBody2D
 class_name Player
 
-export var MAX_SPEED := 130
+export var health := 100
+export var MAX_SPEED := 150
+
+var commander_attr: int
+var biologist_attr: int
+var engineer_attr: int
+var doctor_attr: int
+
 var velocity := Vector2.ZERO
 onready var gun := $Position2D/Rifle
 onready var gun_muzzle := $Position2D/Rifle/Muzzle
@@ -10,6 +17,8 @@ var gun_angle: float
 
 func _ready():
 	Global.player = self
+	
+	# TODO: read player attributes from save data or somewhere
 
 func _physics_process(delta):
 	player_movement()
@@ -42,7 +51,7 @@ func gun_handling():
 	
 	# Gun shooting
 	if Input.is_action_pressed("shoot"):
-		var bullet := preload("res://objects/Bullet.tscn").instance()
+		var bullet := preload("res://objects/weapons/Bullet.tscn").instance()
 		bullet.rotation = gun_angle
 		bullet.global_position = gun_muzzle.global_position
 		get_tree().get_root().add_child(bullet)

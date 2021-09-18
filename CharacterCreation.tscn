@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://CharacterCreation.gd" type="Script" id=1]
+[ext_resource path="res://entities/player/PlaceholderCharacter32x32.png" type="Texture" id=2]
+
+[node name="CharacterCreation" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceholderCharacter32x32" type="Sprite" parent="."]
+position = Vector2( 507.5, 149 )
+scale = Vector2( 7.65625, 8.5625 )
+texture = ExtResource( 2 )
+
+[node name="Lbl_CharAttr" type="Label" parent="."]
+margin_left = 93.0
+margin_top = 16.0
+margin_right = 221.0
+margin_bottom = 30.0
+text = "Character Attributes"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 52.0
+margin_top = 66.0
+margin_right = 92.0
+margin_bottom = 106.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_RemPnts" type="Label" parent="HBoxContainer"]
+margin_top = 13.0
+margin_right = 132.0
+margin_bottom = 27.0
+text = "Points remaining: 18"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 51.0
+margin_top = 136.0
+margin_right = 194.0
+margin_bottom = 323.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 156.0
+margin_bottom = 24.0
+
+[node name="Lbl_Cmdr" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 78.0
+margin_bottom = 19.0
+text = "Commander"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+margin_left = 82.0
+margin_right = 156.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 52.0
+
+[node name="Lbl_Bio" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 56.0
+margin_bottom = 19.0
+text = "Biologist"
+
+[node name="SpinBox2" type="SpinBox" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 60.0
+margin_right = 134.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 80.0
+
+[node name="Lbl_Engr" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 55.0
+margin_bottom = 19.0
+text = "Engineer"
+
+[node name="SpinBox3" type="SpinBox" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 59.0
+margin_right = 133.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 156.0
+margin_bottom = 108.0
+
+[node name="Lbl_Doc" type="Label" parent="VBoxContainer/HBoxContainer4"]
+margin_top = 5.0
+margin_right = 43.0
+margin_bottom = 19.0
+text = "Doctor"
+
+[node name="SpinBox4" type="SpinBox" parent="VBoxContainer/HBoxContainer4"]
+margin_left = 47.0
+margin_right = 121.0
+margin_bottom = 24.0
+
+[node name="Launch Button" type="Button" parent="."]
+margin_left = 454.0
+margin_top = 307.0
+margin_right = 562.0
+margin_bottom = 340.0
+text = "LAUNCH ->"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Launch Button" to="." method="_on_Launch_Button_pressed"]

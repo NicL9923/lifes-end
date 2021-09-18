@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/player/PlaceholderCharacter32x32.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
-[ext_resource path="res://objects/Rifle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/weapons/Rifle.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.88913
