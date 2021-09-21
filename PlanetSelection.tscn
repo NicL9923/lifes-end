@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
+
+[node name="PlanetSelection" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Select_Button" type="Button" parent="."]
+margin_left = 286.227
+margin_top = 331.687
+margin_right = 341.227
+margin_bottom = 351.687
+text = "SELECT"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 226.176
+margin_top = 278.37
+margin_right = 400.176
+margin_bottom = 292.37
+text = "*thumbnails of all planets*"
+
+[node name="Left_Button" type="Button" parent="."]
+margin_left = 47.1433
+margin_top = 127.399
+margin_right = 67.1433
+margin_bottom = 147.399
+text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right_Button" type="Button" parent="."]
+margin_left = 581.996
+margin_top = 135.818
+margin_right = 601.996
+margin_bottom = 155.818
+text = ">"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 230.666
+margin_top = 131.889
+margin_right = 408.666
+margin_bottom = 145.889
+text = "*blown-up image of planet*"
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 417.555
+margin_top = 64.5415
+margin_right = 595.555
+margin_bottom = 112.541
+text = "*popout panel with
+ advantages/disadvantages 
+of planet"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 228.982
+margin_top = 32.5514
+margin_right = 406.982
+margin_bottom = 46.5514
+text = "Planet Name"
+align = 1
+
+[connection signal="pressed" from="Select_Button" to="." method="_on_Select_Button_pressed"]
+[connection signal="pressed" from="Left_Button" to="." method="_on_Left_Button_pressed"]
+[connection signal="pressed" from="Right_Button" to="." method="_on_Right_Button_pressed"]
