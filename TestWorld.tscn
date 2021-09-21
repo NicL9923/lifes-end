@@ -1,12 +1,106 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/Dummy/DummyEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TestWorld.gd" type="Script" id=3]
 
-[node name="World" type="Node2D"]
+[node name="TestWorld" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320.02, 170.089 )
 
+[node name="UI" type="Control" parent="Player"]
+margin_left = -320.02
+margin_top = -179.089
+margin_right = 319.98
+margin_bottom = 178.911
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TglCmbt_Button" type="Button" parent="Player/UI"]
+margin_left = 525.0
+margin_top = 12.0
+margin_right = 630.0
+margin_bottom = 32.0
+text = "Toggle combat"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Building_Button" type="Button" parent="Player/UI"]
+margin_left = 554.151
+margin_top = 53.3969
+margin_right = 618.151
+margin_bottom = 73.3969
+text = "Building"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Research_Button" type="Button" parent="Player/UI"]
+margin_left = 549.946
+margin_top = 92.0782
+margin_right = 619.946
+margin_bottom = 112.078
+text = "Research"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Building_Panel" type="Panel" parent="Player/UI"]
+visible = false
+margin_left = 80.3138
+margin_top = 27.0
+margin_right = 548.314
+margin_bottom = 323.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title_Label" type="Label" parent="Player/UI/Building_Panel"]
+margin_left = 214.259
+margin_top = 7.55099
+margin_right = 273.259
+margin_bottom = 21.551
+text = "Buildings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HQ_Button" type="Button" parent="Player/UI/Building_Panel"]
+margin_left = 47.6656
+margin_top = 55.2166
+margin_right = 80.6656
+margin_bottom = 75.2166
+text = "HQ"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Close_Button" type="Button" parent="Player/UI/Building_Panel"]
+margin_left = 440.789
+margin_top = 7.07906
+margin_right = 460.789
+margin_bottom = 27.0791
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DummyEnemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 449.913, 209.572 )
+
+[node name="TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 32, 32 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="pressed" from="Player/UI/TglCmbt_Button" to="." method="_on_TglCmbt_Button_pressed"]
+[connection signal="pressed" from="Player/UI/Building_Button" to="." method="_on_Building_Button_pressed"]
+[connection signal="pressed" from="Player/UI/Research_Button" to="." method="_on_Research_Button_pressed"]
+[connection signal="pressed" from="Player/UI/Building_Panel/HQ_Button" to="." method="_on_HQ_Button_pressed"]
+[connection signal="pressed" from="Player/UI/Building_Panel/Close_Button" to="." method="_on_Close_Button_pressed"]
