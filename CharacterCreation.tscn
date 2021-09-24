@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://CharacterCreation.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/PlaceholderCharacter32x32.png" type="Texture" id=2]
+[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=3]
 
 [node name="CharacterCreation" type="Control"]
 anchor_right = 1.0
@@ -120,7 +121,8 @@ margin_left = 454.0
 margin_top = 307.0
 margin_right = 562.0
 margin_bottom = 340.0
-text = "LAUNCH ->"
+custom_fonts/font = ExtResource( 3 )
+text = "LAUNCH"
 __meta__ = {
 "_edit_use_anchors_": false
 }

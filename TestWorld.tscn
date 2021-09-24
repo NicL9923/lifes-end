@@ -92,7 +92,14 @@ __meta__ = {
 [node name="DummyEnemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 449.913, 209.572 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Ground_TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 32, 32 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Building_TileMap" type="TileMap" parent="."]
 cell_size = Vector2( 32, 32 )
 format = 1
 __meta__ = {

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://IntroCinematic.gd" type="Script" id=1]
+[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
 
 [node name="IntroCinematic" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,6 +13,7 @@ margin_left = 13.0
 margin_top = 317.0
 margin_right = 114.0
 margin_bottom = 337.0
+custom_fonts/font = ExtResource( 2 )
 text = "Skip Cutscene"
 __meta__ = {
 "_edit_use_anchors_": false

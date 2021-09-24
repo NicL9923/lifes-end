@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
+[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
 
 [node name="PlanetSelection" type="Control"]
 anchor_right = 1.0
@@ -15,6 +16,7 @@ margin_left = 286.227
 margin_top = 331.687
 margin_right = 341.227
 margin_bottom = 351.687
+custom_fonts/font = ExtResource( 2 )
 text = "SELECT"
 
 [node name="Label" type="Label" parent="."]
