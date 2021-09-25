@@ -9,12 +9,14 @@ enum Building_Types {
 onready var building_panel = $Player/UI/Building_Panel
 var in_building_mode = false
 var building_node
-var placement_highlight
+var placement_highlight: Sprite
+const highlight_opacity := 0.5
 
 func _physics_process(_delta):
 	if in_building_mode:
-		# TODO: attach building & highlight sprite to player cursor
-		building_node.global_position = get_global_mouse_position()
+		var snapped_mouse_pos = get_global_mouse_position().snapped(Vector2(32, 32))
+		building_node.global_position = snapped_mouse_pos
+		placement_highlight.global_position = snapped_mouse_pos
 		
 		if Input.is_action_pressed("ui_cancel"):
 			in_building_mode = false
@@ -25,19 +27,25 @@ func _physics_process(_delta):
 func start_building(building_type):
 	in_building_mode = true
 	
-	# TODO: set building_node and placement_highlight based on type
+	# Set the building_node and placement_highlight based on type
 	if building_type == Building_Types.HQ:
 		building_node = preload("res://objects/buildings/HQ_Building.tscn").instance()
+		placement_highlight = Sprite.new()
+		placement_highlight.texture = load("res://effects/highlight.png")
+		# TODO: set size of highlight based on building_type
 		get_tree().get_root().add_child(building_node)
+		get_tree().get_root().add_child(placement_highlight)
 
 func check_building_placement():
-	# TODO: if no collision w/ other objects/buildings
-		# place_highlight = green
+	if building_node.get_overlapping_bodies().size() == 0:
+		placement_highlight.modulate = Color(0.0, 1.0, 0.0, highlight_opacity)
 		if Input.is_action_pressed("shoot"):
-			#place building on map (save position to save/game data -> TODO)
+			# Place building on map (save position to save/game data -> TODO)
+			# TODO: clear building_node ...???
+			placement_highlight.queue_free()
 			in_building_mode = false
-	# else:
-		# red tiles
+	else:
+		placement_highlight.modulate = Color(1.0, 0.0, 0.0, highlight_opacity)
 
 func _on_TglCmbt_Button_pressed():
 	Global.player.toggle_combat()
