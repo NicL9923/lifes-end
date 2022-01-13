@@ -1,4 +1,8 @@
 extends Node
 
-var player: Player
+#Game Settings
 var audioVolume: int
+
+#Player stats
+var player: Player
+var playerMetal: int

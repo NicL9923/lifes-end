@@ -13,6 +13,8 @@ var placement_highlight: Sprite
 const highlight_opacity := 0.5
 
 func _physics_process(_delta):
+	$Player/UI/MetalLabel.text = "Metal: " + str(Global.playerMetal)
+	
 	if in_building_mode:
 		var snapped_mouse_pos = get_global_mouse_position().snapped(Vector2(32, 32))
 		building_node.global_position = snapped_mouse_pos
