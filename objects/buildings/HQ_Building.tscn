@@ -9,6 +9,15 @@ radius = 45.6772
 [node name="HQ_Building" type="Area2D"]
 script = ExtResource( 2 )
 
+[node name="CollisionHighlight" type="ColorRect" parent="."]
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HQ" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
