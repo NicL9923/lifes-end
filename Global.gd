@@ -5,6 +5,22 @@ var audioVolume: int
 
 #Player stats
 var player: Player
-var playerMetal: int
+var playerHealth: int
+var playerWeaponId: int
+var playerCmdrStat: int
+var playerEngrStat: int
+var playerBiolStat: int
+var playerDocStat: int
+var playerBaseData: bool #TODO: keep track of base planet/coordinates, base buildings (types, positions, levels, etc), # of colonists, etc.
+var playerResearchedItemIds: Array
+
+var playerBaseMetal: int
+var playerBaseFood: int
+var playerBaseWater: int
+var playerBaseEnergy: int
+
+var npcColonyData: Array #TODO: keep track of NPC colony planets/coordinates, buildings (types, positions, levels, etc), # of colonists, etc.
+
+#Game flags
 var mainEndingIsGood := false
 var subEndingIsGood := false
