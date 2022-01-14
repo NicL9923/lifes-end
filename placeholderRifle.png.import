@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/highlight.png-dd15e7dda69e148d3127ec85d77e53ed.stex"
+path="res://.import/placeholderRifle.png-9634ccb441873fd5af916b445414c598.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://effects/highlight.png"
-dest_files=[ "res://.import/highlight.png-dd15e7dda69e148d3127ec85d77e53ed.stex" ]
+source_file="res://placeholderRifle.png"
+dest_files=[ "res://.import/placeholderRifle.png-9634ccb441873fd5af916b445414c598.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
