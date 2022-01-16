@@ -40,6 +40,7 @@ func check_building_placement():
 		if Input.is_action_pressed("shoot"):
 			# Place building on map (save position to save/game data -> TODO)
 			# TODO: clear building_node ...??? EDIT: may not need to do as it'll just be reset when placing a new building - just keep an eye out for this
+			building_node.get_child(0).visible = false
 			in_building_mode = false
 	else:
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
