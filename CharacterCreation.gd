@@ -6,4 +6,4 @@ func _ready():
 	pass
 
 func _on_Launch_Button_pressed():
-	get_tree().change_scene("res://IntroCinematic.tscn")
+	get_tree().change_scene("res://cutscenes/IntroCinematic.tscn")
