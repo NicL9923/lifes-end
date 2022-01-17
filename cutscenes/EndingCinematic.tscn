@@ -1,0 +1,162 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://cutscenes/EndingCinematic.gd" type="Script" id=1]
+[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
+
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "[ Incoming transmission ]" ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "badBadSubEnding"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Not only have we destroyed ourselves, however, but everyone else around us as well.", "If we aren't to live on, then neither will anyone else." ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "badGoodSubEnding"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "...but we have ensured that we will be the only ones standing to revel in it.", "Our actions, no matter their intentions, have left us vilified among the other remnants of humankind, and so what awaits us may be a very lonely, isolated future indeed..." ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "badMainEnding"
+length = 18.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "[ Incoming transmission ]", "How has it come to this?", "We've devastated our home once more, and now very likely doomed the survival of our very species.", "Perhaps there is something to be learned from this...or perhaps not." ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "goodBadSubEnding"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "At least we never lost sight of our humanity...", "While we have doomed ourselves, maybe others will live on from our good deeds." ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "goodGoodSubEnding"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "...and not once did we forget our humanity.", "It's not enough for us thrive alone, we must do everything in our power to bring those around us up, and while some could not be saved, others would have never had a chance if not for us." ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "goodMainEnding"
+length = 18.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Subtitles:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "[ Incoming transmission ]", "Whereas our brethren have unfortunately repeated the very same cycle that destroyed our former homeworld right in front of our eyes, we have learned from our old ways.", "We have realized that we can only continue to exist if we ensure that our ecosystems continue to exist alongside us, and so there is hope yet for humankind and her future..." ]
+}
+
+[node name="EndingCinematic" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/badBadSubEnding = SubResource( 1 )
+anims/badGoodSubEnding = SubResource( 2 )
+anims/badMainEnding = SubResource( 3 )
+anims/goodBadSubEnding = SubResource( 4 )
+anims/goodGoodSubEnding = SubResource( 5 )
+anims/goodMainEnding = SubResource( 6 )
+
+[node name="Skip Button" type="Button" parent="."]
+margin_left = 518.0
+margin_top = 14.0
+margin_right = 624.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 2 )
+text = "Skip Cutscene"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubtitleBackground" type="ColorRect" parent="."]
+margin_top = 254.0
+margin_right = 641.0
+margin_bottom = 360.0
+color = Color( 0, 0, 0, 0.392157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Subtitles" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 254.0
+margin_right = 640.0
+margin_bottom = 359.0
+custom_fonts/font = ExtResource( 2 )
+text = "[ Incoming transmission ]"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
