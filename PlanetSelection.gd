@@ -3,7 +3,7 @@ extends Control
 var planets = []
 
 func _on_Select_Button_pressed():
-	get_tree().change_scene("res://TestWorld.tscn")
+	get_tree().change_scene("res://MainWorld.tscn")
 
 func _on_Left_Button_pressed():
 	pass

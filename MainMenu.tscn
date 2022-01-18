@@ -18,6 +18,7 @@ scale = Vector2( 0.500231, 0.500411 )
 texture = ExtResource( 2 )
 
 [node name="MainMenuContainer" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -105,7 +106,6 @@ margin_bottom = 34.0
 tick_count = 3
 
 [node name="LoadGameContainer" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -124,6 +124,15 @@ margin_top = 17.0
 margin_right = 45.0
 margin_bottom = 37.0
 text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveGamesVBox" type="VBoxContainer" parent="LoadGameContainer"]
+margin_left = 171.0
+margin_top = 24.0
+margin_right = 469.0
+margin_bottom = 327.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
