@@ -130,7 +130,6 @@ __meta__ = {
 
 [node name="DevConsole" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 7 )
@@ -152,11 +151,18 @@ margin_bottom = 149.0
 max_length = 100
 placeholder_text = "Input commands here"
 caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CmdHistory" type="TextEdit" parent="UI/DevConsole/ColorRect"]
 margin_right = 350.0
 margin_bottom = 125.0
 readonly = true
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="UI/BuildingUI/Building_Button" to="UI/BuildingUI" method="_on_Building_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/HQ_Button" to="UI/BuildingUI" method="_on_HQ_Button_pressed"]

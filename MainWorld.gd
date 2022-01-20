@@ -12,7 +12,10 @@ func _ready():
 	
 	set_player_camera_bounds()
 	
-	Global.player.global_position = Vector2(Global.cellSize * worldSize.x / 2, Global.cellSize * worldSize.y / 2)
+	if Global.isPlayerBaseFirstLoad:
+		spawn_mineral_deposits()
+	
+	$Player.global_position = Vector2(Global.cellSize * worldSize.x / 2, Global.cellSize * worldSize.y / 2)
 
 func generate_map_border_tiles():
 	for x in [0, worldSize.x - 1]:
@@ -29,12 +32,14 @@ func generate_map_inner_tiles():
 				$TileMap.set_cell(x, y, 1)
 
 func set_player_camera_bounds():
-	#TODO: figure out how to keep player UI from going off screen as player approaches map corners
 	var map_limits = $TileMap.get_used_rect()
 	$Player/Camera2D.limit_left = map_limits.position.x * Global.cellSize
 	$Player/Camera2D.limit_right = map_limits.end.x * Global.cellSize
 	$Player/Camera2D.limit_top = map_limits.position.y * Global.cellSize
 	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
+
+func spawn_mineral_deposits():
+	pass
 
 func save_game(): 
 	var save_game = File.new()
