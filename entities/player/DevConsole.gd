@@ -1,7 +1,7 @@
 extends Control
 
 var isMenuUp := false
-#TODO: entered_commands array that holds up to 100 of the last entered commands
+var entered_cmds: Array #TODO: hold up to 100 of the last entered commands
 	#Bonus points: up and down arrow keys to traverse through them for reuse
 
 
@@ -20,6 +20,7 @@ func _process(delta):
 			isMenuUp = true
 			self.visible = true
 			get_tree().paused = true
+			$ColorRect/LineEdit.grab_focus()
 	
 	if isMenuUp and Input.is_key_pressed(KEY_ENTER):
 		execute_dev_commands()
