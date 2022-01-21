@@ -25,12 +25,12 @@ func _physics_process(delta):
 	if isMenuUp and Input.is_action_just_pressed("ui_enter"):
 		execute_dev_commands()
 	
-	if isMenuUp and Input.is_action_just_pressed("ui_up"):
+	if isMenuUp and Input.is_action_just_pressed("arrow_up"):
 		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
 		
 		if current_history_index != 0:
 			current_history_index -= 1
-	elif isMenuUp and Input.is_action_just_pressed("ui_down"):
+	elif isMenuUp and Input.is_action_just_pressed("arrow_down"):
 		if current_history_index != entered_cmds.size() - 1:
 			current_history_index += 1
 		

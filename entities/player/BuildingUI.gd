@@ -15,7 +15,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if in_building_mode:
-		var snapped_mouse_pos = get_global_mouse_position().snapped(Vector2.ONE * Global.cellSize)
+		#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
+		var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
 		building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2)) #TODO: make sure this works with buildings sized other than 3x3 tiles
 		
 		if Input.is_action_pressed("ui_cancel"):

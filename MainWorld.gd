@@ -39,7 +39,7 @@ func set_player_camera_bounds():
 	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
 
 func spawn_mineral_deposits():
-	pass
+	pass #TODO
 
 func save_game(): 
 	var save_game = File.new()
