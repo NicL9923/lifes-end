@@ -22,7 +22,7 @@ var playerBaseEnergy: int
 var npcColonyData: Array #TODO: keep track of NPC colony planets/coordinates, buildings (types, positions, levels, etc), # of colonists, etc.
 
 #Game flags/vars
-var cellSize := 64
+var cellSize := 32
 
 var isPlayerBaseFirstLoad: bool #TODO: to know when to spawn random mineral deposits in ready() for MainWorld
 

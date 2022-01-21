@@ -15,8 +15,9 @@ func _ready():
 
 func _physics_process(_delta):
 	if in_building_mode:
-		var snapped_mouse_pos = get_global_mouse_position().snapped(Vector2(32, 32))
-		building_node.global_position = snapped_mouse_pos
+		#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
+		var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
+		building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2)) #TODO: make sure this works with buildings sized other than 3x3 tiles
 		
 		if Input.is_action_pressed("ui_cancel"):
 			in_building_mode = false
@@ -30,8 +31,9 @@ func start_building(building_type):
 	# Set the building_node based on type
 	if building_type == Building_Types.HQ:
 		building_node = preload("res://objects/buildings/HQ_Building.tscn").instance()
-		
-		get_tree().get_root().add_child(building_node)
+	
+	building_node.modulate.a = 0.75
+	get_tree().get_root().add_child(building_node)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
@@ -39,6 +41,7 @@ func check_building_placement():
 		if Input.is_action_pressed("shoot"):
 			# Place building on map (save position to save/game data -> TODO)
 			# TODO: clear building_node ...??? EDIT: may not need to do as it'll just be reset when placing a new building - just keep an eye out for this
+			building_node.modulate.a = 1.0
 			building_node.get_child(0).visible = false
 			in_building_mode = false
 	else:

@@ -1,16 +1,16 @@
 extends Control
 
 var isMenuUp := false
-#TODO: entered_commands array that holds up to 100 of the last entered commands
-	#Bonus points: up and down arrow keys to traverse through them for reuse
-
+export var max_cmds := 100
+var entered_cmds: Array
+var current_history_index := 0
 
 
 func _ready():
 	self.visible = false
 
-func _process(delta):
-	if Input.is_action_pressed("dev_menu"):
+func _physics_process(delta):
+	if Input.is_action_just_pressed("dev_menu"):
 		if isMenuUp:
 			self.visible = false
 			isMenuUp = false
@@ -20,9 +20,21 @@ func _process(delta):
 			isMenuUp = true
 			self.visible = true
 			get_tree().paused = true
+			$ColorRect/LineEdit.grab_focus()
 	
-	if isMenuUp and Input.is_key_pressed(KEY_ENTER):
+	if isMenuUp and Input.is_action_just_pressed("ui_enter"):
 		execute_dev_commands()
+	
+	if isMenuUp and Input.is_action_just_pressed("arrow_up"):
+		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
+		
+		if current_history_index != 0:
+			current_history_index -= 1
+	elif isMenuUp and Input.is_action_just_pressed("arrow_down"):
+		if current_history_index != entered_cmds.size() - 1:
+			current_history_index += 1
+		
+		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
 
 func execute_dev_commands():
 	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
@@ -38,3 +50,14 @@ func execute_dev_commands():
 		Global.player.global_position = Vector2(int(cmdTxt[1]), int(cmdTxt[2]))
 	else:
 		$ColorRect/LineEdit.placeholder_text = "Error: Invalid command"
+	
+	if entered_cmds.size() >= max_cmds:
+		entered_cmds.pop_front()
+		
+	entered_cmds.append($ColorRect/LineEdit.text)
+	$ColorRect/LineEdit.text = ""
+	current_history_index = entered_cmds.size() - 1
+	
+	#TODO: make this work
+	for i in range(entered_cmds.size() - 1, 0):
+		$ColorRect/CmdHistory.set_line(i, entered_cmds[i])
