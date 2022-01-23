@@ -19,7 +19,7 @@ func _process(delta):
 		$PlayerHint.visible = true
 		
 		if Input.is_action_pressed("activate"):
-			Global.playerMetal += depositValue
+			Global.playerBaseMetal += depositValue
 			queue_free()
 	else:
 		$PlayerHint.visible = false
