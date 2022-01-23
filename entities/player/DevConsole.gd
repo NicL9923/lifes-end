@@ -46,6 +46,7 @@ func execute_dev_commands():
 		Global.playerHealth = int(cmdTxt[1])
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld
 		get_tree().change_scene("res://" + cmdTxt[1] + ".tscn")
+		get_tree().paused = false
 	elif cmdTxt[0] == "teleport" and cmdTxt[1] != null and cmdTxt[2] != null: #teleport 20 30
 		Global.player.global_position = Vector2(int(cmdTxt[1]), int(cmdTxt[2]))
 	else:
