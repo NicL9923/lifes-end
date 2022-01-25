@@ -165,6 +165,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Healthbar" type="ProgressBar" parent="UI"]
+margin_left = 12.0
+margin_top = 334.0
+margin_right = 141.0
+margin_bottom = 350.0
+step = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="UI/BuildingUI/Building_Button" to="UI/BuildingUI" method="_on_Building_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/HQ_Button" to="UI/BuildingUI" method="_on_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]

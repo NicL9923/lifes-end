@@ -26,6 +26,8 @@ func _ready():
 func _physics_process(delta):
 	player_movement()
 	
+	$UI/Healthbar.value = health
+	
 	if isInCombat:
 		weapon_handling(delta)
 
