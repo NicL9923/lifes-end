@@ -45,16 +45,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Building_Button" type="Button" parent="UI/BuildingUI"]
-margin_left = 556.02
-margin_top = 14.089
-margin_right = 620.02
-margin_bottom = 34.089
-text = "Building"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Building_Panel" type="Panel" parent="UI/BuildingUI"]
 visible = false
 margin_left = 80.3138
@@ -75,52 +65,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HQ_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 47.6656
-margin_top = 55.2166
-margin_right = 80.6656
-margin_bottom = 75.2166
-text = "HQ"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Shipyard_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 95.6862
-margin_top = 55.0
-margin_right = 161.686
-margin_bottom = 75.0
+margin_left = 23.6862
+margin_top = 53.0
+margin_right = 89.6862
+margin_bottom = 73.0
 text = "Shipyard"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Medbay_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 173.686
-margin_top = 54.0
-margin_right = 239.686
-margin_bottom = 74.0
+margin_left = 103.686
+margin_top = 53.0
+margin_right = 169.686
+margin_bottom = 73.0
 text = "Medbay"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Barracks_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 252.686
-margin_top = 55.0
-margin_right = 318.686
-margin_bottom = 75.0
+margin_left = 183.686
+margin_top = 53.0
+margin_right = 249.686
+margin_bottom = 73.0
 text = "Barracks"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Greenhouse_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 341.686
-margin_top = 56.0
-margin_right = 431.686
-margin_bottom = 76.0
+margin_left = 263.686
+margin_top = 53.0
+margin_right = 353.686
+margin_bottom = 73.0
 text = "Greenhouse"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScienceLab_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 367.686
+margin_top = 53.0
+margin_right = 457.686
+margin_bottom = 73.0
+text = "Science Lab"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,6 +165,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Build_HQ_Button" type="Button" parent="UI/BuildingUI"]
+visible = false
+margin_left = 280.0
+margin_top = 320.0
+margin_right = 364.0
+margin_bottom = 340.0
+text = "Build HQ"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ResearchUI" type="Control" parent="UI"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -183,26 +184,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Research_Button" type="Button" parent="UI/ResearchUI"]
-margin_left = 554.02
-margin_top = 50.089
-margin_right = 624.02
-margin_bottom = 70.089
-text = "Research"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ResourceUI" type="Control" parent="UI"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MetalLabel" type="Label" parent="UI/ResourceUI"]
-margin_left = 11.0
-margin_top = 11.0
-margin_right = 63.0
-margin_bottom = 25.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 68.0
+margin_bottom = 30.0
 text = "Metal: X"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -255,15 +249,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="UI/BuildingUI/Building_Button" to="UI/BuildingUI" method="_on_Building_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/HQ_Button" to="UI/BuildingUI" method="_on_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Shipyard_Button" to="UI/BuildingUI" method="_on_Shipyard_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScienceLab_Button" to="UI/BuildingUI" method="_on_ScienceLab_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/CoalPower_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/SolarPower_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/WaterRecyclingSystem_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/CommunicationsArray_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
-[connection signal="pressed" from="UI/ResearchUI/Research_Button" to="UI/ResearchUI" method="_on_Research_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]

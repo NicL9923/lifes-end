@@ -39,7 +39,7 @@ func _physics_process(delta):
 func execute_dev_commands():
 	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
 		
-	#TODO: god mode (no dmg + unlimited ammo), ammo, other resources
+	#TODO: god mode (no dmg + unlimited ammo), ammo, other resources, place building
 	if cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
 		Global.playerBaseMetal += int(cmdTxt[1])
 	elif cmdTxt[0] == "health" and cmdTxt[1] != null: #health 100

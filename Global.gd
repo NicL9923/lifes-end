@@ -10,7 +10,8 @@ enum BUILDING_TYPES {
 	Power_Industrial_Coal = 5,
 	Power_Renewable_Solar = 6,
 	Water_Recycling_System = 7,
-	Communications_Array = 8
+	Communications_Array = 8,
+	Science_Lab = 9
 }
 
 class BuildingData:
@@ -50,6 +51,7 @@ var npcColonyData: Array #BaseData[]
 #Game flags/vars
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
+var building_activiation_distance := 35
 
 #TODO: to know when to spawn random mineral deposits in ready() for MainWorld
 #Also, for now set to true for testing but needs to be loaded from save data in future
