@@ -1,15 +1,18 @@
 extends KinematicBody2D
 
 var health := 100
+onready var nav = get_tree().get_node("Navigation2D")
+var path_to_player: PoolVector2Array
 
 func _ready():
-	randomize()
+	pass
 
 func _physics_process(delta):
-	var x_rand := rand_range(-100, 100)
-	var y_rand := rand_range(-100, 100)
+	path_to_player = nav.get_simple_path(self.global_position, Global.player.global_position)
 	
-	move_and_slide(Vector2(x_rand, y_rand))
+	if path_to_player.size() > 0:
+		pass #move_and_slide(Vector2(x_rand, y_rand))
+
 
 func take_damage(dmg_amt):
 	health -= dmg_amt
