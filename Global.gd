@@ -51,7 +51,9 @@ var npcColonyData: Array #BaseData[]
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 
-var isPlayerBaseFirstLoad: bool #TODO: to know when to spawn random mineral deposits in ready() for MainWorld
+#TODO: to know when to spawn random mineral deposits in ready() for MainWorld
+#Also, for now set to true for testing but needs to be loaded from save data in future
+var isPlayerBaseFirstLoad := true
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
