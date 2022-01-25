@@ -1,9 +1,5 @@
 extends Control
 
-enum Building_Types {
-	HQ
-}
-
 onready var building_panel = $Building_Panel
 var in_building_mode = false
 var building_node
@@ -29,8 +25,24 @@ func start_building(building_type):
 	in_building_mode = true
 	
 	# Set the building_node based on type
-	if building_type == Building_Types.HQ:
-		building_node = preload("res://objects/buildings/HQ_Building.tscn").instance()
+	if building_type == Global.BUILDING_TYPES.HQ:
+		building_node = preload("res://objects/buildings/HQ.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Shipyard:
+		building_node = preload("res://objects/buildings/Shipyard.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Medbay:
+		building_node = preload("res://objects/buildings/Medbay.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Barracks:
+		building_node = preload("res://objects/buildings/Barracks.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Greenhouse:
+		building_node = preload("res://objects/buildings/Greenhouse.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Power_Industrial_Coal:
+		building_node = preload("res://objects/buildings/Power_Industrial_Coal.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Power_Renewable_Solar:
+		building_node = preload("res://objects/buildings/Power_Renewable_Solar.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Water_Recycling_System:
+		building_node = preload("res://objects/buildings/Water_Recycling_System.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Communications_Array:
+		building_node = preload("res://objects/buildings/Communications_Array.tscn").instance()
 	
 	building_node.modulate.a = 0.75
 	get_tree().get_root().add_child(building_node)
@@ -58,4 +70,36 @@ func _on_Close_Button_pressed():
 
 func _on_HQ_Button_pressed():
 	building_panel.hide()
-	start_building(Building_Types.HQ)
+	start_building(Global.BUILDING_TYPES.HQ)
+
+func _on_Shipyard_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Shipyard)
+
+func _on_Medbay_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Medbay)
+
+func _on_Barracks_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Barracks)
+
+func _on_Greenhouse_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Greenhouse)
+
+func _on_CoalPower_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Power_Industrial_Coal)
+
+func _on_SolarPower_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Power_Renewable_Solar)
+
+func _on_WaterRecyclingSystem_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Water_Recycling_System)
+
+func _on_CommunicationsArray_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Communications_Array)

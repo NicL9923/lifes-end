@@ -85,6 +85,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Shipyard_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 95.6862
+margin_top = 55.0
+margin_right = 161.686
+margin_bottom = 75.0
+text = "Shipyard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Medbay_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 173.686
+margin_top = 54.0
+margin_right = 239.686
+margin_bottom = 74.0
+text = "Medbay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Barracks_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 252.686
+margin_top = 55.0
+margin_right = 318.686
+margin_bottom = 75.0
+text = "Barracks"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Greenhouse_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 341.686
+margin_top = 56.0
+margin_right = 431.686
+margin_bottom = 76.0
+text = "Greenhouse"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoalPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 48.6862
+margin_top = 103.0
+margin_right = 138.686
+margin_bottom = 123.0
+text = "Coal Plant"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SolarPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 153.686
+margin_top = 104.0
+margin_right = 243.686
+margin_bottom = 124.0
+text = "Solar Array"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaterRecyclingSystem_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 257.686
+margin_top = 105.0
+margin_right = 422.686
+margin_bottom = 125.0
+text = "Water Recycling System"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CommunicationsArray_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 180.686
+margin_top = 149.0
+margin_right = 280.686
+margin_bottom = 169.0
+text = "Comms Array"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Close_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
 margin_left = 440.789
 margin_top = 7.07906
@@ -165,7 +245,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Healthbar" type="ProgressBar" parent="UI"]
+margin_left = 12.0
+margin_top = 334.0
+margin_right = 141.0
+margin_bottom = 350.0
+step = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="UI/BuildingUI/Building_Button" to="UI/BuildingUI" method="_on_Building_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/HQ_Button" to="UI/BuildingUI" method="_on_HQ_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Shipyard_Button" to="UI/BuildingUI" method="_on_Shipyard_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/CoalPower_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/SolarPower_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/WaterRecyclingSystem_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/CommunicationsArray_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
 [connection signal="pressed" from="UI/ResearchUI/Research_Button" to="UI/ResearchUI" method="_on_Research_Button_pressed"]

@@ -4,8 +4,9 @@ export var worldSize := Vector2(25, 25)
 
 
 func _ready():
-	#TODO: choose tilemap tileset based on Global.playerBaseData (that has yet to be fleshed out, but should include a property such as 'planet'
-	#$TileMap.tile_Set = ???
+	var planet = Global.playerBaseData.planet
+	#TODO: may be worth just merging all planet tiles into single tilemap if they all have 1 or 2 tiles at most...
+	$TileMap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")
 	
 	generate_map_border_tiles()
 	generate_map_inner_tiles()
