@@ -2,7 +2,15 @@ extends Node
 
 #Game classes/types
 enum BUILDING_TYPES {
-	HQ = 0
+	HQ = 0,
+	Shipyard = 1,
+	Medbay = 2,
+	Barracks = 3,
+	Greenhouse = 4,
+	Power_Industrial_Coal = 5,
+	Power_Renewable_Solar = 6,
+	Water_Recycling_System = 7,
+	Communications_Array = 8
 }
 
 class BuildingData:

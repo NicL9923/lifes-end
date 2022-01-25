@@ -1,5 +1,6 @@
 extends Control
 #TODO: come up with traits/benefits/negatives to planets
+	#One idea is solar/radiation exposure for effectiveness of power plants such as Solar
 
 var currently_selected_planet := 2
 
