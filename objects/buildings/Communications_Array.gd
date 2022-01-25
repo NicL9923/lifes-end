@@ -11,8 +11,6 @@ func _process(delta):
 		$PopupUI.visible = false
 
 
-func _on_Building_Button_pressed():
-	Global.player.building_panel.show()
-
-func _on_SaveGame_Button_pressed():
-	get_tree().get_root().get_node("MainWorld").save_game()
+# TODO: hook this up when world map gets implemented
+func _on_WorldMap_Button_pressed():
+	pass

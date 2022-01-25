@@ -43,9 +43,12 @@ func start_building(building_type):
 		building_node = preload("res://objects/buildings/Water_Recycling_System.tscn").instance()
 	elif building_type == Global.BUILDING_TYPES.Communications_Array:
 		building_node = preload("res://objects/buildings/Communications_Array.tscn").instance()
+	elif building_type == Global.BUILDING_TYPES.Science_Lab:
+		building_node = preload("res://objects/buildings/Science_Lab.tscn").instance()
 	
 	building_node.modulate.a = 0.75
-	get_tree().get_root().add_child(building_node)
+	building_node.get_child(0).visible = true
+	get_tree().get_root().get_node("MainWorld").add_child(building_node)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
@@ -59,18 +62,13 @@ func check_building_placement():
 	else:
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
 
-
-func _on_Building_Button_pressed():
-	building_panel.show()
-
+func _on_Build_HQ_Button_pressed():
+	$Build_HQ_Button.visible = false
+	start_building(Global.BUILDING_TYPES.HQ)
 
 func _on_Close_Button_pressed():
 	building_panel.hide()
 
-
-func _on_HQ_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.HQ)
 
 func _on_Shipyard_Button_pressed():
 	building_panel.hide()
@@ -103,3 +101,7 @@ func _on_WaterRecyclingSystem_Button_pressed():
 func _on_CommunicationsArray_Button_pressed():
 	building_panel.hide()
 	start_building(Global.BUILDING_TYPES.Communications_Array)
+
+func _on_ScienceLab_Button_pressed():
+	building_panel.hide()
+	start_building(Global.BUILDING_TYPES.Science_Lab)

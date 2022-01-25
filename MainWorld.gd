@@ -1,6 +1,8 @@
 extends Node2D
 
-export var worldSize := Vector2(25, 25)
+export var worldTileSize := Vector2(25, 25)
+export var minerals_to_spawn := 30
+export var HQ_mineral_cost := 15 # TODO: move building mineral costs into their respective scripts
 
 
 func _ready():
@@ -14,22 +16,29 @@ func _ready():
 	set_player_camera_bounds()
 	
 	if Global.isPlayerBaseFirstLoad:
-		spawn_mineral_deposits()
+		$Player/UI/BuildingUI/Build_HQ_Button.disabled = true
+		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
+		
+		spawn_metal_deposits()
 	
-	$Player.global_position = Vector2(Global.cellSize * worldSize.x / 2, Global.cellSize * worldSize.y / 2)
+	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
+
+func _process(delta):
+	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= 15:
+		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 
 func generate_map_border_tiles():
-	for x in [0, worldSize.x - 1]:
-		for y in range(0, worldSize.y):
+	for x in [0, worldTileSize.x - 1]:
+		for y in range(0, worldTileSize.y):
 			$TileMap.set_cell(x, y, 0)
 	
-	for x in range(1, worldSize.x - 1):
-		for y in [0, worldSize.y - 1]:
+	for x in range(1, worldTileSize.x - 1):
+		for y in [0, worldTileSize.y - 1]:
 			$TileMap.set_cell(x, y, 0)
 
 func generate_map_inner_tiles():
-		for x in range(1, worldSize.x - 1):
-			for y in range(1, worldSize.y - 1):
+		for x in range(1, worldTileSize.x - 1):
+			for y in range(1, worldTileSize.y - 1):
 				$TileMap.set_cell(x, y, 1)
 
 func set_player_camera_bounds():
@@ -39,10 +48,16 @@ func set_player_camera_bounds():
 	$Player/Camera2D.limit_top = map_limits.position.y * Global.cellSize
 	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
 
-func spawn_mineral_deposits():
-	pass #TODO
+func spawn_metal_deposits():
+	randomize()
+	var map_limits = $TileMap.get_used_rect()
+	
+	for i in range(0, minerals_to_spawn):
+		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
+		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * Global.cellSize, map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * Global.cellSize, map_limits.position.y * (Global.cellSize - 1)))
+		get_tree().get_root().get_node("MainWorld").add_child(metal_deposit)
 
-func save_game(): 
+func save_game():
 	var save_game = File.new()
 	#TODO: check if existing saves so that: names of files will just be 'SaveX' where X is the next available num starting from 1
 	save_game.open("user://savegame.save", File.WRITE)

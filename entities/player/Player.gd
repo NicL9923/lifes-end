@@ -18,6 +18,8 @@ var velocity := Vector2.ZERO
 onready var gun_rotation_point := $Position2D
 var gun_angle: float
 
+onready var building_panel := $UI/BuildingUI/Building_Panel
+
 func _ready():
 	Global.player = self
 	
