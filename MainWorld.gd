@@ -6,6 +6,8 @@ export var HQ_mineral_cost := 15 # TODO: move building mineral costs into their 
 
 
 func _ready():
+	Global.world_nav = $Navigation2D
+	
 	var planet = Global.playerBaseData.planet
 	#TODO: may be worth just merging all planet tiles into single tilemap if they all have 1 or 2 tiles at most...
 	$TileMap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")

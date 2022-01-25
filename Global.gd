@@ -57,5 +57,7 @@ var building_activiation_distance := 35
 #Also, for now set to true for testing but needs to be loaded from save data in future
 var isPlayerBaseFirstLoad := true
 
+var world_nav: Navigation2D
+
 var mainEndingIsGood := false
 var subEndingIsGood := false

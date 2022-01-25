@@ -48,7 +48,7 @@ func start_building(building_type):
 	
 	building_node.modulate.a = 0.75
 	building_node.get_child(0).visible = true
-	get_tree().get_root().get_node("MainWorld").add_child(building_node)
+	get_tree().get_root().get_child(1).add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
