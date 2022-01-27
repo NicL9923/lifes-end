@@ -20,13 +20,21 @@ func _on_LoadGameButton_pressed():
 	var save_game_count := 0
 	var save_game = File.new()
 	
+	# Show a button for each save found
 	for i in range(1, Global.MAX_SAVES):
 		if save_game.file_exists("user://save" + String(i) + ".save"):
 			save_game_count += 1
-			# TODO: show a button in $SaveGamesVBox for each one that, when clicked, runs load_game with that save's name (make sure value is exact save name i.e. save1)
+			
+			var new_button = Button.new()
+			new_button.text = "save" + String(i)
+			# TODO: show saveTimestamp
+			new_button.connect("pressed", self, "load_game", [new_button.text])
+			$LoadGameContainer/SaveGamesVBox.add_child(new_button)
 	
 	if save_game_count == 0:
-		pass # TODO: show label saying '[ No savegames found ]'
+		$LoadGameContainer/NoSavesFound_Label.visible = true
+	else:
+		$LoadGameContainer/NoSavesFound_Label.visible = false
 	
 	save_game.close()
 	$LoadGameContainer.visible = true
@@ -65,8 +73,22 @@ func load_game(save_name):
 	
 	save_game.open("user://" + save_name + ".save", File.READ)
 	
-	# Parse JSON save data and put it back into the respective Global vars
-	var save_data = parse_json(save_game.get_as_text())
+	# Get save data and put it back into the respective Global vars
+	var save_data = save_game.get_var(true)
+	
+	Global.playerWeaponId = save_data.playerWeaponId
+	Global.playerCmdrStat = save_data.playerCmdrStat
+	Global.playerEngrStat = save_data.playerEngrStat
+	Global.playerBiolStat = save_data.playerBiolStat
+	Global.playerDocStat = save_data.playerDocStat
+	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
+	Global.playerBaseMetal = save_data.playerBaseMetal
+	Global.playerBaseFood = save_data.playerBaseFood
+	Global.playerBaseWater = save_data.playerBaseWater
+	Global.playerBaseEnergy = save_data.playerBaseEnergy
+	Global.playerBaseData = save_data.playerBaseData
+	Global.isPlayerBaseFirstLoad = false
+	Global.npcColonyData = save_data.npcColonyData
 
 	save_game.close()
 	

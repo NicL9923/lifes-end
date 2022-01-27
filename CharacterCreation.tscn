@@ -68,6 +68,7 @@ margin_left = 82.0
 margin_right = 156.0
 margin_bottom = 24.0
 max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 28.0
@@ -85,6 +86,7 @@ margin_left = 60.0
 margin_right = 134.0
 margin_bottom = 24.0
 max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 56.0
@@ -102,6 +104,7 @@ margin_left = 59.0
 margin_right = 133.0
 margin_bottom = 24.0
 max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 84.0
@@ -119,6 +122,7 @@ margin_left = 47.0
 margin_right = 121.0
 margin_bottom = 24.0
 max_value = 10.0
+rounded = true
 
 [node name="Launch Button" type="Button" parent="."]
 margin_left = 454.0

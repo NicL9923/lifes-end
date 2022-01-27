@@ -77,10 +77,11 @@ func place_building():
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
 	
 	# Add building data to global player base data
-	var bldg_data = Global.BuildingData.new()
-	bldg_data.type = building_type
-	bldg_data.building_lvl = 1
-	bldg_data.global_pos = building_node.global_position
+	var bldg_data = {
+		type = building_type,
+		building_lvl = 1,
+		global_pos = building_node.global_position
+	}
 	Global.playerBaseData.buildings.append(bldg_data)
 	
 	building_node = null
