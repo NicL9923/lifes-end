@@ -37,9 +37,11 @@ func _physics_process(delta):
 		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
 
 func execute_dev_commands():
+	$ColorRect/LineEdit.placeholder_text = "Input commands here"
 	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
 		
-	#TODO: god mode (no dmg + unlimited ammo), ammo, other resources, place building
+	# TODO: god mode (no dmg + unlimited ammo), ammo, other resources, place building
+	# TODO: handle commands w/ invalid parameters
 	if cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
 		Global.playerBaseMetal += int(cmdTxt[1])
 	elif cmdTxt[0] == "health" and cmdTxt[1] != null: #health 100
@@ -49,6 +51,13 @@ func execute_dev_commands():
 		get_tree().paused = false
 	elif cmdTxt[0] == "teleport" and cmdTxt[1] != null and cmdTxt[2] != null: #teleport 20 30
 		Global.player.global_position = Vector2(int(cmdTxt[1]), int(cmdTxt[2]))
+	elif cmdTxt[0] == "clear_saves":
+		var file_deleter = Directory.new()
+		
+		for i in range(1, Global.MAX_SAVES):
+			var path := "user://save" + String(i) + ".save"
+			if file_deleter.file_exists(path):
+				file_deleter.remove(path)
 	else:
 		$ColorRect/LineEdit.placeholder_text = "Error: Invalid command"
 	

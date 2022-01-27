@@ -9,11 +9,6 @@ var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 var currentZoom := 1.0
 var isInCombat := false
 
-var commander_attr: int
-var biologist_attr: int
-var engineer_attr: int
-var doctor_attr: int
-
 onready var currentWeapons := [$Position2D/Rifle]
 var selectedWeapon := 0
 
@@ -25,8 +20,6 @@ onready var building_panel := $UI/BuildingUI/Building_Panel
 
 func _ready():
 	Global.player = self
-	
-	# TODO: read player attributes from save data or somewhere
 
 func _physics_process(delta):
 	player_movement()

@@ -22,6 +22,9 @@ func _ready():
 		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
 		
 		spawn_metal_deposits()
+	else:
+		load_buildings()
+		# TODO: load_colonists()
 	
 	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 
@@ -59,11 +62,51 @@ func spawn_metal_deposits():
 		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
 		get_tree().get_root().get_node("MainWorld").add_child(metal_deposit)
 
+func load_buildings():
+	var bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
+	
+	for bldg in Global.playerBaseData.buildings:
+		var building_node = load("res://objects/buildings/" + bldg_names[bldg.type] + ".tscn").instance()
+		building_node.global_position = bldg.global_pos
+		# TODO: set building level
+		# TODO: set any other random vars we need to here that differ from the actual building placement process
+		get_tree().get_root().get_child(1).add_child(building_node)
+
 func save_game():
 	var save_game = File.new()
-	#TODO: check if existing saves so that: names of files will just be 'SaveX' where X is the next available num starting from 1
-	save_game.open("user://savegame.save", File.WRITE)
 	
-	#TODO: to_json() the variables in Global that need saving
+	# TODO: show label 'Saving...'
 	
+	for i in range(1, Global.MAX_SAVES):
+		var save_name = "user://save" + String(i) + ".save"
+		
+		if not save_game.file_exists(save_name):
+			save_game.open(save_name, File.WRITE)
+			
+			# This is what contains all properties we want to save/persist
+			var save_dictionary = {
+				"playerWeaponId": Global.playerWeaponId,
+				"playerCmdrStat": Global.playerCmdrStat,
+				"playerEngrStat": Global.playerEngrStat,
+				"playerBiolStat": Global.playerBiolStat,
+				"playerDocStat": Global.playerDocStat,
+				"playerResearchedItemIds": Global.playerResearchedItemIds,
+				"playerBaseMetal": Global.playerBaseMetal,
+				"playerBaseFood": Global.playerBaseFood,
+				"playerBaseWater": Global.playerBaseWater,
+				"playerBaseEnergy": Global.playerBaseEnergy,
+				"playerBaseData": Global.playerBaseData,
+				"npcColonyData": Global.npcColonyData,
+				"saveTimestamp": OS.get_datetime()
+			}
+			
+			save_game.store_var(save_dictionary, true)
+			
+			save_game.close()
+			
+			# TODO: show label 'Successfully saved!'
+			
+			return
+	
+	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
 	save_game.close()

@@ -4,6 +4,11 @@ func _ready():
 	$SettingsContainer.visible = false
 	$LoadGameContainer.visible = false
 	$MainMenuContainer/MainMenuVBox/NewGameButton.grab_focus()
+	
+	var config = ConfigFile.new()
+	config.load("res://game_settings.cfg")
+	Global.audioVolume = config.get_value("audio", "volume")
+	$SettingsContainer/SettingsVBox/HSlider.value = Global.audioVolume
 
 func _on_NewGameButton_pressed():
 	get_tree().change_scene("res://CharacterCreation.tscn")
@@ -11,10 +16,27 @@ func _on_NewGameButton_pressed():
 func _on_LoadGameButton_pressed():
 	$MainMenuContainer.visible = false
 	
-	#TODO: get save games to parse in SaveGamesVBox
-	#if none, show label saying '[ No savegames found ]'
-	#else show a button in $SaveGamesVBox for each one that, when clicked, runs load_game with that save's name
+	# Get save games to parse in SaveGamesVBox
+	var save_game_count := 0
+	var save_game = File.new()
 	
+	# Show a button for each save found
+	for i in range(1, Global.MAX_SAVES):
+		if save_game.file_exists("user://save" + String(i) + ".save"):
+			save_game_count += 1
+			
+			var new_button = Button.new()
+			new_button.text = "save" + String(i)
+			# TODO: show saveTimestamp
+			new_button.connect("pressed", self, "load_game", [new_button.text])
+			$LoadGameContainer/SaveGamesVBox.add_child(new_button)
+	
+	if save_game_count == 0:
+		$LoadGameContainer/NoSavesFound_Label.visible = true
+	else:
+		$LoadGameContainer/NoSavesFound_Label.visible = false
+	
+	save_game.close()
 	$LoadGameContainer.visible = true
 
 func _on_SettingsButton_pressed():
@@ -36,32 +58,39 @@ func _on_LG_GoBackBN_pressed():
 
 
 func _on_HSlider_value_changed(value):
-	Global.audioVolume = value as int
+	Global.audioVolume = int(value)
+	
+	var config = ConfigFile.new()
+	config.load("res://game_settings.cfg")
+	
+	config.set_value("audio", "volume", int(value))
+	
+	config.save("res://game_settings.cfg")
 
 
-#TODO: first take care of save_game function in MainWorld scene, then
-#adapt this func to our specific needs/conventions
 func load_game(save_name):
 	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.save"):
-		return
-
-	# Load the file line by line and process that dictionary to restore
-	# the object it represents.
-	save_game.open("user://savegame.save", File.READ)
-	while save_game.get_position() < save_game.get_len():
-		# Get the saved dictionary from the next line in the save file
-		var node_data = parse_json(save_game.get_line())
-
-		# Firstly, we need to create the object and add it to the tree and set its position.
-		var new_object = load(node_data["filename"]).instance()
-		get_node(node_data["parent"]).add_child(new_object)
-		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
-
-		# Now we set the remaining variables.
-		for i in node_data.keys():
-			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
-				continue
-			new_object.set(i, node_data[i])
+	
+	save_game.open("user://" + save_name + ".save", File.READ)
+	
+	# Get save data and put it back into the respective Global vars
+	var save_data = save_game.get_var(true)
+	
+	Global.playerWeaponId = save_data.playerWeaponId
+	Global.playerCmdrStat = save_data.playerCmdrStat
+	Global.playerEngrStat = save_data.playerEngrStat
+	Global.playerBiolStat = save_data.playerBiolStat
+	Global.playerDocStat = save_data.playerDocStat
+	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
+	Global.playerBaseMetal = save_data.playerBaseMetal
+	Global.playerBaseFood = save_data.playerBaseFood
+	Global.playerBaseWater = save_data.playerBaseWater
+	Global.playerBaseEnergy = save_data.playerBaseEnergy
+	Global.playerBaseData = save_data.playerBaseData
+	Global.isPlayerBaseFirstLoad = false
+	Global.npcColonyData = save_data.npcColonyData
 
 	save_game.close()
+	
+	# Load the MainWorld scene now that we've parsed in the save data
+	get_tree().change_scene("res://MainWorld.tscn")

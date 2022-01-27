@@ -137,6 +137,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="NoSavesFound_Label" type="Label" parent="LoadGameContainer"]
+visible = false
+margin_left = 218.0
+margin_top = 152.0
+margin_right = 417.0
+margin_bottom = 212.0
+text = "[ No saves found ]"
+align = 1
+valign = 1
+
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
