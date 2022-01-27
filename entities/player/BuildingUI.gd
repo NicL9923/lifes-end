@@ -57,11 +57,12 @@ func check_building_placement():
 		building_node.get_child(0).color = Color(0.0, 1.0, 0.0, highlight_opacity)
 		if Input.is_action_pressed("shoot"):
 			# Place building on map (save position to save/game data -> TODO)
-			# TODO: clear building_node ...??? EDIT: may not need to do as it'll just be reset when placing a new building - just keep an eye out for this
 			building_node.modulate.a = 1.0
 			if "isBeingPlaced" in building_node:
 				building_node.isBeingPlaced = false
-			building_node.get_child(0).visible = false
+			building_node.get_child(0).visible = false # Hide collision colorRect
+			building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
+			building_node = null
 			in_building_mode = false
 	else:
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
