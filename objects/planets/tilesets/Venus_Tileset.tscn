@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/planets/tilesets/Venus_tileset.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="VenusTileset" type="Node2D"]
+
+[node name="Venus_Wall" type="Sprite" parent="."]
+position = Vector2( 16, -16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Venus_Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Venus_Wall/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Venus_Ground" type="Sprite" parent="."]
+position = Vector2( 48, -16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+region_filter_clip = true

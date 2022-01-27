@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 export var depositValue := 3
 export var collectionDist := 35
@@ -19,7 +19,7 @@ func _process(delta):
 		$PlayerHint.visible = true
 		
 		if Input.is_action_pressed("activate"):
-			Global.playerMetal += depositValue
+			Global.playerBaseMetal += depositValue
 			queue_free()
 	else:
 		$PlayerHint.visible = false

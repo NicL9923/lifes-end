@@ -128,6 +128,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SaveGamesVBox" type="VBoxContainer" parent="LoadGameContainer"]
+margin_left = 171.0
+margin_top = 24.0
+margin_right = 469.0
+margin_bottom = 327.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/SettingsButton" to="." method="_on_SettingsButton_pressed"]

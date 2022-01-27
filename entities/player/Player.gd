@@ -3,7 +3,10 @@ class_name Player
 
 export var health := 100
 export var MAX_SPEED := 150
+export var MAX_ZOOM := 0.25 # 4X zoom in
+var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
+var currentZoom := 1.0
 var isInCombat := false
 
 var commander_attr: int
@@ -18,6 +21,8 @@ var velocity := Vector2.ZERO
 onready var gun_rotation_point := $Position2D
 var gun_angle: float
 
+onready var building_panel := $UI/BuildingUI/Building_Panel
+
 func _ready():
 	Global.player = self
 	
@@ -25,6 +30,9 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement()
+	handle_camera_zoom()
+	
+	$UI/Healthbar.value = health
 	
 	if isInCombat:
 		weapon_handling(delta)
@@ -41,6 +49,14 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	move_and_slide(velocity)
+
+func handle_camera_zoom():
+	if Input.is_action_just_released("scroll_up"):
+		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
+		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
+	elif Input.is_action_just_released("scroll_down"):
+		currentZoom = clamp(lerp(currentZoom, currentZoom + 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
+		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
 
 func weapon_handling(delta):
 	var mouse_pos := get_global_mouse_position()

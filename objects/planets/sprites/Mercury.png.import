@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/placeholderRifle.png-9634ccb441873fd5af916b445414c598.stex"
+path="res://.import/Mercury.png-8c96adda69591ad9b821db5690b8674d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://placeholderRifle.png"
-dest_files=[ "res://.import/placeholderRifle.png-9634ccb441873fd5af916b445414c598.stex" ]
+source_file="res://objects/planets/sprites/Mercury.png"
+dest_files=[ "res://.import/Mercury.png-8c96adda69591ad9b821db5690b8674d.stex" ]
 
 [params]
 

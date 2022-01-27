@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://IntroCinematic.gd" type="Script" id=1]
+[ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
@@ -41,6 +42,11 @@ script = ExtResource( 1 )
 anims/IntroCinematicAnim = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 320.056, 180 )
+scale = Vector2( 0.499913, 0.5 )
+texture = ExtResource( 3 )
+
 [node name="Skip Button" type="Button" parent="."]
 margin_left = 518.0
 margin_top = 14.0
@@ -56,7 +62,7 @@ __meta__ = {
 margin_top = 254.0
 margin_right = 641.0
 margin_bottom = 360.0
-color = Color( 0, 0, 0, 0.392157 )
+color = Color( 0.0235294, 0.329412, 0.623529, 0.392157 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
