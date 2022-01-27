@@ -56,8 +56,6 @@ var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 var building_activiation_distance := 35
 var MAX_SAVES := 5
 
-#TODO: to know when to spawn random mineral deposits in ready() for MainWorld
-#Also, for now set to true for testing but needs to be loaded from save data in future
 var isPlayerBaseFirstLoad := true
 
 var world_nav: Navigation2D

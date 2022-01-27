@@ -81,7 +81,7 @@ func place_building():
 	bldg_data.type = building_type
 	bldg_data.building_lvl = 1
 	bldg_data.global_pos = building_node.global_position
-	Global.playerBaseData.append(bldg_data)
+	Global.playerBaseData.buildings.append(bldg_data)
 	
 	building_node = null
 	in_building_mode = false

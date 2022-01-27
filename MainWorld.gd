@@ -22,6 +22,8 @@ func _ready():
 		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
 		
 		spawn_metal_deposits()
+	else:
+		pass # TODO: load in buildings and set player stats to their global values
 	
 	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 
@@ -70,7 +72,20 @@ func save_game():
 			
 			# This is what contains all properties we want to save/persist
 			var save_dictionary = {
-				"asd": 1
+				"playerHealth": Global.playerHealth,
+				"playerWeaponId": Global.playerWeaponId,
+				"playerCmdrStat": Global.playerCmdrStat,
+				"playerEngrStat": Global.playerEngrStat,
+				"playerBiolStat": Global.playerBiolStat,
+				"playerDocStat": Global.playerDocStat,
+				"playerResearchedItemIds": Global.playerResearchedItemIds,
+				"playerBaseMetal": Global.playerBaseMetal,
+				"playerBaseFood": Global.playerBaseFood,
+				"playerBaseWater": Global.playerBaseWater,
+				"playerBaseEnergy": Global.playerBaseEnergy,
+				"playerBaseData": Global.playerBaseData,
+				"isPlayerBaseFirstLoad": false,
+				"npcColonyData": Global.npcColonyData
 			}
 			
 			save_game.store_line(to_json(save_dictionary))
