@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/buildings/Science_Lab.gd" type="Script" id=1]
 [ext_resource path="res://objects/buildings/science_lab.png" type="Texture" id=2]
 [ext_resource path="res://ui/PopupBox.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46, 25.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 46, 25.5 )
 
 [node name="Science_Lab" type="Area2D"]
@@ -55,5 +58,11 @@ text = "Research"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 2 )
+disabled = true
 
 [connection signal="pressed" from="PopupUI/Research_Button" to="." method="_on_Research_Button_pressed"]

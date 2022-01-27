@@ -49,6 +49,7 @@ var playerBaseData := BaseData.new()
 var npcColonyData: Array #BaseData[]
 
 #Game flags/vars
+var world_tile_size := Vector2(50, 50)
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 var building_activiation_distance := 35
