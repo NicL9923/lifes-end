@@ -17,7 +17,7 @@ enum BUILDING_TYPES {
 class BuildingData:
 	var type: int #BUILDING_TYPES
 	var global_pos: Vector2
-	#TODO: building_lvl
+	var building_lvl: int # Start level is 1
 
 class BaseData:
 	var planet: String
@@ -29,6 +29,7 @@ class BaseData:
 var audioVolume: int
 
 #Player stats
+# TODO: Combine player stats and base resources into a single class/object/dictionary
 var player: Player
 var playerHealth: int
 var playerWeaponId: int
@@ -53,6 +54,7 @@ var world_tile_size := Vector2(50, 50)
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 var building_activiation_distance := 35
+var MAX_SAVES := 5
 
 #TODO: to know when to spawn random mineral deposits in ready() for MainWorld
 #Also, for now set to true for testing but needs to be loaded from save data in future

@@ -4,6 +4,12 @@ func _ready():
 	$SettingsContainer.visible = false
 	$LoadGameContainer.visible = false
 	$MainMenuContainer/MainMenuVBox/NewGameButton.grab_focus()
+	
+	var config = ConfigFile.new()
+	config.load("res://game_settings.cfg")
+	print(config.get_value("audio", "volume"))
+	Global.audioVolume = config.get_value("audio", "volume")
+	$SettingsContainer/SettingsVBox/HSlider.value = Global.audioVolume
 
 func _on_NewGameButton_pressed():
 	get_tree().change_scene("res://CharacterCreation.tscn")
@@ -36,7 +42,14 @@ func _on_LG_GoBackBN_pressed():
 
 
 func _on_HSlider_value_changed(value):
-	Global.audioVolume = value as int
+	Global.audioVolume = int(value)
+	
+	var config = ConfigFile.new()
+	config.load("res://game_settings.cfg")
+	
+	config.set_value("audio", "volume", int(value))
+	
+	config.save("res://game_settings.cfg")
 
 
 #TODO: first take care of save_game function in MainWorld scene, then

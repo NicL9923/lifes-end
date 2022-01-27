@@ -3,6 +3,7 @@ extends Control
 onready var building_panel = $Building_Panel
 var in_building_mode = false
 var building_node
+var building_type
 const highlight_opacity := 0.5
 
 
@@ -21,8 +22,9 @@ func _physics_process(_delta):
 		
 		check_building_placement()
 
-func start_building(building_type):
+func start_building(bldg_type):
 	in_building_mode = true
+	building_type = bldg_type
 	
 	# Set the building_node based on type
 	if building_type == Global.BUILDING_TYPES.HQ:
@@ -55,17 +57,34 @@ func start_building(building_type):
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
 		building_node.get_child(0).color = Color(0.0, 1.0, 0.0, highlight_opacity)
+		
 		if Input.is_action_pressed("shoot"):
-			# Place building on map (save position to save/game data -> TODO)
-			building_node.modulate.a = 1.0
-			if "isBeingPlaced" in building_node:
-				building_node.isBeingPlaced = false
-			building_node.get_child(0).visible = false # Hide collision colorRect
-			building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
-			building_node = null
-			in_building_mode = false
+			place_building()
 	else:
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
+
+func place_building():
+	# Place building on map (save position to save/game data -> TODO)
+	building_node.modulate.a = 1.0
+	
+	if "isBeingPlaced" in building_node:
+		building_node.isBeingPlaced = false
+	
+	if "cost_to_build" in building_node:
+		Global.playerBaseMetal -= building_node.cost_to_build
+	
+	building_node.get_child(0).visible = false # Hide collision colorRect
+	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
+	
+	# Add building data to global player base data
+	var bldg_data = Global.BuildingData.new()
+	bldg_data.type = building_type
+	bldg_data.building_lvl = 1
+	bldg_data.global_pos = building_node.global_position
+	Global.playerBaseData.append(bldg_data)
+	
+	building_node = null
+	in_building_mode = false
 
 func _on_Build_HQ_Button_pressed():
 	$Build_HQ_Button.visible = false

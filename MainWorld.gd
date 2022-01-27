@@ -61,9 +61,22 @@ func spawn_metal_deposits():
 
 func save_game():
 	var save_game = File.new()
-	#TODO: check if existing saves so that: names of files will just be 'SaveX' where X is the next available num starting from 1
-	save_game.open("user://savegame.save", File.WRITE)
 	
-	#TODO: to_json() the variables in Global that need saving
+	for i in range(1, Global.MAX_SAVES):
+		var save_name = "user://save" + String(i) + ".save"
+		
+		if not save_game.file_exists(save_name):
+			save_game.open(save_name, File.WRITE)
+			
+			# This is what contains all properties we want to save/persist
+			var save_dictionary = {
+				"asd": 1
+			}
+			
+			save_game.store_line(to_json(save_dictionary))
+			
+			save_game.close()
+			return
 	
+	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
 	save_game.close()
