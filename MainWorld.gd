@@ -1,6 +1,6 @@
 extends Node2D
 
-export var worldTileSize := Vector2(25, 25)
+var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
 export var HQ_mineral_cost := 15 # TODO: move building mineral costs into their respective scripts
 
@@ -56,7 +56,7 @@ func spawn_metal_deposits():
 	
 	for i in range(0, minerals_to_spawn):
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
-		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * Global.cellSize, map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * Global.cellSize, map_limits.position.y * (Global.cellSize - 1)))
+		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
 		get_tree().get_root().get_node("MainWorld").add_child(metal_deposit)
 
 func save_game():
