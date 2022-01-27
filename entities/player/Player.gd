@@ -4,7 +4,7 @@ class_name Player
 export var health := 100
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
-var MIN_ZOOM := Global.world_tile_size.x / 20 # zoom out
+var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
 var currentZoom := 1.0
 var isInCombat := false
@@ -51,7 +51,6 @@ func player_movement():
 	move_and_slide(velocity)
 
 func handle_camera_zoom():
-	print(currentZoom)
 	if Input.is_action_just_released("scroll_up"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
 		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
