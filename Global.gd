@@ -18,6 +18,7 @@ enum BUILDING_TYPES {
 
 
 #Game Settings
+const GAME_SETTINGS_CONFIG_PATH := "user://game_settings.cfg"
 var audioVolume: int
 
 #Player stats
