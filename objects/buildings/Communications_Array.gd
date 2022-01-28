@@ -13,6 +13,5 @@ func _process(delta):
 		$PopupUI.visible = false
 
 
-# TODO: hook this up when world map gets implemented
 func _on_WorldMap_Button_pressed():
-	pass
+	get_tree().change_scene("res://SystemMap.tscn")
