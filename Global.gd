@@ -18,6 +18,7 @@ enum BUILDING_TYPES {
 
 
 #Game Settings
+const GAME_SETTINGS_CONFIG_PATH := "user://game_settings.cfg"
 var audioVolume: int
 
 #Player stats
@@ -48,7 +49,7 @@ var npcColonyData: Array #BaseData[]
 var world_tile_size := Vector2(50, 50)
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
-var building_activiation_distance := 35
+var building_activiation_distance := 75
 var MAX_SAVES := 5
 
 var isPlayerBaseFirstLoad := true

@@ -6,8 +6,12 @@ func _ready():
 	$MainMenuContainer/MainMenuVBox/NewGameButton.grab_focus()
 	
 	var config = ConfigFile.new()
-	config.load("res://game_settings.cfg")
-	Global.audioVolume = config.get_value("audio", "volume")
+	
+	if config.load(Global.GAME_SETTINGS_CONFIG_PATH) != OK:
+		Global.audioVolume = 100
+	else:
+		Global.audioVolume = config.get_value("audio", "volume")
+	
 	$SettingsContainer/SettingsVBox/HSlider.value = Global.audioVolume
 
 func _on_NewGameButton_pressed():
@@ -61,11 +65,11 @@ func _on_HSlider_value_changed(value):
 	Global.audioVolume = int(value)
 	
 	var config = ConfigFile.new()
-	config.load("res://game_settings.cfg")
+	config.load(Global.GAME_SETTINGS_CONFIG_PATH)
 	
 	config.set_value("audio", "volume", int(value))
 	
-	config.save("res://game_settings.cfg")
+	config.save(Global.GAME_SETTINGS_CONFIG_PATH)
 
 
 func load_game(save_name):
