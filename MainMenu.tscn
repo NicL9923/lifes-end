@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://ui/MainMenu_Background.png" type="Texture" id=2]
+[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=2]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
+[ext_resource path="res://ui/Earth.png" type="Texture" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -12,10 +14,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenu_Background" type="Sprite" parent="."]
+[node name="Background" type="Sprite" parent="."]
 position = Vector2( 319.974, 180.413 )
 scale = Vector2( 0.500231, 0.500411 )
 texture = ExtResource( 2 )
+
+[node name="Earth" type="Sprite" parent="."]
+position = Vector2( 82, 276 )
+scale = Vector2( 0.531667, 0.527669 )
+texture = ExtResource( 5 )
+
+[node name="Title" type="Sprite" parent="."]
+position = Vector2( 320, 80 )
+scale = Vector2( 0.4775, 0.4775 )
+texture = ExtResource( 4 )
 
 [node name="MainMenuContainer" type="Control" parent="."]
 margin_right = 40.0
@@ -136,6 +148,16 @@ margin_bottom = 327.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NoSavesFound_Label" type="Label" parent="LoadGameContainer"]
+visible = false
+margin_left = 218.0
+margin_top = 152.0
+margin_right = 417.0
+margin_bottom = 212.0
+text = "[ No saves found ]"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MainMenuContainer/MainMenuVBox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]

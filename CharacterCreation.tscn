@@ -63,10 +63,12 @@ margin_right = 78.0
 margin_bottom = 19.0
 text = "Commander"
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+[node name="Cmdr_SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
 margin_left = 82.0
 margin_right = 156.0
 margin_bottom = 24.0
+max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 28.0
@@ -79,10 +81,12 @@ margin_right = 56.0
 margin_bottom = 19.0
 text = "Biologist"
 
-[node name="SpinBox2" type="SpinBox" parent="VBoxContainer/HBoxContainer2"]
+[node name="Biol_SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 60.0
 margin_right = 134.0
 margin_bottom = 24.0
+max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 56.0
@@ -95,10 +99,12 @@ margin_right = 55.0
 margin_bottom = 19.0
 text = "Engineer"
 
-[node name="SpinBox3" type="SpinBox" parent="VBoxContainer/HBoxContainer3"]
+[node name="Engr_SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer3"]
 margin_left = 59.0
 margin_right = 133.0
 margin_bottom = 24.0
+max_value = 10.0
+rounded = true
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 84.0
@@ -111,10 +117,12 @@ margin_right = 43.0
 margin_bottom = 19.0
 text = "Doctor"
 
-[node name="SpinBox4" type="SpinBox" parent="VBoxContainer/HBoxContainer4"]
+[node name="Doc_SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer4"]
 margin_left = 47.0
 margin_right = 121.0
 margin_bottom = 24.0
+max_value = 10.0
+rounded = true
 
 [node name="Launch Button" type="Button" parent="."]
 margin_left = 454.0
@@ -127,4 +135,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Cmdr_SpinBox" to="." method="_on_Cmdr_SpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/Biol_SpinBox" to="." method="_on_Biol_SpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/Engr_SpinBox" to="." method="_on_Engr_SpinBox_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer4/Doc_SpinBox" to="." method="_on_Doc_SpinBox_value_changed"]
 [connection signal="pressed" from="Launch Button" to="." method="_on_Launch_Button_pressed"]

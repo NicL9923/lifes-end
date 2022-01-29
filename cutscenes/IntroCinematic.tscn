@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
+[ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=4]
+[ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=5]
+[ext_resource path="res://ui/Earth.png" type="Texture" id=6]
+[ext_resource path="res://objects/ship.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
-length = 22.0
+length = 30.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Subtitles:text")
 tracks/0/interp = 1
@@ -14,7 +18,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 9, 11.5, 18 ),
+"times": PoolRealArray( 0, 2.5, 12.5, 15.5, 22.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ "[ Incoming transmission ]", "Earth...she was once our beautiful home. Her oceans spanned over half the planet, and her vast mountain ranges covered in snowy forests housed the most majestic wildlife.", "But no more...", "Her ecosystems have been ravaged to the point that not even us humans can survive within them, and so we look to space.", "Perhaps there is something to be learned from this...or perhaps not." ]
@@ -47,6 +51,63 @@ position = Vector2( 320.056, 180 )
 scale = Vector2( 0.499913, 0.5 )
 texture = ExtResource( 3 )
 
+[node name="Mars" type="Sprite" parent="."]
+position = Vector2( 615, 184 )
+scale = Vector2( 0.183594, 0.183594 )
+texture = ExtResource( 5 )
+
+[node name="Earth\'s Moon" type="Sprite" parent="."]
+position = Vector2( 261, 68 )
+scale = Vector2( 0.3125, 0.3125 )
+texture = ExtResource( 4 )
+
+[node name="Earth" type="Sprite" parent="."]
+position = Vector2( 69, 262 )
+scale = Vector2( 1.08167, 1.08167 )
+texture = ExtResource( 6 )
+
+[node name="Ship Fleet" type="Node2D" parent="."]
+
+[node name="Ship" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 136, 128 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship2" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 171, 113 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship3" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 175, 155 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship4" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 209, 134 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship5" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 149, 184 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship6" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 214, 183 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship7" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 75, 148 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
+[node name="Ship8" type="Sprite" parent="Ship Fleet"]
+position = Vector2( 173, 228 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 7 )
+
 [node name="Skip Button" type="Button" parent="."]
 margin_left = 518.0
 margin_top = 14.0
@@ -77,16 +138,6 @@ text = "[ Incoming transmission ]"
 align = 1
 valign = 1
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
-margin_left = 185.0
-margin_top = 119.0
-margin_right = 464.0
-margin_bottom = 133.0
-text = "*insert mass ship exodus from Earth here!*"
 __meta__ = {
 "_edit_use_anchors_": false
 }

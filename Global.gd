@@ -14,23 +14,16 @@ enum BUILDING_TYPES {
 	Science_Lab = 9
 }
 
-class BuildingData:
-	var type: int #BUILDING_TYPES
-	var global_pos: Vector2
-	#TODO: building_lvl
-
-class BaseData:
-	var planet: String
-	var buildings: Array #BuildingData[]
-	var colonists: Array
+# NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 
 
 #Game Settings
+const GAME_SETTINGS_CONFIG_PATH := "user://game_settings.cfg"
 var audioVolume: int
 
 #Player stats
+# TODO: Combine player stats and base resources into a single class/object/dictionary?
 var player: Player
-var playerHealth: int
 var playerWeaponId: int
 var playerCmdrStat: int
 var playerEngrStat: int
@@ -44,7 +37,11 @@ var playerBaseWater: int
 var playerBaseEnergy: int
 
 
-var playerBaseData := BaseData.new()
+var playerBaseData = {
+	planet = "",
+	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
+	colonists = []
+}
 
 var npcColonyData: Array #BaseData[]
 
@@ -52,10 +49,9 @@ var npcColonyData: Array #BaseData[]
 var world_tile_size := Vector2(50, 50)
 var cellSize := 32
 var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
-var building_activiation_distance := 35
+var building_activiation_distance := 75
+var MAX_SAVES := 5
 
-#TODO: to know when to spawn random mineral deposits in ready() for MainWorld
-#Also, for now set to true for testing but needs to be loaded from save data in future
 var isPlayerBaseFirstLoad := true
 
 var world_nav: Navigation2D

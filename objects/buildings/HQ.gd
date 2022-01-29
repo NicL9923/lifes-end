@@ -1,5 +1,6 @@
 extends Area2D
 
+export var cost_to_build := 15
 var isBeingPlaced: bool # Need this var and check so menu doesn't show when building's being placed
 
 func _ready():

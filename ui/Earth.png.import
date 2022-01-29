@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MainMenu_Background.png-608f43f287f149c24a64748cc7cd6ecb.stex"
+path="res://.import/Earth.png-b0f8c477c07a44aec63502e1a6d359c3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/MainMenu_Background.png"
-dest_files=[ "res://.import/MainMenu_Background.png-608f43f287f149c24a64748cc7cd6ecb.stex" ]
+source_file="res://ui/Earth.png"
+dest_files=[ "res://.import/Earth.png-b0f8c477c07a44aec63502e1a6d359c3.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

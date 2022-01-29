@@ -1,13 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=3]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=4]
+[ext_resource path="res://objects/planets/sprites/Venus.png" type="Texture" id=5]
+[ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=6]
+[ext_resource path="res://objects/planets/sprites/Pluto.png" type="Texture" id=7]
+[ext_resource path="res://objects/planets/sprites/Mercury.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
 
 [node name="PlanetSelection" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -30,24 +38,88 @@ __meta__ = {
 }
 
 [node name="Planet_Thumbnail_Container" type="ColorRect" parent="."]
-margin_left = 192.0
+margin_left = 240.0
 margin_top = 272.0
-margin_right = 448.0
+margin_right = 400.0
 margin_bottom = 304.0
+mouse_filter = 2
 color = Color( 0.0196078, 0.439216, 0.717647, 0.45098 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Planet_Thumbnail_Container"]
-margin_left = 40.0
-margin_top = 8.0
-margin_right = 214.0
-margin_bottom = 22.0
-text = "*thumbnails of all planets*"
+[node name="Highlight" type="ColorRect" parent="Planet_Thumbnail_Container"]
+margin_left = 66.0
+margin_top = 2.0
+margin_right = 94.0
+margin_bottom = 30.0
+color = Color( 0, 0.392157, 0.411765, 0.87451 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Planet_Thumbnail_Container"]
+margin_right = 160.0
+margin_bottom = 32.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mercury_Area" type="Area2D" parent="Planet_Thumbnail_Container/HBoxContainer"]
+
+[node name="Mercury_Sprite" type="Sprite" parent="Planet_Thumbnail_Container/HBoxContainer/Mercury_Area"]
+position = Vector2( 16, 16 )
+scale = Vector2( 0.1875, 0.1875 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet_Thumbnail_Container/HBoxContainer/Mercury_Area"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+
+[node name="Venus_Area" type="Area2D" parent="Planet_Thumbnail_Container/HBoxContainer"]
+
+[node name="Venus_Sprite" type="Sprite" parent="Planet_Thumbnail_Container/HBoxContainer/Venus_Area"]
+position = Vector2( 48, 16 )
+scale = Vector2( 0.1875, 0.1875 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet_Thumbnail_Container/HBoxContainer/Venus_Area"]
+position = Vector2( 48, 16 )
+shape = SubResource( 1 )
+
+[node name="Earth\'sMoon_Area" type="Area2D" parent="Planet_Thumbnail_Container/HBoxContainer"]
+
+[node name="Earth\'sMoon_Sprite" type="Sprite" parent="Planet_Thumbnail_Container/HBoxContainer/Earth\'sMoon_Area"]
+position = Vector2( 80, 16 )
+scale = Vector2( 0.1875, 0.1875 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet_Thumbnail_Container/HBoxContainer/Earth\'sMoon_Area"]
+position = Vector2( 80, 16 )
+shape = SubResource( 1 )
+
+[node name="Mars_Area" type="Area2D" parent="Planet_Thumbnail_Container/HBoxContainer"]
+
+[node name="Mars_Sprite" type="Sprite" parent="Planet_Thumbnail_Container/HBoxContainer/Mars_Area"]
+position = Vector2( 112, 16 )
+scale = Vector2( 0.1875, 0.1875 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet_Thumbnail_Container/HBoxContainer/Mars_Area"]
+position = Vector2( 112, 16 )
+shape = SubResource( 1 )
+
+[node name="Pluto_Area" type="Area2D" parent="Planet_Thumbnail_Container/HBoxContainer"]
+
+[node name="Pluto_Sprite" type="Sprite" parent="Planet_Thumbnail_Container/HBoxContainer/Pluto_Area"]
+position = Vector2( 144, 16 )
+scale = Vector2( 0.1875, 0.1875 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet_Thumbnail_Container/HBoxContainer/Pluto_Area"]
+position = Vector2( 144, 16 )
+shape = SubResource( 1 )
 
 [node name="Left_Button" type="Button" parent="."]
 margin_left = 64.0
@@ -71,14 +143,18 @@ position = Vector2( 320, 152 )
 scale = Vector2( 1.5, 1.4375 )
 texture = ExtResource( 3 )
 
-[node name="Label4" type="Label" parent="."]
-margin_left = 424.0
+[node name="Placeholder_Label" type="Label" parent="."]
+margin_left = 408.0
 margin_top = 40.0
-margin_right = 602.0
+margin_right = 584.0
 margin_bottom = 88.0
 text = "*popout panel with
- advantages/disadvantages 
-of planet"
+advantages/disadvantages 
+of planet*"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlanetName_Label" type="Label" parent="."]
 margin_left = 232.0
@@ -92,5 +168,10 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Select_Button" to="." method="_on_Select_Button_pressed"]
+[connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Mercury_Area" to="." method="_on_Mercury_Area_input_event"]
+[connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Venus_Area" to="." method="_on_Venus_Area_input_event"]
+[connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Earth'sMoon_Area" to="." method="_on_EarthsMoon_Area_input_event"]
+[connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Mars_Area" to="." method="_on_Mars_Area_input_event"]
+[connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Pluto_Area" to="." method="_on_Pluto_Area_input_event"]
 [connection signal="pressed" from="Left_Button" to="." method="_on_Left_Button_pressed"]
 [connection signal="pressed" from="Right_Button" to="." method="_on_Right_Button_pressed"]
