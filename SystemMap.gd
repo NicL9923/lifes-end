@@ -1,4 +1,4 @@
-extends Control
+extends Spatial
 
 var currently_selected_planet := 2
 
@@ -11,10 +11,10 @@ func _process(_delta):
 		get_tree().change_scene("res://MainGame.tscn")
 
 func update_thumbnail_highlight_pos():
-	$Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2
+	$UI/Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2
 
 func display_planet(planet_index):
-	$PlanetName_Label.text = Global.planets[planet_index]
+	$UI/PlanetName_Label.text = Global.planets[planet_index]
 	update_thumbnail_highlight_pos()
 	
 	# TODO: load 3D planet mesh
