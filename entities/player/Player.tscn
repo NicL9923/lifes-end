@@ -204,17 +204,14 @@ __meta__ = {
 
 [node name="DevConsole" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="UI/DevConsole"]
-margin_left = 0.019989
-margin_top = -1.911
-margin_right = 350.02
-margin_bottom = 148.089
-color = Color( 0, 0, 0, 0.392157 )
+margin_right = 350.0
+margin_bottom = 148.0
+color = Color( 0, 0, 0, 0.72549 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -230,14 +227,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CmdHistory" type="TextEdit" parent="UI/DevConsole/ColorRect"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/DevConsole/ColorRect"]
+margin_left = 3.0
+margin_top = 3.0
 margin_right = 350.0
-margin_bottom = 125.0
-readonly = true
-wrap_enabled = true
+margin_bottom = 123.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CmdHistory_VBox" type="VBoxContainer" parent="UI/DevConsole/ColorRect/ScrollContainer"]
 
 [node name="Healthbar" type="ProgressBar" parent="UI"]
 margin_left = 12.0
