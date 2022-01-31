@@ -27,6 +27,9 @@ func _physics_process(delta):
 	
 	$UI/Healthbar.value = health
 	
+	if Input.is_action_just_pressed("ui_cancel"):
+		$UI/EscMenu.visible = !$UI/EscMenu.visible
+	
 	if isInCombat:
 		weapon_handling(delta)
 
@@ -51,7 +54,7 @@ func handle_camera_zoom():
 		currentZoom = clamp(lerp(currentZoom, currentZoom + 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
 		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
 
-func weapon_handling(delta):
+func weapon_handling(_delta):
 	var mouse_pos := get_global_mouse_position()
 	var currentWeapon = currentWeapons[selectedWeapon]
 	
@@ -75,3 +78,11 @@ func toggle_combat():
 	else:
 		isInCombat = true
 		gun_rotation_point.show()
+
+
+func _on_Quit_Button_pressed():
+	# TODO: ConfirmationDialog
+	#popup.window_title = "Are you sure?"
+	#popup.dialog_text = "Unsaved data will be lost"
+	
+	get_tree().change_scene("res://MainMenu.tscn")

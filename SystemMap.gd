@@ -16,18 +16,22 @@ func _input(event):
 	if event is InputEventMouseButton:
 		mouse_pressed = event.pressed
 	if event is InputEventMouseMotion and mouse_pressed:
-		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.z)
+		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.z)
 
 func map_icons_to_planet():
 	# TODO: map icons to planets
 		# Check player and npc bases for planet, and if it's the current one, map those icons (Sprite3D)
 	var coords = $Planet.get_coords_from_lat_long(60, 60)
-	print(coords)
+	# print(coords)
 	
 	var test_sprite = Sprite3D.new()
 	test_sprite.texture = load("res://objects/ship.png")
 	$Planet.add_child(test_sprite)
 	test_sprite.translation = coords
+	# TODO: make sure sprite is always angled up towards planet's north pole, and matches rotation outward of whereever it's at on the planet
+	# TODO: float icon just sliiiiightly above surface of planet so no clipping
+	test_sprite.rotation_degrees.y = 90
+	test_sprite.scale = Vector3(0.25, 0.25, 0.25)
 
 func update_thumbnail_highlight_pos():
 	$UI/Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2

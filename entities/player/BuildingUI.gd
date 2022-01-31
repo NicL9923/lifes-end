@@ -18,6 +18,8 @@ func _physics_process(_delta):
 		
 		if Input.is_action_pressed("ui_cancel"):
 			in_building_mode = false
+			building_node.queue_free()
+			building_node = null
 			return
 		
 		check_building_placement()

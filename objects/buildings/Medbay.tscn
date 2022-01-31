@@ -11,6 +11,7 @@ extents = Vector2( 47, 28 )
 [node name="Medbay" type="Area2D"]
 
 [node name="CollisionHighlight" type="ColorRect" parent="."]
+visible = false
 margin_left = -48.0
 margin_top = -48.0
 margin_right = 48.0

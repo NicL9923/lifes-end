@@ -8,7 +8,7 @@ var canBeCollected := false
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	#Check if player within collection distance
 	if Global.player.position.distance_to(self.position) < collectionDist:
 		canBeCollected = true
