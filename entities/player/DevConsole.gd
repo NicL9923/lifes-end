@@ -10,7 +10,7 @@ var current_history_index := 0
 func _ready():
 	self.visible = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("dev_menu"):
 		if isMenuUp:
 			self.visible = false

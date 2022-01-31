@@ -11,6 +11,7 @@ extents = Vector2( 45, 41 )
 [node name="Shipyard" type="Area2D"]
 
 [node name="CollisionHighlight" type="ColorRect" parent="."]
+visible = false
 margin_left = -48.0
 margin_top = -48.0
 margin_right = 48.0
