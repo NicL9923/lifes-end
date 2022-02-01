@@ -251,6 +251,7 @@ __meta__ = {
 [node name="CmdHistory_VBox" type="VBoxContainer" parent="UI/DevConsole/ColorRect/ScrollContainer"]
 
 [node name="EscMenu" type="Control" parent="UI"]
+pause_mode = 2
 visible = false
 margin_left = 290.0
 margin_top = 86.0
