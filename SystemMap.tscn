@@ -145,6 +145,9 @@ script = ExtResource( 7 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 4 )
 
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84115 )
+
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Mercury_Area" to="." method="_on_Mercury_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Venus_Area" to="." method="_on_Venus_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Earth'sMoon_Area" to="." method="_on_EarthsMoon_Area_input_event"]
