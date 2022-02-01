@@ -76,8 +76,6 @@ func load_buildings():
 func save_game():
 	var save_game = File.new()
 	
-	# TODO: show label 'Saving...'
-	
 	for i in range(1, Global.MAX_SAVES):
 		var save_name = "user://save" + String(i) + ".save"
 		
@@ -105,7 +103,10 @@ func save_game():
 			
 			save_game.close()
 			
-			# TODO: show label 'Successfully saved!'
+			var popup = AcceptDialog.new()
+			popup.dialog_text = "Successfully saved! (save" + String(i) + ")"
+			Global.player.get_node("UI").add_child(popup)
+			popup.popup_centered()
 			
 			return
 	
