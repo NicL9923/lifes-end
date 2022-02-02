@@ -111,6 +111,7 @@ func toggle_combat():
 
 func _load_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")
+	get_tree().paused = false
 
 func _on_Quit_Button_pressed():
 	var popup = ConfirmationDialog.new()
