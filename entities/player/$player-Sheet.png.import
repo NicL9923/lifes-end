@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DummyEnemySprite.png-92f6b931cc9e30b5e5fb5cf69cabacf0.stex"
+path="res://.import/$player-Sheet.png-a7df2bcec005d8c17a140b3cfc6425ac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/Dummy/DummyEnemySprite.png"
-dest_files=[ "res://.import/DummyEnemySprite.png-92f6b931cc9e30b5e5fb5cf69cabacf0.stex" ]
+source_file="res://entities/player/$player-Sheet.png"
+dest_files=[ "res://.import/$player-Sheet.png-a7df2bcec005d8c17a140b3cfc6425ac.stex" ]
 
 [params]
 
