@@ -331,7 +331,7 @@ MAX_SPEED = 275
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
