@@ -6,6 +6,8 @@ export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
+onready var animatedSprite = $AnimatedSprite
+
 var currentZoom := 1.0
 var isInCombat := false
 
@@ -25,6 +27,7 @@ func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
 	
+	
 	$UI/Healthbar.value = health
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -39,6 +42,7 @@ func player_movement():
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
+	player_animation(input_vector)
 	
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector * MAX_SPEED
@@ -46,6 +50,31 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	move_and_slide(velocity)
+
+func player_animation(input_vector):
+	#right animations
+	if input_vector.x > 0:
+		animatedSprite.play("rightRun")
+	elif Input.is_action_just_released("ui_right"):
+		animatedSprite.play("rightIdle")	
+		
+	#left animations
+	if input_vector.x < 0:
+		animatedSprite.play("leftRun")
+	elif Input.is_action_just_released("ui_left"):
+		animatedSprite.play("leftIdle")	
+	
+	#down animations
+	if input_vector.y > 0 and input_vector.x == 0:
+		animatedSprite.play("downRun")
+	elif Input.is_action_just_released("ui_down"):
+		animatedSprite.play("downIdle")	
+	
+	#up animations
+	if input_vector.y < 0 and input_vector.x == 0:
+		animatedSprite.play("upRun")
+	elif Input.is_action_just_released("ui_up"):
+		animatedSprite.play("upIdle")	
 
 func handle_camera_zoom():
 	if Input.is_action_just_released("scroll_up"):
