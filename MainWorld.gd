@@ -4,7 +4,6 @@ var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
-export var HQ_mineral_cost := 15 # TODO: move building mineral costs into their respective scripts
 onready var tilemap = get_node("Navigation2D/TileMap")
 
 
@@ -35,7 +34,7 @@ func _ready():
 	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 
 func _process(_delta):
-	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= 15:
+	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= HQ.cost_to_build:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 
 func generate_map_border_tiles():
