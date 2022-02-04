@@ -93,6 +93,7 @@ func load_game(save_name):
 	Global.playerBaseData = save_data.playerBaseData
 	Global.isPlayerBaseFirstLoad = false
 	Global.npcColonyData = save_data.npcColonyData
+	Global.rscCollectionSiteData = save_data.rscCollectionSiteData
 
 	save_game.close()
 	

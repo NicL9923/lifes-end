@@ -2,7 +2,8 @@ extends Node2D
 
 var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
-export var HQ_mineral_cost := 15 # TODO: move building mineral costs into their respective scripts
+export var npc_colonies_to_generate := 50
+export var rsc_collection_sites_to_generate := 20
 onready var tilemap = get_node("Navigation2D/TileMap")
 
 
@@ -10,7 +11,7 @@ func _ready():
 	Global.world_nav = $Navigation2D
 	
 	var planet = Global.playerBaseData.planet
-	#TODO: may be worth just merging all planet tiles into single tilemap if they all have 1 or 2 tiles at most...
+	#TODO: may be worth just merging all planet tiles into single tileset if they all have 1 to 4 tiles at most...
 	tilemap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")
 	
 	generate_map_border_tiles()
@@ -23,6 +24,9 @@ func _ready():
 		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
 		
 		spawn_metal_deposits()
+		
+		generate_npc_colonies()
+		generate_resource_collection_sites()
 	else:
 		load_buildings()
 		# TODO: load_colonists()
@@ -30,7 +34,7 @@ func _ready():
 	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 
 func _process(_delta):
-	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= 15:
+	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= HQ.cost_to_build:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 
 func generate_map_border_tiles():
@@ -62,6 +66,69 @@ func spawn_metal_deposits():
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
 		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
 		get_tree().get_root().get_node("MainWorld").add_child(metal_deposit)
+
+func randomly_select_planet(bias: String):
+	randomize()
+	var prob_biases: Array
+	
+	if bias == "colony":
+		prob_biases = Global.colony_biases
+	elif bias == "rsc_site":
+		prob_biases = Global.rsc_site_biases
+	else:
+		return 0
+	
+	var planet_rand = rand_range(1, 100)
+	if planet_rand < prob_biases[0]:
+		return 0
+	elif planet_rand < prob_biases[1]:
+		return 1
+	elif planet_rand < prob_biases[2]:
+		return 2
+	elif planet_rand < prob_biases[3]:
+		return 3
+	elif planet_rand < prob_biases[4]:
+		return 4
+
+func generate_npc_colonies():
+	randomize()
+	
+	for _i in range(1, npc_colonies_to_generate):
+		var newNpcColony = {
+			planet = "",
+			coords = { lat = 0, long = 0 },
+			buildings = []
+		}
+		
+		newNpcColony.planet = Global.planets[randomly_select_planet("colony")]
+		
+		# TODO: check to make sure not adding colonies within a certain radius of one another
+		newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
+		newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
+		
+		# TODO: randomly generate buildings within npc colony (just HQ and maybe a barracks to start)
+		
+		Global.npcColonyData.append(newNpcColony)
+
+func generate_resource_collection_sites():
+	randomize()
+	
+	for _i in range(1, rsc_collection_sites_to_generate):
+		var newRscSite = {
+			planet = "",
+			coords = { lat = 0, long = 0 },
+			numMetalDeposits = 0
+		}
+		
+		newRscSite.planet = Global.planets[randomly_select_planet("rsc_site")]
+		
+		# TODO: check to make sure not adding sites within a certain radius of one another, or of npc colonies
+		newRscSite.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
+		newRscSite.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
+		
+		newRscSite.numMetalDeposits = rand_range(1, Global.max_deposits_at_rsc_site)
+		
+		Global.rscCollectionSiteData.append(newRscSite)
 
 func load_buildings():
 	var bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
@@ -96,6 +163,7 @@ func save_game():
 				"playerBaseEnergy": Global.playerBaseEnergy,
 				"playerBaseData": Global.playerBaseData,
 				"npcColonyData": Global.npcColonyData,
+				"rscCollectionSiteData": Global.rscCollectionSiteData,
 				"saveTimestamp": OS.get_datetime()
 			}
 			

@@ -50,6 +50,7 @@ func start_building(bldg_type):
 	elif building_type == Global.BUILDING_TYPES.Science_Lab:
 		building_node = preload("res://objects/buildings/Science_Lab.tscn").instance()
 	
+	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
 	if "isBeingPlaced" in building_node:
 		building_node.isBeingPlaced = true
