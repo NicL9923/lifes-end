@@ -27,6 +27,8 @@ func _ready():
 		
 		generate_npc_colonies()
 		generate_resource_collection_sites()
+		
+		Global.isPlayerBaseFirstLoad = false
 	else:
 		load_buildings()
 		# TODO: load_colonists()
@@ -34,7 +36,7 @@ func _ready():
 	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 
 func _process(_delta):
-	if Global.isPlayerBaseFirstLoad and Global.playerBaseMetal >= HQ.cost_to_build:
+	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerBaseMetal >= HQ.cost_to_build:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 
 func generate_map_border_tiles():

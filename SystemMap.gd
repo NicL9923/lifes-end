@@ -3,11 +3,15 @@ extends Spatial
 var currently_selected_planet := 2
 var player_rotate_sensitivity := 1
 var mouse_pressed := false
+export var icon_scale := 0.4
+const col_shape_scale := 0.05
 
+
+func _ready():
+	map_icons_to_planet()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene("res://MainWorld.tscn")
+	pass
 
 func _input(event):
 	# Handle player dragging/rotating planet
@@ -16,29 +20,54 @@ func _input(event):
 	if event is InputEventMouseMotion and mouse_pressed:
 		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.z)
 
+func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		print("Clicked!")
+	
+	print("Area input triggered")
+
+func create_icon(iconImgPath: String, coordinates):
+	var newIcon = Area.new()
+	
+	var colShape = CollisionShape.new()
+	colShape.shape = BoxShape.new()
+	colShape.scale = Vector3(col_shape_scale, col_shape_scale, col_shape_scale)
+	
+	var newSprite = Sprite3D.new()
+	newSprite.texture = load(iconImgPath)
+	
+	
+	newIcon.add_child(colShape)
+	newIcon.add_child(newSprite)
+	newIcon.add_to_group("icon")
+	$Planet.add_child(newIcon)
+	
+	newIcon.translation = $Planet.get_coords_from_lat_long(coordinates.lat, coordinates.long)
+	newIcon.transform = newIcon.transform.looking_at($Planet.translation, Vector3(0, 1, 0))
+	newSprite.scale = Vector3(icon_scale, icon_scale, icon_scale)
+	newIcon.connect("input_event", self, "_icon_area_clicked")
+
+func remove_current_icons():
+	for node in $Planet.get_children():
+		if node.is_in_group("icon"):
+			node.queue_free()
+
 func map_icons_to_planet():
+	remove_current_icons()
+	
 	if Global.playerBaseData.planet == Global.planets[currently_selected_planet]:
-		print("Player is on this planet") # TODO: map icon to planet using coords
+		# print("Player is on this planet")
+		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords)
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
-			print("NPC colony is on this planet")
+			# print("NPC colony is on this planet")
+			create_icon("res://ui/NpcColonyIcon.png", colony.coords)
 	
 	for rsc_site in Global.rscCollectionSiteData:
 		if rsc_site.planet == Global.planets[currently_selected_planet]:
-			print("Resource Site is on this planet")
-	
-	
-	var coords = $Planet.get_coords_from_lat_long(60, 60)
-	
-	var test_sprite = Sprite3D.new()
-	test_sprite.texture = load("res://objects/ship.png")
-	$Planet.add_child(test_sprite)
-	test_sprite.translation = coords
-	# TODO: make sure sprite is always angled up towards planet's north pole, and matches rotation outward of whereever it's at on the planet
-	# TODO: float icon just sliiiiightly above surface of planet so no clipping
-	test_sprite.rotation_degrees.y = 90
-	test_sprite.scale = Vector3(0.25, 0.25, 0.25)
+			# print("Resource Site is on this planet")
+			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords)
 
 func update_thumbnail_highlight_pos():
 	$UI/Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2
@@ -48,7 +77,7 @@ func display_planet(planet_index):
 	update_thumbnail_highlight_pos()
 	
 	# TODO: apply planet's specific shader to mesh
-	# TODO: space skybox
+	# TODO: make space skybox
 	
 	map_icons_to_planet()
 
@@ -76,3 +105,6 @@ func _on_Pluto_Area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		currently_selected_planet = 4
 		display_planet(currently_selected_planet)
+
+func _on_Return_Button_pressed():
+	get_tree().change_scene("res://MainWorld.tscn")
