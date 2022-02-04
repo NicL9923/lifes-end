@@ -1,9 +1,17 @@
-[gd_resource type="TileSet" load_steps=3 format=2]
+[gd_resource type="TileSet" load_steps=5 format=2]
 
 [ext_resource path="res://objects/planets/tilesets/Mars_tileset.png" type="Texture" id=1]
 
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [resource]
 0/name = "Mars_Wall"
@@ -14,6 +22,7 @@ extents = Vector2( 16, 16 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 16, 16 )
 0/navigation_offset = Vector2( 16, 16 )
+0/navigation = SubResource( 2 )
 0/shape_offset = Vector2( 16, 16 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
 0/shape = SubResource( 1 )
@@ -35,6 +44,7 @@ extents = Vector2( 16, 16 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 16, 16 )
 1/navigation_offset = Vector2( 16, 16 )
+1/navigation = SubResource( 3 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape_one_way = false
