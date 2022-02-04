@@ -6,10 +6,8 @@ var mouse_pressed := false
 
 
 func _process(_delta):
-	if Input.is_action_pressed("ui_cancel"):
-		get_tree().change_scene("res://MainGame.tscn")
-	
-	map_icons_to_planet()
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://MainWorld.tscn")
 
 func _input(event):
 	# Handle player dragging/rotating planet
@@ -19,10 +17,19 @@ func _input(event):
 		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.z)
 
 func map_icons_to_planet():
-	# TODO: map icons to planets
-		# Check player and npc bases for planet, and if it's the current one, map those icons (Sprite3D)
+	if Global.playerBaseData.planet == Global.planets[currently_selected_planet]:
+		print("Player is on this planet") # TODO: map icon to planet using coords
+	
+	for colony in Global.npcColonyData:
+		if colony.planet == Global.planets[currently_selected_planet]:
+			print("NPC colony is on this planet")
+	
+	for rsc_site in Global.rscCollectionSiteData:
+		if rsc_site.planet == Global.planets[currently_selected_planet]:
+			print("Resource Site is on this planet")
+	
+	
 	var coords = $Planet.get_coords_from_lat_long(60, 60)
-	# print(coords)
 	
 	var test_sprite = Sprite3D.new()
 	test_sprite.texture = load("res://objects/ship.png")
@@ -41,6 +48,9 @@ func display_planet(planet_index):
 	update_thumbnail_highlight_pos()
 	
 	# TODO: apply planet's specific shader to mesh
+	# TODO: space skybox
+	
+	map_icons_to_planet()
 
 func _on_Mercury_Area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
