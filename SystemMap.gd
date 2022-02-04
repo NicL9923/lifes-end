@@ -20,13 +20,27 @@ func _input(event):
 	if event is InputEventMouseMotion and mouse_pressed:
 		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.z)
 
-func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		print("Clicked!")
-	
-	print("Area input triggered")
+func _setup_system_location(placeType: String, placeIndex: int):
+	Global.location_to_load.type = placeType
+	Global.location_to_load.index = placeIndex
+	get_tree().change_scene("res://SystemLocation.tscn")
 
-func create_icon(iconImgPath: String, coordinates):
+func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, placeIndex):
+	if event is InputEventMouseButton and event.pressed:
+		var popup = ConfirmationDialog.new()
+		popup.window_title = "Navigation System"
+		
+		if placeType == "npcColony":
+			popup.dialog_text = "Are you sure you want to raid this colony?"
+		else:
+			popup.dialog_text = "Are you sure you want to visit this resource site?"
+		
+		popup.connect("confirmed", self, "_setup_system_location", [placeType, placeIndex])
+		popup.pause_mode = Node.PAUSE_MODE_PROCESS
+		$UI.add_child(popup)
+		popup.popup_centered()
+
+func create_icon(iconImgPath: String, coordinates, type: String, index: int):
 	var newIcon = Area.new()
 	
 	var colShape = CollisionShape.new()
@@ -45,7 +59,7 @@ func create_icon(iconImgPath: String, coordinates):
 	newIcon.translation = $Planet.get_coords_from_lat_long(coordinates.lat, coordinates.long)
 	newIcon.transform = newIcon.transform.looking_at($Planet.translation, Vector3(0, 1, 0))
 	newSprite.scale = Vector3(icon_scale, icon_scale, icon_scale)
-	newIcon.connect("input_event", self, "_icon_area_clicked")
+	newIcon.connect("input_event", self, "_icon_area_clicked", [type, index])
 
 func remove_current_icons():
 	for node in $Planet.get_children():
@@ -57,17 +71,23 @@ func map_icons_to_planet():
 	
 	if Global.playerBaseData.planet == Global.planets[currently_selected_planet]:
 		# print("Player is on this planet")
-		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords)
+		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords, "playerColony", 0)
+	
+	var place_index := 0
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
 			# print("NPC colony is on this planet")
-			create_icon("res://ui/NpcColonyIcon.png", colony.coords)
+			create_icon("res://ui/NpcColonyIcon.png", colony.coords, "npcColony", place_index)
+		place_index += 1
+	
+	place_index = 0
 	
 	for rsc_site in Global.rscCollectionSiteData:
 		if rsc_site.planet == Global.planets[currently_selected_planet]:
 			# print("Resource Site is on this planet")
-			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords)
+			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords, "rscSite", place_index)
+		place_index += 1
 
 func update_thumbnail_highlight_pos():
 	$UI/Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2

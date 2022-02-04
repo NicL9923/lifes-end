@@ -60,8 +60,11 @@ var building_activiation_distance := 75
 var MAX_SAVES := 5
 
 var isPlayerBaseFirstLoad := true
-
 var world_nav: Navigation2D
+var location_to_load := {
+	type = "",
+	index = 0
+}
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
