@@ -51,6 +51,7 @@ var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: i
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
+const location_type := { playerColony = "playerColony", npcColony = "npcColony", rscSite = "rscSite" }
 const colony_biases := [10, 25, 65, 95, 100] # Used to determine concentration of npc colonies on the above planets (actual prob is 10/15/40/30/5%)
 const rsc_site_biases := [20, 45, 55, 70, 100] # Same idea as planet_biases (actual prob is 20/25/10/15/30)
 const latitude_range := [-90, 90]

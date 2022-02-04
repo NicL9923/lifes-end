@@ -46,6 +46,8 @@ func create_icon(iconImgPath: String, coordinates, type: String, index: int):
 	var colShape = CollisionShape.new()
 	colShape.shape = BoxShape.new()
 	colShape.scale = Vector3(col_shape_scale, col_shape_scale, col_shape_scale)
+	if type == Global.location_type.playerColony:
+		colShape.disabled = true
 	
 	var newSprite = Sprite3D.new()
 	newSprite.texture = load(iconImgPath)
@@ -71,14 +73,14 @@ func map_icons_to_planet():
 	
 	if Global.playerBaseData.planet == Global.planets[currently_selected_planet]:
 		# print("Player is on this planet")
-		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords, "playerColony", 0)
+		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords, Global.location_type.playerColony, 0)
 	
 	var place_index := 0
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
 			# print("NPC colony is on this planet")
-			create_icon("res://ui/NpcColonyIcon.png", colony.coords, "npcColony", place_index)
+			create_icon("res://ui/NpcColonyIcon.png", colony.coords, Global.location_type.npcColony, place_index)
 		place_index += 1
 	
 	place_index = 0
@@ -86,7 +88,7 @@ func map_icons_to_planet():
 	for rsc_site in Global.rscCollectionSiteData:
 		if rsc_site.planet == Global.planets[currently_selected_planet]:
 			# print("Resource Site is on this planet")
-			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords, "rscSite", place_index)
+			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords, Global.location_type.rscSite, place_index)
 		place_index += 1
 
 func update_thumbnail_highlight_pos():
