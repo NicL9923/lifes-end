@@ -333,6 +333,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -603,6 +604,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RTB_Button" type="Button" parent="UI"]
+visible = false
+margin_left = 264.0
+margin_top = 8.0
+margin_right = 376.0
+margin_bottom = 28.0
+text = "Return to Base"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Shipyard_Button" to="UI/BuildingUI" method="_on_Shipyard_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
@@ -615,3 +627,4 @@ __meta__ = {
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/EscMenu/ColorRect/VBoxContainer/Quit_Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="UI/RTB_Button" to="." method="_on_RTB_Button_pressed"]

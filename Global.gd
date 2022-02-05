@@ -41,10 +41,12 @@ var playerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
 	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
-	colonists = []
+	colonists = [],
+	lastPlayerPos = Vector2(0, 0),
+	metalDeposits = [] # Vector2[]
 }
 
-var npcColonyData: Array # (playerBaseData, but w/o colonists[])
+var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
 var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
 
 #Game flags/vars

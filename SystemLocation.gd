@@ -2,12 +2,19 @@ extends Node2D
 
 onready var tilemap = get_node("Navigation2D/TileMap")
 var are_enemies_present := false
+var remaining_enemies := 0
+var isARaid := false
+var location_type: String
+var location_index: int
 
 
 func _ready():
-	if Global.location_to_load.type == Global.location_type.npcColony:
+	location_type = Global.location_to_load.type
+	location_index = Global.location_to_load.index
+	
+	if location_type == Global.location_type.npcColony:
 		load_npc_colony()
-	elif Global.location_to_load.type == Global.location_type.rscSite:
+	elif location_type == Global.location_type.rscSite:
 		load_resource_collection_site()
 	else:
 		print("You screwed something up really bad if you're seeing this...")
@@ -17,8 +24,23 @@ func _ready():
 	Global.world_nav = $Navigation2D
 	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 
-func _process(delta):
-	pass # TODO: check if npc colony gets destroyed -> if so, set "isDestroyed" flag to true
+func _physics_process(_delta):
+	$Player.get_node("UI/RTB_Button").visible = !are_enemies_present
+	
+	print(remaining_enemies)
+	
+	var enemy_count := 0
+	if isARaid:
+		for node in get_children():
+			if node.is_in_group("enemy"):
+				enemy_count +=1
+		
+		remaining_enemies = enemy_count
+		
+		if remaining_enemies == 0:
+			Global.npcColonyData[location_index].isDestroyed = true
+			are_enemies_present = false
+			Global.player.toggle_combat(false)
 
 
 func load_planet(planet):
@@ -35,6 +57,7 @@ func load_npc_colony():
 	spawn_buildings(npcColony.buildings)
 	spawn_colonists()
 	
+	isARaid = true
 	are_enemies_present = true
 	Global.player.toggle_combat(are_enemies_present)
 
@@ -45,6 +68,8 @@ func load_resource_collection_site():
 	
 	spawn_metal_deposits(rscSite.numMetalDeposits)
 	
+	# TODO: random chance enemies spawn!
+	
 	Global.rscCollectionSiteData.pop_at(Global.location_to_load.index) # Remove the site after player visits it
 
 
@@ -53,20 +78,24 @@ func spawn_buildings(bldg_list: Array):
 		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = get_random_location_in_map()
 		# TODO: set building level
-		get_tree().get_root().get_child(1).add_child(building_node)
+		add_child(building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
 func spawn_colonists():
-	for _i in range(Global.max_colonists_at_npc_colony):
+	var num_colonists = rand_range(1, Global.max_colonists_at_npc_colony)
+	for _i in range(num_colonists):
 		var new_colonist = load("res://entities/enemies/Dummy/DummyEnemy.tscn").instance()
 		new_colonist.global_position = get_random_location_in_map()
-		get_tree().get_root().get_child(1).add_child(new_colonist)
+		new_colonist.add_to_group("enemy")
+		add_child(new_colonist)
+		
+		remaining_enemies += 1
 
 func spawn_metal_deposits(numMetalDeposits: int):
 	for _i in range(numMetalDeposits):
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
 		metal_deposit.global_position = get_random_location_in_map()
-		get_tree().get_root().get_child(1).add_child(metal_deposit)
+		add_child(metal_deposit)
 
 func get_random_location_in_map():
 	randomize()

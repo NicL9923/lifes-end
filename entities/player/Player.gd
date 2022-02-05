@@ -121,3 +121,6 @@ func _on_Quit_Button_pressed():
 	popup.pause_mode = Node.PAUSE_MODE_PROCESS
 	$UI.add_child(popup)
 	popup.popup_centered()
+
+func _on_RTB_Button_pressed():
+	get_tree().change_scene("res://MainWorld.tscn")
