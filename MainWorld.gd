@@ -5,6 +5,7 @@ export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 onready var tilemap = get_node("Navigation2D/TileMap")
+var areThereRemainingMetalDeposits := true
 
 
 func _ready():
@@ -28,16 +29,32 @@ func _ready():
 		generate_npc_colonies()
 		generate_resource_collection_sites()
 		
+		$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
+		
 		Global.isPlayerBaseFirstLoad = false
 	else:
 		load_buildings()
 		# TODO: load_colonists()
-	
-	$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
+		
+		if Global.playerBaseData.metalDeposits.size() == 0:
+			areThereRemainingMetalDeposits = false
+		else:
+			re_spawn_metal_deposits()
+		
+		$Player.global_position = Global.playerBaseData.lastPlayerPos
 
-func _process(_delta):
+func _physics_process(_delta):
 	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerBaseMetal >= HQ.cost_to_build:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
+	
+	Global.playerBaseData.lastPlayerPos = $Player.global_position
+	
+	if areThereRemainingMetalDeposits:
+		var updatedMetalDepositArr := []
+		for node in get_children():
+			if node.is_in_group("metal_deposit"):
+				updatedMetalDepositArr.append(node.global_position)
+		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
 
 func generate_map_border_tiles():
 	for x in [0, worldTileSize.x - 1]:
@@ -67,7 +84,14 @@ func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
 		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
-		get_tree().get_root().get_node("MainWorld").add_child(metal_deposit)
+		metal_deposit.add_to_group("metal_deposit")
+		add_child(metal_deposit)
+
+func re_spawn_metal_deposits():
+	for deposit_pos in Global.playerBaseData.metalDeposits:
+		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
+		metal_deposit.global_position = deposit_pos
+		add_child(metal_deposit)
 
 func randomly_select_planet(bias: String):
 	randomize()
@@ -99,7 +123,8 @@ func generate_npc_colonies():
 		var newNpcColony = {
 			planet = "",
 			coords = { lat = 0, long = 0 },
-			buildings = []
+			buildings = [],
+			isDestroyed = false
 		}
 		
 		newNpcColony.planet = Global.planets[randomly_select_planet("colony")]
@@ -108,7 +133,10 @@ func generate_npc_colonies():
 		newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 		newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
-		# TODO: randomly generate buildings within npc colony (just HQ and maybe a barracks to start)
+		# TODO: Randomly generate other buildings within npc colony
+			# NOTE: currently randomly setting building locations in SystemLocation.gd
+		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.HQ, global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.Barracks, global_pos = Vector2(0, 0), building_lvl = 1 })
 		
 		Global.npcColonyData.append(newNpcColony)
 
@@ -133,13 +161,10 @@ func generate_resource_collection_sites():
 		Global.rscCollectionSiteData.append(newRscSite)
 
 func load_buildings():
-	var bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
-	
 	for bldg in Global.playerBaseData.buildings:
-		var building_node = load("res://objects/buildings/" + bldg_names[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = bldg.global_pos
 		# TODO: set building level
-		# TODO: set any other random vars we need to here that differ from the actual building placement process
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():
