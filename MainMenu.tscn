@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=2]
@@ -6,10 +6,12 @@
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/Earth.png" type="Texture" id=5]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=6]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=7]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,34 +59,34 @@ __meta__ = {
 
 [node name="NewGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
 margin_right = 84.0
-margin_bottom = 23.0
+margin_bottom = 21.0
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../LoadGameButton")
 custom_fonts/font = ExtResource( 3 )
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 27.0
+margin_top = 25.0
 margin_right = 84.0
-margin_bottom = 50.0
+margin_bottom = 46.0
 focus_neighbour_top = NodePath("../NewGameButton")
 focus_neighbour_bottom = NodePath("../SettingsButton")
 custom_fonts/font = ExtResource( 3 )
 text = "Load Game"
 
 [node name="SettingsButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 54.0
+margin_top = 50.0
 margin_right = 84.0
-margin_bottom = 77.0
+margin_bottom = 71.0
 focus_neighbour_top = NodePath("../LoadGameButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
 custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 81.0
+margin_top = 75.0
 margin_right = 84.0
-margin_bottom = 104.0
+margin_bottom = 96.0
 focus_neighbour_top = NodePath("../SettingsButton")
 focus_neighbour_bottom = NodePath("../NewGameButton")
 custom_fonts/font = ExtResource( 3 )

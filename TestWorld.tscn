@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/Dummy/DummyEnemy.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://objects/buildings/HQ.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/planets/tilesets/Mars_Tileset.tres" type="TileSet" id=6]
 [ext_resource path="res://objects/buildings/Communications_Array.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=8]
 
 [node name="TestWorld" type="Node2D"]
 script = ExtResource( 3 )
@@ -31,6 +32,7 @@ margin_left = -47.0
 margin_top = 146.0
 margin_right = 58.0
 margin_bottom = 166.0
+theme = ExtResource( 8 )
 text = "Toggle combat"
 __meta__ = {
 "_edit_use_anchors_": false
