@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=2]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/Earth.png" type="Texture" id=5]
+[ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -19,19 +20,27 @@ position = Vector2( 319.974, 180.413 )
 scale = Vector2( 0.500231, 0.500411 )
 texture = ExtResource( 2 )
 
+[node name="Moon" type="Sprite" parent="."]
+position = Vector2( 8, 136 )
+scale = Vector2( 0.40625, 0.40625 )
+texture = ExtResource( 6 )
+
 [node name="Earth" type="Sprite" parent="."]
-position = Vector2( 82, 276 )
-scale = Vector2( 0.531667, 0.527669 )
+position = Vector2( 69.4967, 290.605 )
+scale = Vector2( 1.66411, 1.6516 )
 texture = ExtResource( 5 )
 
 [node name="Title" type="Sprite" parent="."]
-position = Vector2( 320, 80 )
-scale = Vector2( 0.4775, 0.4775 )
+position = Vector2( 320, 96 )
+scale = Vector2( 0.994375, 0.994375 )
 texture = ExtResource( 4 )
 
 [node name="MainMenuContainer" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MainMenuVBox" type="VBoxContainer" parent="MainMenuContainer"]
 anchor_left = 0.5

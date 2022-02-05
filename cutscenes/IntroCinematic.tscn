@@ -62,8 +62,8 @@ scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 4 )
 
 [node name="Earth" type="Sprite" parent="."]
-position = Vector2( 69, 262 )
-scale = Vector2( 1.08167, 1.08167 )
+position = Vector2( 56, 276 )
+scale = Vector2( 1.84073, 1.84073 )
 texture = ExtResource( 6 )
 
 [node name="Ship Fleet" type="Node2D" parent="."]
