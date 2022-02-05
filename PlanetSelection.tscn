@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=6]
 [ext_resource path="res://objects/planets/sprites/Pluto.png" type="Texture" id=7]
 [ext_resource path="res://objects/planets/sprites/Mercury.png" type="Texture" id=8]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -16,6 +17,7 @@ extents = Vector2( 16, 16 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 9 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -145,19 +147,6 @@ __meta__ = {
 position = Vector2( 320, 152 )
 scale = Vector2( 1.5, 1.4375 )
 texture = ExtResource( 3 )
-
-[node name="Placeholder_Label" type="Label" parent="."]
-margin_left = 408.0
-margin_top = 40.0
-margin_right = 584.0
-margin_bottom = 88.0
-text = "*popout panel with
-advantages/disadvantages 
-of planet*"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlanetName_Label" type="Label" parent="."]
 margin_left = 232.0
