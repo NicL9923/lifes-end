@@ -138,6 +138,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Return_Button" type="Button" parent="UI"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 80.0
+margin_bottom = 40.0
+text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Planet" type="Spatial" parent="."]
 script = ExtResource( 7 )
 
@@ -147,9 +157,11 @@ material/0 = SubResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84115 )
+light_energy = 3.504
 
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Mercury_Area" to="." method="_on_Mercury_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Venus_Area" to="." method="_on_Venus_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Earth'sMoon_Area" to="." method="_on_EarthsMoon_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Mars_Area" to="." method="_on_Mars_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Pluto_Area" to="." method="_on_Pluto_Area_input_event"]
+[connection signal="pressed" from="UI/Return_Button" to="." method="_on_Return_Button_pressed"]

@@ -1,6 +1,13 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://MainGame.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# TODO: this scene will manage the player base and other maps (i.e. AI colonies, resource locations, etc) \"scenes\" (read: nodes)
+
+func _ready():
+	pass
+"
 
 [node name="Main Game" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 1 )

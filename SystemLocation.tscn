@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SystemLocation.gd" type="Script" id=1]
+[ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=2]
+
+[node name="SystemLocation" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Navigation2D"]
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+format = 1
+
+[node name="Player" parent="." instance=ExtResource( 2 )]

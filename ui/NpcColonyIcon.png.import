@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlaceholderCharacter32x32.png-c13ef178dfc2c80380077a22ab36a966.stex"
+path="res://.import/NpcColonyIcon.png-3d5561e5bc8b57964d770ef10180cbfc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/PlaceholderCharacter32x32.png"
-dest_files=[ "res://.import/PlaceholderCharacter32x32.png-c13ef178dfc2c80380077a22ab36a966.stex" ]
+source_file="res://ui/NpcColonyIcon.png"
+dest_files=[ "res://.import/NpcColonyIcon.png-3d5561e5bc8b57964d770ef10180cbfc.stex" ]
 
 [params]
 

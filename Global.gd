@@ -39,22 +39,37 @@ var playerBaseEnergy: int
 
 var playerBaseData = {
 	planet = "",
+	coords = { lat = 0, long = 0 },
 	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
-	colonists = []
+	colonists = [],
+	lastPlayerPos = Vector2(0, 0),
+	metalDeposits = [] # Vector2[]
 }
 
-var npcColonyData: Array #BaseData[]
+var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
+var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
 
 #Game flags/vars
-var world_tile_size := Vector2(50, 50)
-var cellSize := 32
-var planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
-var building_activiation_distance := 75
-var MAX_SAVES := 5
+const world_tile_size := Vector2(50, 50)
+const cellSize := 32
+const bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
+const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
+const location_type := { playerColony = "playerColony", npcColony = "npcColony", rscSite = "rscSite" }
+const colony_biases := [10, 25, 65, 95, 100] # Used to determine concentration of npc colonies on the above planets (actual prob is 10/15/40/30/5%)
+const rsc_site_biases := [20, 45, 55, 70, 100] # Same idea as planet_biases (actual prob is 20/25/10/15/30)
+const latitude_range := [-90, 90]
+const longitude_range := [-180, 180]
+const max_deposits_at_rsc_site := 100
+const max_colonists_at_npc_colony := 20
+const building_activiation_distance := 75
+const MAX_SAVES := 5
 
 var isPlayerBaseFirstLoad := true
-
 var world_nav: Navigation2D
+var location_to_load := {
+	type = "",
+	index = 0
+}
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
