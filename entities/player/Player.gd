@@ -101,8 +101,8 @@ func weapon_handling(_delta):
 	if Input.is_action_pressed("shoot"):
 		currentWeapon.shoot(gun_angle)
 
-func toggle_combat():
-	if isInCombat:
+func toggle_combat(on: bool):
+	if !on:
 		isInCombat = false
 		gun_rotation_point.hide()
 	else:

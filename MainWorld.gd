@@ -108,7 +108,10 @@ func generate_npc_colonies():
 		newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 		newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
-		# TODO: randomly generate buildings within npc colony (just HQ and maybe a barracks to start)
+		# TODO: Randomly generate other buildings within npc colony
+			# NOTE: currently randomly setting building locations in SystemLocation.gd
+		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.HQ, global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.Barracks, global_pos = Vector2(0, 0), building_lvl = 1 })
 		
 		Global.npcColonyData.append(newNpcColony)
 
@@ -133,13 +136,10 @@ func generate_resource_collection_sites():
 		Global.rscCollectionSiteData.append(newRscSite)
 
 func load_buildings():
-	var bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
-	
 	for bldg in Global.playerBaseData.buildings:
-		var building_node = load("res://objects/buildings/" + bldg_names[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = bldg.global_pos
 		# TODO: set building level
-		# TODO: set any other random vars we need to here that differ from the actual building placement process
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():
