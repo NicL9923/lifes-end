@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://SystemMap.gd" type="Script" id=1]
 [ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=2]
@@ -8,27 +8,24 @@
 [ext_resource path="res://objects/planets/sprites/Venus.png" type="Texture" id=6]
 [ext_resource path="res://objects/planets/Planet.gd" type="Script" id=7]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=8]
+[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 2 )
+
 [sub_resource type="SphereMesh" id=2]
+material = SubResource( 7 )
 radial_segments = 24
 
-[sub_resource type="Shader" id=3]
-code = "shader_type spatial;
+[sub_resource type="PanoramaSky" id=5]
+panorama = ExtResource( 9 )
 
-
-void fragment() {
-	METALLIC = 0.0;
-	ROUGHNESS = 0.85;
-	ALBEDO = vec3(0.2, 0.2, 0.2);
-	
-	
-}"
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="Environment" id=6]
+background_mode = 2
+background_sky = SubResource( 5 )
 
 [node name="System Map" type="Spatial"]
 script = ExtResource( 1 )
@@ -155,11 +152,14 @@ script = ExtResource( 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Planet"]
 mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+material/0 = null
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84115 )
 light_energy = 3.504
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
 
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Mercury_Area" to="." method="_on_Mercury_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Venus_Area" to="." method="_on_Venus_Area_input_event"]

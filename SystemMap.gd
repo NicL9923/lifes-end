@@ -100,8 +100,9 @@ func display_planet(planet_index):
 	$UI/PlanetName_Label.text = Global.planets[planet_index]
 	update_thumbnail_highlight_pos()
 	
-	# TODO: apply planet's specific shader to mesh
-	# TODO: make space skybox
+	var newMaterial = SpatialMaterial.new()
+	newMaterial.albedo_texture = load("res://objects/planets/sprites/" + Global.planets[planet_index] + ".png")
+	$Planet/MeshInstance.mesh.surface_set_material(0, newMaterial)
 	
 	map_icons_to_planet()
 
