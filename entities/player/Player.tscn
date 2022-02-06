@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -9,38 +9,16 @@
 [ext_resource path="res://entities/player/DevConsole.gd" type="Script" id=7]
 [ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=9]
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 864, 96, 96 )
+[ext_resource path="res://objects/buildings/shipyard.png" type="Texture" id=10]
+[ext_resource path="res://ui/DynamicFont_12.tres" type="DynamicFont" id=11]
+[ext_resource path="res://objects/buildings/science_lab.png" type="Texture" id=12]
+[ext_resource path="res://objects/buildings/water_recycling_system.png" type="Texture" id=13]
+[ext_resource path="res://objects/buildings/barracks.png" type="Texture" id=14]
+[ext_resource path="res://objects/buildings/power_industrial_coal.png" type="Texture" id=15]
+[ext_resource path="res://objects/buildings/greenhouse.png" type="Texture" id=16]
+[ext_resource path="res://objects/buildings/medbay.png" type="Texture" id=17]
+[ext_resource path="res://objects/buildings/power_renewable_solar.png" type="Texture" id=18]
+[ext_resource path="res://objects/buildings/Communications_Array.png" type="Texture" id=19]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
@@ -74,37 +52,37 @@ region = Rect2( 192, 96, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 96, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 960, 96, 96 )
+region = Rect2( 0, 576, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 960, 96, 96 )
+region = Rect2( 96, 576, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 960, 96, 96 )
+region = Rect2( 192, 576, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 1 )
-region = Rect2( 288, 960, 96, 96 )
+region = Rect2( 288, 576, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 1056, 96, 96 )
+region = Rect2( 0, 672, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 1056, 96, 96 )
+region = Rect2( 96, 672, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 1056, 96, 96 )
+region = Rect2( 192, 672, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 1 )
-region = Rect2( 288, 1056, 96, 96 )
+region = Rect2( 288, 672, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
@@ -138,101 +116,37 @@ region = Rect2( 192, 288, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 288, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=53]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 1344, 96, 96 )
+region = Rect2( 0, 960, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=54]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 1344, 96, 96 )
+region = Rect2( 96, 960, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=55]
+[sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 1344, 96, 96 )
+region = Rect2( 192, 960, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=56]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 1 )
-region = Rect2( 288, 1344, 96, 96 )
+region = Rect2( 288, 960, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=57]
+[sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 1440, 96, 96 )
+region = Rect2( 0, 1056, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=58]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 1440, 96, 96 )
+region = Rect2( 96, 1056, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=59]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 1440, 96, 96 )
+region = Rect2( 192, 1056, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=60]
+[sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 1 )
-region = Rect2( 288, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 480, 96, 96 )
+region = Rect2( 288, 1056, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 1 )
@@ -266,21 +180,112 @@ region = Rect2( 192, 1248, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1248, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 864, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
-"loop": true,
-"name": "upIdle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "leftIdle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
-"name": "upRun",
+"name": "rightRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
@@ -288,14 +293,19 @@ animations = [ {
 "name": "leftRun",
 "speed": 15.0
 }, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "upRun",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
+"loop": true,
+"name": "downIdle",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
 "loop": true,
 "name": "downRun",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": true,
-"name": "rightRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
@@ -303,9 +313,9 @@ animations = [ {
 "name": "rightIdle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "downIdle",
+"name": "upIdle",
 "speed": 5.0
 } ]
 
@@ -331,7 +341,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -360,121 +370,476 @@ __meta__ = {
 }
 
 [node name="Building_Panel" type="Panel" parent="UI/BuildingUI"]
-visible = false
-margin_left = 80.3138
-margin_top = 27.0
-margin_right = 548.314
-margin_bottom = 323.0
+margin_left = 88.0
+margin_top = 24.0
+margin_right = 560.0
+margin_bottom = 320.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title_Label" type="Label" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 199.686
-margin_top = 5.0
-margin_right = 260.686
-margin_bottom = 22.0
+margin_left = 200.0
+margin_top = 8.0
+margin_right = 261.0
+margin_bottom = 25.0
 text = "Buildings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Shipyard_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 23.6862
-margin_top = 53.0
-margin_right = 89.6862
-margin_bottom = 73.0
+[node name="Close_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 448.0
+margin_top = 8.0
+margin_right = 464.0
+margin_bottom = 27.0
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/BuildingUI/Building_Panel"]
+margin_left = 16.0
+margin_top = 32.0
+margin_right = 456.0
+margin_bottom = 280.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BuildingUI/Building_Panel/ScrollContainer"]
+margin_right = 425.0
+margin_bottom = 707.0
+rect_min_size = Vector2( 425, 0 )
+
+[node name="Shipyard_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_right = 425.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Shipyard_Button"]
+position = Vector2( 32, 32 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Shipyard_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Shipyard"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Medbay_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 103.686
-margin_top = 53.0
-margin_right = 169.686
-margin_bottom = 73.0
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Shipyard_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 11 )
+text = "Allows the player to upgrade their ship"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Shipyard_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 25 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Medbay_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 425.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button"]
+position = Vector2( 32, 33 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 17 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Medbay"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Barracks_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 183.686
-margin_top = 53.0
-margin_right = 249.686
-margin_bottom = 73.0
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 11 )
+text = "Heals the player and their colonists"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 25 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Barracks_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 158.0
+margin_right = 425.0
+margin_bottom = 233.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button"]
+position = Vector2( 32, 42 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Barracks"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Greenhouse_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 263.686
-margin_top = 53.0
-margin_right = 353.686
-margin_bottom = 73.0
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 11 )
+text = "Recruit new colonists and view player stats"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 25 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Greenhouse_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 237.0
+margin_right = 425.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button"]
+position = Vector2( 32, 41 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Greenhouse"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScienceLab_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 367.686
-margin_top = 53.0
-margin_right = 457.686
-margin_bottom = 73.0
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "Creates 5 Food per day"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 10 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScienceLab_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 316.0
+margin_right = 425.0
+margin_bottom = 391.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+position = Vector2( 32, 34 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Science Lab"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoalPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 48.6862
-margin_top = 103.0
-margin_right = 138.686
-margin_bottom = 123.0
-text = "Coal Plant"
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "Allows the player to conduct research"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SolarPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 153.686
-margin_top = 104.0
-margin_right = 243.686
-margin_bottom = 124.0
-text = "Solar Array"
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 25 metal"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaterRecyclingSystem_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 257.686
-margin_top = 105.0
-margin_right = 422.686
-margin_bottom = 125.0
+[node name="CoalPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 395.0
+margin_right = 425.0
+margin_bottom = 470.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+position = Vector2( 32, 37 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
+text = "Coal Power Plant"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "Generates 15 Energy and 5 Pollution per day"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 15 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SolarPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 474.0
+margin_right = 425.0
+margin_bottom = 549.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+position = Vector2( 32, 38 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 18 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
+text = "Solar Power Plant"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "Generates 5 Energy per day"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 15 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaterRecyclingSystem_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 553.0
+margin_right = 425.0
+margin_bottom = 628.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+position = Vector2( 32, 39 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
 text = "Water Recycling System"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CommunicationsArray_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 180.686
-margin_top = 149.0
-margin_right = 280.686
-margin_bottom = 169.0
-text = "Comms Array"
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "Generates 10 Water per day"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Close_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 440.789
-margin_top = 7.07906
-margin_right = 460.789
-margin_bottom = 27.0791
-text = "X"
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 10 metal"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CommunicationsArray_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+margin_top = 632.0
+margin_right = 425.0
+margin_bottom = 707.0
+rect_min_size = Vector2( 0, 75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+position = Vector2( 32, 43 )
+scale = Vector2( 0.458333, 0.458333 )
+texture = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+margin_left = 71.6862
+margin_top = 8.0
+margin_right = 131.686
+margin_bottom = 25.0
+text = "Communications Array"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+margin_left = 72.0
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 11 )
+text = "View the System Map"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 424.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 11 )
+text = "Cost: 30 metal"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -507,13 +872,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MetalLabel" type="Label" parent="UI/ResourceUI"]
-margin_left = 10.0
-margin_top = 9.0
-margin_right = 65.0
-margin_bottom = 26.0
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ResourceUI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 70.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MetalLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
+margin_right = 64.0
+margin_bottom = 17.0
 theme = SubResource( 2 )
 text = "Metal: X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
+margin_top = 21.0
+margin_right = 64.0
+margin_bottom = 38.0
+theme = SubResource( 2 )
+text = "Energy: X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaterLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
+margin_top = 42.0
+margin_right = 64.0
+margin_bottom = 59.0
+theme = SubResource( 2 )
+text = "Water: X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FoodLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
+margin_top = 63.0
+margin_right = 64.0
+margin_bottom = 80.0
+theme = SubResource( 2 )
+text = "Food: X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -620,16 +1022,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Shipyard_Button" to="UI/BuildingUI" method="_on_Shipyard_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScienceLab_Button" to="UI/BuildingUI" method="_on_ScienceLab_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/CoalPower_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/SolarPower_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/WaterRecyclingSystem_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/CommunicationsArray_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Shipyard_Button" to="UI/BuildingUI" method="_on_Shipyard_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button" to="UI/BuildingUI" method="_on_ScienceLab_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/EscMenu/ColorRect/VBoxContainer/Quit_Button" to="." method="_on_Quit_Button_pressed"]
 [connection signal="pressed" from="UI/RTB_Button" to="." method="_on_RTB_Button_pressed"]
