@@ -36,6 +36,7 @@ var playerBaseFood: int
 var playerBaseWater: int
 var playerBaseEnergy: int
 
+var game_time := { ticks = 800.0, earthDays = 0 } # Game loads at 0800/8AM (goes from 0000 to 2400)
 
 var playerBaseData = {
 	planet = "",

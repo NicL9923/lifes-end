@@ -49,44 +49,50 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 257.607
-margin_top = 178.584
-margin_right = 341.607
-margin_bottom = 299.584
+margin_left = 244.0
+margin_top = 188.0
+margin_right = 358.0
+margin_bottom = 309.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NewGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_right = 84.0
-margin_bottom = 21.0
+margin_top = 4.0
+margin_right = 114.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../LoadGameButton")
 custom_fonts/font = ExtResource( 3 )
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 25.0
-margin_right = 84.0
-margin_bottom = 46.0
+margin_top = 33.0
+margin_right = 114.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../NewGameButton")
 focus_neighbour_bottom = NodePath("../SettingsButton")
 custom_fonts/font = ExtResource( 3 )
 text = "Load Game"
 
 [node name="SettingsButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 50.0
-margin_right = 84.0
-margin_bottom = 71.0
+margin_top = 62.0
+margin_right = 114.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../LoadGameButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
 custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 75.0
-margin_right = 84.0
-margin_bottom = 96.0
+margin_top = 91.0
+margin_right = 114.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../SettingsButton")
 focus_neighbour_bottom = NodePath("../NewGameButton")
 custom_fonts/font = ExtResource( 3 )
@@ -131,15 +137,6 @@ tick_count = 3
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
-
-[node name="LoadGameVBox" type="VBoxContainer" parent="LoadGameContainer"]
-margin_left = 203.0
-margin_top = 17.0
-margin_right = 441.0
-margin_bottom = 343.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LG_GoBackBN" type="Button" parent="LoadGameContainer"]
 margin_left = 25.0

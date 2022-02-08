@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MainWorld.gd" type="Script" id=2]
 [ext_resource path="res://objects/planets/tilesets/Mars_Tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://effects/DayNightCycle.tscn" type="PackedScene" id=4]
 
 [node name="MainWorld" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="CanvasModulate" parent="." instance=ExtResource( 4 )]
+position = Vector2( -192, 96 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 

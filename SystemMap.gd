@@ -8,6 +8,7 @@ const col_shape_scale := 0.05
 
 
 func _ready():
+	display_planet(currently_selected_planet)
 	map_icons_to_planet()
 
 func _process(_delta):
