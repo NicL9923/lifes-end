@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/buildings/power_industrial_coal.png" type="Texture" id=1]
+[ext_resource path="res://objects/buildings/Power_Industrial_Coal.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42, 33.5 )
@@ -9,6 +10,7 @@ extents = Vector2( 42, 33.5 )
 extents = Vector2( 42, 33.5 )
 
 [node name="Power_Industrial_Coal" type="Area2D"]
+script = ExtResource( 2 )
 
 [node name="CollisionHighlight" type="ColorRect" parent="."]
 visible = false

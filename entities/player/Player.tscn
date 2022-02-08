@@ -341,7 +341,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 6
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -455,7 +455,6 @@ margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 25 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -503,7 +502,6 @@ margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 25 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -551,7 +549,6 @@ margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 25 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -599,13 +596,12 @@ margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 10 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScienceLab_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Science_Lab_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 316.0
 margin_right = 425.0
 margin_bottom = 391.0
@@ -614,12 +610,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Science_Lab_Button"]
 position = Vector2( 32, 34 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 12 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Science_Lab_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -629,7 +625,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Science_Lab_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -641,19 +637,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Science_Lab_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 25 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoalPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Power_Industrial_Coal_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 395.0
 margin_right = 425.0
 margin_bottom = 470.0
@@ -662,12 +657,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button"]
 position = Vector2( 32, 37 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 15 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -677,7 +672,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -689,19 +684,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 15 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SolarPower_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Power_Renewable_Solar_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 474.0
 margin_right = 425.0
 margin_bottom = 549.0
@@ -710,12 +704,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
 position = Vector2( 32, 38 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 18 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -725,7 +719,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -737,19 +731,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 15 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaterRecyclingSystem_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Water_Recycling_System_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 553.0
 margin_right = 425.0
 margin_bottom = 628.0
@@ -758,12 +751,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button"]
 position = Vector2( 32, 39 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 13 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -773,7 +766,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -785,19 +778,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 10 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CommunicationsArray_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Communications_Array_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 632.0
 margin_right = 425.0
 margin_bottom = 707.0
@@ -806,12 +798,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Communications_Array_Button"]
 position = Vector2( 32, 43 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 19 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Communications_Array_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -821,7 +813,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Communications_Array_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -833,13 +825,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Communications_Array_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 11 )
-text = "Cost: 30 metal"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1028,11 +1019,11 @@ __meta__ = {
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Medbay_Button" to="UI/BuildingUI" method="_on_Medbay_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Barracks_Button" to="UI/BuildingUI" method="_on_Barracks_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/ScienceLab_Button" to="UI/BuildingUI" method="_on_ScienceLab_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CoalPower_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/SolarPower_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/WaterRecyclingSystem_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/CommunicationsArray_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Science_Lab_Button" to="UI/BuildingUI" method="_on_ScienceLab_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Communications_Array_Button" to="UI/BuildingUI" method="_on_CommunicationsArray_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/EscMenu/ColorRect/VBoxContainer/Quit_Button" to="." method="_on_Quit_Button_pressed"]
 [connection signal="pressed" from="UI/RTB_Button" to="." method="_on_RTB_Button_pressed"]

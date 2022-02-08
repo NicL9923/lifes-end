@@ -109,6 +109,7 @@ func load_game(save_name):
 	Global.playerBaseFood = save_data.playerBaseFood
 	Global.playerBaseWater = save_data.playerBaseWater
 	Global.playerBaseEnergy = save_data.playerBaseEnergy
+	Global.game_time = save_data.gameTime
 	Global.playerBaseData = save_data.playerBaseData
 	Global.isPlayerBaseFirstLoad = false
 	Global.npcColonyData = save_data.npcColonyData
