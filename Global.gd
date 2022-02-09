@@ -38,6 +38,7 @@ var playerBaseEnergy: int
 
 var game_time := { ticks = 800.0, earthDays = 0 } # Game loads at 0800/8AM (goes from 0000 to 2400)
 
+var playerShipData = { level = 1 }
 var playerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
@@ -60,6 +61,7 @@ const colony_biases := [10, 25, 65, 95, 100] # Used to determine concentration o
 const rsc_site_biases := [20, 45, 55, 70, 100] # Same idea as planet_biases (actual prob is 20/25/10/15/30)
 const latitude_range := [-90, 90]
 const longitude_range := [-180, 180]
+const ship_upgrade_costs := [15, 30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20
 const building_activiation_distance := 75
