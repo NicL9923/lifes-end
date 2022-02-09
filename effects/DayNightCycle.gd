@@ -14,9 +14,9 @@ func _process(delta):
 	else:
 		Global.game_time.ticks += delta * Global.time_speed
 	
-	handle_daylight_based_on_planet(delta)
+	handle_daylight_based_on_planet()
 
-func handle_daylight_based_on_planet(delta):
+func handle_daylight_based_on_planet():
 	if Global.playerBaseData.planet == Global.planets[0]: # Mercury - 1/176 Earth time
 		handle_planet_day_night_cycle(176)
 	elif Global.playerBaseData.planet == Global.planets[1]: # Venus - 1/243 Earth time
