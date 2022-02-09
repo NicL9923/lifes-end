@@ -2,8 +2,6 @@ extends CanvasModulate
 
 signal day_has_passed
 
-# NOTE: A game-day is 20mins long (1200 seconds) (0000 - 2400)
-
 export var min_darkness := 0.4
 var dark_value := 1.0
 
@@ -14,11 +12,11 @@ func _process(delta):
 		Global.game_time.earthDays += 1
 		emit_signal("day_has_passed")
 	else:
-		Global.game_time.ticks += delta * 2
+		Global.game_time.ticks += delta * Global.time_speed
 	
-	handle_daylight_based_on_planet(delta)
+	handle_daylight_based_on_planet()
 
-func handle_daylight_based_on_planet(delta):
+func handle_daylight_based_on_planet():
 	if Global.playerBaseData.planet == Global.planets[0]: # Mercury - 1/176 Earth time
 		handle_planet_day_night_cycle(176)
 	elif Global.playerBaseData.planet == Global.planets[1]: # Venus - 1/243 Earth time

@@ -64,6 +64,7 @@ const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20
 const building_activiation_distance := 75
 const MAX_SAVES := 5
+var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
 
 var isPlayerBaseFirstLoad := true
 var world_nav: Navigation2D
