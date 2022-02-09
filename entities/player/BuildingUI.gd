@@ -33,8 +33,8 @@ func _physics_process(_delta):
 			node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
 			if Global.playerBaseMetal >= bldg.cost_to_build:
 				node.disabled = false
-		else:
-			node.disabled = true
+			else:
+				node.disabled = true
 
 func start_building(bldg_type):
 	in_building_mode = true
