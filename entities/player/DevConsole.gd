@@ -56,6 +56,7 @@ func execute_dev_commands():
 		output_to_add.append("teleport x y - teleports player to coords (x, y)")
 		output_to_add.append("set_time 0-2400 - sets time of day to given num")
 		output_to_add.append("set_day x - sets game Earth days passed to x")
+		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
 	elif cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
@@ -82,6 +83,9 @@ func execute_dev_commands():
 	elif cmdTxt[0] == "set_day" and cmdTxt[1] != null: # set_day 13
 		Global.game_time.earthDays = int(cmdTxt[1])
 		output_to_add.append("Set day (in Earth days) to " + cmdTxt[1])
+	elif cmdTxt[0] == "set_time_speed" and cmdTxt[1] != null:
+		Global.time_speed = int(cmdTxt[1])
+		output_to_add.append("Set time speed to " + cmdTxt[1])
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld
 		var path = "res://" + cmdTxt[1] + ".tscn"
 		get_tree().change_scene(path)

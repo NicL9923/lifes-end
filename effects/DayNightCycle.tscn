@@ -2,5 +2,5 @@
 
 [ext_resource path="res://effects/DayNightCycle.gd" type="Script" id=1]
 
-[node name="CanvasModulate" type="CanvasModulate"]
+[node name="DayNightCycle" type="CanvasModulate"]
 script = ExtResource( 1 )

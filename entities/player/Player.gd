@@ -29,6 +29,7 @@ func _physics_process(delta):
 	
 	
 	$UI/Healthbar.value = health
+	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		$UI/EscMenu.visible = !$UI/EscMenu.visible
