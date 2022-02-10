@@ -2,7 +2,7 @@ extends Spatial
 
 var player_planet_index := _get_player_planet_index()
 var currently_selected_planet := player_planet_index
-var player_rotate_sensitivity := 1
+var player_rotate_sensitivity := { x = 1, y = 0.5 }
 var mouse_pressed := false
 export var icon_scale := 0.4
 const col_shape_scale := 0.05
@@ -20,7 +20,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		mouse_pressed = event.pressed
 	if event is InputEventMouseMotion and mouse_pressed:
-		$Planet.rotation_degrees = Vector3($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity), $Planet.rotation_degrees.z)
+		$Planet.rotation_degrees = Vector3(clamp($Planet.rotation_degrees.x + (event.relative.y * player_rotate_sensitivity.y), -30, 30), $Planet.rotation_degrees.y + (event.relative.x * player_rotate_sensitivity.x), $Planet.rotation_degrees.z)
 
 func _setup_system_location(placeType: String, placeIndex: int):
 	Global.location_to_load.type = placeType
