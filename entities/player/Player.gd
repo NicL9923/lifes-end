@@ -10,6 +10,7 @@ onready var animatedSprite = $AnimatedSprite
 
 var currentZoom := 1.0
 var isInCombat := false
+var ui_is_open := false
 
 onready var currentWeapons := [$Position2D/Rifle]
 var selectedWeapon := 0
@@ -20,6 +21,8 @@ var gun_angle: float
 
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var ship_panel := $UI/ShipUI/Ship_Panel
+onready var research_panel := $UI/ResearchUI/Research_Panel
+onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
@@ -27,14 +30,14 @@ func _ready():
 func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
-	
+	check_if_ui_open()
 	
 	$UI/Healthbar.value = health
 	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		$UI/EscMenu.visible = !$UI/EscMenu.visible
-		get_tree().paused = $UI/EscMenu.visible
+		esc_menu.visible = !esc_menu.visible
+		get_tree().paused = esc_menu.visible
 	
 	if isInCombat:
 		weapon_handling(delta)
@@ -79,6 +82,9 @@ func player_animation(input_vector):
 		animatedSprite.play("upIdle")	
 
 func handle_camera_zoom():
+	if ui_is_open:
+		return
+	
 	if Input.is_action_just_released("scroll_up"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
 		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
@@ -110,6 +116,12 @@ func toggle_combat(on: bool):
 	else:
 		isInCombat = true
 		gun_rotation_point.show()
+
+func check_if_ui_open():
+	if building_panel.visible or ship_panel.visible or research_panel.visible:
+		ui_is_open = true
+	else:
+		ui_is_open = false
 
 func _load_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")
