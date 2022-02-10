@@ -1,6 +1,7 @@
 extends Spatial
 
-var currently_selected_planet := 2
+var player_planet_index := _get_player_planet_index()
+var currently_selected_planet := player_planet_index
 var player_rotate_sensitivity := 1
 var mouse_pressed := false
 export var icon_scale := 0.4
@@ -26,20 +27,73 @@ func _setup_system_location(placeType: String, placeIndex: int):
 	Global.location_to_load.index = placeIndex
 	get_tree().change_scene("res://SystemLocation.tscn")
 
+func _get_player_planet_index() -> int:
+	for i in range(0, Global.planets.size()):
+		if Global.playerBaseData.planet == Global.planets[i]:
+			return i
+	
+	return 0
+
+func _calculate_distance_to_planet(start_plt_idx, dest_plt_idx):
+	var total_dist := 0
+	
+	if start_plt_idx > dest_plt_idx:
+		for cur_plt_idx in range(dest_plt_idx, start_plt_idx):
+			total_dist += Global.planet_distances[cur_plt_idx]
+	else:
+		for cur_plt_idx in range(start_plt_idx, dest_plt_idx):
+			total_dist += Global.planet_distances[cur_plt_idx]
+	
+	print(total_dist)
+	return total_dist
+
+func _check_if_travel_possible():
+	if Global.playerShipData.level == 1: # Unable to travel w/o upgrading ship
+		return false;
+	elif Global.playerShipData.level == 2: # Can travel on current planet
+		if currently_selected_planet == player_planet_index:
+			return true
+		else:
+			return false
+	elif Global.playerShipData.level == 3: # Can travel 40 distance (million miles) = ~1 planet
+		if _calculate_distance_to_planet(player_planet_index, currently_selected_planet) > 40:
+			return false
+		else:
+			return true
+	elif Global.playerShipData.level == 4: # Can travel 80 distance (million miles) = ~2 planets
+		if _calculate_distance_to_planet(player_planet_index, currently_selected_planet) > 80:
+			return false
+		else:
+			return true
+	elif Global.playerShipData.level == 5: # Can travel to any planet, and to/from Pluto
+		return true
+
 func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, placeIndex):
 	if event is InputEventMouseButton and event.pressed:
-		var popup = ConfirmationDialog.new()
-		popup.window_title = "Navigation System"
-		
-		if placeType == "npcColony":
-			popup.dialog_text = "Are you sure you want to raid this colony?"
+		if not _check_if_travel_possible():
+			var popup = AcceptDialog.new()
+			popup.window_title = "Navigation System"
+			popup.dialog_text = "You are unable to travel this far with your current ship. Upgrade your ship at the shipyard to increase travel distance!"
+			
+			popup.dialog_autowrap = true
+			popup.rect_size = Vector2(300, 100)
+			
+			popup.pause_mode = Node.PAUSE_MODE_PROCESS
+			$UI.add_child(popup)
+			popup.popup_centered()
 		else:
-			popup.dialog_text = "Are you sure you want to visit this resource site?"
-		
-		popup.connect("confirmed", self, "_setup_system_location", [placeType, placeIndex])
-		popup.pause_mode = Node.PAUSE_MODE_PROCESS
-		$UI.add_child(popup)
-		popup.popup_centered()
+			var popup = ConfirmationDialog.new()
+			popup.window_title = "Navigation System"
+			
+			if placeType == "npcColony":
+				popup.dialog_text = "Are you sure you want to raid this colony?"
+			else:
+				popup.dialog_text = "Are you sure you want to visit this resource site?"
+			
+			popup.connect("confirmed", self, "_setup_system_location", [placeType, placeIndex])
+			popup.pause_mode = Node.PAUSE_MODE_PROCESS
+			$UI.add_child(popup)
+			popup.popup_centered()
 
 func create_icon(iconImgPath: String, coordinates, type: String, index: int):
 	var newIcon = Area.new()
