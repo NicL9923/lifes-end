@@ -189,6 +189,7 @@ func save_game():
 				"playerBaseWater": Global.playerBaseWater,
 				"playerBaseEnergy": Global.playerBaseEnergy,
 				"gameTime": Global.game_time,
+				"playerShipData": Global.playerShipData,
 				"playerBaseData": Global.playerBaseData,
 				"npcColonyData": Global.npcColonyData,
 				"rscCollectionSiteData": Global.rscCollectionSiteData,
