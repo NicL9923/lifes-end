@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://objects/buildings/Communications_Array.png" type="Texture" id=19]
 [ext_resource path="res://objects/ship.png" type="Texture" id=20]
 [ext_resource path="res://entities/player/ShipUI.gd" type="Script" id=21]
+[ext_resource path="res://entities/player/EscMenu.gd" type="Script" id=22]
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
@@ -343,6 +344,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1060,6 +1062,7 @@ margin_top = 86.0
 margin_right = 330.0
 margin_bottom = 126.0
 theme = ExtResource( 9 )
+script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
