@@ -29,12 +29,11 @@ func _physics_process(_delta):
 	for node in $Building_Panel/ScrollContainer/VBoxContainer.get_children():
 		var bldg = load(base_bldg_path + node.name.replace("_Button", "") + ".tscn").instance()
 		
-		if "cost_to_build" in bldg:
-			node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
-			if Global.playerResources.metal >= bldg.cost_to_build:
-				node.disabled = false
-			else:
-				node.disabled = true
+		node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
+		if Global.playerResources.metal >= bldg.cost_to_build:
+			node.disabled = false
+		else:
+			node.disabled = true
 
 func start_building(bldg_type):
 	in_building_mode = true
@@ -79,7 +78,7 @@ func check_building_placement():
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
 
 func place_building():
-	# Place building on map (save position to save/game data -> TODO)
+	# Place building on map
 	building_node.modulate.a = 1.0
 	building_node.isBeingPlaced = false
 	building_node.isPlayerBldg = true

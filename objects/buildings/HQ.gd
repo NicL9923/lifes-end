@@ -1,6 +1,6 @@
 extends Building
 
-func _ready():
+func _init():
 	cost_to_build = Global.cost_to_build_HQ
 
 func _process(_delta):

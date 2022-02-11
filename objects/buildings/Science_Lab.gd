@@ -1,6 +1,6 @@
 extends Building
 
-func _ready():
+func _init():
 	cost_to_build = 25
 
 func _process(_delta):

@@ -1,7 +1,7 @@
 extends Building
 
-func _ready():
-	cost_to_build = 30
+func _init():
+	self.cost_to_build = 30
 
 func _process(_delta):
 	$PopupUI.visible = is_player_in_popup_distance()
