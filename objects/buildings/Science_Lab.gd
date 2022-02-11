@@ -1,5 +1,7 @@
 extends Building
 
+# TODO: Upgrades -> faster research and more research "slots"
+
 func _init():
 	cost_to_build = 25
 

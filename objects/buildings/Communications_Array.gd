@@ -1,5 +1,7 @@
 extends Building
 
+# NOTE: This building has no upgrades
+
 func _init():
 	self.cost_to_build = 30
 

@@ -31,6 +31,8 @@ func _ready():
 		
 		$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
 		
+		# TODO: set Global.modifiers based on player stats
+		
 		Global.isPlayerBaseFirstLoad = false
 	else:
 		load_buildings()

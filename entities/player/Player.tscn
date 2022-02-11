@@ -17,7 +17,7 @@
 [ext_resource path="res://objects/buildings/power_industrial_coal.png" type="Texture" id=15]
 [ext_resource path="res://objects/buildings/greenhouse.png" type="Texture" id=16]
 [ext_resource path="res://objects/buildings/medbay.png" type="Texture" id=17]
-[ext_resource path="res://objects/buildings/power_renewable_solar.png" type="Texture" id=18]
+[ext_resource path="res://objects/buildings/power_sustainable_solar.png" type="Texture" id=18]
 [ext_resource path="res://objects/buildings/Communications_Array.png" type="Texture" id=19]
 [ext_resource path="res://objects/ship.png" type="Texture" id=20]
 [ext_resource path="res://entities/player/ShipUI.gd" type="Script" id=21]
@@ -351,7 +351,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
