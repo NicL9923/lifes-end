@@ -59,38 +59,6 @@ region = Rect2( 192, 672, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 672, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 288, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1344, 96, 96 )
@@ -122,70 +90,6 @@ region = Rect2( 192, 1440, 96, 96 )
 [sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1056, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 1 )
@@ -251,6 +155,38 @@ region = Rect2( 192, 96, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 96, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1056, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 768, 96, 96 )
@@ -283,6 +219,70 @@ region = Rect2( 192, 864, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 864, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 480, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
@@ -290,24 +290,9 @@ animations = [ {
 "name": "rightRun",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
-"loop": true,
-"name": "leftRun",
-"speed": 15.0
-}, {
 "frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
 "loop": true,
 "name": "downRun",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
-"loop": true,
-"name": "rightIdle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "upRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
@@ -320,9 +305,24 @@ animations = [ {
 "name": "leftIdle",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "upRun",
+"speed": 15.0
+}, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "upIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"loop": true,
+"name": "leftRun",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
+"loop": true,
+"name": "rightIdle",
 "speed": 5.0
 } ]
 
@@ -351,7 +351,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 5
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -891,7 +891,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Power_Renewable_Solar_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
+[node name="Power_Sustainable_Solar_Button" type="Button" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer"]
 margin_top = 632.0
 margin_right = 590.0
 margin_bottom = 707.0
@@ -900,12 +900,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
+[node name="Sprite" type="Sprite" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Sustainable_Solar_Button"]
 position = Vector2( 32, 38 )
 scale = Vector2( 0.458333, 0.458333 )
 texture = ExtResource( 18 )
 
-[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
+[node name="Label" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Sustainable_Solar_Button"]
 margin_left = 71.6862
 margin_top = 8.0
 margin_right = 131.686
@@ -915,7 +915,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
+[node name="Label2" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Sustainable_Solar_Button"]
 margin_left = 72.0
 margin_top = 32.0
 margin_right = 424.0
@@ -927,7 +927,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button"]
+[node name="Label3" type="Label" parent="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Sustainable_Solar_Button"]
 margin_left = 72.0
 margin_top = 56.0
 margin_right = 424.0
@@ -1155,7 +1155,7 @@ text = "Quit to Main Menu"
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Greenhouse_Button" to="UI/BuildingUI" method="_on_Greenhouse_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Water_Recycling_System_Button" to="UI/BuildingUI" method="_on_WaterRecyclingSystem_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Industrial_Coal_Button" to="UI/BuildingUI" method="_on_CoalPower_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Renewable_Solar_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
+[connection signal="pressed" from="UI/BuildingUI/Building_Panel/ScrollContainer/VBoxContainer/Power_Sustainable_Solar_Button" to="UI/BuildingUI" method="_on_SolarPower_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]
 [connection signal="pressed" from="UI/ResearchUI/Research_Panel/Close_Button" to="UI/ResearchUI" method="_on_Close_Button_pressed"]
 [connection signal="pressed" from="UI/ShipUI/Ship_Panel/Close_Button" to="UI/ShipUI" method="_on_Close_Button_pressed"]
