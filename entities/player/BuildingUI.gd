@@ -9,7 +9,7 @@ const base_bldg_path := "res://objects/buildings/"
 
 
 func _ready():
-	pass
+	generate_building_buttons()
 
 func _physics_process(_delta):
 	if in_building_mode:
@@ -25,7 +25,7 @@ func _physics_process(_delta):
 		
 		check_building_placement()
 	
-	# Check if player has enough resources for each building
+	# Check if player has enough resources for each building # TODO: reevaluate need for this after finishing dynamic generation of building buttons
 	for node in $Building_Panel/ScrollContainer/VBoxContainer.get_children():
 		var bldg = load(base_bldg_path + node.name.replace("_Button", "") + ".tscn").instance()
 		
@@ -35,31 +35,16 @@ func _physics_process(_delta):
 		else:
 			node.disabled = true
 
+func generate_building_buttons():
+	for bldg in Global.BUILDING_TYPES:
+		pass # TODO: skip HQ (idx 0)
+
 func start_building(bldg_type):
 	in_building_mode = true
 	building_type = bldg_type
 	
 	# Set the building_node based on type
-	if building_type == Global.BUILDING_TYPES.HQ:
-		building_node = load(base_bldg_path + "HQ.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Shipyard:
-		building_node = load(base_bldg_path + "Shipyard.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Medbay:
-		building_node = load(base_bldg_path + "Medbay.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Barracks:
-		building_node = load(base_bldg_path + "Barracks.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Greenhouse:
-		building_node = load(base_bldg_path + "Greenhouse.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Power_Industrial_Coal:
-		building_node = load(base_bldg_path + "Power_Industrial_Coal.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Power_Renewable_Solar:
-		building_node = load(base_bldg_path + "Power_Renewable_Solar.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Water_Recycling_System:
-		building_node = load(base_bldg_path + "Water_Recycling_System.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Communications_Array:
-		building_node = load(base_bldg_path + "Communications_Array.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Science_Lab:
-		building_node = load(base_bldg_path + "Science_Lab.tscn").instance()
+	building_node = load(base_bldg_path + building_type + ".tscn").instance()
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75

@@ -164,10 +164,10 @@ func generate_resource_collection_sites():
 
 func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
-		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/" + Global.BUILDING_TYPES[bldg.type] + ".tscn").instance()
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
-		building_node.bldgLvl = bldg.building_level
+		building_node.bldgLvl = bldg.building_lvl
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():

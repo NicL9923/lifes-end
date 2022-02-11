@@ -8,7 +8,7 @@ var bldgLvl: int
 
 
 func _ready():
-	pass
+	get_node("CollisionHighlight").visible = false
 
 func is_player_in_popup_distance():
 	return (Global.player.position.distance_to(self.position) < Global.building_activiation_distance and !Global.player.isInCombat and !isBeingPlaced)
