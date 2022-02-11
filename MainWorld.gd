@@ -164,7 +164,8 @@ func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
 		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = bldg.global_pos
-		# TODO: set building level
+		building_node.isPlayerBldg = true
+		building_node.bldgLvl = bldg.building_level
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():

@@ -77,7 +77,7 @@ func spawn_buildings(bldg_list: Array):
 	for bldg in bldg_list:
 		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = get_random_location_in_map()
-		# TODO: set building level
+		building_node.bldgLvl = 1
 		add_child(building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony

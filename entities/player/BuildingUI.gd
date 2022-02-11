@@ -81,12 +81,10 @@ func check_building_placement():
 func place_building():
 	# Place building on map (save position to save/game data -> TODO)
 	building_node.modulate.a = 1.0
-	
-	if "isBeingPlaced" in building_node:
-		building_node.isBeingPlaced = false
-	
-	if "cost_to_build" in building_node:
-		Global.playerResources.metal -= building_node.cost_to_build
+	building_node.isBeingPlaced = false
+	building_node.isPlayerBldg = true
+	building_node.bldgLvl = 1
+	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
@@ -94,7 +92,7 @@ func place_building():
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = 1,
+		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
