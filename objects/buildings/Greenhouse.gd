@@ -4,7 +4,7 @@ export var food_produced_per_day := 5 # TODO: consider using this value in Build
 
 func _ready():
 	cost_to_build = 10
-	get_tree().get_root().get_child(1).get_node("DayNightCycle").connect("day_has_passed", self, "_handle_new_day")
+	connect_to_daynight_cycle()
 
-func _handle_new_day():
+func handle_new_day():
 	Global.playerResources.food += food_produced_per_day

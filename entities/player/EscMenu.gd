@@ -28,5 +28,5 @@ func _on_Quit_Button_pressed():
 	popup.dialog_text = "Unsaved data will be lost"
 	popup.connect("confirmed", self, "_load_main_menu")
 	popup.pause_mode = Node.PAUSE_MODE_PROCESS
-	$UI.add_child(popup)
+	Global.player.get_node("UI").add_child(popup)
 	popup.popup_centered()
