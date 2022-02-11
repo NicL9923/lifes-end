@@ -5,7 +5,7 @@ func _ready():
 	pass
 
 func _process(_delta):
-	$Ship_Panel/ProgressBar.value = (Global.playerShipData.level - 1) * 25
+	$Ship_Panel/TextureProgress.value = (Global.playerShipData.level - 1) * 25
 	
 	if Global.playerShipData.level == 5:
 		$Ship_Panel/Upgrade_Button.disabled = true
