@@ -24,7 +24,7 @@ func _on_Cmdr_SpinBox_value_changed(value):
 		return
 	
 	remaining_attr_pts -= (value - cur_cmdr)
-	Global.playerCmdrStat = value
+	Global.playerStats.cmdr = value
 	cur_cmdr = value
 	
 	update_remaining_points_lbl()
@@ -35,7 +35,7 @@ func _on_Biol_SpinBox_value_changed(value):
 		return
 	
 	remaining_attr_pts -= (value - cur_biol)
-	Global.playerBiolStat = value
+	Global.playerStats.biol = value
 	cur_biol = value
 	
 	update_remaining_points_lbl()
@@ -46,7 +46,7 @@ func _on_Engr_SpinBox_value_changed(value):
 		return
 	
 	remaining_attr_pts -= (value - cur_engr)
-	Global.playerEngrStat = value
+	Global.playerStats.engr = value
 	cur_engr = value
 	
 	update_remaining_points_lbl()
@@ -57,7 +57,7 @@ func _on_Doc_SpinBox_value_changed(value):
 		return
 	
 	remaining_attr_pts -= (value - cur_doc)
-	Global.playerDocStat = value
+	Global.playerStats.doc = value
 	cur_doc = value
 	
 	update_remaining_points_lbl()

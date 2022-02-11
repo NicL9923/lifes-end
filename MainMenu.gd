@@ -100,15 +100,10 @@ func load_game(save_name):
 	var save_data = save_game.get_var(true)
 	
 	Global.playerWeaponId = save_data.playerWeaponId
-	Global.playerCmdrStat = save_data.playerCmdrStat
-	Global.playerEngrStat = save_data.playerEngrStat
-	Global.playerBiolStat = save_data.playerBiolStat
-	Global.playerDocStat = save_data.playerDocStat
+	Global.playerStats = save_data.playerStats
 	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
-	Global.playerBaseMetal = save_data.playerBaseMetal
-	Global.playerBaseFood = save_data.playerBaseFood
-	Global.playerBaseWater = save_data.playerBaseWater
-	Global.playerBaseEnergy = save_data.playerBaseEnergy
+	Global.playerResources = save_data.playerResources
+	Global.modifiers = save_data.modifiers
 	Global.game_time = save_data.gameTime
 	Global.playerShipData = save_data.playerShipData
 	Global.playerBaseData = save_data.playerBaseData

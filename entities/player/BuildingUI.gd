@@ -29,12 +29,11 @@ func _physics_process(_delta):
 	for node in $Building_Panel/ScrollContainer/VBoxContainer.get_children():
 		var bldg = load(base_bldg_path + node.name.replace("_Button", "") + ".tscn").instance()
 		
-		if "cost_to_build" in bldg:
-			node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
-			if Global.playerBaseMetal >= bldg.cost_to_build:
-				node.disabled = false
-			else:
-				node.disabled = true
+		node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
+		if Global.playerResources.metal >= bldg.cost_to_build:
+			node.disabled = false
+		else:
+			node.disabled = true
 
 func start_building(bldg_type):
 	in_building_mode = true
@@ -79,14 +78,12 @@ func check_building_placement():
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
 
 func place_building():
-	# Place building on map (save position to save/game data -> TODO)
+	# Place building on map
 	building_node.modulate.a = 1.0
-	
-	if "isBeingPlaced" in building_node:
-		building_node.isBeingPlaced = false
-	
-	if "cost_to_build" in building_node:
-		Global.playerBaseMetal -= building_node.cost_to_build
+	building_node.isBeingPlaced = false
+	building_node.isPlayerBldg = true
+	building_node.bldgLvl = 1
+	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
@@ -94,7 +91,7 @@ func place_building():
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = 1,
+		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)

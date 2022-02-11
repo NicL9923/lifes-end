@@ -1,11 +1,12 @@
-extends Area2D
+extends Building
 
-export var cost_to_build := 10
 export var food_produced_per_day := 5 # TODO: consider using this value in BuildingUI (so we just have to change it here)
 
+func _init():
+	cost_to_build = 10
 
 func _ready():
-	get_tree().get_root().get_child(1).get_node("DayNightCycle").connect("day_has_passed", self, "_handle_new_day")
+	connect_to_daynight_cycle()
 
-func _handle_new_day():
-	Global.playerBaseFood += food_produced_per_day
+func handle_new_day():
+	add_food(food_produced_per_day * Global.modifiers.foodProduction)

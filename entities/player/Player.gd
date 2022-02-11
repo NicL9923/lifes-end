@@ -33,6 +33,8 @@ func _physics_process(delta):
 	check_if_ui_open()
 	
 	$UI/Healthbar.value = health
+	$UI/Healthbar.max_value = Global.playerStats.max_health
+	
 	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if isInCombat:
@@ -118,19 +120,6 @@ func check_if_ui_open():
 		ui_is_open = true
 	else:
 		ui_is_open = false
-
-func _load_main_menu():
-	get_tree().change_scene("res://MainMenu.tscn")
-	get_tree().paused = false
-
-func _on_Quit_Button_pressed():
-	var popup = ConfirmationDialog.new()
-	popup.window_title = "Are you sure?"
-	popup.dialog_text = "Unsaved data will be lost"
-	popup.connect("confirmed", self, "_load_main_menu")
-	popup.pause_mode = Node.PAUSE_MODE_PROCESS
-	$UI.add_child(popup)
-	popup.popup_centered()
 
 func _on_RTB_Button_pressed():
 	get_tree().change_scene("res://MainWorld.tscn")

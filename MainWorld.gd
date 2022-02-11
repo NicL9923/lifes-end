@@ -44,7 +44,7 @@ func _ready():
 		$Player.global_position = Global.playerBaseData.lastPlayerPos
 
 func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerBaseMetal >= HQ.cost_to_build:
+	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = $Player.global_position
@@ -164,7 +164,8 @@ func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
 		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
 		building_node.global_position = bldg.global_pos
-		# TODO: set building level
+		building_node.isPlayerBldg = true
+		building_node.bldgLvl = bldg.building_level
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():
@@ -179,15 +180,10 @@ func save_game():
 			# This is what contains all properties we want to save/persist
 			var save_dictionary = {
 				"playerWeaponId": Global.playerWeaponId,
-				"playerCmdrStat": Global.playerCmdrStat,
-				"playerEngrStat": Global.playerEngrStat,
-				"playerBiolStat": Global.playerBiolStat,
-				"playerDocStat": Global.playerDocStat,
+				"playerStats": Global.playerStats,
 				"playerResearchedItemIds": Global.playerResearchedItemIds,
-				"playerBaseMetal": Global.playerBaseMetal,
-				"playerBaseFood": Global.playerBaseFood,
-				"playerBaseWater": Global.playerBaseWater,
-				"playerBaseEnergy": Global.playerBaseEnergy,
+				"playerResources": Global.playerResources,
+				"modifiers": Global.modifiers,
 				"gameTime": Global.game_time,
 				"playerShipData": Global.playerShipData,
 				"playerBaseData": Global.playerBaseData,

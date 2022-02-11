@@ -60,16 +60,16 @@ func execute_dev_commands():
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
 	elif cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
-		Global.playerBaseMetal += int(cmdTxt[1])
+		Global.playerResources.metal += int(cmdTxt[1])
 		output_to_add.append("Successfully added " + cmdTxt[1] + " metal!")
 	elif cmdTxt[0] == "energy" and cmdTxt[1] != null: #energy 5
-		Global.playerBaseEnergy += int(cmdTxt[1])
+		Global.playerResources.energy += int(cmdTxt[1])
 		output_to_add.append("Successfully added " + cmdTxt[1] + " energy!")
 	elif cmdTxt[0] == "food" and cmdTxt[1] != null: #food 5
-		Global.playerBaseFood += int(cmdTxt[1])
+		Global.playerResources.food += int(cmdTxt[1])
 		output_to_add.append("Successfully added " + cmdTxt[1] + " food!")
 	elif cmdTxt[0] == "water" and cmdTxt[1] != null: #water 5
-		Global.playerBaseWater += int(cmdTxt[1])
+		Global.playerResources.water += int(cmdTxt[1])
 		output_to_add.append("Successfully added " + cmdTxt[1] + " water!")
 	elif cmdTxt[0] == "health" and cmdTxt[1] != null: #health 100
 		Global.player.health = int(cmdTxt[1])

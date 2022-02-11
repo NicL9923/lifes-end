@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NpcColonyIcon.png-3d5561e5bc8b57964d770ef10180cbfc.stex"
+path="res://.import/bar_black_bg.png-f838c2564868680713290f8848fd3f0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/NpcColonyIcon.png"
-dest_files=[ "res://.import/NpcColonyIcon.png-3d5561e5bc8b57964d770ef10180cbfc.stex" ]
+source_file="res://ui/bar_black_bg.png"
+dest_files=[ "res://.import/bar_black_bg.png-f838c2564868680713290f8848fd3f0f.stex" ]
 
 [params]
 
