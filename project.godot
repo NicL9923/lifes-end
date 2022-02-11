@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="Life's End"
 run/main_scene="res://MainMenu.tscn"
-config/icon="res://ui/icon.png"
+config/icon="res://ui/icons/icon.png"
 config/windows_native_icon="res://ui/icon.ico"
 
 [autoload]

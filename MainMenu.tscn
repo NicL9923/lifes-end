@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=2]
-[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/Earth.png" type="Texture" id=5]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=6]
@@ -65,7 +64,6 @@ margin_bottom = 29.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../LoadGameButton")
-custom_fonts/font = ExtResource( 3 )
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
@@ -75,7 +73,6 @@ margin_bottom = 58.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../NewGameButton")
 focus_neighbour_bottom = NodePath("../SettingsButton")
-custom_fonts/font = ExtResource( 3 )
 text = "Load Game"
 
 [node name="SettingsButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
@@ -85,7 +82,6 @@ margin_bottom = 87.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../LoadGameButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
-custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
@@ -95,7 +91,6 @@ margin_bottom = 116.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../SettingsButton")
 focus_neighbour_bottom = NodePath("../NewGameButton")
-custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 
 [node name="SettingsContainer" type="Control" parent="."]

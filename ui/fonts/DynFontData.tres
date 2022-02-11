@@ -2,4 +2,4 @@
 
 [resource]
 antialiased = false
-font_path = "res://ui/gbb__.ttf"
+font_path = "res://ui/fonts/gbb__.ttf"

@@ -6,6 +6,7 @@ var player_rotate_sensitivity := { x = 1, y = 0.5 }
 var mouse_pressed := false
 export var icon_scale := 0.4
 const col_shape_scale := 0.05
+const icon_base_path := "res://ui/icons/"
 
 
 func _ready():
@@ -127,16 +128,16 @@ func map_icons_to_planet():
 	remove_current_icons()
 	
 	if Global.playerBaseData.planet == Global.planets[currently_selected_planet]:
-		create_icon("res://ui/PlayerColonyIcon.png", Global.playerBaseData.coords, Global.location_type.playerColony, 0)
+		create_icon(icon_base_path + "PlayerColonyIcon.png", Global.playerBaseData.coords, Global.location_type.playerColony, 0)
 	
 	var place_index := 0
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
-			var iconPath = "res://ui/NpcColonyIcon.png"
+			var iconPath = icon_base_path + "NpcColonyIcon.png"
 			
 			if colony.isDestroyed:
-				iconPath = "res://ui/DestroyedColonyIcon.png"
+				iconPath = icon_base_path + "DestroyedColonyIcon.png"
 			
 			create_icon(iconPath, colony.coords, Global.location_type.npcColony, place_index)
 		place_index += 1
@@ -145,7 +146,7 @@ func map_icons_to_planet():
 	
 	for rsc_site in Global.rscCollectionSiteData:
 		if rsc_site.planet == Global.planets[currently_selected_planet]:
-			create_icon("res://ui/ResourceSiteIcon.png", rsc_site.coords, Global.location_type.rscSite, place_index)
+			create_icon(icon_base_path + "ResourceSiteIcon.png", rsc_site.coords, Global.location_type.rscSite, place_index)
 		place_index += 1
 
 func update_thumbnail_highlight_pos():
