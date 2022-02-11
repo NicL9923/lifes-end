@@ -103,6 +103,7 @@ func load_game(save_name):
 	Global.playerStats = save_data.playerStats
 	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
 	Global.playerResources = save_data.playerResources
+	Global.modifiers = save_data.modifiers
 	Global.game_time = save_data.gameTime
 	Global.playerShipData = save_data.playerShipData
 	Global.playerBaseData = save_data.playerBaseData

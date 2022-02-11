@@ -6,11 +6,12 @@ func _process(_delta):
 		self.visible = !self.visible
 		get_tree().paused = self.visible
 
-func clear_global_data():
+func reset_global_data():
 	Global.playerWeaponId = -1
 	Global.playerStats = Global.defaultPlayerStats
 	Global.playerResources = Global.defaultPlayerResources
 	Global.playerResearchedItemIds = []
+	Global.modifiers = Global.defaultModifiers
 	Global.game_time = Global.defaultGameTime
 	Global.playerShipData = Global.defaultShipData
 	Global.playerBaseData = Global.defaultPlayerBaseData
@@ -19,7 +20,7 @@ func clear_global_data():
 
 func _load_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")
-	clear_global_data()
+	reset_global_data()
 	get_tree().paused = false
 
 func _on_Quit_Button_pressed():

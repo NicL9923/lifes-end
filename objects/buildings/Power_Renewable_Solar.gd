@@ -8,4 +8,4 @@ func _ready():
 	connect_to_daynight_cycle()
 
 func handle_new_day():
-	Global.playerResources.energy += energy_produced_per_day
+	add_energy(energy_produced_per_day * Global.modifiers.solarEnergyProduction)

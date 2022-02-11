@@ -16,7 +16,7 @@ enum BUILDING_TYPES {
 
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
-const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100 }
 const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
@@ -24,7 +24,16 @@ const defaultPlayerBaseData = {
 	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
 	colonists = [],
 	lastPlayerPos = Vector2(0, 0),
-	metalDeposits = [] # Vector2[]
+	metalDeposits = [], # Vector2[]
+	pollutionLevel = 0.0 # 0.0 - 100.0
+}
+const defaultModifiers = {
+	playerWeaponDamage = 1,
+	solarEnergyProduction = 1,
+	researchSpeed = 1,
+	buildSpeed = 1,
+	foodProduction = 1,
+	waterProduction = 1
 }
 const defaultGameTime = { ticks = 800.0, earthDays = 0 }
 
@@ -44,6 +53,8 @@ var playerBaseData := defaultPlayerBaseData
 
 var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
 var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
+
+var modifiers := defaultModifiers
 
 #Game flags/vars
 const world_tile_size := Vector2(50, 50)

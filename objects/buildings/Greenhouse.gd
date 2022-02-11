@@ -7,4 +7,4 @@ func _ready():
 	connect_to_daynight_cycle()
 
 func handle_new_day():
-	Global.playerResources.food += food_produced_per_day
+	add_food(food_produced_per_day * Global.modifiers.foodProduction)

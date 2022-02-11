@@ -33,6 +33,8 @@ func _physics_process(delta):
 	check_if_ui_open()
 	
 	$UI/Healthbar.value = health
+	$UI/Healthbar.max_value = Global.playerStats.max_health
+	
 	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if isInCombat:

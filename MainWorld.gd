@@ -182,6 +182,7 @@ func save_game():
 				"playerStats": Global.playerStats,
 				"playerResearchedItemIds": Global.playerResearchedItemIds,
 				"playerResources": Global.playerResources,
+				"modifiers": Global.modifiers,
 				"gameTime": Global.game_time,
 				"playerShipData": Global.playerShipData,
 				"playerBaseData": Global.playerBaseData,
