@@ -1,11 +1,7 @@
-extends Area2D
-class_name HQ
-
-const cost_to_build := 15
-var isBeingPlaced: bool # Need this var and check so menu doesn't show when building's being placed
+extends Building
 
 func _ready():
-	pass
+	cost_to_build = Global.cost_to_build_HQ
 
 func _process(_delta):
 	#Check if player within collection distance

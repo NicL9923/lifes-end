@@ -44,7 +44,7 @@ func _ready():
 		$Player.global_position = Global.playerBaseData.lastPlayerPos
 
 func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= HQ.cost_to_build:
+	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = $Player.global_position

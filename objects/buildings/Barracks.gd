@@ -1,3 +1,4 @@
-extends Area2D
+extends Building
 
-export var cost_to_build := 25
+func _ready():
+	cost_to_build = 25

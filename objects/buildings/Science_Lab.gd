@@ -1,10 +1,7 @@
-extends Area2D
-
-var isBeingPlaced: bool
-export var cost_to_build := 25
+extends Building
 
 func _ready():
-	pass
+	cost_to_build = 25
 
 func _process(_delta):
 	#Check if player within collection distance

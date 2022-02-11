@@ -49,6 +49,7 @@ var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: i
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
 const bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
+const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 const planet_distances := [31, 36, 33, 3000] # in millions of miles
 const location_type := { playerColony = "playerColony", npcColony = "npcColony", rscSite = "rscSite" }
