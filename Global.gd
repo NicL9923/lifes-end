@@ -15,31 +15,10 @@ enum BUILDING_TYPES {
 }
 
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
-
-
-#Game Settings
-const GAME_SETTINGS_CONFIG_PATH := "user://game_settings.cfg"
-var audioVolume: int
-
-#Player stats
-# TODO: Combine player stats and base resources into a single class/object/dictionary?
-var player: Player
-var playerWeaponId: int
-var playerCmdrStat: int
-var playerEngrStat: int
-var playerBiolStat: int
-var playerDocStat: int
-var playerResearchedItemIds: Array
-
-var playerBaseMetal: int
-var playerBaseFood: int
-var playerBaseWater: int
-var playerBaseEnergy: int
-
-var game_time := { ticks = 800.0, earthDays = 0 } # Game loads at 0800/8AM (goes from 0000 to 2400)
-
-var playerShipData = { level = 1 }
-var playerBaseData = {
+const defaultShipData = { level = 1 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0 }
+const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
+const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
 	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
@@ -47,6 +26,21 @@ var playerBaseData = {
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [] # Vector2[]
 }
+const defaultGameTime = { ticks = 800.0, earthDays = 0 }
+
+#Game Settings
+const GAME_SETTINGS_CONFIG_PATH := "user://game_settings.cfg"
+var audioVolume: int
+
+#Player stats
+var player: Player
+var playerWeaponId: int
+var playerStats := defaultPlayerStats
+var playerResources := defaultPlayerResources
+
+var playerResearchedItemIds: Array
+var playerShipData := defaultShipData
+var playerBaseData := defaultPlayerBaseData
 
 var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
 var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
@@ -70,6 +64,7 @@ const MAX_SAVES := 5
 var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
 
 var isPlayerBaseFirstLoad := true
+var game_time := defaultGameTime # Game loads at 0800/8AM (goes from 0000 to 2400)
 var world_nav: Navigation2D
 var location_to_load := {
 	type = "",

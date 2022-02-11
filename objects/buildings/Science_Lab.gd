@@ -13,7 +13,5 @@ func _process(_delta):
 	else:
 		$PopupUI.visible = false
 
-
-# TODO: open player research panel when implemented
 func _on_Research_Button_pressed():
-	pass
+	Global.player.research_panel.show()

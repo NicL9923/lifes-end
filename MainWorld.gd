@@ -44,7 +44,7 @@ func _ready():
 		$Player.global_position = Global.playerBaseData.lastPlayerPos
 
 func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerBaseMetal >= HQ.cost_to_build:
+	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= HQ.cost_to_build:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = $Player.global_position
@@ -179,15 +179,9 @@ func save_game():
 			# This is what contains all properties we want to save/persist
 			var save_dictionary = {
 				"playerWeaponId": Global.playerWeaponId,
-				"playerCmdrStat": Global.playerCmdrStat,
-				"playerEngrStat": Global.playerEngrStat,
-				"playerBiolStat": Global.playerBiolStat,
-				"playerDocStat": Global.playerDocStat,
+				"playerStats": Global.playerStats,
 				"playerResearchedItemIds": Global.playerResearchedItemIds,
-				"playerBaseMetal": Global.playerBaseMetal,
-				"playerBaseFood": Global.playerBaseFood,
-				"playerBaseWater": Global.playerBaseWater,
-				"playerBaseEnergy": Global.playerBaseEnergy,
+				"playerResources": Global.playerResources,
 				"gameTime": Global.game_time,
 				"playerShipData": Global.playerShipData,
 				"playerBaseData": Global.playerBaseData,

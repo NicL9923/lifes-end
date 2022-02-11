@@ -119,18 +119,5 @@ func check_if_ui_open():
 	else:
 		ui_is_open = false
 
-func _load_main_menu():
-	get_tree().change_scene("res://MainMenu.tscn")
-	get_tree().paused = false
-
-func _on_Quit_Button_pressed():
-	var popup = ConfirmationDialog.new()
-	popup.window_title = "Are you sure?"
-	popup.dialog_text = "Unsaved data will be lost"
-	popup.connect("confirmed", self, "_load_main_menu")
-	popup.pause_mode = Node.PAUSE_MODE_PROCESS
-	$UI.add_child(popup)
-	popup.popup_centered()
-
 func _on_RTB_Button_pressed():
 	get_tree().change_scene("res://MainWorld.tscn")

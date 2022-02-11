@@ -31,7 +31,7 @@ func _physics_process(_delta):
 		
 		if "cost_to_build" in bldg:
 			node.get_node("Label3").text = "Cost: " + str(bldg.cost_to_build) + " metal"
-			if Global.playerBaseMetal >= bldg.cost_to_build:
+			if Global.playerResources.metal >= bldg.cost_to_build:
 				node.disabled = false
 			else:
 				node.disabled = true
@@ -86,7 +86,7 @@ func place_building():
 		building_node.isBeingPlaced = false
 	
 	if "cost_to_build" in building_node:
-		Global.playerBaseMetal -= building_node.cost_to_build
+		Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings

@@ -347,7 +347,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 1
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1152,4 +1152,4 @@ text = "Quit to Main Menu"
 [connection signal="pressed" from="UI/ResearchUI/Research_Panel/Close_Button" to="UI/ResearchUI" method="_on_Close_Button_pressed"]
 [connection signal="pressed" from="UI/ShipUI/Ship_Panel/Close_Button" to="UI/ShipUI" method="_on_Close_Button_pressed"]
 [connection signal="pressed" from="UI/ShipUI/Ship_Panel/Upgrade_Button" to="UI/ShipUI" method="_on_Upgrade_Button_pressed"]
-[connection signal="pressed" from="UI/EscMenu/ColorRect/VBoxContainer/Quit_Button" to="." method="_on_Quit_Button_pressed"]
+[connection signal="pressed" from="UI/EscMenu/ColorRect/VBoxContainer/Quit_Button" to="UI/EscMenu" method="_on_Quit_Button_pressed"]

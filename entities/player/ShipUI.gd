@@ -13,14 +13,14 @@ func _process(_delta):
 	else:
 		$Ship_Panel/Cost_Label.text = "Cost: " + str(Global.ship_upgrade_costs[Global.playerShipData.level - 1]) + " metal"
 		
-		if Global.playerBaseMetal < Global.ship_upgrade_costs[Global.playerShipData.level - 1]:
+		if Global.playerResources.metal < Global.ship_upgrade_costs[Global.playerShipData.level - 1]:
 			$Ship_Panel/Upgrade_Button.disabled = true
 		else:
 			$Ship_Panel/Upgrade_Button.disabled = false
 
 
 func _on_Upgrade_Button_pressed():
-	Global.playerBaseMetal -= Global.ship_upgrade_costs[Global.playerShipData.level - 1]
+	Global.playerResources.metal -= Global.ship_upgrade_costs[Global.playerShipData.level - 1]
 	Global.playerShipData.level += 1
 
 
