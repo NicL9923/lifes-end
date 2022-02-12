@@ -27,8 +27,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	#process_states(delta)
-	pathfind_to_point(delta, Global.player.global_position)
+	process_states(delta)
 
 func process_states(delta):
 	match(cur_state):
@@ -61,7 +60,7 @@ func process_idle(delta):
 		anim_sprt.play("idle_down")
 	
 	if timer <= 0.0:
-		timer = -1.0
+		set_timer(-1.0)
 		
 		var next_x := self.global_position.x + rand_range(-100, 100)
 		var next_y := self.global_position.y + rand_range(-100, 100)
@@ -73,12 +72,15 @@ func process_idle(delta):
 
 # Can go to/from idle, attacking
 func process_patrolling(delta):
-	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 0:
+	print("here")
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
 		pathfind_to_point(delta, last_known_player_team_pos)
 		
 		# TODO: scan for entities in group("player_team"), and switch to state attacking
-	if self.global_position.distance_to(next_patrol_point) > 0:
+	if self.global_position.distance_to(next_patrol_point) > 5:
 		pathfind_to_point(delta, next_patrol_point)
+		print(global_position)
+		print(global_position.distance_to(next_patrol_point))
 		
 		# TODO: scan for entities in group("player_team"), and switch to state attacking
 	else:

@@ -27,18 +27,19 @@ func _physics_process(_delta):
 	if isMenuUp and Input.is_action_just_pressed("ui_enter"):
 		execute_dev_commands()
 	
-	if isMenuUp and Input.is_action_just_pressed("arrow_up"):
-		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
-		$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
-		
-		if current_history_index != 0:
-			current_history_index -= 1
-	elif isMenuUp and Input.is_action_just_pressed("arrow_down"):
-		if current_history_index != entered_cmds.size() - 1:
-			current_history_index += 1
-		
-		$ColorRect/LineEdit.text = entered_cmds[current_history_index]
-		$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
+	if isMenuUp and entered_cmds.size() > 0:
+		if isMenuUp and Input.is_action_just_pressed("arrow_up"):
+			$ColorRect/LineEdit.text = entered_cmds[current_history_index]
+			$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
+			
+			if current_history_index != 0:
+				current_history_index -= 1
+		elif isMenuUp and Input.is_action_just_pressed("arrow_down"):
+			if current_history_index != entered_cmds.size() - 1:
+				current_history_index += 1
+			
+			$ColorRect/LineEdit.text = entered_cmds[current_history_index]
+			$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
 
 func execute_dev_commands():
 	$ColorRect/LineEdit.placeholder_text = "Input commands here"
