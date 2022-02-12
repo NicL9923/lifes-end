@@ -13,7 +13,7 @@ enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 
 onready var anim_sprt = $AnimatedSprite
 export var health := 100
-export var speed := 75
+export var speed := 125
 export var accuracy := 50
 var cur_state = STATE.IDLE
 
@@ -27,7 +27,8 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	process_states(delta)
+	#process_states(delta)
+	pathfind_to_point(delta, Global.player.global_position)
 
 func process_states(delta):
 	match(cur_state):
@@ -117,13 +118,17 @@ func pathfind_to_point(delta, pos: Vector2):
 			var motion = Vector2(speed, 0).rotated(move_rot)
 			move_and_slide(motion)
 			
-			if motion.x > 0:
+			if motion.x > 0 and abs(motion.x) > abs(motion.y):
 				last_movement_dir = MOVEMENT_DIR.RIGHT
-			elif motion.x < 0:
+				anim_sprt.play("run_right")
+			elif motion.x < 0 and abs(motion.x) > abs(motion.y):
+				anim_sprt.play("run_left")
 				last_movement_dir = MOVEMENT_DIR.LEFT
-			elif motion.y > 0:
+			elif motion.y < 0:
+				anim_sprt.play("run_up")
 				last_movement_dir = MOVEMENT_DIR.UP
-			else:
+			elif motion.y > 0:
+				anim_sprt.play("run_down")
 				last_movement_dir = MOVEMENT_DIR.DOWN
 			break
 		
