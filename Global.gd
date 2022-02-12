@@ -1,19 +1,6 @@
 extends Node
 
 #Game classes/types
-enum BUILDING_TYPES {
-	HQ = 0,
-	Shipyard = 1,
-	Medbay = 2,
-	Barracks = 3,
-	Greenhouse = 4,
-	Power_Industrial_Coal = 5,
-	Power_Renewable_Solar = 6,
-	Water_Recycling_System = 7,
-	Communications_Array = 8,
-	Science_Lab = 9
-}
-
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
 const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100 }
@@ -21,7 +8,7 @@ const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
-	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
+	buildings = [], #BuildingData[] -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
 	colonists = [],
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [], # Vector2[]
@@ -59,7 +46,27 @@ var modifiers := defaultModifiers
 #Game flags/vars
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
-const bldg_names = ["HQ", "Shipyard", "Medbay", "Barracks", "Greenhouse", "Power_Industrial_Coal", "Power_Renewable_Solar", "Water_Recycling_System", "Communications_Array", "Science_Lab"]
+const BUILDING_TYPES = {
+	HQ = "HQ",
+	Shipyard = "Shipyard",
+	Communications_Array = "Communications_Array",
+	Science_Lab = "Science_Lab",
+	Maintenance = "Maintenance",
+	Factory = "Factory",
+	Workshop = "Workshop",
+	Barracks = "Barracks",
+	Medbay = "Medbay",
+	Greenhouse = "Greenhouse",
+	Water_Recycling_System = "Water_Recycling_System",
+	Power_Industrial_Coal = "Power_Industrial_Coal",
+	Power_Industrial_Oil = "Power_Industrial_Oil",
+	Power_Industrial_Gas = "Power_Industrial_Gas",
+	Power_Sustainable_Solar = "Power_Sustainable_Solar",
+	Power_Sustainable_Geothermal = "Power_Sustainable_Geothermal",
+	Power_Sustainable_Nuclear = "Power_Sustainable_Nuclear",
+	Smeltery = "Smeltery",
+	Mining_Operation = "Mining_Operation"
+}
 const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 const planet_distances := [31, 36, 33, 3000] # in millions of miles

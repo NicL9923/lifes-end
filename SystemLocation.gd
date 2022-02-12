@@ -75,7 +75,7 @@ func load_resource_collection_site():
 
 func spawn_buildings(bldg_list: Array):
 	for bldg in bldg_list:
-		var building_node = load("res://objects/buildings/" + Global.bldg_names[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/" + Global.BUILDING_TYPES[bldg.type] + ".tscn").instance()
 		building_node.global_position = get_random_location_in_map()
 		building_node.bldgLvl = 1
 		add_child(building_node)

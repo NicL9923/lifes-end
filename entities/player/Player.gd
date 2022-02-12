@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 export var health := 100
+export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
@@ -45,13 +46,14 @@ func player_movement():
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
-	player_animation(input_vector)
 	
 	if input_vector != Vector2.ZERO:
-		velocity = input_vector * MAX_SPEED
+		velocity += input_vector * ACCELERATION
+		velocity = velocity.clamped(MAX_SPEED)
 	else:
 		velocity = Vector2.ZERO
 	
+	player_animation(input_vector)
 	move_and_slide(velocity)
 
 func player_animation(input_vector):

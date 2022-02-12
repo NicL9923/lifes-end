@@ -1,5 +1,7 @@
 extends Building
 
+# TODO: Upgrades -> Allows upgrading other buildings to higher levels; maybe further build radius from power sources in future???
+
 func _init():
 	cost_to_build = Global.cost_to_build_HQ
 
