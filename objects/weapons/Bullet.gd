@@ -14,11 +14,11 @@ func _process(delta):
 
 # TODO: need to flesh these out
 func _on_Bullet_area_entered(area):
-	queue_free()
-	if area.is_in_group("enemy") or area.is_in_group("good_guy"):
+	if area.is_in_group("enemy") or area.is_in_group("player_team"):
+		queue_free()
 		area.take_damage(damage)
 
 func _on_Bullet_body_entered(body):
 	queue_free()
-	if body.is_in_group("enemy") or body.is_in_group("good_guy"):
+	if body.is_in_group("enemy") or body.is_in_group("player_team"):
 		body.take_damage(damage)

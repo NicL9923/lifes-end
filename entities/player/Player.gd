@@ -27,7 +27,7 @@ onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
-	Global.player.add_to_group("player_team")
+	self.add_to_group("player_team")
 
 func _physics_process(delta):
 	player_movement()

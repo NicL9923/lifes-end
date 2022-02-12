@@ -30,6 +30,7 @@ var hostiles_in_los := []
 var num_bullets_in_los := 0
 
 # TODO: maybe do like RimWorld does where enemies know where you/allies are at all times (in place of current LoS system *still good for bullets though...?*)
+# TODO: handle pathing around buildings (these silly bois get stuck on them currently - tilemap collisions should be fine though)
 
 func _ready():
 	pass
@@ -57,12 +58,16 @@ func handle_enemies_in_line_of_sight():
 		enter_state(STATE.ATTACKING)
 
 func get_closest_hostile():
+	if hostiles_in_los.size() == 0:
+		return null
+	
 	var closest_hostile = hostiles_in_los[0]
 	
 	for hostile in hostiles_in_los:
 		if hostile.global_position.distance_to(self.global_position) < closest_hostile.global_position.distance_to(self.global_position):
 			closest_hostile = hostile
 	
+	last_known_player_team_pos = closest_hostile.global_position
 	return closest_hostile
 
 # Can go to/from patrolling
@@ -114,30 +119,39 @@ func process_taking_cover(delta):
 
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
+	if hostiles_in_los.size() == 0:
+		enter_state(STATE.PATROLLING)
+		return
+	
 	# Advance towards closest hostile
-	pathfind_to_point(delta, get_closest_hostile().global_position)
+	var closest_hostile = get_closest_hostile()
+	
+	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
+		enter_state(STATE.ATTACKING)
+	else:
+		pathfind_to_point(delta, closest_hostile.global_position)
 
 # Can go to/from advancing, taking_cover
 func process_attacking(delta):
 	# If no more enemies present in LoS, enter_state(patrolling)
 	if hostiles_in_los.size() == 0:
 		enter_state(STATE.PATROLLING)
+		return
 	
 	# Find closest hostile and engage them
 	var closest_hostile = get_closest_hostile()
 	
 	# Rotate weapon towards entity we're attacking
 		# TODO: predict player_team entities position w/ var accuracy
-	weapon.rotation = Vector2.ZERO.angle_to(closest_hostile.global_position)
-	
-	weapon.shoot(weapon.rotation)
+	$Position2D.look_at(closest_hostile.global_position)
+	weapon.shoot(closest_hostile.global_position.angle_to_point(weapon.global_position))
 	
 	# Take cover if lots of bullets are flying around (in LoS)
 	if num_bullets_in_los > bullets_to_take_cover:
 		enter_state(STATE.TAKING_COVER)
 	
 	# Advance if closest hostile reaches a certain distance away (within LoS)
-	if self.global_position.distance_to(closest_hostile) >= dist_to_advance:
+	if self.global_position.distance_to(closest_hostile.global_position) >= dist_to_advance:
 		enter_state(STATE.ADVANCING)
 
 # Can go from attacking
@@ -184,15 +198,18 @@ func take_damage(dmg_amt):
 func die():
 	queue_free()
 
+func _on_LineOfSight_body_entered(body):
+	if body.is_in_group("player_team"):
+		hostiles_in_los.append(body)
+
+func _on_LineOfSight_body_exited(body):
+	if body.is_in_group("player_team"):
+		hostiles_in_los.erase(body)
 
 func _on_LineOfSight_area_entered(area):
-	if area.is_in_group("player_team"):
-		hostiles_in_los.append(area)
-	elif area.is_in_group("bullets"):
+	if area.is_in_group("bullets"):
 		num_bullets_in_los += 1
 
 func _on_LineOfSight_area_exited(area):
-	if area.is_in_group("player_team"):
-		hostiles_in_los.erase(area)
-	elif area.is_in_group("bullets"):
+	if area.is_in_group("bullets"):
 		num_bullets_in_los -= 1
