@@ -27,6 +27,7 @@ onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
+	Global.player.add_to_group("player_team")
 
 func _physics_process(delta):
 	player_movement()
@@ -61,25 +62,25 @@ func player_animation(input_vector):
 	if input_vector.x > 0:
 		animatedSprite.play("rightRun")
 	elif Input.is_action_just_released("ui_right"):
-		animatedSprite.play("rightIdle")	
+		animatedSprite.play("rightIdle")
 		
 	#left animations
 	if input_vector.x < 0:
 		animatedSprite.play("leftRun")
 	elif Input.is_action_just_released("ui_left"):
-		animatedSprite.play("leftIdle")	
+		animatedSprite.play("leftIdle")
 	
 	#down animations
 	if input_vector.y > 0 and input_vector.x == 0:
 		animatedSprite.play("downRun")
 	elif Input.is_action_just_released("ui_down"):
-		animatedSprite.play("downIdle")	
+		animatedSprite.play("downIdle")
 	
 	#up animations
 	if input_vector.y < 0 and input_vector.x == 0:
 		animatedSprite.play("upRun")
 	elif Input.is_action_just_released("ui_up"):
-		animatedSprite.play("upIdle")	
+		animatedSprite.play("upIdle")
 
 func handle_camera_zoom():
 	if ui_is_open:
