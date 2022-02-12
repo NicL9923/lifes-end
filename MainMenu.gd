@@ -26,14 +26,33 @@ func _on_LoadGameButton_pressed():
 	
 	# Show a button for each save found
 	for i in range(1, Global.MAX_SAVES):
-		if save_game.file_exists("user://save" + String(i) + ".save"):
+		var filepath = "user://save" + String(i) + ".save"
+		if save_game.file_exists(filepath):
 			save_game_count += 1
 			
-			var new_button = Button.new()
-			new_button.text = "save" + String(i)
-			# TODO: show saveTimestamp
-			new_button.connect("pressed", self, "load_game", [new_button.text])
-			$LoadGameContainer/SaveGamesVBox.add_child(new_button)
+			var savegame_panel = Button.new()
+			savegame_panel.rect_min_size.y = 50
+			
+			var new_vbox = VBoxContainer.new()
+			new_vbox.alignment = BoxContainer.ALIGN_CENTER
+			new_vbox.rect_position.x += 20
+			new_vbox.rect_position.y += 5
+			savegame_panel.add_child(new_vbox)
+			
+			var save_name_label = Label.new()
+			save_name_label.text = "save" + String(i)
+			new_vbox.add_child(save_name_label)
+			
+			var timestamp_label = Label.new()
+			save_game.open(filepath, File.READ)
+			var time = save_game.get_var(true).saveTimestamp
+			timestamp_label.text = "%02d/%02d/%d @ %02d:%02d" % [time.month, time.day, time.year, time.hour, time.minute]
+			new_vbox.add_child(timestamp_label)
+			
+			savegame_panel.connect("pressed", self, "load_game", [save_name_label.text])
+			$LoadGameContainer/SaveGamesVBox.add_child(savegame_panel)
+	
+	save_game.close()
 	
 	if save_game_count == 0:
 		$LoadGameContainer/NoSavesFound_Label.visible = true
@@ -81,15 +100,12 @@ func load_game(save_name):
 	var save_data = save_game.get_var(true)
 	
 	Global.playerWeaponId = save_data.playerWeaponId
-	Global.playerCmdrStat = save_data.playerCmdrStat
-	Global.playerEngrStat = save_data.playerEngrStat
-	Global.playerBiolStat = save_data.playerBiolStat
-	Global.playerDocStat = save_data.playerDocStat
+	Global.playerStats = save_data.playerStats
 	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
-	Global.playerBaseMetal = save_data.playerBaseMetal
-	Global.playerBaseFood = save_data.playerBaseFood
-	Global.playerBaseWater = save_data.playerBaseWater
-	Global.playerBaseEnergy = save_data.playerBaseEnergy
+	Global.playerResources = save_data.playerResources
+	Global.modifiers = save_data.modifiers
+	Global.game_time = save_data.gameTime
+	Global.playerShipData = save_data.playerShipData
 	Global.playerBaseData = save_data.playerBaseData
 	Global.isPlayerBaseFirstLoad = false
 	Global.npcColonyData = save_data.npcColonyData

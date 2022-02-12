@@ -5,16 +5,18 @@ var in_building_mode = false
 var building_node
 var building_type
 const highlight_opacity := 0.5
+const base_bldg_path := "res://objects/buildings/"
+onready var building_button_box = $Building_Panel/ScrollContainer/VBoxContainer
 
 
 func _ready():
-	pass
+	generate_building_buttons()
 
 func _physics_process(_delta):
 	if in_building_mode:
 		#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
 		var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
-		building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2)) #TODO: make sure this works with buildings sized other than 3x3 tiles
+		building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2))
 		
 		if Input.is_action_pressed("ui_cancel"):
 			in_building_mode = false
@@ -23,38 +25,95 @@ func _physics_process(_delta):
 			return
 		
 		check_building_placement()
+	
+	var cur_bldg_idx := 1
+	for node in building_button_box.get_children():
+		var btn_is_disabled := false
+		
+		# Check if player has enough resources for each building
+		var bldg_cost = int(node.get_child(3).text.split(" ")[1])
+		if Global.playerResources.metal < bldg_cost:
+			btn_is_disabled = true
+		
+		# Check how many of each limited building player has, and disable the button if they're at the limit
+		if node.get_children().size() == 5:
+			var num_placed := get_num_bldgs_placed(Global.BUILDING_TYPES.values()[cur_bldg_idx])
+			var limit_lbl = node.get_child(4)
+			var max_placeable := int(limit_lbl.text.split(" / ")[1])
+			
+			if num_placed == max_placeable:
+				btn_is_disabled = true
+			
+			limit_lbl.text = str(num_placed) + " / " + str(max_placeable)
+		
+		node.disabled = btn_is_disabled
+		cur_bldg_idx += 1
+
+# Since we generate them based on the order of Global.BUILDING_TYPES, we can safely assume that order stays the same when referencing it elsewhere
+func generate_building_buttons():
+	for bldg in Global.BUILDING_TYPES:
+		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
+			continue
+		
+		var bldg_info = load(base_bldg_path + bldg + ".tscn").instance()
+		
+		var new_bldg_btn = Button.new()
+		new_bldg_btn.rect_min_size = Vector2(590, 100)
+		
+		var bldg_sprite = Sprite.new()
+		bldg_sprite.texture = load(base_bldg_path + bldg.to_lower() + ".png")
+		bldg_sprite.scale = Vector2(0.75, 0.75)
+		new_bldg_btn.add_child(bldg_sprite)
+		bldg_sprite.position = Vector2(50, new_bldg_btn.rect_min_size.y / 2)
+		
+		var title_lbl = Label.new()
+		title_lbl.text = bldg_info.bldg_name
+		new_bldg_btn.add_child(title_lbl)
+		title_lbl.rect_position = Vector2(125, 10)
+		
+		var desc_lbl = Label.new()
+		desc_lbl.text = bldg_info.bldg_desc
+		desc_lbl.autowrap = true
+		desc_lbl.rect_size.x = 350
+		new_bldg_btn.add_child(desc_lbl)
+		desc_lbl.rect_position = Vector2(125, 35)
+		
+		var cost_lbl = Label.new()
+		cost_lbl.text = "Cost: " + str(bldg_info.cost_to_build) + " metal"
+		new_bldg_btn.add_child(cost_lbl)
+		cost_lbl.rect_position = Vector2(125, 75)
+		
+		if "BUILDING_LIMIT" in bldg_info:
+			var limit_lbl = Label.new()
+			# TODO: make func to look through playerBaseData and see how many we already have -> will be used in bldg-count check in _process() too
+			limit_lbl.text = str(get_num_bldgs_placed(bldg)) + " / " + str(bldg_info.BUILDING_LIMIT)
+			new_bldg_btn.add_child(limit_lbl)
+			limit_lbl.rect_position = Vector2(550, (new_bldg_btn.rect_min_size.y / 2) - 5)
+		
+		new_bldg_btn.connect("pressed", self, "start_building", [bldg])
+		building_button_box.add_child(new_bldg_btn)
+
+func get_num_bldgs_placed(bldg_type: String) -> int:
+	var bldgs_found := 0
+	
+	for bldg in Global.playerBaseData.buildings:
+		if bldg.type == bldg_type:
+			bldgs_found += 1
+	
+	return bldgs_found
 
 func start_building(bldg_type):
+	building_panel.hide()
 	in_building_mode = true
 	building_type = bldg_type
 	
 	# Set the building_node based on type
-	if building_type == Global.BUILDING_TYPES.HQ:
-		building_node = preload("res://objects/buildings/HQ.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Shipyard:
-		building_node = preload("res://objects/buildings/Shipyard.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Medbay:
-		building_node = preload("res://objects/buildings/Medbay.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Barracks:
-		building_node = preload("res://objects/buildings/Barracks.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Greenhouse:
-		building_node = preload("res://objects/buildings/Greenhouse.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Power_Industrial_Coal:
-		building_node = preload("res://objects/buildings/Power_Industrial_Coal.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Power_Renewable_Solar:
-		building_node = preload("res://objects/buildings/Power_Renewable_Solar.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Water_Recycling_System:
-		building_node = preload("res://objects/buildings/Water_Recycling_System.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Communications_Array:
-		building_node = preload("res://objects/buildings/Communications_Array.tscn").instance()
-	elif building_type == Global.BUILDING_TYPES.Science_Lab:
-		building_node = preload("res://objects/buildings/Science_Lab.tscn").instance()
+	building_node = load(base_bldg_path + building_type + ".tscn").instance()
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
-	if "isBeingPlaced" in building_node:
-		building_node.isBeingPlaced = true
-	building_node.get_child(0).visible = true
+	building_node.isBeingPlaced = true
+	building_node.get_node("CollisionHighlight").visible = true
 	get_tree().get_root().get_child(1).add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
 
 func check_building_placement():
@@ -67,14 +126,12 @@ func check_building_placement():
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)
 
 func place_building():
-	# Place building on map (save position to save/game data -> TODO)
+	# Place building on map
 	building_node.modulate.a = 1.0
-	
-	if "isBeingPlaced" in building_node:
-		building_node.isBeingPlaced = false
-	
-	if "cost_to_build" in building_node:
-		Global.playerBaseMetal -= building_node.cost_to_build
+	building_node.isBeingPlaced = false
+	building_node.isPlayerBldg = true
+	building_node.bldgLvl = 1
+	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
@@ -82,7 +139,7 @@ func place_building():
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = 1,
+		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
@@ -96,40 +153,3 @@ func _on_Build_HQ_Button_pressed():
 
 func _on_Close_Button_pressed():
 	building_panel.hide()
-
-
-func _on_Shipyard_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Shipyard)
-
-func _on_Medbay_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Medbay)
-
-func _on_Barracks_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Barracks)
-
-func _on_Greenhouse_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Greenhouse)
-
-func _on_CoalPower_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Power_Industrial_Coal)
-
-func _on_SolarPower_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Power_Renewable_Solar)
-
-func _on_WaterRecyclingSystem_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Water_Recycling_System)
-
-func _on_CommunicationsArray_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Communications_Array)
-
-func _on_ScienceLab_Button_pressed():
-	building_panel.hide()
-	start_building(Global.BUILDING_TYPES.Science_Lab)

@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
-[ext_resource path="res://ui/DynamicFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=4]
 [ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=5]
 [ext_resource path="res://ui/Earth.png" type="Texture" id=6]
 [ext_resource path="res://objects/ship.png" type="Texture" id=7]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=8]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
@@ -62,8 +64,8 @@ scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 4 )
 
 [node name="Earth" type="Sprite" parent="."]
-position = Vector2( 69, 262 )
-scale = Vector2( 1.08167, 1.08167 )
+position = Vector2( 56, 276 )
+scale = Vector2( 1.84073, 1.84073 )
 texture = ExtResource( 6 )
 
 [node name="Ship Fleet" type="Node2D" parent="."]
@@ -113,6 +115,7 @@ margin_left = 518.0
 margin_top = 14.0
 margin_right = 624.0
 margin_bottom = 37.0
+theme = ExtResource( 8 )
 custom_fonts/font = ExtResource( 2 )
 text = "Skip Cutscene"
 __meta__ = {
@@ -123,7 +126,7 @@ __meta__ = {
 margin_top = 254.0
 margin_right = 641.0
 margin_bottom = 360.0
-color = Color( 0.0235294, 0.329412, 0.623529, 0.392157 )
+color = Color( 0.0235294, 0.329412, 0.623529, 0.745098 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

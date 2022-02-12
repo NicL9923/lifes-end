@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 export var health := 100
+export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
@@ -10,6 +11,7 @@ onready var animatedSprite = $AnimatedSprite
 
 var currentZoom := 1.0
 var isInCombat := false
+var ui_is_open := false
 
 onready var currentWeapons := [$Position2D/Rifle]
 var selectedWeapon := 0
@@ -19,6 +21,9 @@ onready var gun_rotation_point := $Position2D
 var gun_angle: float
 
 onready var building_panel := $UI/BuildingUI/Building_Panel
+onready var ship_panel := $UI/ShipUI/Ship_Panel
+onready var research_panel := $UI/ResearchUI/Research_Panel
+onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
@@ -26,13 +31,12 @@ func _ready():
 func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
-	
+	check_if_ui_open()
 	
 	$UI/Healthbar.value = health
+	$UI/Healthbar.max_value = Global.playerStats.max_health
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		$UI/EscMenu.visible = !$UI/EscMenu.visible
-		get_tree().paused = $UI/EscMenu.visible
+	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if isInCombat:
 		weapon_handling(delta)
@@ -42,13 +46,14 @@ func player_movement():
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
-	player_animation(input_vector)
 	
 	if input_vector != Vector2.ZERO:
-		velocity = input_vector * MAX_SPEED
+		velocity += input_vector * ACCELERATION
+		velocity = velocity.clamped(MAX_SPEED)
 	else:
 		velocity = Vector2.ZERO
 	
+	player_animation(input_vector)
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
@@ -77,6 +82,9 @@ func player_animation(input_vector):
 		animatedSprite.play("upIdle")	
 
 func handle_camera_zoom():
+	if ui_is_open:
+		return
+	
 	if Input.is_action_just_released("scroll_up"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
 		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
@@ -109,18 +117,11 @@ func toggle_combat(on: bool):
 		isInCombat = true
 		gun_rotation_point.show()
 
-func _load_main_menu():
-	get_tree().change_scene("res://MainMenu.tscn")
-	get_tree().paused = false
-
-func _on_Quit_Button_pressed():
-	var popup = ConfirmationDialog.new()
-	popup.window_title = "Are you sure?"
-	popup.dialog_text = "Unsaved data will be lost"
-	popup.connect("confirmed", self, "_load_main_menu")
-	popup.pause_mode = Node.PAUSE_MODE_PROCESS
-	$UI.add_child(popup)
-	popup.popup_centered()
+func check_if_ui_open():
+	if building_panel.visible or ship_panel.visible or research_panel.visible:
+		ui_is_open = true
+	else:
+		ui_is_open = false
 
 func _on_RTB_Button_pressed():
 	get_tree().change_scene("res://MainWorld.tscn")

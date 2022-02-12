@@ -45,28 +45,52 @@ func execute_dev_commands():
 	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
 	var output_to_add = []
 	
-	# TODO: god mode (no dmg + unlimited ammo), ammo, other resources, place building
+	# TODO: god mode (no dmg + unlimited ammo), ammo, place building
 	# TODO: handle commands w/ invalid parameters
 	if cmdTxt[0] == "help":
 		output_to_add.append("metal x - gives player x metal")
+		output_to_add.append("energy x - gives player x energy")
+		output_to_add.append("food x - gives player x food")
+		output_to_add.append("water x - gives player x water")
 		output_to_add.append("health x - sets player health to x")
-		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("teleport x y - teleports player to coords (x, y)")
+		output_to_add.append("set_time 0-2400 - sets time of day to given num")
+		output_to_add.append("set_day x - sets game Earth days passed to x")
+		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
+		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
 	elif cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
-		Global.playerBaseMetal += int(cmdTxt[1])
+		Global.playerResources.metal += int(cmdTxt[1])
 		output_to_add.append("Successfully added " + cmdTxt[1] + " metal!")
+	elif cmdTxt[0] == "energy" and cmdTxt[1] != null: #energy 5
+		Global.playerResources.energy += int(cmdTxt[1])
+		output_to_add.append("Successfully added " + cmdTxt[1] + " energy!")
+	elif cmdTxt[0] == "food" and cmdTxt[1] != null: #food 5
+		Global.playerResources.food += int(cmdTxt[1])
+		output_to_add.append("Successfully added " + cmdTxt[1] + " food!")
+	elif cmdTxt[0] == "water" and cmdTxt[1] != null: #water 5
+		Global.playerResources.water += int(cmdTxt[1])
+		output_to_add.append("Successfully added " + cmdTxt[1] + " water!")
 	elif cmdTxt[0] == "health" and cmdTxt[1] != null: #health 100
 		Global.player.health = int(cmdTxt[1])
 		output_to_add.append("Set player health to " + cmdTxt[1])
+	elif cmdTxt[0] == "teleport" and cmdTxt[1] != null and cmdTxt[2] != null: #teleport 20 30
+		Global.player.global_position = Vector2(int(cmdTxt[1]), int(cmdTxt[2]))
+		output_to_add.append("Teleported to x: " + cmdTxt[1] + " y: " + cmdTxt[2])
+	elif cmdTxt[0] == "set_time" and cmdTxt[1] != null: # set_time 800 *range: 0-2400
+		Global.game_time.ticks = float(cmdTxt[1])
+		output_to_add.append("Set time to " + cmdTxt[1])
+	elif cmdTxt[0] == "set_day" and cmdTxt[1] != null: # set_day 13
+		Global.game_time.earthDays = int(cmdTxt[1])
+		output_to_add.append("Set day (in Earth days) to " + cmdTxt[1])
+	elif cmdTxt[0] == "set_time_speed" and cmdTxt[1] != null:
+		Global.time_speed = int(cmdTxt[1])
+		output_to_add.append("Set time speed to " + cmdTxt[1])
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld
 		var path = "res://" + cmdTxt[1] + ".tscn"
 		get_tree().change_scene(path)
 		output_to_add.append("Loaded scene " + path)
 		get_tree().paused = false
-	elif cmdTxt[0] == "teleport" and cmdTxt[1] != null and cmdTxt[2] != null: #teleport 20 30
-		Global.player.global_position = Vector2(int(cmdTxt[1]), int(cmdTxt[2]))
-		output_to_add.append("Teleported to x: " + cmdTxt[1] + " y: " + cmdTxt[2])
 	elif cmdTxt[0] == "clear_saves":
 		var file_deleter = Directory.new()
 		

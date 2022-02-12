@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DestroyedColonyIcon.png-3b0e19bc11f0600aae6c408c9f80829d.stex"
+path="res://.import/power_sustainable_nuclear.png-09d7cd317a412b5dd9c7cb548ea6e13b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/DestroyedColonyIcon.png"
-dest_files=[ "res://.import/DestroyedColonyIcon.png-3b0e19bc11f0600aae6c408c9f80829d.stex" ]
+source_file="res://objects/buildings/power_sustainable_nuclear.png"
+dest_files=[ "res://.import/power_sustainable_nuclear.png-09d7cd317a412b5dd9c7cb548ea6e13b.stex" ]
 
 [params]
 

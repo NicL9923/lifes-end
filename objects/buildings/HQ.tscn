@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/buildings/HQ.gd" type="Script" id=1]
-[ext_resource path="res://objects/buildings/HQ.png" type="Texture" id=2]
+[ext_resource path="res://objects/buildings/hq.png" type="Texture" id=2]
 [ext_resource path="res://ui/PopupBox.png" type="Texture" id=3]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 40 )
@@ -40,6 +41,7 @@ __meta__ = {
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

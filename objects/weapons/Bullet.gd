@@ -6,7 +6,6 @@ var velocity
 
 func _ready():
 	velocity = Vector2(speed, 0).rotated(Global.player.gun_angle)
-	pass
 
 func _process(delta):
 	position += velocity * delta
