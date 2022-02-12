@@ -27,6 +27,7 @@ onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
+	self.add_to_group("player_team")
 
 func _physics_process(delta):
 	player_movement()
@@ -61,25 +62,25 @@ func player_animation(input_vector):
 	if input_vector.x > 0:
 		animatedSprite.play("rightRun")
 	elif Input.is_action_just_released("ui_right"):
-		animatedSprite.play("rightIdle")	
+		animatedSprite.play("rightIdle")
 		
 	#left animations
 	if input_vector.x < 0:
 		animatedSprite.play("leftRun")
 	elif Input.is_action_just_released("ui_left"):
-		animatedSprite.play("leftIdle")	
+		animatedSprite.play("leftIdle")
 	
 	#down animations
 	if input_vector.y > 0 and input_vector.x == 0:
 		animatedSprite.play("downRun")
 	elif Input.is_action_just_released("ui_down"):
-		animatedSprite.play("downIdle")	
+		animatedSprite.play("downIdle")
 	
 	#up animations
 	if input_vector.y < 0 and input_vector.x == 0:
 		animatedSprite.play("upRun")
 	elif Input.is_action_just_released("ui_up"):
-		animatedSprite.play("upIdle")	
+		animatedSprite.play("upIdle")
 
 func handle_camera_zoom():
 	if ui_is_open:
@@ -116,6 +117,19 @@ func toggle_combat(on: bool):
 	else:
 		isInCombat = true
 		gun_rotation_point.show()
+
+func take_damage(dmg_amt):
+	if Global.debug.god_mode:
+		return
+	
+	health = clamp(health - dmg_amt, 0, Global.playerStats.max_health)
+	
+	if health == 0:
+		die()
+
+func die(): # TODO - maybe respawn back at colony and lose some resources?
+	print("Player is deaded")
+	pass
 
 func check_if_ui_open():
 	if building_panel.visible or ship_panel.visible or research_panel.visible:

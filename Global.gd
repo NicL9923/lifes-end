@@ -92,3 +92,12 @@ var location_to_load := {
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
+
+var debug = {
+	dev_console = {
+		entered_cmds = [],
+		output_stream = [],
+		current_history_index = 0
+	},
+	god_mode = false
+}
