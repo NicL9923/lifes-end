@@ -14,7 +14,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="SpatialMaterial" id=7]
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 5 )
 
 [sub_resource type="SphereMesh" id=2]
 material = SubResource( 7 )

@@ -10,6 +10,7 @@ var areThereRemainingMetalDeposits := true
 
 func _ready():
 	Global.world_nav = $Navigation2D
+	Global.player.add_to_group("good_guys")
 	
 	var planet = Global.playerBaseData.planet
 	#TODO: may be worth just merging all planet tiles into single tileset if they all have 1 to 4 tiles at most...
