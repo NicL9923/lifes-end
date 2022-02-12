@@ -45,13 +45,11 @@ func execute_dev_commands():
 	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
 	var output_to_add = []
 	
-	# TODO: god mode (no dmg + unlimited ammo), ammo, place building
-	# TODO: handle commands w/ invalid parameters
+	# TODO: add ammo, place building
+	# TODO: handle commands w/ invalid parameters, stop all the crashing involving cmd_history when switching scenes
 	if cmdTxt[0] == "help":
-		output_to_add.append("metal x - gives player x metal")
-		output_to_add.append("energy x - gives player x energy")
-		output_to_add.append("food x - gives player x food")
-		output_to_add.append("water x - gives player x water")
+		output_to_add.append("god - player is invincible and has unlimited ammo")
+		output_to_add.append("metal/energy/food/water x - gives player x of specified rsc")
 		output_to_add.append("health x - sets player health to x")
 		output_to_add.append("teleport x y - teleports player to coords (x, y)")
 		output_to_add.append("set_time 0-2400 - sets time of day to given num")
@@ -59,18 +57,12 @@ func execute_dev_commands():
 		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
-	elif cmdTxt[0] == "metal" and cmdTxt[1] != null: #metal 5
-		Global.playerResources.metal += int(cmdTxt[1])
-		output_to_add.append("Successfully added " + cmdTxt[1] + " metal!")
-	elif cmdTxt[0] == "energy" and cmdTxt[1] != null: #energy 5
-		Global.playerResources.energy += int(cmdTxt[1])
-		output_to_add.append("Successfully added " + cmdTxt[1] + " energy!")
-	elif cmdTxt[0] == "food" and cmdTxt[1] != null: #food 5
-		Global.playerResources.food += int(cmdTxt[1])
-		output_to_add.append("Successfully added " + cmdTxt[1] + " food!")
-	elif cmdTxt[0] == "water" and cmdTxt[1] != null: #water 5
-		Global.playerResources.water += int(cmdTxt[1])
-		output_to_add.append("Successfully added " + cmdTxt[1] + " water!")
+	elif cmdTxt[0] == "god":
+		Global.debug.god_mode = !Global.debug.god_mode
+		output_to_add.append("God mode set to " + ("on" if Global.debug.god_mode else "off"))
+	elif cmdTxt[0] == "metal" or cmdTxt[0] == "energy" or cmdTxt[0] == "food" or cmdTxt[0] == "water" and cmdTxt[1] != null:
+		Global.playerResources[cmdTxt[0]] += int(cmdTxt[1])
+		output_to_add.append("Successfully added " + cmdTxt[1] + " " + cmdTxt[0] + "!")
 	elif cmdTxt[0] == "health" and cmdTxt[1] != null: #health 100
 		Global.player.health = int(cmdTxt[1])
 		output_to_add.append("Set player health to " + cmdTxt[1])

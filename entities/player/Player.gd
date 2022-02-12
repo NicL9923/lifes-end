@@ -117,6 +117,19 @@ func toggle_combat(on: bool):
 		isInCombat = true
 		gun_rotation_point.show()
 
+func take_damage(dmg_amt):
+	if Global.debug.god_mode:
+		return
+	
+	health = clamp(health - dmg_amt, 0, Global.playerStats.max_health)
+	
+	if health == 0:
+		die()
+
+func die(): # TODO - maybe respawn back at colony and lose some resources?
+	print("Player is deaded")
+	pass
+
 func check_if_ui_open():
 	if building_panel.visible or ship_panel.visible or research_panel.visible:
 		ui_is_open = true

@@ -92,3 +92,7 @@ var location_to_load := {
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
+
+var debug = {
+	god_mode = false
+}

@@ -9,7 +9,6 @@ enum STATE {
 	IDLE,
 	PATROLLING,
 	TAKING_COVER,
-	SEARCHING_FOR_NEAREST_GOOD_GUY,
 	ADVANCING,
 	ATTACKING,
 	FLEEING
@@ -27,21 +26,19 @@ func process_states(delta):
 		STATE.IDLE: process_idle()
 		STATE.PATROLLING: process_patrolling()
 		STATE.TAKING_COVER: process_taking_cover()
-		STATE.SEARCHING_FOR_NEAREST_GOOD_GUY: process_searching_for_nearest_good_guy()
 		STATE.ADVANCING: process_advancing()
 		STATE.ATTACKING: process_attacking(delta)
 		STATE.FLEEING: process_fleeing()
 
+# Can go to/from patrolling
 func process_idle():
 	pass
 
+# Can go to/from idle, 
 func process_patrolling():
 	pass
 
 func process_taking_cover():
-	pass
-
-func process_searching_for_nearest_good_guy():
 	pass
 
 func process_advancing():
