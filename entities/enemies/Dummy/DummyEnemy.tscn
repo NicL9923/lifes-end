@@ -314,7 +314,7 @@ script = ExtResource( 2 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 33 )
 animation = "idle_down"
-frame = 7
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
@@ -325,3 +325,14 @@ shape = SubResource( 34 )
 
 [node name="Rifle" parent="Position2D" instance=ExtResource( 3 )]
 position = Vector2( 11.1793, 0.166855 )
+time_between_shots = 3
+
+[node name="LineOfSight" type="Area2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="LineOfSight"]
+position = Vector2( 0, 16 )
+polygon = PoolVector2Array( 0, -16, 128, -192, 128, 192 )
+
+[connection signal="area_entered" from="LineOfSight" to="." method="_on_LineOfSight_area_entered"]
+[connection signal="area_exited" from="LineOfSight" to="." method="_on_LineOfSight_area_exited"]

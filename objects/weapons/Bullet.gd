@@ -7,6 +7,7 @@ var angle
 
 func _ready():
 	velocity = Vector2(speed, 0).rotated(rotation)
+	self.add_to_group("bullets")
 
 func _process(delta):
 	position += velocity * delta

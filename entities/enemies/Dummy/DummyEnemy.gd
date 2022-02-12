@@ -12,16 +12,24 @@ enum STATE {
 enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 
 onready var anim_sprt = $AnimatedSprite
+onready var line_of_sight = $LineOfSight
+onready var weapon = $Position2D/Rifle
+
 export var health := 100
 export var speed := 125
 export var accuracy := 50
+export var bullets_to_take_cover := 10
+export var dist_to_advance := 15.0
 var cur_state = STATE.IDLE
 
 var timer := -1.0 # a value of -1.0 is "null" state
 var last_movement_dir
 var next_patrol_point: Vector2
-var last_known_player_team_pos: Vector2
+var last_known_player_team_pos
+var hostiles_in_los := []
+var num_bullets_in_los := 0
 
+# TODO: maybe do like RimWorld does where enemies know where you/allies are at all times (in place of current LoS system *still good for bullets though...?*)
 
 func _ready():
 	pass
@@ -43,6 +51,19 @@ func enter_state(new_state):
 
 func set_timer(seconds: float):
 	timer = seconds
+
+func handle_enemies_in_line_of_sight():
+	if hostiles_in_los.size() > 0:
+		enter_state(STATE.ATTACKING)
+
+func get_closest_hostile():
+	var closest_hostile = hostiles_in_los[0]
+	
+	for hostile in hostiles_in_los:
+		if hostile.global_position.distance_to(self.global_position) < closest_hostile.global_position.distance_to(self.global_position):
+			closest_hostile = hostile
+	
+	return closest_hostile
 
 # Can go to/from patrolling
 func process_idle(delta):
@@ -69,39 +90,55 @@ func process_idle(delta):
 		enter_state(STATE.PATROLLING)
 	else:
 		timer -= delta
+	
+	handle_enemies_in_line_of_sight()
 
 # Can go to/from idle, attacking
 func process_patrolling(delta):
-	print("here")
+	handle_enemies_in_line_of_sight()
+	
+	# NOTE: The below two if statements use 5 as the value because the entity can't always get perfectly close to the point
 	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
 		pathfind_to_point(delta, last_known_player_team_pos)
-		
-		# TODO: scan for entities in group("player_team"), and switch to state attacking
-	if self.global_position.distance_to(next_patrol_point) > 5:
+	elif self.global_position.distance_to(next_patrol_point) > 5:
 		pathfind_to_point(delta, next_patrol_point)
-		print(global_position)
-		print(global_position.distance_to(next_patrol_point))
-		
-		# TODO: scan for entities in group("player_team"), and switch to state attacking
 	else:
+		last_known_player_team_pos = null
 		enter_state(STATE.IDLE)
 
 # Can go to/from patrolling, attacking
 func process_taking_cover(delta):
 	# TODO: Find nearest static body(?), and get on the opposite side of it as the player
-	# for x amt of time
+	# for x amt of time, or until there's less bullets in LoS
 	pass
 
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
-	# TODO: move towards lastKnownPlayerTeamPos
-	pathfind_to_point(delta, Global.player.global_position)
-	pass
+	# Advance towards closest hostile
+	pathfind_to_point(delta, get_closest_hostile().global_position)
 
 # Can go to/from advancing, taking_cover
 func process_attacking(delta):
-	# TODO: attack (i.e. predict player_team entities position to accuracy
-	pass
+	# If no more enemies present in LoS, enter_state(patrolling)
+	if hostiles_in_los.size() == 0:
+		enter_state(STATE.PATROLLING)
+	
+	# Find closest hostile and engage them
+	var closest_hostile = get_closest_hostile()
+	
+	# Rotate weapon towards entity we're attacking
+		# TODO: predict player_team entities position w/ var accuracy
+	weapon.rotation = Vector2.ZERO.angle_to(closest_hostile.global_position)
+	
+	weapon.shoot(weapon.rotation)
+	
+	# Take cover if lots of bullets are flying around (in LoS)
+	if num_bullets_in_los > bullets_to_take_cover:
+		enter_state(STATE.TAKING_COVER)
+	
+	# Advance if closest hostile reaches a certain distance away (within LoS)
+	if self.global_position.distance_to(closest_hostile) >= dist_to_advance:
+		enter_state(STATE.ADVANCING)
 
 # Can go from attacking
 func process_fleeing(delta):
@@ -117,6 +154,7 @@ func pathfind_to_point(delta, pos: Vector2):
 		
 		if move_dist <= dist_to_next_point:
 			var move_rot = get_angle_to(self.global_position.linear_interpolate(path[0], move_dist / dist_to_next_point))
+			line_of_sight.rotation = move_rot
 			var motion = Vector2(speed, 0).rotated(move_rot)
 			move_and_slide(motion)
 			
@@ -145,3 +183,16 @@ func take_damage(dmg_amt):
 
 func die():
 	queue_free()
+
+
+func _on_LineOfSight_area_entered(area):
+	if area.is_in_group("player_team"):
+		hostiles_in_los.append(area)
+	elif area.is_in_group("bullets"):
+		num_bullets_in_los += 1
+
+func _on_LineOfSight_area_exited(area):
+	if area.is_in_group("player_team"):
+		hostiles_in_los.erase(area)
+	elif area.is_in_group("bullets"):
+		num_bullets_in_los -= 1
