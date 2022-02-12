@@ -17,6 +17,7 @@ func reset_global_data():
 	Global.playerBaseData = Global.defaultPlayerBaseData
 	Global.npcColonyData = []
 	Global.rscCollectionSiteData = []
+	Global.isPlayerBaseFirstLoad = true
 
 func _load_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")

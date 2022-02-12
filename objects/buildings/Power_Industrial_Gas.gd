@@ -6,6 +6,8 @@ export var pollution_produced_per_day := 0.1
 
 func _init():
 	cost_to_build = 15
+	bldg_name = "Gas Power Plant"
+	bldg_desc = "Produces " + str(energy_produced_per_day) + " Energy and " + str(pollution_produced_per_day) + " Pollution per day"
 
 func _ready():
 	connect_to_daynight_cycle()

@@ -6,9 +6,12 @@ var isBeingPlaced: bool # Need this var and check so menu doesn't show when buil
 var isPlayerBldg := false
 var bldgLvl: int
 
+var bldg_name: String
+var bldg_desc: String
+
 
 func _ready():
-	get_node("CollisionHighlight").visible = false
+	pass
 
 func is_player_in_popup_distance():
 	return (Global.player.position.distance_to(self.position) < Global.building_activiation_distance and !Global.player.isInCombat and !isBeingPlaced)

@@ -168,6 +168,7 @@ func load_buildings():
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
 		building_node.bldgLvl = bldg.building_lvl
+		building_node.get_node("CollisionHighlight").visible = false
 		get_tree().get_root().get_child(1).add_child(building_node)
 
 func save_game():

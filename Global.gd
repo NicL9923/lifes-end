@@ -8,7 +8,7 @@ const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
-	buildings = [], #BuildingData[] -> type(int), global_pos(Vector2), building_lvl(int *start is 1)
+	buildings = [], #BuildingData[] -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
 	colonists = [],
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [], # Vector2[]

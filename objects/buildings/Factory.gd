@@ -5,6 +5,8 @@ extends Building
 
 func _init():
 	cost_to_build = 50
+	bldg_name = "Factory"
+	bldg_desc = "Allows you to craft weapons"
 
 func _on_Craft_Button_pressed():
 	pass # TODO: make crafting panel and show it here
