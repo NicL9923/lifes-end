@@ -29,14 +29,14 @@ var last_known_player_team_pos
 var hostiles_in_los := []
 var num_bullets_in_los := 0
 
-# TODO: maybe do like RimWorld does where enemies know where you/allies are at all times (in place of current LoS system *still good for bullets though...?*)
 # TODO: handle pathing around buildings (these silly bois get stuck on them currently - tilemap collisions should be fine though)
 
 func _ready():
-	self.add_to_group("enemy")
+	self.add_to_group("player_team")
 
 func _physics_process(delta):
 	process_states(delta)
+	print(hostiles_in_los)
 
 func process_states(delta):
 	match(cur_state):
