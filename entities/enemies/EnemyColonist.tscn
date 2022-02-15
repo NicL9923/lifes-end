@@ -1,0 +1,560 @@
+[gd_scene load_steps=70 format=2]
+
+[ext_resource path="res://objects/weapons/Rifle.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=67]
+script/source = "extends KinematicBody2D
+
+enum STATE {
+	IDLE,
+	PATROLLING,
+	TAKING_COVER,
+	ADVANCING,
+	ATTACKING,
+	FLEEING
+}
+
+enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
+
+onready var anim_sprt = $AnimatedSprite
+onready var line_of_sight = $LineOfSight
+onready var weapon = $Position2D/Rifle
+
+export var health := 100
+export var speed := 125
+export var accuracy := 50
+export var bullets_to_take_cover := 10
+export var dist_to_advance := 15.0
+var cur_state = STATE.IDLE
+
+var timer := -1.0 # a value of -1.0 is \"null\" state
+var last_movement_dir
+var next_patrol_point: Vector2
+var last_known_player_team_pos
+var hostiles_in_los := []
+var num_bullets_in_los := 0
+
+# TODO: maybe do like RimWorld does where enemies know where you/allies are at all times (in place of current LoS system *still good for bullets though...?*)
+# TODO: handle pathing around buildings (these silly bois get stuck on them currently - tilemap collisions should be fine though)
+
+func _ready():
+	pass
+
+func _physics_process(delta):
+	process_states(delta)
+
+func process_states(delta):
+	match(cur_state):
+		STATE.IDLE: process_idle(delta)
+		STATE.PATROLLING: process_patrolling(delta)
+		STATE.TAKING_COVER: process_taking_cover(delta)
+		STATE.ADVANCING: process_advancing(delta)
+		STATE.ATTACKING: process_attacking(delta)
+		STATE.FLEEING: process_fleeing(delta)
+
+func enter_state(new_state):
+	cur_state = new_state
+
+func set_timer(seconds: float):
+	timer = seconds
+
+func handle_enemies_in_line_of_sight():
+	if hostiles_in_los.size() > 0:
+		enter_state(STATE.ATTACKING)
+
+func get_closest_hostile():
+	if hostiles_in_los.size() == 0:
+		return null
+	
+	var closest_hostile = hostiles_in_los[0]
+	
+	for hostile in hostiles_in_los:
+		if hostile.global_position.distance_to(self.global_position) < closest_hostile.global_position.distance_to(self.global_position):
+			closest_hostile = hostile
+	
+	last_known_player_team_pos = closest_hostile.global_position
+	return closest_hostile
+
+# Can go to/from patrolling
+func process_idle(delta):
+	if timer == -1.0:
+		set_timer(3.0)
+	
+	# May have to update or even timer code to just let idle animation run like 1-x times
+	if last_movement_dir == MOVEMENT_DIR.UP:
+		anim_sprt.play(\"idle_up\")
+	elif last_movement_dir == MOVEMENT_DIR.LEFT:
+		anim_sprt.play(\"idle_left\")
+	elif last_movement_dir == MOVEMENT_DIR.RIGHT:
+		anim_sprt.play(\"idle_right\")
+	else:
+		anim_sprt.play(\"idle_down\")
+	
+	if timer <= 0.0:
+		set_timer(-1.0)
+		
+		var next_x := self.global_position.x + rand_range(-100, 100)
+		var next_y := self.global_position.y + rand_range(-100, 100)
+		next_patrol_point = Vector2(next_x, next_y)
+		
+		enter_state(STATE.PATROLLING)
+	else:
+		timer -= delta
+	
+	handle_enemies_in_line_of_sight()
+
+# Can go to/from idle, attacking
+func process_patrolling(delta):
+	handle_enemies_in_line_of_sight()
+	
+	# NOTE: The below two if statements use 5 as the value because the entity can't always get perfectly close to the point
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
+		pathfind_to_point(delta, last_known_player_team_pos)
+	elif self.global_position.distance_to(next_patrol_point) > 5:
+		pathfind_to_point(delta, next_patrol_point)
+	else:
+		last_known_player_team_pos = null
+		enter_state(STATE.IDLE)
+
+# Can go to/from patrolling, attacking
+func process_taking_cover(delta):
+	# TODO: Find nearest static body(?), and get on the opposite side of it as the player
+	# for x amt of time, or until there's less bullets in LoS
+	pass
+
+# Can go to/from taking_cover, attacking, patrolling
+func process_advancing(delta):
+	if hostiles_in_los.size() == 0:
+		enter_state(STATE.PATROLLING)
+		return
+	
+	# Advance towards closest hostile
+	var closest_hostile = get_closest_hostile()
+	
+	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
+		enter_state(STATE.ATTACKING)
+	else:
+		pathfind_to_point(delta, closest_hostile.global_position)
+
+# Can go to/from advancing, taking_cover
+func process_attacking(delta):
+	# If no more enemies present in LoS, enter_state(patrolling)
+	if hostiles_in_los.size() == 0:
+		enter_state(STATE.PATROLLING)
+		return
+	
+	# Find closest hostile and engage them
+	var closest_hostile = get_closest_hostile()
+	
+	# Rotate weapon towards entity we're attacking
+		# TODO: predict player_team entities position w/ var accuracy
+	$Position2D.look_at(closest_hostile.global_position)
+	weapon.shoot(closest_hostile.global_position.angle_to_point(weapon.global_position))
+	
+	# Take cover if lots of bullets are flying around (in LoS)
+	if num_bullets_in_los > bullets_to_take_cover:
+		enter_state(STATE.TAKING_COVER)
+	
+	# Advance if closest hostile reaches a certain distance away (within LoS)
+	if self.global_position.distance_to(closest_hostile.global_position) >= dist_to_advance:
+		enter_state(STATE.ADVANCING)
+
+# Can go from attacking
+func process_fleeing(delta):
+	# Disengage from combat and run away from nearest player_team entity
+	pass
+
+func pathfind_to_point(delta, pos: Vector2):
+	var move_dist = speed * delta
+	var path := Global.world_nav.get_simple_path(self.global_position, pos)
+	
+	while path.size() > 0:
+		var dist_to_next_point = self.global_position.distance_to(path[0])
+		
+		if move_dist <= dist_to_next_point:
+			var move_rot = get_angle_to(self.global_position.linear_interpolate(path[0], move_dist / dist_to_next_point))
+			line_of_sight.rotation = move_rot
+			var motion = Vector2(speed, 0).rotated(move_rot)
+			move_and_slide(motion)
+			
+			if motion.x > 0 and abs(motion.x) > abs(motion.y):
+				last_movement_dir = MOVEMENT_DIR.RIGHT
+				anim_sprt.play(\"run_right\")
+			elif motion.x < 0 and abs(motion.x) > abs(motion.y):
+				anim_sprt.play(\"run_left\")
+				last_movement_dir = MOVEMENT_DIR.LEFT
+			elif motion.y < 0:
+				anim_sprt.play(\"run_up\")
+				last_movement_dir = MOVEMENT_DIR.UP
+			elif motion.y > 0:
+				anim_sprt.play(\"run_down\")
+				last_movement_dir = MOVEMENT_DIR.DOWN
+			break
+		
+		path.remove(0)
+		move_dist -= dist_to_next_point
+
+func take_damage(dmg_amt):
+	health -= dmg_amt
+	
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()
+
+func _on_LineOfSight_body_entered(body):
+	if body.is_in_group(\"player_team\"):
+		hostiles_in_los.append(body)
+
+func _on_LineOfSight_body_exited(body):
+	if body.is_in_group(\"player_team\"):
+		hostiles_in_los.erase(body)
+
+func _on_LineOfSight_area_entered(area):
+	if area.is_in_group(\"bullets\"):
+		num_bullets_in_los += 1
+
+func _on_LineOfSight_area_exited(area):
+	if area.is_in_group(\"bullets\"):
+		num_bullets_in_los -= 1
+"
+
+[sub_resource type="StreamTexture" id=68]
+load_path = "res://.import/$enemy-Sheet.png-9de0b4423cde8cacc94038d8b67ec801.stex"
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = SubResource( 68 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = SubResource( 68 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = SubResource( 68 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = SubResource( 68 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = SubResource( 68 )
+region = Rect2( 0, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = SubResource( 68 )
+region = Rect2( 96, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = SubResource( 68 )
+region = Rect2( 192, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = SubResource( 68 )
+region = Rect2( 288, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = SubResource( 68 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = SubResource( 68 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = SubResource( 68 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = SubResource( 68 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = SubResource( 68 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = SubResource( 68 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = SubResource( 68 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = SubResource( 68 )
+region = Rect2( 288, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = SubResource( 68 )
+region = Rect2( 0, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = SubResource( 68 )
+region = Rect2( 96, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = SubResource( 68 )
+region = Rect2( 192, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = SubResource( 68 )
+region = Rect2( 288, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = SubResource( 68 )
+region = Rect2( 0, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = SubResource( 68 )
+region = Rect2( 96, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = SubResource( 68 )
+region = Rect2( 192, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = SubResource( 68 )
+region = Rect2( 288, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = SubResource( 68 )
+region = Rect2( 0, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = SubResource( 68 )
+region = Rect2( 96, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = SubResource( 68 )
+region = Rect2( 192, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = SubResource( 68 )
+region = Rect2( 288, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = SubResource( 68 )
+region = Rect2( 0, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = SubResource( 68 )
+region = Rect2( 96, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = SubResource( 68 )
+region = Rect2( 192, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = SubResource( 68 )
+region = Rect2( 288, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = SubResource( 68 )
+region = Rect2( 0, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = SubResource( 68 )
+region = Rect2( 96, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = SubResource( 68 )
+region = Rect2( 192, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = SubResource( 68 )
+region = Rect2( 288, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = SubResource( 68 )
+region = Rect2( 0, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = SubResource( 68 )
+region = Rect2( 96, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = SubResource( 68 )
+region = Rect2( 192, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = SubResource( 68 )
+region = Rect2( 288, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = SubResource( 68 )
+region = Rect2( 0, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = SubResource( 68 )
+region = Rect2( 96, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = SubResource( 68 )
+region = Rect2( 192, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = SubResource( 68 )
+region = Rect2( 288, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = SubResource( 68 )
+region = Rect2( 0, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = SubResource( 68 )
+region = Rect2( 96, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = SubResource( 68 )
+region = Rect2( 192, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = SubResource( 68 )
+region = Rect2( 288, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = SubResource( 68 )
+region = Rect2( 0, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = SubResource( 68 )
+region = Rect2( 96, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = SubResource( 68 )
+region = Rect2( 192, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = SubResource( 68 )
+region = Rect2( 288, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = SubResource( 68 )
+region = Rect2( 0, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = SubResource( 68 )
+region = Rect2( 96, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = SubResource( 68 )
+region = Rect2( 192, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = SubResource( 68 )
+region = Rect2( 288, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = SubResource( 68 )
+region = Rect2( 0, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = SubResource( 68 )
+region = Rect2( 96, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = SubResource( 68 )
+region = Rect2( 192, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = SubResource( 68 )
+region = Rect2( 288, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = SubResource( 68 )
+region = Rect2( 0, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = SubResource( 68 )
+region = Rect2( 96, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = SubResource( 68 )
+region = Rect2( 192, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = SubResource( 68 )
+region = Rect2( 288, 1440, 96, 96 )
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "idle_left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ) ],
+"loop": true,
+"name": "run_up",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"loop": true,
+"name": "run_down",
+"speed": 15.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=34]
+radius = 7.0
+height = 24.0
+
+[node name="DummyEnemy" type="KinematicBody2D" groups=["enemy"]]
+script = SubResource( 67 )
+dist_to_advance = 150.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 33 )
+animation = "idle_down"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
+position = Vector2( 1, 1 )
+shape = SubResource( 34 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Rifle" parent="Position2D" instance=ExtResource( 3 )]
+position = Vector2( 11.1793, 0.166855 )
+time_between_shots = 25
+
+[node name="LineOfSight" type="Area2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="LineOfSight"]
+position = Vector2( 0, 16 )
+polygon = PoolVector2Array( 0, -16, 128, -192, 128, 192 )
+
+[connection signal="area_entered" from="LineOfSight" to="." method="_on_LineOfSight_area_entered"]
+[connection signal="area_exited" from="LineOfSight" to="." method="_on_LineOfSight_area_exited"]
+[connection signal="body_entered" from="LineOfSight" to="." method="_on_LineOfSight_body_entered"]
+[connection signal="body_exited" from="LineOfSight" to="." method="_on_LineOfSight_body_exited"]
