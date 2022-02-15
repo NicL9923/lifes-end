@@ -38,7 +38,7 @@ var num_bullets_in_los := 0
 # TODO: handle pathing around buildings (these silly bois get stuck on them currently - tilemap collisions should be fine though)
 
 func _ready():
-	pass
+	self.add_to_group(\"enemy\")
 
 func _physics_process(delta):
 	process_states(delta)
@@ -75,12 +75,7 @@ func get_closest_hostile():
 	last_known_player_team_pos = closest_hostile.global_position
 	return closest_hostile
 
-# Can go to/from patrolling
-func process_idle(delta):
-	if timer == -1.0:
-		set_timer(3.0)
-	
-	# May have to update or even timer code to just let idle animation run like 1-x times
+func handle_idle_anim():
 	if last_movement_dir == MOVEMENT_DIR.UP:
 		anim_sprt.play(\"idle_up\")
 	elif last_movement_dir == MOVEMENT_DIR.LEFT:
@@ -89,13 +84,25 @@ func process_idle(delta):
 		anim_sprt.play(\"idle_right\")
 	else:
 		anim_sprt.play(\"idle_down\")
+
+func set_new_patrol_point():
+	randomize()
+	
+	var next_x := self.global_position.x + rand_range(-100, 100)
+	var next_y := self.global_position.y + rand_range(-100, 100)
+	next_patrol_point = Vector2(next_x, next_y)
+
+# Can go to/from patrolling
+func process_idle(delta):
+	if timer == -1.0:
+		set_timer(3.0)
+	
+	handle_idle_anim()
 	
 	if timer <= 0.0:
 		set_timer(-1.0)
 		
-		var next_x := self.global_position.x + rand_range(-100, 100)
-		var next_y := self.global_position.y + rand_range(-100, 100)
-		next_patrol_point = Vector2(next_x, next_y)
+		set_new_patrol_point()
 		
 		enter_state(STATE.PATROLLING)
 	else:
@@ -111,6 +118,7 @@ func process_patrolling(delta):
 	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
 		pathfind_to_point(delta, last_known_player_team_pos)
 	elif self.global_position.distance_to(next_patrol_point) > 5:
+		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
 		last_known_player_team_pos = null
@@ -142,6 +150,8 @@ func process_attacking(delta):
 	if hostiles_in_los.size() == 0:
 		enter_state(STATE.PATROLLING)
 		return
+	
+	handle_idle_anim()
 	
 	# Find closest hostile and engage them
 	var closest_hostile = get_closest_hostile()
@@ -526,7 +536,7 @@ animations = [ {
 radius = 7.0
 height = 24.0
 
-[node name="DummyEnemy" type="KinematicBody2D" groups=["enemy"]]
+[node name="EnemyColonist" type="KinematicBody2D" groups=["enemy"]]
 script = SubResource( 67 )
 dist_to_advance = 150.0
 

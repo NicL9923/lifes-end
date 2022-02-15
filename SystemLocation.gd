@@ -84,9 +84,8 @@ func spawn_buildings(bldg_list: Array):
 func spawn_colonists():
 	var num_colonists = rand_range(1, Global.max_colonists_at_npc_colony)
 	for _i in range(num_colonists):
-		var new_colonist = load("res://entities/enemies/Dummy/DummyEnemy.tscn").instance()
+		var new_colonist = load("res://entities/enemies/EnemyColonist.tscn").instance()
 		new_colonist.global_position = get_random_location_in_map()
-		new_colonist.add_to_group("enemy")
 		add_child(new_colonist)
 		
 		remaining_enemies += 1
