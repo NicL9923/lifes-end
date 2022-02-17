@@ -4,7 +4,7 @@ var player_planet_index := _get_player_planet_index()
 var currently_selected_planet := player_planet_index
 export var player_rotate_sensitivity := { x = 10 * 0.001, y = 10 * 0.001 }
 var mouse_pressed := false
-export var icon_scale := 0.4
+export var icon_scale := 0.25
 const col_shape_scale := 0.05
 const icon_base_path := "res://ui/icons/"
 
@@ -24,8 +24,8 @@ func _input(event):
 		$Planet.rotate_y(event.relative.x * player_rotate_sensitivity.x)
 		$Planet.rotate_x(event.relative.y * player_rotate_sensitivity.y)
 		
-		$Planet.rotation_degrees.x = clamp($Planet.rotation_degrees.x, -30, 30)
-		$Planet.rotation_degrees.z = clamp($Planet.rotation_degrees.z, -30, 30)
+		$Planet.rotation_degrees.x = clamp($Planet.rotation_degrees.x, -15, 15)
+		$Planet.rotation_degrees.z = clamp($Planet.rotation_degrees.z, -15, 15)
 
 func _setup_system_location(placeType: String, placeIndex: int):
 	Global.location_to_load.type = placeType
