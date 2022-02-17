@@ -28,8 +28,6 @@ func _ready():
 		spawn_metal_deposits()
 		
 		generate_npc_colonies()
-		for colony in Global.npcColonyData:
-			print(colony.coords)
 		generate_resource_collection_sites()
 		
 		$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
