@@ -157,7 +157,7 @@ func display_planet(planet_index):
 	update_thumbnail_highlight_pos()
 	
 	var newMaterial = SpatialMaterial.new()
-	newMaterial.albedo_texture = load("res://objects/planets/sprites/" + Global.planets[planet_index] + ".png")
+	newMaterial.albedo_texture = load("res://objects/planets/3d_sprites/" + Global.planets[planet_index] + " 3D.png")
 	$Planet/MeshInstance.mesh.surface_set_material(0, newMaterial)
 	
 	map_icons_to_planet()
