@@ -36,7 +36,6 @@ func _ready():
 
 func _physics_process(delta):
 	process_states(delta)
-	print(hostiles_in_los)
 
 func process_states(delta):
 	match(cur_state):

@@ -14,12 +14,15 @@ enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 onready var anim_sprt = $AnimatedSprite
 onready var line_of_sight = $LineOfSight
 onready var weapon = $Position2D/Rifle
+onready var col_det = $CollisionDetector
 
 export var health := 100
+export var max_health := 100
 export var speed := 125
 export var accuracy := 50
 export var bullets_to_take_cover := 10
 export var dist_to_advance := 15.0
+export var dist_to_follow_bullet := 1000
 var cur_state = STATE.IDLE
 
 var timer := -1.0 # a value of -1.0 is "null" state
@@ -28,15 +31,22 @@ var next_patrol_point: Vector2
 var last_known_player_team_pos
 var hostiles_in_los := []
 var num_bullets_in_los := 0
-
-# TODO: maybe do like RimWorld does where enemies know where you/allies are at all times (in place of current LoS system *still good for bullets though...?*)
-# TODO: handle pathing around buildings (these silly bois get stuck on them currently - tilemap collisions should be fine though)
+var nearby_col_objects := []
 
 func _ready():
-	pass
+	self.add_to_group("enemy")
 
 func _physics_process(delta):
+	handle_healthbar()
 	process_states(delta)
+
+func handle_healthbar():
+	$Healthbar.value = health
+	
+	if health < max_health:
+		$Healthbar.visible = true
+	else:
+		$Healthbar.visible = false
 
 func process_states(delta):
 	match(cur_state):
@@ -48,6 +58,8 @@ func process_states(delta):
 		STATE.FLEEING: process_fleeing(delta)
 
 func enter_state(new_state):
+	var states = ["idle", "patrolling", "taking cover", "advancing", "attacking", "fleeing"]
+	print(states[new_state])
 	cur_state = new_state
 
 func set_timer(seconds: float):
@@ -70,12 +82,19 @@ func get_closest_hostile():
 	last_known_player_team_pos = closest_hostile.global_position
 	return closest_hostile
 
-# Can go to/from patrolling
-func process_idle(delta):
-	if timer == -1.0:
-		set_timer(3.0)
+func get_closest_col_object():
+	if nearby_col_objects.size() == 0:
+		return null
 	
-	# May have to update or even timer code to just let idle animation run like 1-x times
+	var closest_col_object = nearby_col_objects[0]
+	
+	for col_obj in nearby_col_objects:
+		if col_obj.global_position.distance_to(self.global_position) < closest_col_object.global_position.distance_to(self.global_position):
+			closest_col_object = col_obj
+	
+	return closest_col_object
+
+func handle_idle_anim():
 	if last_movement_dir == MOVEMENT_DIR.UP:
 		anim_sprt.play("idle_up")
 	elif last_movement_dir == MOVEMENT_DIR.LEFT:
@@ -84,13 +103,25 @@ func process_idle(delta):
 		anim_sprt.play("idle_right")
 	else:
 		anim_sprt.play("idle_down")
+
+func set_new_patrol_point():
+	randomize()
+	
+	var next_x := self.global_position.x + rand_range(-100, 100)
+	var next_y := self.global_position.y + rand_range(-100, 100)
+	next_patrol_point = Vector2(next_x, next_y)
+
+# Can go to/from patrolling
+func process_idle(delta):
+	if timer == -1.0:
+		set_timer(3.0)
+	
+	handle_idle_anim()
 	
 	if timer <= 0.0:
 		set_timer(-1.0)
 		
-		var next_x := self.global_position.x + rand_range(-100, 100)
-		var next_y := self.global_position.y + rand_range(-100, 100)
-		next_patrol_point = Vector2(next_x, next_y)
+		set_new_patrol_point()
 		
 		enter_state(STATE.PATROLLING)
 	else:
@@ -106,6 +137,7 @@ func process_patrolling(delta):
 	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
 		pathfind_to_point(delta, last_known_player_team_pos)
 	elif self.global_position.distance_to(next_patrol_point) > 5:
+		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
 		last_known_player_team_pos = null
@@ -115,6 +147,8 @@ func process_patrolling(delta):
 func process_taking_cover(delta):
 	# TODO: Find nearest static body(?), and get on the opposite side of it as the player
 	# for x amt of time, or until there's less bullets in LoS
+	
+	# If there isn't static body in LoS, just switch back to attacking
 	pass
 
 # Can go to/from taking_cover, attacking, patrolling
@@ -138,6 +172,8 @@ func process_attacking(delta):
 		enter_state(STATE.PATROLLING)
 		return
 	
+	handle_idle_anim()
+	
 	# Find closest hostile and engage them
 	var closest_hostile = get_closest_hostile()
 	
@@ -159,6 +195,10 @@ func process_fleeing(delta):
 	# Disengage from combat and run away from nearest player_team entity
 	pass
 
+func angle_difference(angle1, angle2):
+	var diff = angle2 - angle1
+	return diff if abs(diff) < 180 else diff + (360 * -sign(diff))
+
 func pathfind_to_point(delta, pos: Vector2):
 	var move_dist = speed * delta
 	var path := Global.world_nav.get_simple_path(self.global_position, pos)
@@ -168,7 +208,22 @@ func pathfind_to_point(delta, pos: Vector2):
 		
 		if move_dist <= dist_to_next_point:
 			var move_rot = get_angle_to(self.global_position.linear_interpolate(path[0], move_dist / dist_to_next_point))
-			line_of_sight.rotation = move_rot
+			
+			# Mke sure we're not running into something, and if we are, run perpendicular to it in the direction closest to the original
+			if nearby_col_objects.size() > 0:
+				var obj_to_avoid = get_closest_col_object()
+				var angle_to_obj := get_angle_to(obj_to_avoid.global_position) # self.global_position.angle_to_point(obj_to_avoid.global_position)
+				
+				# print(move_rot)
+				# print(angle_to_obj)
+				# print(angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) + 90))
+				# print(angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) - 90))
+				
+				if angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) + 90) < angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) - 90):
+					move_rot = angle_to_obj + deg2rad(90)
+				else:
+					move_rot = angle_to_obj - deg2rad(90) # TODO: AI only runs one way around building at present (not this one)...need to figure out how to get this way working
+			
 			var motion = Vector2(speed, 0).rotated(move_rot)
 			move_and_slide(motion)
 			
@@ -209,7 +264,21 @@ func _on_LineOfSight_body_exited(body):
 func _on_LineOfSight_area_entered(area):
 	if area.is_in_group("bullets"):
 		num_bullets_in_los += 1
+		
+		# Patrol (roughly) towards source of incoming bullet
+		if cur_state == STATE.IDLE or cur_state == STATE.PATROLLING:
+			enter_state(STATE.PATROLLING)
+			last_known_player_team_pos = (area.global_position - self.global_position).normalized() * dist_to_follow_bullet
 
 func _on_LineOfSight_area_exited(area):
 	if area.is_in_group("bullets"):
 		num_bullets_in_los -= 1
+
+
+func _on_CollisionDetector_body_entered(body):
+	if body.is_in_group("building"):
+		nearby_col_objects.append(body)
+
+func _on_CollisionDetector_body_exited(body):
+	if body.is_in_group("building"):
+		nearby_col_objects.erase(body)

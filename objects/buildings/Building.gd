@@ -11,7 +11,7 @@ var bldg_desc: String
 
 
 func _ready():
-	self.add_to_group("building")
+	get_node("StaticBody2D").add_to_group("building")
 
 func is_player_in_popup_distance():
 	return (Global.player.position.distance_to(self.position) < Global.building_activiation_distance and !Global.player.isInCombat and !isBeingPlaced)
