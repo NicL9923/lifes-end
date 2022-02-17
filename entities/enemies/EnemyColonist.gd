@@ -30,6 +30,7 @@ var last_movement_dir
 var next_patrol_point
 var last_known_player_team_pos
 var hostiles_in_los := []
+var potential_cover_in_los := []
 var num_bullets_in_los := 0
 var nearby_col_objects := []
 
@@ -69,30 +70,29 @@ func handle_enemies_in_line_of_sight():
 	if hostiles_in_los.size() > 0:
 		enter_state(STATE.ATTACKING)
 
-func get_closest_hostile():
-	if hostiles_in_los.size() == 0:
+func get_closest_of(type):
+	var node_arr := []
+	
+	if type == "hostile":
+		node_arr = hostiles_in_los
+	elif type == "col_obj":
+		node_arr = nearby_col_objects
+	elif type == "cover":
+		node_arr = potential_cover_in_los
+	else:
 		return null
 	
-	var closest_hostile = hostiles_in_los[0]
-	
-	for hostile in hostiles_in_los:
-		if hostile.global_position.distance_to(self.global_position) < closest_hostile.global_position.distance_to(self.global_position):
-			closest_hostile = hostile
-	
-	last_known_player_team_pos = closest_hostile.global_position
-	return closest_hostile
-
-func get_closest_col_object():
-	if nearby_col_objects.size() == 0:
+	if node_arr.size() == 0:
 		return null
 	
-	var closest_col_object = nearby_col_objects[0]
+	var closest_node = node_arr[0]
+	for node in node_arr:
+		if node.global_position.distance_to(self.global_position) < node.global_position.distance_to(self.global_position):
+			closest_node = node
 	
-	for col_obj in nearby_col_objects:
-		if col_obj.global_position.distance_to(self.global_position) < closest_col_object.global_position.distance_to(self.global_position):
-			closest_col_object = col_obj
-	
-	return closest_col_object
+	if type == "hostile":
+		last_known_player_team_pos = closest_node.global_position
+	return closest_node
 
 func handle_idle_anim():
 	if last_movement_dir == MOVEMENT_DIR.UP:
@@ -148,11 +148,12 @@ func process_patrolling(delta):
 
 # Can go to/from patrolling, attacking
 func process_taking_cover(delta):
-	# TODO: Find nearest static body(?), and get on the opposite side of it as the player
-	# for x amt of time, or until there's less bullets in LoS
+	var closest_cover = get_closest_of("cover")
 	
-	# If there isn't static body in LoS, just switch back to attacking
-	pass
+	if closest_cover:
+		pathfind_to_point(delta, closest_cover.global_position) # TODO: Get on the opposite side of it as the player for x amt of time, or until there's less bullets in LoS
+	else:
+		enter_state(STATE.ATTACKING) # If there isn't static body in LoS, just switch back to attacking
 
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
@@ -161,7 +162,7 @@ func process_advancing(delta):
 		return
 	
 	# Advance towards closest hostile
-	var closest_hostile = get_closest_hostile()
+	var closest_hostile = get_closest_of("hostile")
 	
 	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
 		enter_state(STATE.ATTACKING)
@@ -178,7 +179,7 @@ func process_attacking(delta):
 	handle_idle_anim()
 	
 	# Find closest hostile and engage them
-	var closest_hostile = get_closest_hostile()
+	var closest_hostile = get_closest_of("hostile")
 	
 	# Rotate weapon towards entity we're attacking
 		# TODO: predict player_team entities position w/ var accuracy
@@ -210,7 +211,7 @@ func pathfind_to_point(delta, pos: Vector2):
 			
 			# Mke sure we're not running into something, and if we are, run perpendicular to it in the direction closest to the original
 			if nearby_col_objects.size() > 0:
-				var obj_to_avoid = get_closest_col_object()
+				var obj_to_avoid = get_closest_of("col_obj")
 				var angle_to_obj := get_angle_to(obj_to_avoid.global_position) # self.global_position.angle_to_point(obj_to_avoid.global_position)
 				
 				var move1 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj + deg2rad(90))
@@ -254,11 +255,15 @@ func die():
 func _on_LineOfSight_body_entered(body):
 	if body.is_in_group("player_team"):
 		hostiles_in_los.append(body)
+	elif body.is_in_group("building"):
+		potential_cover_in_los.append(body)
 
 func _on_LineOfSight_body_exited(body):
 	if body.is_in_group("player_team"):
 		last_known_player_team_pos = body.global_position
 		hostiles_in_los.erase(body)
+	elif body.is_in_group("building"):
+		potential_cover_in_los.erase(body)
 
 func _on_LineOfSight_area_entered(area):
 	if area.is_in_group("bullets"):
