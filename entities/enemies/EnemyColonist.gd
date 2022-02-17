@@ -195,10 +195,6 @@ func process_fleeing(delta):
 	# Disengage from combat and run away from nearest player_team entity
 	pass
 
-func angle_difference(angle1, angle2):
-	var diff = angle2 - angle1
-	return diff if abs(diff) < 180 else diff + (360 * -sign(diff))
-
 func pathfind_to_point(delta, pos: Vector2):
 	var move_dist = speed * delta
 	var path := Global.world_nav.get_simple_path(self.global_position, pos)
@@ -214,15 +210,14 @@ func pathfind_to_point(delta, pos: Vector2):
 				var obj_to_avoid = get_closest_col_object()
 				var angle_to_obj := get_angle_to(obj_to_avoid.global_position) # self.global_position.angle_to_point(obj_to_avoid.global_position)
 				
-				# print(move_rot)
-				# print(angle_to_obj)
-				# print(angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) + 90))
-				# print(angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) - 90))
+				var move1 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj + deg2rad(90))
+				var move2 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj - deg2rad(90))
 				
-				if angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) + 90) < angle_difference(rad2deg(move_rot), rad2deg(angle_to_obj) - 90):
+				# Check which distance is shorter, and make sure the difference is great enough so we eliminate MOST (not all) indecisive glitching in place
+				if move1.distance_to(path[0]) < move2.distance_to(path[0]) and abs(move1.distance_to(path[0]) - move2.distance_to(path[0])) > 20:
 					move_rot = angle_to_obj + deg2rad(90)
 				else:
-					move_rot = angle_to_obj - deg2rad(90) # TODO: AI only runs one way around building at present (not this one)...need to figure out how to get this way working
+					move_rot = angle_to_obj - deg2rad(90)
 			
 			var motion = Vector2(speed, 0).rotated(move_rot)
 			move_and_slide(motion)
