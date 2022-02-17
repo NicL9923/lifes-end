@@ -21,13 +21,13 @@ export var max_health := 100
 export var speed := 125
 export var accuracy := 50
 export var bullets_to_take_cover := 10
-export var dist_to_advance := 15.0
 export var dist_to_follow_bullet := 1000
+onready var dist_to_advance := float(line_of_sight.get_node("CollisionShape2D").shape.radius) * 0.75
 var cur_state = STATE.IDLE
 
 var timer := -1.0 # a value of -1.0 is "null" state
 var last_movement_dir
-var next_patrol_point: Vector2
+var next_patrol_point
 var last_known_player_team_pos
 var hostiles_in_los := []
 var num_bullets_in_los := 0
@@ -105,10 +105,12 @@ func handle_idle_anim():
 		anim_sprt.play("idle_down")
 
 func set_new_patrol_point():
+	var map_limits = Global.world_nav.get_child(0).get_used_rect()
 	randomize()
 	
-	var next_x := self.global_position.x + rand_range(-100, 100)
-	var next_y := self.global_position.y + rand_range(-100, 100)
+	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x, map_limits.end.x)
+	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y, map_limits.end.y)
+	
 	next_patrol_point = Vector2(next_x, next_y)
 
 # Can go to/from patrolling
@@ -136,10 +138,11 @@ func process_patrolling(delta):
 	# NOTE: The below two if statements use 5 as the value because the entity can't always get perfectly close to the point
 	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
 		pathfind_to_point(delta, last_known_player_team_pos)
-	elif self.global_position.distance_to(next_patrol_point) > 5:
+	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 5:
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
+		next_patrol_point = null
 		last_known_player_team_pos = null
 		enter_state(STATE.IDLE)
 
@@ -214,7 +217,7 @@ func pathfind_to_point(delta, pos: Vector2):
 				var move2 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj - deg2rad(90))
 				
 				# Check which distance is shorter, and make sure the difference is great enough so we eliminate MOST (not all) indecisive glitching in place
-				if move1.distance_to(path[0]) < move2.distance_to(path[0]) and abs(move1.distance_to(path[0]) - move2.distance_to(path[0])) > 20:
+				if move1.distance_to(path[0]) < move2.distance_to(path[0]) and abs(move1.distance_to(path[0]) - move2.distance_to(path[0])) > 50:
 					move_rot = angle_to_obj + deg2rad(90)
 				else:
 					move_rot = angle_to_obj - deg2rad(90)
@@ -254,6 +257,7 @@ func _on_LineOfSight_body_entered(body):
 
 func _on_LineOfSight_body_exited(body):
 	if body.is_in_group("player_team"):
+		last_known_player_team_pos = body.global_position
 		hostiles_in_los.erase(body)
 
 func _on_LineOfSight_area_entered(area):
