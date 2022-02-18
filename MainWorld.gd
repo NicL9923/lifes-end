@@ -19,7 +19,7 @@ func _ready():
 	generate_map_border_tiles()
 	generate_map_inner_tiles()
 	
-	set_player_camera_bounds()
+	Global.set_player_camera_bounds(tilemap.get_used_rect())
 	
 	if Global.isPlayerBaseFirstLoad:
 		$Player/UI/BuildingUI/Build_HQ_Button.disabled = true
@@ -75,20 +75,10 @@ func generate_map_inner_tiles():
 			for y in range(1, worldTileSize.y - 1):
 				tilemap.set_cell(x, y, 1)
 
-func set_player_camera_bounds():
-	var map_limits = tilemap.get_used_rect()
-	$Player/Camera2D.limit_left = map_limits.position.x * Global.cellSize
-	$Player/Camera2D.limit_right = map_limits.end.x * Global.cellSize
-	$Player/Camera2D.limit_top = map_limits.position.y * Global.cellSize
-	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
-
 func spawn_metal_deposits():
-	randomize()
-	var map_limits = tilemap.get_used_rect()
-	
 	for _i in range(0, minerals_to_spawn):
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
-		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
+		metal_deposit.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		metal_deposit.add_to_group("metal_deposit")
 		add_child(metal_deposit)
 
@@ -200,5 +190,5 @@ func load_colonists():
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
-		loaded_colonist.global_position = Vector2(Global.player.global_position.x + rand_range(-15, 15), Global.player.global_position.y + rand_range(-15, 15))
+		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
 		add_child(loaded_colonist)

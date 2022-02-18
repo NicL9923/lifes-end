@@ -181,3 +181,21 @@ func reset_global_data():
 	Global.npcColonyData = []
 	Global.rscCollectionSiteData = []
 	Global.isPlayerBaseFirstLoad = true
+
+
+func set_player_camera_bounds(map_limits): # tilemap.get_used_rect()
+	player.get_node("Camera2D").limit_left = map_limits.position.x * Global.cellSize
+	player.get_node("Camera2D").limit_right = map_limits.end.x * Global.cellSize
+	player.get_node("Camera2D").limit_top = map_limits.position.y * Global.cellSize
+	player.get_node("Camera2D").limit_bottom = map_limits.end.y * Global.cellSize
+
+func get_random_location_in_map(map_limits):
+	randomize()
+	var x := rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1))
+	var y := rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1))
+	return Vector2(x, y)
+
+func get_position_in_radius_around(position: Vector2, radius: int) -> Vector2:
+	randomize()
+	
+	return Vector2(position.x + rand_range(-radius, radius) * cellSize, position.y + rand_range(-radius, radius) * cellSize)
