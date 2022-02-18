@@ -12,6 +12,10 @@ func _ready():
 	location_type = Global.location_to_load.type
 	location_index = Global.location_to_load.index
 	
+	Global.world_nav = $Navigation2D
+	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
+	Global.player = $Player
+	
 	if location_type == Global.location_type.npcColony:
 		load_npc_colony()
 	elif location_type == Global.location_type.rscSite:
@@ -20,10 +24,6 @@ func _ready():
 		print("You screwed something up really bad if you're seeing this...")
 	
 	set_player_camera_bounds()
-	
-	Global.world_nav = $Navigation2D
-	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
-	Global.player = $Player
 
 func _physics_process(_delta):
 	$Player.get_node("UI/RTB_Button").visible = !are_enemies_present

@@ -36,6 +36,8 @@ func _ready():
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
+		$Player.global_position = Global.playerBaseData.lastPlayerPos
+		
 		load_buildings()
 		load_colonists()
 		
@@ -43,8 +45,6 @@ func _ready():
 			areThereRemainingMetalDeposits = false
 		else:
 			re_spawn_metal_deposits()
-		
-		$Player.global_position = Global.playerBaseData.lastPlayerPos
 	
 	Global.player = $Player
 
