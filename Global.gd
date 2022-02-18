@@ -1,5 +1,7 @@
 extends Node
 
+enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
+
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
