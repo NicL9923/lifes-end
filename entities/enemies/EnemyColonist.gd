@@ -6,7 +6,8 @@ enum STATE {
 	TAKING_COVER,
 	ADVANCING,
 	ATTACKING,
-	FLEEING
+	FLEEING,
+	COWERING
 }
 
 enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
@@ -20,10 +21,16 @@ export var health := 100
 export var max_health := 100
 export var speed := 125
 export var accuracy := 50
-export var bullets_to_take_cover := 10
+export var bullets_to_take_cover := 10 # Default: 10
+export var percent_chance_to_flee := 1 # Default: 1
+onready var will_flee_on_low_health := true if rand_range(1, 100) <= percent_chance_to_flee else false
 export var dist_to_follow_bullet := 1000
 onready var dist_to_advance := float(line_of_sight.get_node("CollisionShape2D").shape.radius) * 0.75
+
 var cur_state = STATE.IDLE
+onready var currentWeapons := [$Position2D/Rifle]
+var selectedWeapon := 0
+onready var currentWeapon = currentWeapons[selectedWeapon]
 
 var timer := -1.0 # a value of -1.0 is "null" state
 var last_movement_dir
@@ -40,6 +47,9 @@ func _ready():
 func _physics_process(delta):
 	handle_healthbar()
 	process_states(delta)
+	
+	if health < 50 and will_flee_on_low_health:
+		enter_state(STATE.FLEEING)
 
 func handle_healthbar():
 	$Healthbar.value = health
@@ -57,6 +67,7 @@ func process_states(delta):
 		STATE.ADVANCING: process_advancing(delta)
 		STATE.ATTACKING: process_attacking(delta)
 		STATE.FLEEING: process_fleeing(delta)
+		STATE.COWERING: process_cowering(delta)
 
 func enter_state(new_state):
 	var states = ["idle", "patrolling", "taking cover", "advancing", "attacking", "fleeing"]
@@ -113,6 +124,9 @@ func set_new_patrol_point():
 	
 	next_patrol_point = Vector2(next_x, next_y)
 
+func reset_weapon_rotation():
+	$Position2D.rotation_degrees = 45.0
+
 # Can go to/from patrolling
 func process_idle(delta):
 	if timer == -1.0:
@@ -150,9 +164,15 @@ func process_patrolling(delta):
 func process_taking_cover(delta):
 	var closest_cover = get_closest_of("cover")
 	
-	if closest_cover:
-		pathfind_to_point(delta, closest_cover.global_position) # TODO: Get on the opposite side of it as the player for x amt of time, or until there's less bullets in LoS
+	if closest_cover and (timer > 0 or num_bullets_in_los > bullets_to_take_cover):
+		timer -= delta
+		var closest_hostile = get_closest_of("hostile")
+		if closest_hostile:
+			pathfind_to_point(delta, closest_cover.global_position)
+		else:
+			pathfind_to_point(delta, closest_cover.global_position)
 	else:
+		timer = -1
 		enter_state(STATE.ATTACKING) # If there isn't static body in LoS, just switch back to attacking
 
 # Can go to/from taking_cover, attacking, patrolling
@@ -173,6 +193,7 @@ func process_advancing(delta):
 func process_attacking(delta):
 	# If no more enemies present in LoS, enter_state(patrolling)
 	if hostiles_in_los.size() == 0:
+		reset_weapon_rotation()
 		enter_state(STATE.PATROLLING)
 		return
 	
@@ -182,22 +203,40 @@ func process_attacking(delta):
 	var closest_hostile = get_closest_of("hostile")
 	
 	# Rotate weapon towards entity we're attacking
-		# TODO: predict player_team entities position w/ var accuracy
+		# TODO: predict player_team entities position w/ var accuracy (using current motion)
 	$Position2D.look_at(closest_hostile.global_position)
-	weapon.shoot(closest_hostile.global_position.angle_to_point(weapon.global_position))
+	if global_position.x > closest_hostile.global_position.x:
+		currentWeapon.scale.y = -1
+	else:
+		currentWeapon.scale.y = 1
+	weapon.shoot(closest_hostile.global_position.angle_to_point(weapon.global_position), "enemy")
 	
 	# Take cover if lots of bullets are flying around (in LoS)
 	if num_bullets_in_los > bullets_to_take_cover:
+		timer = 7.5
+		reset_weapon_rotation()
 		enter_state(STATE.TAKING_COVER)
 	
 	# Advance if closest hostile reaches a certain distance away (within LoS)
 	if self.global_position.distance_to(closest_hostile.global_position) >= dist_to_advance:
+		reset_weapon_rotation()
 		enter_state(STATE.ADVANCING)
 
-# Can go from attacking
 func process_fleeing(delta):
-	# Disengage from combat and run away from nearest player_team entity
-	pass
+	$Position2D.visible = false # "Unequip" weapon when fleeing/cowering
+	var closest_enemy = get_closest_of("hostile")
+	
+	if closest_enemy:
+		pathfind_to_point(delta, closest_enemy.global_position * -1)
+	else:
+		enter_state(STATE.COWERING)
+
+func process_cowering(delta):
+	# TODO: play cowering animation
+	
+	if get_closest_of("hostile"):
+		enter_state(STATE.FLEEING)
+
 
 func pathfind_to_point(delta, pos: Vector2):
 	var move_dist = speed * delta

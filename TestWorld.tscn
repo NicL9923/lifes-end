@@ -45,7 +45,7 @@ health = 100
 max_health = 100
 speed = 125
 accuracy = 50
-bullets_to_take_cover = 10
+bullets_to_take_cover = 0
 dist_to_follow_bullet = 1000
 
 [node name="MetalDeposit" parent="." instance=ExtResource( 4 )]

@@ -108,7 +108,7 @@ func weapon_handling(_delta):
 	
 	# Gun shooting
 	if Input.is_action_pressed("shoot"):
-		currentWeapon.shoot(gun_angle)
+		currentWeapon.shoot(gun_angle, "player_team")
 
 func toggle_combat(on: bool):
 	if !on:

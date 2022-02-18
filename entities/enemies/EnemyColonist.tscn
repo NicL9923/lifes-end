@@ -5,6 +5,12 @@
 [ext_resource path="res://objects/weapons/Rifle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/enemies/EnemyColonist.gd" type="Script" id=4]
 
+[sub_resource type="CircleShape2D" id=69]
+radius = 200.0
+
+[sub_resource type="RectangleShape2D" id=70]
+extents = Vector2( 21.75, 24.625 )
+
 [sub_resource type="StreamTexture" id=68]
 load_path = "res://.import/$enemy-Sheet.png-9de0b4423cde8cacc94038d8b67ec801.stex"
 
@@ -311,14 +317,20 @@ animations = [ {
 radius = 7.0
 height = 24.0
 
-[sub_resource type="CircleShape2D" id=69]
-radius = 200.0
-
-[sub_resource type="RectangleShape2D" id=70]
-extents = Vector2( 21.75, 24.625 )
-
 [node name="EnemyColonist" type="KinematicBody2D" groups=["enemy"]]
 script = ExtResource( 4 )
+
+[node name="LineOfSight" type="Area2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LineOfSight"]
+position = Vector2( 0, 16 )
+shape = SubResource( 69 )
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource( 70 )
 
 [node name="Healthbar" type="TextureProgress" parent="."]
 margin_left = -11.0
@@ -344,22 +356,12 @@ position = Vector2( 1, 1 )
 shape = SubResource( 34 )
 
 [node name="Position2D" type="Position2D" parent="."]
+rotation = 0.785398
 
 [node name="Rifle" parent="Position2D" instance=ExtResource( 3 )]
 position = Vector2( 11.1793, 0.166855 )
+scale = Vector2( 0.75, 0.75 )
 time_between_shots = 40
-
-[node name="LineOfSight" type="Area2D" parent="."]
-position = Vector2( 0, -16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LineOfSight"]
-position = Vector2( 0, 16 )
-shape = SubResource( 69 )
-
-[node name="CollisionDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
-shape = SubResource( 70 )
 
 [connection signal="area_entered" from="LineOfSight" to="." method="_on_LineOfSight_area_entered"]
 [connection signal="area_exited" from="LineOfSight" to="." method="_on_LineOfSight_area_exited"]
