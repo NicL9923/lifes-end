@@ -49,7 +49,7 @@ func _on_LoadGameButton_pressed():
 			timestamp_label.text = "%02d/%02d/%d @ %02d:%02d" % [time.month, time.day, time.year, time.hour, time.minute]
 			new_vbox.add_child(timestamp_label)
 			
-			savegame_panel.connect("pressed", self, "load_game", [save_name_label.text])
+			savegame_panel.connect("pressed", Global, "load_game", [save_name_label.text])
 			$LoadGameContainer/SaveGamesVBox.add_child(savegame_panel)
 	
 	save_game.close()
@@ -89,29 +89,3 @@ func _on_HSlider_value_changed(value):
 	config.set_value("audio", "volume", int(value))
 	
 	config.save(Global.GAME_SETTINGS_CONFIG_PATH)
-
-
-func load_game(save_name):
-	var save_game = File.new()
-	
-	save_game.open("user://" + save_name + ".save", File.READ)
-	
-	# Get save data and put it back into the respective Global vars
-	var save_data = save_game.get_var(true)
-	
-	Global.playerWeaponId = save_data.playerWeaponId
-	Global.playerStats = save_data.playerStats
-	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
-	Global.playerResources = save_data.playerResources
-	Global.modifiers = save_data.modifiers
-	Global.game_time = save_data.gameTime
-	Global.playerShipData = save_data.playerShipData
-	Global.playerBaseData = save_data.playerBaseData
-	Global.isPlayerBaseFirstLoad = false
-	Global.npcColonyData = save_data.npcColonyData
-	Global.rscCollectionSiteData = save_data.rscCollectionSiteData
-
-	save_game.close()
-	
-	# Load the MainWorld scene now that we've parsed in the save data
-	get_tree().change_scene("res://MainWorld.tscn")

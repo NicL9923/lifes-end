@@ -103,3 +103,81 @@ var debug = {
 	},
 	god_mode = false
 }
+
+############### FUNCTIONS ##################
+
+func save_game():
+	var save_game = File.new()
+	
+	for i in range(1, Global.MAX_SAVES):
+		var save_name = "user://save" + String(i) + ".save"
+		
+		if not save_game.file_exists(save_name):
+			save_game.open(save_name, File.WRITE)
+			
+			# This is what contains all properties we want to save/persist
+			var save_dictionary = {
+				"playerWeaponId": Global.playerWeaponId,
+				"playerStats": Global.playerStats,
+				"playerResearchedItemIds": Global.playerResearchedItemIds,
+				"playerResources": Global.playerResources,
+				"modifiers": Global.modifiers,
+				"gameTime": Global.game_time,
+				"playerShipData": Global.playerShipData,
+				"playerBaseData": Global.playerBaseData,
+				"npcColonyData": Global.npcColonyData,
+				"rscCollectionSiteData": Global.rscCollectionSiteData,
+				"saveTimestamp": OS.get_datetime()
+			}
+			
+			save_game.store_var(save_dictionary, true)
+			
+			save_game.close()
+			
+			var popup = AcceptDialog.new()
+			popup.dialog_text = "Successfully saved! (save" + String(i) + ")"
+			Global.player.get_node("UI").add_child(popup)
+			popup.popup_centered()
+			
+			return
+	
+	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
+	save_game.close()
+
+func load_game(save_name):
+	var save_game = File.new()
+	
+	save_game.open("user://" + save_name + ".save", File.READ)
+	
+	# Get save data and put it back into the respective Global vars
+	var save_data = save_game.get_var(true)
+	
+	Global.playerWeaponId = save_data.playerWeaponId
+	Global.playerStats = save_data.playerStats
+	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
+	Global.playerResources = save_data.playerResources
+	Global.modifiers = save_data.modifiers
+	Global.game_time = save_data.gameTime
+	Global.playerShipData = save_data.playerShipData
+	Global.playerBaseData = save_data.playerBaseData
+	Global.isPlayerBaseFirstLoad = false
+	Global.npcColonyData = save_data.npcColonyData
+	Global.rscCollectionSiteData = save_data.rscCollectionSiteData
+
+	save_game.close()
+	
+	# Load the MainWorld scene now that we've parsed in the save data
+	get_tree().change_scene("res://MainWorld.tscn")
+
+func reset_global_data():
+	Global.playerWeaponId = -1
+	Global.playerStats = Global.defaultPlayerStats
+	Global.playerResources = Global.defaultPlayerResources
+	Global.playerResearchedItemIds = []
+	Global.modifiers = Global.defaultModifiers
+	Global.game_time = Global.defaultGameTime
+	Global.playerShipData = Global.defaultShipData
+	Global.playerBaseData = Global.defaultPlayerBaseData
+	Global.npcColonyData = []
+	Global.rscCollectionSiteData = []
+	Global.isPlayerBaseFirstLoad = true
