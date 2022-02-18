@@ -1,5 +1,7 @@
 extends Node
 
+enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
+
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
@@ -8,8 +10,8 @@ const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
-	buildings = [], #BuildingData[] -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
-	colonists = [],
+	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
+	colonists = [], # Colonist{} -> health(int), global_pos(Vector2)
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [], # Vector2[]
 	pollutionLevel = 0.0 # 0.0 - 100.0
@@ -92,3 +94,12 @@ var location_to_load := {
 
 var mainEndingIsGood := false
 var subEndingIsGood := false
+
+var debug = {
+	dev_console = {
+		entered_cmds = [],
+		output_stream = [],
+		current_history_index = 0
+	},
+	god_mode = false
+}

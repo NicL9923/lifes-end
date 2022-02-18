@@ -4,14 +4,13 @@
 [ext_resource path="res://objects/MetalDeposit.gd" type="Script" id=2]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 13.5 )
 
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 3 )
 
-[node name="MetalDeposit" type="StaticBody2D"]
+[node name="MetalDeposit" type="StaticBody2D" groups=["building"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

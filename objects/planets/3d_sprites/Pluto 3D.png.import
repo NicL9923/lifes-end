@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Smeltery.png-1e8e2c675312d17e8d26ffaf0192142d.stex"
+path="res://.import/Pluto 3D.png-8ded8a1b83cea7163193673afecdbdc4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/buildings/Smeltery.png"
-dest_files=[ "res://.import/Smeltery.png-1e8e2c675312d17e8d26ffaf0192142d.stex" ]
+source_file="res://objects/planets/3d_sprites/Pluto 3D.png"
+dest_files=[ "res://.import/Pluto 3D.png-8ded8a1b83cea7163193673afecdbdc4.stex" ]
 
 [params]
 

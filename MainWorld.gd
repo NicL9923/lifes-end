@@ -4,6 +4,7 @@ var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
+export var location_radius := 10
 onready var tilemap = get_node("Navigation2D/TileMap")
 var areThereRemainingMetalDeposits := true
 
@@ -36,7 +37,7 @@ func _ready():
 		Global.isPlayerBaseFirstLoad = false
 	else:
 		load_buildings()
-		# TODO: load_colonists()
+		load_colonists()
 		
 		if Global.playerBaseData.metalDeposits.size() == 0:
 			areThereRemainingMetalDeposits = false
@@ -44,6 +45,8 @@ func _ready():
 			re_spawn_metal_deposits()
 		
 		$Player.global_position = Global.playerBaseData.lastPlayerPos
+	
+	Global.player = $Player
 
 func _physics_process(_delta):
 	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
@@ -118,6 +121,21 @@ func randomly_select_planet(bias: String):
 	elif planet_rand < prob_biases[4]:
 		return 4
 
+func is_clear_of_other_locations(new_lat, new_long, new_planet):
+	var is_clear := true
+	
+	for colony in Global.npcColonyData:
+		if colony.planet == new_planet:
+			if abs(new_lat - colony.coords.lat) < location_radius and abs(new_long - colony.coords.long) < location_radius:
+				is_clear = false
+				
+	for site in Global.rscCollectionSiteData:
+		if site.planet == new_planet:
+			if abs(new_lat - site.coords.lat) < location_radius and abs(new_long - site.coords.long) < location_radius:
+				is_clear = false
+	
+	return is_clear
+
 func generate_npc_colonies():
 	randomize()
 	
@@ -131,9 +149,12 @@ func generate_npc_colonies():
 		
 		newNpcColony.planet = Global.planets[randomly_select_planet("colony")]
 		
-		# TODO: check to make sure not adding colonies within a certain radius of one another
 		newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 		newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
+		
+		while not is_clear_of_other_locations(newNpcColony.coords.lat, newNpcColony.coords.long, newNpcColony.planet):
+			newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
+			newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
 		# TODO: Randomly generate other buildings within npc colony
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
@@ -154,9 +175,12 @@ func generate_resource_collection_sites():
 		
 		newRscSite.planet = Global.planets[randomly_select_planet("rsc_site")]
 		
-		# TODO: check to make sure not adding sites within a certain radius of one another, or of npc colonies
 		newRscSite.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 		newRscSite.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
+		
+		while not is_clear_of_other_locations(newRscSite.coords.lat, newRscSite.coords.long, newRscSite.planet):
+			newRscSite.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
+			newRscSite.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
 		newRscSite.numMetalDeposits = rand_range(1, Global.max_deposits_at_rsc_site)
 		
@@ -170,6 +194,14 @@ func load_buildings():
 		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
 		get_tree().get_root().get_child(1).add_child(building_node)
+
+func load_colonists():
+	for colonist in Global.playerBaseData.colonists:
+		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.id = colonist.id
+		loaded_colonist.health = colonist.health
+		loaded_colonist.global_position = Vector2(Global.player.global_position.x + rand_range(-15, 15), Global.player.global_position.y + rand_range(-15, 15))
+		add_child(loaded_colonist)
 
 func save_game():
 	var save_game = File.new()

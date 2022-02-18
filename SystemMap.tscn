@@ -14,7 +14,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="SpatialMaterial" id=7]
-albedo_texture = ExtResource( 2 )
+albedo_texture = ExtResource( 5 )
 
 [sub_resource type="SphereMesh" id=2]
 material = SubResource( 7 )
@@ -156,7 +156,7 @@ material/0 = null
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.84115 )
-light_energy = 3.504
+light_energy = 2.113
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )

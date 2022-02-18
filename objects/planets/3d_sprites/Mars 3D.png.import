@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Smeltery.png-1e8e2c675312d17e8d26ffaf0192142d.stex"
+path="res://.import/Mars 3D.png-3f91d9eaf98680550f417b84e072396f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/buildings/Smeltery.png"
-dest_files=[ "res://.import/Smeltery.png-1e8e2c675312d17e8d26ffaf0192142d.stex" ]
+source_file="res://objects/planets/3d_sprites/Mars 3D.png"
+dest_files=[ "res://.import/Mars 3D.png-3f91d9eaf98680550f417b84e072396f.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
