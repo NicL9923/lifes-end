@@ -119,3 +119,4 @@ func handle_healthbar():
 
 func reset_weapon_rotation():
 	get_node("Position2D").rotation_degrees = 45.0
+	currentWeapon.scale.y = 1

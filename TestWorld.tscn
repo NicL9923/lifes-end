@@ -41,12 +41,6 @@ __meta__ = {
 
 [node name="EnemyColonist" parent="." instance=ExtResource( 2 )]
 position = Vector2( 840, 256 )
-health = 100
-max_health = 100
-speed = 125
-accuracy = 50
-bullets_to_take_cover = 0
-dist_to_follow_bullet = 1000
 
 [node name="MetalDeposit" parent="." instance=ExtResource( 4 )]
 position = Vector2( 124, 135 )
