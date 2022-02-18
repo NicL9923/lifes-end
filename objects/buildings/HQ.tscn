@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://objects/buildings/HQ.gd" type="Script" id=1]
+[ext_resource path="res://objects/buildings/hq.png" type="Texture" id=2]
+[ext_resource path="res://ui/PopupBox.png" type="Texture" id=3]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 40 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40, 40 )
+
+[node name="HQ" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionHighlight" type="ColorRect" parent="."]
+visible = false
+margin_left = -48.0
+margin_top = -48.0
+margin_right = 48.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HQ" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PopupUI" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup_Sprite" type="Sprite" parent="PopupUI"]
+position = Vector2( 64, -72 )
+scale = Vector2( 1.125, 1.125 )
+texture = ExtResource( 3 )
+
+[node name="Building_Button" type="Button" parent="PopupUI"]
+margin_left = 8.0
+margin_top = -120.0
+margin_right = 120.0
+margin_bottom = -100.0
+text = "Build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveGame_Button" type="Button" parent="PopupUI"]
+margin_left = 8.0
+margin_top = -80.0
+margin_right = 120.0
+margin_bottom = -60.0
+text = "Save Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 2 )
+
+[connection signal="pressed" from="PopupUI/Building_Button" to="." method="_on_Building_Button_pressed"]
+[connection signal="pressed" from="PopupUI/SaveGame_Button" to="." method="_on_SaveGame_Button_pressed"]
