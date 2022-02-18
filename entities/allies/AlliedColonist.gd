@@ -10,6 +10,8 @@ enum STATE {
 	COWERING
 }
 
+# TODO: conversational popups (says random thing from conversation_text[] for now)
+
 
 func _ready():
 	cur_state = STATE.IDLE

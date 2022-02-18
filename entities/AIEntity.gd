@@ -26,6 +26,7 @@ var potential_cover_in_los := []
 var num_bullets_in_los := 0
 var nearby_col_objects := []
 
+var id
 var cur_state
 var current_weapons := []
 var selectedWeaponIdx := 0
@@ -108,6 +109,9 @@ func take_damage(dmg_amt):
 
 func die():
 	queue_free()
+	
+	if self.is_in_group("player_team"):
+		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():
 	healthbar.value = health

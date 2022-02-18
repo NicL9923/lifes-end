@@ -23,11 +23,10 @@ func _ready():
 	
 	Global.world_nav = $Navigation2D
 	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
+	Global.player = $Player
 
 func _physics_process(_delta):
 	$Player.get_node("UI/RTB_Button").visible = !are_enemies_present
-	
-	print(remaining_enemies)
 	
 	var enemy_count := 0
 	if isARaid:
@@ -56,6 +55,8 @@ func load_npc_colony():
 	
 	spawn_buildings(npcColony.buildings)
 	spawn_colonists()
+	
+	load_player_colonists()
 	
 	isARaid = true
 	are_enemies_present = true
@@ -108,6 +109,14 @@ func set_player_camera_bounds():
 	$Player/Camera2D.limit_right = map_limits.end.x * Global.cellSize
 	$Player/Camera2D.limit_top = map_limits.position.y * Global.cellSize
 	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
+
+func load_player_colonists():
+	for colonist in Global.playerBaseData.colonists:
+		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.id = colonist.id
+		loaded_colonist.health = colonist.health
+		loaded_colonist.global_position = Vector2(Global.player.global_position.x + rand_range(-15, 15), Global.player.global_position.y + rand_range(-15, 15))
+		add_child(loaded_colonist)
 
 func generate_map_border_tiles():
 	for x in [0, Global.world_tile_size.x - 1]:

@@ -37,7 +37,7 @@ func _ready():
 		Global.isPlayerBaseFirstLoad = false
 	else:
 		load_buildings()
-		# TODO: load_colonists()
+		load_colonists()
 		
 		if Global.playerBaseData.metalDeposits.size() == 0:
 			areThereRemainingMetalDeposits = false
@@ -45,6 +45,8 @@ func _ready():
 			re_spawn_metal_deposits()
 		
 		$Player.global_position = Global.playerBaseData.lastPlayerPos
+	
+	Global.player = $Player
 
 func _physics_process(_delta):
 	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
@@ -192,6 +194,14 @@ func load_buildings():
 		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
 		get_tree().get_root().get_child(1).add_child(building_node)
+
+func load_colonists():
+	for colonist in Global.playerBaseData.colonists:
+		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.id = colonist.id
+		loaded_colonist.health = colonist.health
+		loaded_colonist.global_position = Vector2(Global.player.global_position.x + rand_range(-15, 15), Global.player.global_position.y + rand_range(-15, 15))
+		add_child(loaded_colonist)
 
 func save_game():
 	var save_game = File.new()
