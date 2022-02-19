@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HQ.png-b71382892f33a9e206c36d9e7cc54c03.stex"
+path="res://.import/planetTileset.png-b409e21a450e8554909487acc7d2c9de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/buildings/HQ.png"
-dest_files=[ "res://.import/HQ.png-b71382892f33a9e206c36d9e7cc54c03.stex" ]
+source_file="res://objects/planets/tilesets/planetTileset.png"
+dest_files=[ "res://.import/planetTileset.png-b409e21a450e8554909487acc7d2c9de.stex" ]
 
 [params]
 

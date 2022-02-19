@@ -5,8 +5,9 @@ export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
-onready var tilemap = get_node("Navigation2D/TileMap")
+onready var tilemap = $TileMap
 var areThereRemainingMetalDeposits := true
+enum Cell {GROUND, OUTER}
 
 
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 	
 	var planet = Global.playerBaseData.planet
 	#TODO: may be worth just merging all planet tiles into single tileset if they all have 1 to 4 tiles at most...
-	tilemap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")
+	tilemap.tile_set = load("res://objects/planets/tilesets/planetTileset.tres")
 	
 	generate_map_border_tiles()
 	generate_map_inner_tiles()
@@ -62,10 +63,12 @@ func _physics_process(_delta):
 		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
 
 func generate_map_border_tiles():
+	#vertical column tiles
 	for x in [0, worldTileSize.x - 1]:
 		for y in range(0, worldTileSize.y):
 			tilemap.set_cell(x, y, 0)
 	
+	#horizontal row tiles
 	for x in range(1, worldTileSize.x - 1):
 		for y in [0, worldTileSize.y - 1]:
 			tilemap.set_cell(x, y, 0)
@@ -74,6 +77,10 @@ func generate_map_inner_tiles():
 		for x in range(1, worldTileSize.x - 1):
 			for y in range(1, worldTileSize.y - 1):
 				tilemap.set_cell(x, y, 1)
+
+func generate_random_tile():
+	pass
+
 
 func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):
