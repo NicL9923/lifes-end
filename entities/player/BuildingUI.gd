@@ -114,7 +114,7 @@ func start_building(bldg_type):
 	building_node.modulate.a = 0.75
 	building_node.isBeingPlaced = true
 	building_node.get_node("CollisionHighlight").visible = true
-	get_tree().get_root().get_child(1).add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
+	get_tree().get_current_scene().add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:

@@ -20,10 +20,14 @@ var velocity := Vector2.ZERO
 onready var gun_rotation_point := $Position2D
 var gun_angle: float
 
+onready var camera := $Camera2D
+onready var healthbar := $UI/Healthbar
+onready var earth_days_lbl := $UI/Days_Label
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var ship_panel := $UI/ShipUI/Ship_Panel
 onready var research_panel := $UI/ResearchUI/Research_Panel
 onready var esc_menu := $UI/EscMenu
+
 
 func _ready():
 	Global.player = self
@@ -34,10 +38,10 @@ func _physics_process(delta):
 	handle_camera_zoom()
 	check_if_ui_open()
 	
-	$UI/Healthbar.value = health
-	$UI/Healthbar.max_value = Global.playerStats.max_health
+	healthbar.value = health
+	healthbar.max_value = Global.playerStats.max_health
 	
-	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
+	earth_days_lbl.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if isInCombat:
 		weapon_handling(delta)
@@ -88,10 +92,10 @@ func handle_camera_zoom():
 	
 	if Input.is_action_just_released("scroll_up"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
-		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
+		camera.zoom = Vector2(currentZoom, currentZoom)
 	elif Input.is_action_just_released("scroll_down"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom + 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
-		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
+		camera.zoom = Vector2(currentZoom, currentZoom)
 
 func weapon_handling(_delta):
 	var mouse_pos := get_global_mouse_position()

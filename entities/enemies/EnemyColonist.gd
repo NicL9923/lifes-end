@@ -63,15 +63,6 @@ func handle_idle_anim():
 	else:
 		anim_sprt.play("idle_down")
 
-func set_new_patrol_point():
-	var map_limits = Global.world_nav.get_child(0).get_used_rect()
-	randomize()
-	
-	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x, map_limits.end.x)
-	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y, map_limits.end.y)
-	
-	next_patrol_point = Vector2(next_x, next_y)
-
 # Can go to/from patrolling
 func process_idle(delta):
 	if timer == -1.0:
@@ -94,10 +85,11 @@ func process_idle(delta):
 func process_patrolling(delta):
 	handle_enemies_in_line_of_sight()
 	
-	# NOTE: The below two if statements use 5 as the value because the entity can't always get perfectly close to the point
-	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
+	# NOTE: The below two if statements use 10 as the value because the entity can't always get perfectly close to the point
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 10:
 		pathfind_to_point(delta, last_known_player_team_pos)
-	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 5:
+	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 10:
+		#print(self.global_position.distance_to(next_patrol_point))
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
