@@ -8,6 +8,8 @@ export var location_radius := 10
 onready var tilemap = get_node("Navigation2D/TileMap")
 var areThereRemainingMetalDeposits := true
 
+# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
+
 
 func _ready():
 	Global.world_nav = $Navigation2D

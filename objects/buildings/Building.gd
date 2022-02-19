@@ -5,6 +5,8 @@ var cost_to_build: int
 var isBeingPlaced: bool # Need this var and check so menu doesn't show when building's being placed
 var isPlayerBldg := false
 var bldgLvl: int
+var has_to_be_unlocked := false
+var seconds_to_build = 60 / Global.modifiers.buildSpeed
 
 var bldg_name: String
 var bldg_desc: String
