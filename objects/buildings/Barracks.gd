@@ -23,4 +23,4 @@ func _on_RecruitColonist_Button_pressed():
 	get_tree().get_current_scene().add_child(new_colonist)
 
 func _on_ViewStats_Button_pressed():
-	pass # TODO
+	Global.player.player_stats_ui.show()

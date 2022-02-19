@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	pass 
+	pass
 
 func _on_Close_Button_pressed():
 	self.visible = false

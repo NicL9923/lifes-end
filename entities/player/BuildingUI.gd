@@ -1,12 +1,12 @@
 extends Control
 
 onready var building_panel = $Building_Panel
+onready var building_button_box = $Building_Panel/ScrollContainer/VBoxContainer
 var in_building_mode = false
 var building_node
 var building_type
 const highlight_opacity := 0.5
 const base_bldg_path := "res://objects/buildings/"
-onready var building_button_box = $Building_Panel/ScrollContainer/VBoxContainer
 
 
 func _ready():
