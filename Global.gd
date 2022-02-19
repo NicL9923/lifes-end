@@ -17,13 +17,17 @@ const defaultPlayerBaseData = {
 	pollutionLevel = 0.0 # 0.0 - 100.0
 }
 const defaultModifiers = {
-	playerWeaponDamage = 1,
-	solarEnergyProduction = 1,
-	researchSpeed = 1,
-	buildSpeed = 1,
-	foodProduction = 1,
-	waterProduction = 1
+	playerTeamWeaponDamage = 1.0,
+	solarEnergyProduction = 1.0,
+	researchSpeed = 1.0,
+	buildSpeed = 1.0,
+	craftSpeed = 1.0,
+	foodProduction = 1.0,
+	waterProduction = 1.0,
+	pollutionDamage = 1.0,
+	metalDepositValue = 1.0
 }
+
 const defaultGameTime = { ticks = 800.0, earthDays = 0 }
 
 #Game Settings
