@@ -2,7 +2,9 @@ extends Control
 
 var isMenuUp := false
 export var max_cmds := 100
-
+onready var line_edit = $ColorRect/LineEdit
+onready var history_scroll_cont = $ColorRect/ScrollContainer
+onready var history_vbox = $ColorRect/ScrollContainer/CmdHistory_VBox
 
 
 func _ready():
@@ -13,22 +15,22 @@ func _physics_process(_delta):
 		if isMenuUp:
 			self.visible = false
 			isMenuUp = false
-			$ColorRect/LineEdit.release_focus()
+			line_edit.release_focus()
 			get_tree().paused = false
 		else:
 			isMenuUp = true
 			self.visible = true
 			get_tree().paused = true
-			$ColorRect/LineEdit.text = ""
-			$ColorRect/LineEdit.grab_focus()
+			line_edit.text = ""
+			line_edit.grab_focus()
 	
 	if isMenuUp and Input.is_action_just_pressed("ui_enter"):
 		execute_dev_commands()
 	
 	if isMenuUp and Global.debug.dev_console.entered_cmds.size() > 0:
 		if isMenuUp and Input.is_action_just_pressed("arrow_up"):
-			$ColorRect/LineEdit.text = Global.debug.dev_console.entered_cmds[Global.debug.dev_console.current_history_index]
-			$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
+			line_edit.text = Global.debug.dev_console.entered_cmds[Global.debug.dev_console.current_history_index]
+			line_edit.caret_position = line_edit.text.length()
 			
 			if Global.debug.dev_console.current_history_index != 0:
 				Global.debug.dev_console.current_history_index -= 1
@@ -36,12 +38,12 @@ func _physics_process(_delta):
 			if Global.debug.dev_console.current_history_index != Global.debug.dev_console.entered_cmds.size() - 1:
 				Global.debug.dev_console.current_history_index += 1
 			
-			$ColorRect/LineEdit.text = Global.debug.dev_console.entered_cmds[Global.debug.dev_console.current_history_index]
-			$ColorRect/LineEdit.caret_position = $ColorRect/LineEdit.text.length()
+			line_edit.text = Global.debug.dev_console.entered_cmds[Global.debug.dev_console.current_history_index]
+			line_edit.caret_position = line_edit.text.length()
 
 func execute_dev_commands():
-	$ColorRect/LineEdit.placeholder_text = "Input commands here"
-	var cmdTxt = Array($ColorRect/LineEdit.text.split(' '))
+	line_edit.placeholder_text = "Input commands here"
+	var cmdTxt = Array(line_edit.text.split(' '))
 	var output_to_add = []
 	
 	# TODO: add ammo, place building
@@ -91,14 +93,14 @@ func execute_dev_commands():
 				file_deleter.remove(path)
 		output_to_add.append("Cleared saves!")
 	else:
-		$ColorRect/LineEdit.placeholder_text = "Error: Invalid command"
+		line_edit.placeholder_text = "Error: Invalid command"
 	
 	if Global.debug.dev_console.entered_cmds.size() >= max_cmds:
 		Global.debug.dev_console.entered_cmds.pop_front()
 		Global.debug.dev_console.output_stream.pop_front() # This is a weird case, but entered_cmds being limited should limit output_stream well enough
 		
-	Global.debug.dev_console.entered_cmds.append($ColorRect/LineEdit.text)
-	$ColorRect/LineEdit.text = ""
+	Global.debug.dev_console.entered_cmds.append(line_edit.text)
+	line_edit.text = ""
 	Global.debug.dev_console.current_history_index = Global.debug.dev_console.entered_cmds.size() - 1
 	
 	Global.debug.dev_console.output_stream.append(Global.debug.dev_console.entered_cmds[Global.debug.dev_console.current_history_index])
@@ -106,14 +108,14 @@ func execute_dev_commands():
 		Global.debug.dev_console.output_stream.append(output)
 	
 	# Clear cmd history labels first to stay up-to-date
-	for node in $ColorRect/ScrollContainer/CmdHistory_VBox.get_children():
+	for node in history_vbox.get_children():
 		node.queue_free()
 	
 	# Push command/console output history to actual display
 	for line in Global.debug.dev_console.output_stream:
 		var history_label = Label.new()
 		history_label.text = line
-		$ColorRect/ScrollContainer/CmdHistory_VBox.add_child(history_label)
+		history_vbox.add_child(history_label)
 	
 	yield(VisualServer, "frame_post_draw") # Note: This is here because if it isn't, scrollbar max_value doesn't update quick enough
-	$ColorRect/ScrollContainer.scroll_vertical = $ColorRect/ScrollContainer.get_v_scrollbar().max_value + 5
+	history_scroll_cont.scroll_vertical = history_scroll_cont.get_v_scrollbar().max_value + 5

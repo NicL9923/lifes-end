@@ -9,4 +9,4 @@ func _init():
 	bldg_desc = "Allows you to craft weapons"
 
 func _on_Craft_Button_pressed():
-	pass # TODO: make crafting panel and show it here
+	Global.player.crafting_ui.visible.show()

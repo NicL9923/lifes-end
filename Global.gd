@@ -17,13 +17,17 @@ const defaultPlayerBaseData = {
 	pollutionLevel = 0.0 # 0.0 - 100.0
 }
 const defaultModifiers = {
-	playerWeaponDamage = 1,
-	solarEnergyProduction = 1,
-	researchSpeed = 1,
-	buildSpeed = 1,
-	foodProduction = 1,
-	waterProduction = 1
+	playerTeamWeaponDamage = 1.0,
+	solarEnergyProduction = 1.0,
+	researchSpeed = 1.0,
+	buildSpeed = 1.0,
+	craftSpeed = 1.0,
+	foodProduction = 1.0,
+	waterProduction = 1.0,
+	pollutionDamage = 1.0,
+	metalDepositValue = 1.0
 }
+
 const defaultGameTime = { ticks = 800.0, earthDays = 0 }
 
 #Game Settings
@@ -79,7 +83,7 @@ const latitude_range := [-90, 90]
 const longitude_range := [-180, 180]
 const ship_upgrade_costs := [15, 30, 50, 100]
 const max_deposits_at_rsc_site := 100
-const max_colonists_at_npc_colony := 20
+const max_colonists_at_npc_colony := 20 # Default: 20
 const building_activiation_distance := 75
 const MAX_SAVES := 5
 var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
@@ -103,3 +107,99 @@ var debug = {
 	},
 	god_mode = false
 }
+
+############### FUNCTIONS ##################
+
+func save_game():
+	var save_game = File.new()
+	
+	for i in range(1, Global.MAX_SAVES):
+		var save_name = "user://save" + String(i) + ".save"
+		
+		if not save_game.file_exists(save_name):
+			save_game.open(save_name, File.WRITE)
+			
+			# This is what contains all properties we want to save/persist
+			var save_dictionary = {
+				"playerWeaponId": Global.playerWeaponId,
+				"playerStats": Global.playerStats,
+				"playerResearchedItemIds": Global.playerResearchedItemIds,
+				"playerResources": Global.playerResources,
+				"modifiers": Global.modifiers,
+				"gameTime": Global.game_time,
+				"playerShipData": Global.playerShipData,
+				"playerBaseData": Global.playerBaseData,
+				"npcColonyData": Global.npcColonyData,
+				"rscCollectionSiteData": Global.rscCollectionSiteData,
+				"saveTimestamp": OS.get_datetime()
+			}
+			
+			save_game.store_var(save_dictionary, true)
+			
+			save_game.close()
+			
+			var popup = AcceptDialog.new()
+			popup.dialog_text = "Successfully saved! (save" + String(i) + ")"
+			Global.player.get_node("UI").add_child(popup)
+			popup.popup_centered()
+			
+			return
+	
+	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
+	save_game.close()
+
+func load_game(save_name):
+	var save_game = File.new()
+	
+	save_game.open("user://" + save_name + ".save", File.READ)
+	
+	# Get save data and put it back into the respective Global vars
+	var save_data = save_game.get_var(true)
+	
+	Global.playerWeaponId = save_data.playerWeaponId
+	Global.playerStats = save_data.playerStats
+	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
+	Global.playerResources = save_data.playerResources
+	Global.modifiers = save_data.modifiers
+	Global.game_time = save_data.gameTime
+	Global.playerShipData = save_data.playerShipData
+	Global.playerBaseData = save_data.playerBaseData
+	Global.isPlayerBaseFirstLoad = false
+	Global.npcColonyData = save_data.npcColonyData
+	Global.rscCollectionSiteData = save_data.rscCollectionSiteData
+
+	save_game.close()
+	
+	# Load the MainWorld scene now that we've parsed in the save data
+	get_tree().change_scene("res://MainWorld.tscn")
+
+func reset_global_data():
+	Global.playerWeaponId = -1
+	Global.playerStats = Global.defaultPlayerStats
+	Global.playerResources = Global.defaultPlayerResources
+	Global.playerResearchedItemIds = []
+	Global.modifiers = Global.defaultModifiers
+	Global.game_time = Global.defaultGameTime
+	Global.playerShipData = Global.defaultShipData
+	Global.playerBaseData = Global.defaultPlayerBaseData
+	Global.npcColonyData = []
+	Global.rscCollectionSiteData = []
+	Global.isPlayerBaseFirstLoad = true
+
+
+func set_player_camera_bounds(map_limits): # tilemap.get_used_rect()
+	player.get_node("Camera2D").limit_left = map_limits.position.x * Global.cellSize
+	player.get_node("Camera2D").limit_right = map_limits.end.x * Global.cellSize
+	player.get_node("Camera2D").limit_top = map_limits.position.y * Global.cellSize
+	player.get_node("Camera2D").limit_bottom = map_limits.end.y * Global.cellSize
+
+func get_random_location_in_map(map_limits):
+	randomize()
+	var x := rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1))
+	var y := rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1))
+	return Vector2(x, y)
+
+func get_position_in_radius_around(position: Vector2, radius: int) -> Vector2:
+	randomize()
+	
+	return Vector2(position.x + rand_range(-radius, radius) * cellSize, position.y + rand_range(-radius, radius) * cellSize)

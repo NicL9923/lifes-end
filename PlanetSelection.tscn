@@ -10,7 +10,6 @@
 [ext_resource path="res://objects/planets/sprites/Mercury.png" type="Texture" id=8]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=9]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 

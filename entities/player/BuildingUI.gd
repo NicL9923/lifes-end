@@ -1,12 +1,12 @@
 extends Control
 
 onready var building_panel = $Building_Panel
+onready var building_button_box = $Building_Panel/ScrollContainer/VBoxContainer
 var in_building_mode = false
 var building_node
 var building_type
 const highlight_opacity := 0.5
 const base_bldg_path := "res://objects/buildings/"
-onready var building_button_box = $Building_Panel/ScrollContainer/VBoxContainer
 
 
 func _ready():
@@ -114,7 +114,7 @@ func start_building(bldg_type):
 	building_node.modulate.a = 0.75
 	building_node.isBeingPlaced = true
 	building_node.get_node("CollisionHighlight").visible = true
-	get_tree().get_root().get_child(1).add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
+	get_tree().get_current_scene().add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:

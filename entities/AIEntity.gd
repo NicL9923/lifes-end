@@ -101,6 +101,15 @@ func get_closest_of(type):
 		last_known_player_team_pos = closest_node.global_position
 	return closest_node
 
+func set_new_patrol_point():
+	var map_limits = Global.world_nav.get_child(0).get_used_rect()
+	randomize()
+	
+	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x * Global.cellSize, map_limits.end.x * Global.cellSize)
+	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y * Global.cellSize, map_limits.end.y * Global.cellSize)
+	
+	next_patrol_point = Vector2(next_x, next_y)
+
 func take_damage(dmg_amt):
 	health -= dmg_amt
 	
@@ -110,7 +119,7 @@ func take_damage(dmg_amt):
 func die():
 	queue_free()
 	
-	if self.is_in_group("player_team"):
+	if self.is_in_group("player_team") and Global.playerBaseData.colonists.size() > id:
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():

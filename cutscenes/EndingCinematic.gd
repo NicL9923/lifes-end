@@ -22,5 +22,5 @@ func _ready():
 	_on_Skip_Button_pressed()
 
 func _on_Skip_Button_pressed():
-	#TODO: go back to player base (verify no save data is lost - either save before cutscene, or something...)
-	pass
+	# Go back to MainWorld so player can continue playing game
+	get_tree().change_scene("res://MainWorld.tscn")

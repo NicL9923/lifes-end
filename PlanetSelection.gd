@@ -6,6 +6,10 @@ extends Control
 	# Earth's Moon (familiar = morale/combat boost?), Mars (The Next Frontier = largest concentration of other colonies),
 	# Venus (Volatile = More natural events)
 
+onready var tn_highlight = $Planet_Thumbnail_Container/Highlight
+onready var planet_name_lbl = $PlanetName_Label
+onready var planet_sprite = $Planet_Sprite
+
 var currently_selected_planet := 2
 
 
@@ -28,11 +32,11 @@ func _on_Right_Button_pressed():
 		display_planet(currently_selected_planet)
 
 func update_thumbnail_highlight_pos():
-	$Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2
+	tn_highlight.rect_position.x = currently_selected_planet * 32 + 2
 
 func display_planet(planet_index):
-	$PlanetName_Label.text = Global.planets[planet_index]
-	$Planet_Sprite.texture = load("res://objects/planets/sprites/" + Global.planets[planet_index] + ".png")
+	planet_name_lbl.text = Global.planets[planet_index]
+	planet_sprite.texture = load("res://objects/planets/sprites/" + Global.planets[planet_index] + ".png")
 	
 	update_thumbnail_highlight_pos()
 

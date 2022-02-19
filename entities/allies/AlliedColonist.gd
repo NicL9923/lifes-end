@@ -65,15 +65,6 @@ func handle_idle_anim():
 	else:
 		anim_sprt.play("idle_down")
 
-func set_new_patrol_point():
-	var map_limits = Global.world_nav.get_child(0).get_used_rect()
-	randomize()
-	
-	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x, map_limits.end.x)
-	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y, map_limits.end.y)
-	
-	next_patrol_point = Vector2(next_x, next_y)
-
 # Can go to/from patrolling
 func process_idle(delta):
 	if timer == -1.0:
