@@ -2,34 +2,71 @@ extends Control
 
 const research_tree = {
 	improved_weapons_1 = { id = 0, cur_progress = 0, pts_to_complete = 1500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 1.5 } },
-	improved_weapons_2 = { id = 1, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.0 } },
-	modular_construction = { id = 5, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG } },
-	advanced_healthcare = { id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } },
-	carbon_scrubbing = { id = 7, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } },
-	metal_by_any_means = { id = 8, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION } },
-	production_is_power = { id = 9, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_FACTORY } },
-	natural_gas_is_natural = { id = 10, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER } },
-	oil_is_what_we_know = { id = 11, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER } },
-	efficient_construction_practices = { id = 12, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } },
-	efficient_engineering = { id = 13, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.CRAFT_SPEED, value = 2.0 } },
-	this_is_what_weve_become = { id = 14, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 } },
-	careful_extraction = { id = 15, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } },
-	quality_from_passion = { id = 16, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP } },
-	harness_our_planets_energy = { id = 17, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER } },
-	harness_the_power_of_the_stars = { id = 18, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER } },
-	advanced_solar_cells = { id = 19, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } },
-	maximizing_natures_bounty = { id = 20, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.FOOD, value = 1.5 } },
-	maximizing_natures_bounty_2 = { id = 21, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE, value = 2.0 } },
-	discover_your_fate = { id = 22, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE } }
+	improved_weapons_2 = { id = 1, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.0 }, prereqs = [0] },
+	modular_construction = { id = 2, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG } },
+	advanced_healthcare = { id = 3, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } },
+	carbon_scrubbing = { id = 4, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } },
+	metal_by_any_means = { id = 5, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION } },
+	production_is_power = { id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_FACTORY }, prereqs = [5] },
+	natural_gas_is_natural = { id = 7, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [6] },
+	oil_is_what_we_know = { id = 8, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [7] },
+	efficient_construction_practices = { id = 9, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } },
+	efficient_engineering = { id = 10, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.CRAFT_SPEED, value = 2.0 }, prereqs = [9] },
+	this_is_what_weve_become = { id = 11, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [10] },
+	careful_extraction = { id = 12, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } },
+	quality_from_passion = { id = 13, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP }, prereqs = [12] },
+	harness_our_planets_energy = { id = 14, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER }, prereqs = [13] },
+	harness_the_power_of_the_stars = { id = 15, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER }, prereqs = [14] },
+	advanced_solar_cells = { id = 16, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } },
+	maximizing_natures_bounty = { id = 17, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.FOOD, value = 1.5 }, prereqs = [16] },
+	maximizing_natures_bounty_2 = { id = 18, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE, value = 2.0 }, prereqs = [17] },
+	discover_your_fate = { id = 19, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[8, 11], [15, 18]] }
 }
 
 export var daily_research_points := 250
+onready var research_btn_cont := $Research_Panel/Research_Btn_Container
 var cur_research_id := -1 # -1 means no current research
 
 
 func _ready():
 	connect_to_daynight_cycle()
 	load_completed_research()
+
+func _process(_delta):
+	set_current_research_options()
+
+func set_current_research_options():
+	for btn in research_btn_cont:
+		var research_id = int(btn.name.replace("research_", ""))
+		
+		# Handle prereqs for ending (discover your fate)
+		if "ending_prereqs" in research_tree[research_id]:
+			var one_set_of_prereqs_met := false
+			
+			for prereq_opt_grp in research_tree[research_id].ending_prereqs:
+				var all_prereqs_in_opt_grp_met := true
+				for prereq_id in prereq_opt_grp:
+					if research_tree[prereq_id].cur_progress != research_tree[prereq_id].pts_to_complete:
+						all_prereqs_in_opt_grp_met = false
+						break
+				
+				if all_prereqs_in_opt_grp_met:
+					one_set_of_prereqs_met = true
+					break
+			
+			btn.disabled = false if one_set_of_prereqs_met else true
+			break
+		
+		# Handle prereqs for all normal research
+		if "prereqs" in research_tree[research_id]:
+			var all_prereqs_met := true
+			for prereq_id in research_tree[research_id].prereqs:
+				if research_tree[prereq_id].cur_progress != research_tree[prereq_id].pts_to_complete:
+					all_prereqs_met = false
+					break
+			
+			btn.disabled = false if all_prereqs_met else true
+			
 
 func connect_to_daynight_cycle():
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
@@ -42,7 +79,7 @@ func update_current_research():
 		return
 	
 	# Add daily progress to current research
-	research_tree[cur_research_id].cur_progress += daily_research_points * Global.modifiers.researchSpeed
+	research_tree[cur_research_id].cur_progress = clamp(research_tree[cur_research_id].cur_progress + (daily_research_points * Global.modifiers.researchSpeed), 0, research_tree[cur_research_id].pts_to_complete)
 	
 	if research_tree[cur_research_id].cur_progress >= research_tree[cur_research_id].pts_to_complete:
 		Global.playerResearchedItemIds.append(cur_research_id) # Add its id to Global.completedResearchIds

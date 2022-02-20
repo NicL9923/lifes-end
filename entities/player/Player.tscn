@@ -53,38 +53,6 @@ region = Rect2( 192, 480, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 480, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=55]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=56]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1440, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 768, 96, 96 )
@@ -116,6 +84,38 @@ region = Rect2( 192, 864, 96, 96 )
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 96, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
@@ -181,6 +181,38 @@ region = Rect2( 192, 1248, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1248, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1440, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 960, 96, 96 )
@@ -245,38 +277,6 @@ region = Rect2( 192, 288, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 288, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 96, 96, 96 )
-
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
 "frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
@@ -284,14 +284,14 @@ animations = [ {
 "name": "rightIdle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
-"loop": true,
-"name": "downRun",
-"speed": 15.0
-}, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "upIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "leftIdle",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
@@ -304,6 +304,11 @@ animations = [ {
 "name": "downIdle",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
+"loop": true,
+"name": "downRun",
+"speed": 15.0
+}, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
 "name": "upRun",
@@ -313,11 +318,6 @@ animations = [ {
 "loop": true,
 "name": "leftRun",
 "speed": 15.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "leftIdle",
-"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -385,7 +385,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 1
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -616,182 +616,226 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResearchButton" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="Research_Btn_Container" type="Control" parent="UI/ResearchUI/Research_Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="research_0" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 72.0
 margin_top = 32.0
-margin_right = -320.0
-margin_bottom = -176.0
+margin_right = 112.0
+margin_bottom = 72.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Improved Weapons Systems I"
 research_description = "Increases weapon  damage for the player and their colonists by 1.5x"
 
-[node name="ResearchButton2" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_1" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 176.0
 margin_top = 32.0
-margin_right = -216.0
-margin_bottom = -176.0
+margin_right = 216.0
+margin_bottom = 72.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Improved Weapons Systems II"
 research_description = "Increases weapon  damage for the player and their colonists by 2.0x"
 
-[node name="ResearchButton3" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_2" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 280.0
 margin_top = 32.0
-margin_right = -112.0
-margin_bottom = -176.0
+margin_right = 320.0
+margin_bottom = 72.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Modular Construction"
 research_description = "Unlocks Maintenance building"
 
-[node name="ResearchButton4" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_3" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 384.0
 margin_top = 32.0
-margin_right = -8.0
-margin_bottom = -176.0
+margin_right = 424.0
+margin_bottom = 72.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Advanced Healthcare"
 research_description = "Unlocks Medbay"
 
-[node name="ResearchButton5" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_4" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 488.0
 margin_top = 32.0
-margin_right = 96.0
-margin_bottom = -176.0
+margin_right = 528.0
+margin_bottom = 72.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Carbon Scrubbing"
 research_description = "Unlocks Carbon Scrubber"
 
-[node name="ResearchButton6" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_5" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 72.0
 margin_top = 112.0
-margin_right = -320.0
-margin_bottom = -96.0
+margin_right = 112.0
+margin_bottom = 152.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Metal by Any Means"
 research_description = "Unlocks Mining Operation"
 
-[node name="ResearchButton7" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_6" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 72.0
 margin_top = 168.0
-margin_right = -320.0
-margin_bottom = -40.0
+margin_right = 112.0
+margin_bottom = 208.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Production is Power"
 research_description = "Unlocks Factory"
 
-[node name="ResearchButton8" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_7" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 72.0
 margin_top = 224.0
-margin_right = -320.0
-margin_bottom = 15.9999
+margin_right = 112.0
+margin_bottom = 264.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Natural Gas is Natural"
 research_description = "Unlocks Gas Power Plant"
 
-[node name="ResearchButton9" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_8" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 72.0
 margin_top = 280.0
-margin_right = -320.0
-margin_bottom = 72.0
+margin_right = 112.0
+margin_bottom = 320.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Oil is What We Know"
 research_description = "Unlocks Oil Power Plan t"
 
-[node name="ResearchButton14" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_9" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 168.0
 margin_top = 144.0
-margin_right = -224.0
-margin_bottom = -64.0
+margin_right = 208.0
+margin_bottom = 184.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Efficient Construction Practices"
 research_description = "Increases build speed by 2.0x"
 
-[node name="ResearchButton15" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_10" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 168.0
 margin_top = 200.0
-margin_right = -224.0
-margin_bottom = -8.00006
+margin_right = 208.0
+margin_bottom = 240.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Efficient Engineering"
 research_description = "Increases craft speed by 2.0x"
 
-[node name="ResearchButton16" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_11" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 168.0
 margin_top = 256.0
-margin_right = -224.0
-margin_bottom = 48.0
+margin_right = 208.0
+margin_bottom = 296.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "This is What We've Become"
 research_description = "Pollution damage to player and colonists' health halved"
 
-[node name="ResearchButton10" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_12" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 480.0
 margin_top = 112.0
-margin_right = 88.0
-margin_bottom = -96.0
+margin_right = 520.0
+margin_bottom = 152.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Careful Extraction"
 research_description = "Unlocks Smeltery"
 
-[node name="ResearchButton11" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_13" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 480.0
 margin_top = 168.0
-margin_right = 88.0
-margin_bottom = -40.0
+margin_right = 520.0
+margin_bottom = 208.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Quality from Passion"
 research_description = "Unlocks Workshop"
 
-[node name="ResearchButton12" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_14" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 480.0
 margin_top = 224.0
-margin_right = 88.0
-margin_bottom = 15.9999
+margin_right = 520.0
+margin_bottom = 264.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness Our Planet's Energy"
 research_description = "Unlocks Geothermal Power Plant"
 
-[node name="ResearchButton13" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_15" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 480.0
 margin_top = 280.0
-margin_right = 88.0
-margin_bottom = 72.0
+margin_right = 520.0
+margin_bottom = 320.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness the Power of the Stars"
 research_description = "Unlocks Nuclear Power Plant"
 
-[node name="ResearchButton17" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_16" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 384.0
 margin_top = 144.0
-margin_right = -8.0
-margin_bottom = -64.0
+margin_right = 424.0
+margin_bottom = 184.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Advanced Solar Cells"
 research_description = "Increases solar production by 1.5x"
 
-[node name="ResearchButton18" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_17" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 384.0
 margin_top = 200.0
-margin_right = -8.0
-margin_bottom = -8.00006
+margin_right = 424.0
+margin_bottom = 240.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Maximizing Nature's Bounty"
 research_description = "Increases food production by 1.5x"
 
-[node name="ResearchButton19" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_18" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 384.0
 margin_top = 256.0
-margin_right = -8.0
-margin_bottom = 48.0
+margin_right = 424.0
+margin_bottom = 296.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Maximizing Nature's Bounty II"
 research_description = "Increases metal received from metal deposits by 2.0x"
 
-[node name="ResearchButton20" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 13 )]
+[node name="research_19" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 280.0
 margin_top = 304.0
-margin_right = -112.0
-margin_bottom = 96.0
+margin_right = 320.0
+margin_bottom = 344.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Discover Your Fate"
 research_description = "*Note: This will trigger the ending, after which you'll be able to continue playing*"
@@ -958,7 +1002,6 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
