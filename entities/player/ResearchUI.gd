@@ -1,11 +1,8 @@
 extends Control
 
 const research_tree = {
-	improved_weapons_1 = { id = 0, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 1.25 } },
-	improved_weapons_2 = { id = 1, cur_progress = 0, pts_to_complete = 1250, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 1.5 } },
-	improved_weapons_3 = { id = 2, cur_progress = 0, pts_to_complete = 1500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.0 } },
-	improved_weapons_4 = { id = 3, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.5 } },
-	improved_weapons_5 = { id = 4, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 4.0 } },
+	improved_weapons_1 = { id = 0, cur_progress = 0, pts_to_complete = 1500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 1.5 } },
+	improved_weapons_2 = { id = 1, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.0 } },
 	modular_construction = { id = 5, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG } },
 	advanced_healthcare = { id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } },
 	carbon_scrubbing = { id = 7, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } },
