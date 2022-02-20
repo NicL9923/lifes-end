@@ -74,11 +74,11 @@ func generate_building_buttons():
 		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
 			continue
 		
-		# Skip if building needs to be unlocked and hasn't
-		if bldg.has_to_be_unlocked and not is_building_unlocked(bldg):
-			continue
-		
 		var bldg_info = load(base_bldg_path + bldg + ".tscn").instance()
+		
+		# Skip if building needs to be unlocked and hasn't
+		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg):
+			continue
 		
 		var new_bldg_btn = Button.new()
 		new_bldg_btn.rect_min_size = Vector2(590, 100)

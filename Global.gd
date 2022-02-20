@@ -96,7 +96,7 @@ const BUILDING_TYPES = {
 	Power_Sustainable_Nuclear = "Power_Sustainable_Nuclear",
 	Smeltery = "Smeltery",
 	Mining_Operation = "Mining_Operation",
-	Carbon_Scrubber = "Carbon Scrubber"
+	Carbon_Scrubber = "Carbon_Scrubber"
 }
 const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
