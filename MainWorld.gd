@@ -5,9 +5,10 @@ export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
-onready var tilemap = $TileMap
+onready var tilemap = get_node("Navigation2D/TileMap")
 var areThereRemainingMetalDeposits := true
-enum Cell {GROUND, OUTER}
+var rng := RandomNumberGenerator.new()
+enum Cell {GROUND, OUTER_TOP, OUTER_BOTTOM, OUTER_LEFT, OUTER_RIGHT}
 
 
 func _ready():
@@ -63,24 +64,69 @@ func _physics_process(_delta):
 		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
 
 func generate_map_border_tiles():
+	#find first and last tiles in indexing for corner pieces
+	#determine left, right, top and bottom sides
+	
+	#corner tiles
+	tilemap.set_cell(0, 0, planet_tile_value(0))
+	tilemap.set_cell(0, 49, planet_tile_value(8))
+	tilemap.set_cell(49, 0, planet_tile_value(3))
+	tilemap.set_cell(49, 49, planet_tile_value(11))
+	
 	#vertical column tiles
 	for x in [0, worldTileSize.x - 1]:
-		for y in range(0, worldTileSize.y):
-			tilemap.set_cell(x, y, 0)
-	
+		for y in range(0, worldTileSize.y - 1):
+			#wall tiles
+			if y > 0 and y < worldTileSize.y and x == 0:
+				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_LEFT)))
+			if y > 0 and y < worldTileSize.y and x == worldTileSize.x - 1:
+				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_RIGHT)))
+			
 	#horizontal row tiles
 	for x in range(1, worldTileSize.x - 1):
 		for y in [0, worldTileSize.y - 1]:
-			tilemap.set_cell(x, y, 0)
+			#top edge
+			if y == 0:
+				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_TOP)))
+			#bottom edge
+			if y == worldTileSize.y - 1:
+				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_BOTTOM)))
+				
 
 func generate_map_inner_tiles():
 		for x in range(1, worldTileSize.x - 1):
 			for y in range(1, worldTileSize.y - 1):
-				tilemap.set_cell(x, y, 1)
+				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.GROUND)))
 
-func generate_random_tile():
-	pass
-
+func generate_random_tile(cell_type):
+	var range_vector := Vector2()
+	
+	if cell_type == Cell.OUTER_TOP:
+		range_vector = Vector2(1, 2)
+	elif cell_type == Cell.OUTER_BOTTOM:
+		range_vector = Vector2(9,10)
+	elif cell_type == Cell.OUTER_LEFT:
+		range_vector = Vector2(4, 5)
+	elif cell_type == Cell.OUTER_RIGHT:
+		range_vector = Vector2(6, 7)
+	elif cell_type == Cell.GROUND:
+		range_vector = Vector2(12,15)
+	
+	return rng.randi_range(range_vector.x, range_vector.y)
+	
+func planet_tile_value(ind):
+	var planet = Global.playerBaseData.planet
+	
+	if planet == "Mars":
+		return ind
+	if planet == "Venus":
+		return ind + 16
+	if planet == "Mercury":
+		return ind + 32
+	if planet == "Earth's Moon":
+		return ind + 48
+	if planet == "Pluto":
+		return ind + 64
 
 func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):
