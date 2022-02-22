@@ -16,6 +16,8 @@ func _ready():
 	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 	Global.player = $Player
 	
+	Global.generate_map_tiles(tilemap)
+	
 	if location_type == Global.location_type.npcColony:
 		load_npc_colony()
 	elif location_type == Global.location_type.rscSite:
@@ -41,17 +43,8 @@ func _physics_process(_delta):
 			are_enemies_present = false
 			Global.player.toggle_combat(false)
 
-
-func load_planet(planet):
-	tilemap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")
-	
-	generate_map_border_tiles()
-	generate_map_inner_tiles()
-
 func load_npc_colony():
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]
-	
-	load_planet(npcColony.planet)
 	
 	spawn_buildings(npcColony.buildings)
 	spawn_colonists()
@@ -64,8 +57,6 @@ func load_npc_colony():
 
 func load_resource_collection_site():
 	var rscSite = Global.rscCollectionSiteData[Global.location_to_load.index]
-	
-	load_planet(rscSite.planet)
 	
 	spawn_metal_deposits(rscSite.numMetalDeposits)
 	
@@ -104,17 +95,3 @@ func load_player_colonists():
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
 		add_child(loaded_colonist)
-
-func generate_map_border_tiles():
-	for x in [0, Global.world_tile_size.x - 1]:
-		for y in range(0, Global.world_tile_size.y):
-			tilemap.set_cell(x, y, 0)
-	
-	for x in range(1, Global.world_tile_size.x - 1):
-		for y in [0, Global.world_tile_size.y - 1]:
-			tilemap.set_cell(x, y, 0)
-
-func generate_map_inner_tiles():
-		for x in range(1, Global.world_tile_size.x - 1):
-			for y in range(1, Global.world_tile_size.y - 1):
-				tilemap.set_cell(x, y, 1)
