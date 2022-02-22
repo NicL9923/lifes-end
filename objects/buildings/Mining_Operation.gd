@@ -7,6 +7,7 @@ func _init():
 	cost_to_build = 25
 	bldg_name = "Mining Operation"
 	bldg_desc = "Produces " + str(metal_produced_per_day) + " Metal and " + str(pollution_produced_per_day) + " Pollution per day"
+	has_to_be_unlocked = true
 
 func _ready():
 	connect_to_daynight_cycle()

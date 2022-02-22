@@ -14,18 +14,24 @@ func _ready():
 
 func _physics_process(_delta):
 	if in_building_mode:
-		#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
-		var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
-		building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2))
-		
-		if Input.is_action_pressed("ui_cancel"):
-			in_building_mode = false
-			building_node.queue_free()
-			building_node = null
-			return
-		
-		check_building_placement()
+		handle_building_placement()
 	
+	check_building_requirements()
+
+func handle_building_placement():
+	#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
+	var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
+	building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2))
+	
+	if Input.is_action_pressed("ui_cancel"):
+		in_building_mode = false
+		building_node.queue_free()
+		building_node = null
+		return
+	
+	check_building_placement()
+
+func check_building_requirements():
 	var cur_bldg_idx := 1
 	for node in building_button_box.get_children():
 		var btn_is_disabled := false
@@ -49,13 +55,30 @@ func _physics_process(_delta):
 		node.disabled = btn_is_disabled
 		cur_bldg_idx += 1
 
+func is_building_unlocked(bldg):
+	for unlocked_bldg in Global.playerBaseData.unlockedBuildings:
+		if bldg == unlocked_bldg:
+			return true
+	
+	return false
+
 # Since we generate them based on the order of Global.BUILDING_TYPES, we can safely assume that order stays the same when referencing it elsewhere
 func generate_building_buttons():
+	for bldg_btn in building_button_box.get_children():
+		bldg_btn.queue_free()
+	
 	for bldg in Global.BUILDING_TYPES:
+		if bldg == Global.BUILDING_TYPES.Carbon_Scrubber:
+			continue # Skip this as it's not implemented yet
+		
 		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
 			continue
 		
 		var bldg_info = load(base_bldg_path + bldg + ".tscn").instance()
+		
+		# Skip if building needs to be unlocked and hasn't
+		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg):
+			continue
 		
 		var new_bldg_btn = Button.new()
 		new_bldg_btn.rect_min_size = Vector2(590, 100)

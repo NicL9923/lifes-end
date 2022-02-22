@@ -29,5 +29,5 @@ func randomly_scale_deposit():
 	
 	var new_scale := rand_range(0.5, 2.0)
 	self.scale = Vector2(new_scale, new_scale)
-	depositValue *= new_scale
+	depositValue *= new_scale * Global.modifiers.metalDepositValue
 	collectionDist = collectionDist * new_scale if new_scale > 1 else collectionDist

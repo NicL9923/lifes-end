@@ -1,6 +1,6 @@
 extends Building
 
-export var food_produced_per_day := 5 # TODO: consider using this value in BuildingUI (so we just have to change it here)
+export var food_produced_per_day := 5
 
 func _init():
 	cost_to_build = 10

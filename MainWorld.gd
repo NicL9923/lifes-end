@@ -10,6 +10,8 @@ var areThereRemainingMetalDeposits := true
 var rng := RandomNumberGenerator.new()
 enum Cell {GROUND, OUTER_TOP, OUTER_BOTTOM, OUTER_LEFT, OUTER_RIGHT}
 
+# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
+
 
 func _ready():
 	Global.world_nav = $Navigation2D

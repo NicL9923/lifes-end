@@ -2,6 +2,29 @@ extends Node
 
 enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 
+enum RESEARCH_EFFECTS {
+	WPN_DMG = 0,
+	SOLAR = 1,
+	RESEARCH_SPEED = 2,
+	BUILD_SPEED = 3,
+	CRAFT_SPEED = 4,
+	FOOD = 5,
+	POLLUTION_DMG = 6,
+	METAL_DEPOSIT_VALUE = 7,
+	UNLOCK_MAINTENANCE_BLDG = 8,
+	UNLOCK_MEDBAY = 9,
+	UNLOCK_CARBON_SCRUBBER = 10,
+	UNLOCK_MINING_OPERATION = 11,
+	UNLOCK_FACTORY = 12,
+	UNLOCK_GAS_POWER = 13,
+	UNLOCK_OIL_POWER = 14,
+	UNLOCK_SMELTERY = 15,
+	UNLOCK_WORKSHOP = 16,
+	UNLOCK_GEOTHERMAL_POWER = 17,
+	UNLOCK_NUCLEAR_POWER = 18,
+	DISCOVER_YOUR_FATE = 19
+}
+
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
@@ -10,6 +33,7 @@ const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
+	unlockedBuildings = [], # String[] of BUILDING_TYPES
 	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
 	colonists = [], # Colonist{} -> health(int), global_pos(Vector2)
 	lastPlayerPos = Vector2(0, 0),
@@ -71,7 +95,8 @@ const BUILDING_TYPES = {
 	Power_Sustainable_Geothermal = "Power_Sustainable_Geothermal",
 	Power_Sustainable_Nuclear = "Power_Sustainable_Nuclear",
 	Smeltery = "Smeltery",
-	Mining_Operation = "Mining_Operation"
+	Mining_Operation = "Mining_Operation",
+	Carbon_Scrubber = "Carbon_Scrubber"
 }
 const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
