@@ -61,6 +61,7 @@ var audioVolume: int
 
 #Player stats
 var player: Player
+var playerName: String
 var playerWeaponId: int
 var playerStats := defaultPlayerStats
 var playerResources := defaultPlayerResources
@@ -111,7 +112,6 @@ const ship_upgrade_costs := [15, 30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20 # Default: 20
 const building_activiation_distance := 75
-const MAX_SAVES := 5
 var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
 
 var isPlayerBaseFirstLoad := true
@@ -139,39 +139,36 @@ var debug = {
 func save_game():
 	var save_game = File.new()
 	
-	for i in range(1, Global.MAX_SAVES):
-		var save_name = "user://save" + String(i) + ".save"
-		
-		if not save_game.file_exists(save_name):
-			save_game.open(save_name, File.WRITE)
-			
-			# This is what contains all properties we want to save/persist
-			var save_dictionary = {
-				"playerWeaponId": Global.playerWeaponId,
-				"playerStats": Global.playerStats,
-				"playerResearchedItemIds": Global.playerResearchedItemIds,
-				"playerResources": Global.playerResources,
-				"modifiers": Global.modifiers,
-				"gameTime": Global.game_time,
-				"playerShipData": Global.playerShipData,
-				"playerBaseData": Global.playerBaseData,
-				"npcColonyData": Global.npcColonyData,
-				"rscCollectionSiteData": Global.rscCollectionSiteData,
-				"saveTimestamp": OS.get_datetime()
-			}
-			
-			save_game.store_var(save_dictionary, true)
-			
-			save_game.close()
-			
-			var popup = AcceptDialog.new()
-			popup.dialog_text = "Successfully saved! (save" + String(i) + ")"
-			Global.player.get_node("UI").add_child(popup)
-			popup.popup_centered()
-			
-			return
+	var save_name = "user://" + playerName + ".save"
 	
-	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
+	if save_game.file_exists(save_name):
+		pass # TODO: notify player they're about to overwrite old save
+		
+	save_game.open(save_name, File.WRITE)
+	
+	# This is what contains all properties we want to save/persist
+	var save_dictionary = {
+		"playerName": playerName,
+		"playerWeaponId": playerWeaponId,
+		"playerStats": playerStats,
+		"playerResearchedItemIds": playerResearchedItemIds,
+		"playerResources": playerResources,
+		"modifiers": modifiers,
+		"gameTime": game_time,
+		"playerShipData": playerShipData,
+		"playerBaseData": playerBaseData,
+		"npcColonyData": npcColonyData,
+		"rscCollectionSiteData": rscCollectionSiteData,
+		"saveTimestamp": OS.get_datetime()
+	}
+	
+	save_game.store_var(save_dictionary, true)
+	
+	var popup = AcceptDialog.new()
+	popup.dialog_text = "Successfully saved! (" + playerName + ".save)"
+	Global.player.get_node("UI").add_child(popup)
+	popup.popup_centered()
+	
 	save_game.close()
 
 func load_game(save_name):
@@ -182,17 +179,18 @@ func load_game(save_name):
 	# Get save data and put it back into the respective Global vars
 	var save_data = save_game.get_var(true)
 	
-	Global.playerWeaponId = save_data.playerWeaponId
-	Global.playerStats = save_data.playerStats
-	Global.playerResearchedItemIds = save_data.playerResearchedItemIds
-	Global.playerResources = save_data.playerResources
-	Global.modifiers = save_data.modifiers
-	Global.game_time = save_data.gameTime
-	Global.playerShipData = save_data.playerShipData
-	Global.playerBaseData = save_data.playerBaseData
-	Global.isPlayerBaseFirstLoad = false
-	Global.npcColonyData = save_data.npcColonyData
-	Global.rscCollectionSiteData = save_data.rscCollectionSiteData
+	playerName = save_data.playerName
+	playerWeaponId = save_data.playerWeaponId
+	playerStats = save_data.playerStats
+	playerResearchedItemIds = save_data.playerResearchedItemIds
+	playerResources = save_data.playerResources
+	modifiers = save_data.modifiers
+	game_time = save_data.gameTime
+	playerShipData = save_data.playerShipData
+	playerBaseData = save_data.playerBaseData
+	isPlayerBaseFirstLoad = false
+	npcColonyData = save_data.npcColonyData
+	rscCollectionSiteData = save_data.rscCollectionSiteData
 
 	save_game.close()
 	
@@ -200,17 +198,18 @@ func load_game(save_name):
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
-	Global.playerWeaponId = -1
-	Global.playerStats = Global.defaultPlayerStats
-	Global.playerResources = Global.defaultPlayerResources
-	Global.playerResearchedItemIds = []
-	Global.modifiers = Global.defaultModifiers
-	Global.game_time = Global.defaultGameTime
-	Global.playerShipData = Global.defaultShipData
-	Global.playerBaseData = Global.defaultPlayerBaseData
-	Global.npcColonyData = []
-	Global.rscCollectionSiteData = []
-	Global.isPlayerBaseFirstLoad = true
+	playerName = ""
+	playerWeaponId = -1
+	playerStats = Global.defaultPlayerStats
+	playerResources = Global.defaultPlayerResources
+	playerResearchedItemIds = []
+	modifiers = Global.defaultModifiers
+	game_time = Global.defaultGameTime
+	playerShipData = Global.defaultShipData
+	playerBaseData = Global.defaultPlayerBaseData
+	npcColonyData = []
+	rscCollectionSiteData = []
+	isPlayerBaseFirstLoad = true
 
 
 func set_player_camera_bounds(map_limits): # tilemap.get_used_rect()
