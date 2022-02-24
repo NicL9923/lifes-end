@@ -67,7 +67,7 @@ position = Vector2( 505, 169 )
 scale = Vector2( 2.82292, 2.99479 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 5
+frame = 4
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]

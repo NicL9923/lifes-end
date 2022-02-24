@@ -3,7 +3,7 @@ extends Control
 func _ready():
 	$SettingsContainer.visible = false
 	$LoadGameContainer.visible = false
-	$MainMenuContainer/MainMenuVBox/NewGameButton.grab_focus()
+	$MainMenuContainer/NewGameButton.grab_focus()
 	
 	var config = ConfigFile.new()
 	
