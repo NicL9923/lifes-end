@@ -1,7 +1,7 @@
 extends Control
 
 const MAX_STAT_VALUE := 10
-export var remaining_attr_pts := 18
+export var remaining_attr_pts := 0
 
 onready var remaining_pts_lbl = $Lbl_RemPnts
 onready var cmdr_spinbox = $Cmdr_HBox/Cmdr_SpinBox
@@ -23,9 +23,13 @@ func _ready():
 	update_remaining_points_lbl()
 	
 	cur_cmdr = cmdr_spinbox.value
+	Global.playerStats.cmdr = cur_cmdr
 	cur_biol = biol_spinbox.value
+	Global.playerStats.biol = cur_biol
 	cur_engr = engr_spinbox.value
+	Global.playerStats.engr = cur_engr
 	cur_doc = doc_spinbox.value
+	Global.playerStats.doc = cur_doc
 
 func check_all_fields_completed():
 	if Global.playerName.length() > 0 and Global.playerName.length() <= 20 and remaining_attr_pts == 0:

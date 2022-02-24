@@ -67,7 +67,7 @@ position = Vector2( 505, 169 )
 scale = Vector2( 2.82292, 2.99479 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 2
+frame = 4
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
@@ -83,9 +83,9 @@ __meta__ = {
 [node name="Lbl_RemPnts" type="Label" parent="."]
 margin_left = 48.0
 margin_top = 65.0
-margin_right = 182.0
+margin_right = 192.0
 margin_bottom = 82.0
-text = "Points remaining: 18"
+text = "Points remaining: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,6 +110,7 @@ margin_left = 90.0
 margin_right = 140.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Bio_HBox" type="HBoxContainer" parent="."]
@@ -129,6 +130,7 @@ margin_left = 67.0
 margin_right = 117.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Engr_HBox" type="HBoxContainer" parent="."]
@@ -151,6 +153,7 @@ margin_left = 67.0
 margin_right = 117.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Doc_HBox" type="HBoxContainer" parent="."]
@@ -173,6 +176,7 @@ margin_left = 54.0
 margin_right = 104.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Launch Button" type="Button" parent="."]
