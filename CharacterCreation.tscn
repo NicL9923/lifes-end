@@ -67,7 +67,7 @@ position = Vector2( 505, 169 )
 scale = Vector2( 2.82292, 2.99479 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 5
+frame = 4
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
@@ -82,19 +82,19 @@ __meta__ = {
 
 [node name="Lbl_RemPnts" type="Label" parent="."]
 margin_left = 48.0
-margin_top = 89.0
-margin_right = 182.0
-margin_bottom = 106.0
-text = "Points remaining: 18"
+margin_top = 65.0
+margin_right = 192.0
+margin_bottom = 82.0
+text = "Points remaining: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Cmdr_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
-margin_top = 153.0
+margin_top = 97.0
 margin_right = 191.0
-margin_bottom = 180.0
+margin_bottom = 124.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,13 +110,14 @@ margin_left = 90.0
 margin_right = 140.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Bio_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
-margin_top = 201.0
+margin_top = 145.0
 margin_right = 191.0
-margin_bottom = 228.0
+margin_bottom = 172.0
 
 [node name="Lbl_Bio" type="Label" parent="Bio_HBox"]
 margin_top = 5.0
@@ -129,13 +130,14 @@ margin_left = 67.0
 margin_right = 117.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Engr_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
-margin_top = 249.0
+margin_top = 193.0
 margin_right = 191.0
-margin_bottom = 276.0
+margin_bottom = 220.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,13 +153,14 @@ margin_left = 67.0
 margin_right = 117.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Doc_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
-margin_top = 297.0
+margin_top = 241.0
 margin_right = 191.0
-margin_bottom = 324.0
+margin_bottom = 268.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,6 +176,7 @@ margin_left = 54.0
 margin_right = 104.0
 margin_bottom = 27.0
 max_value = 10.0
+value = 5.0
 rounded = true
 
 [node name="Launch Button" type="Button" parent="."]
@@ -186,8 +190,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CharName_HBox" type="HBoxContainer" parent="."]
+margin_left = 48.0
+margin_top = 281.0
+margin_right = 288.0
+margin_bottom = 321.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CharName_HBox"]
+margin_top = 11.0
+margin_right = 42.0
+margin_bottom = 28.0
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="CharName_HBox"]
+margin_left = 46.0
+margin_right = 266.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 220, 0 )
+max_length = 20
+placeholder_text = "Choose your name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="value_changed" from="Cmdr_HBox/Cmdr_SpinBox" to="." method="_on_Cmdr_SpinBox_value_changed"]
 [connection signal="value_changed" from="Bio_HBox/Biol_SpinBox" to="." method="_on_Biol_SpinBox_value_changed"]
 [connection signal="value_changed" from="Engr_HBox/Engr_SpinBox" to="." method="_on_Engr_SpinBox_value_changed"]
 [connection signal="value_changed" from="Doc_HBox/Doc_SpinBox" to="." method="_on_Doc_SpinBox_value_changed"]
 [connection signal="pressed" from="Launch Button" to="." method="_on_Launch_Button_pressed"]
+[connection signal="text_changed" from="CharName_HBox/LineEdit" to="." method="_on_LineEdit_text_changed"]
