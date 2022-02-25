@@ -23,6 +23,7 @@ var gun_angle: float
 onready var camera := $Camera2D
 onready var healthbar := $UI/Healthbar
 onready var earth_days_lbl := $UI/Days_Label
+onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var research_ui := $UI/ResearchUI
 onready var crafting_ui := $UI/CraftingUI

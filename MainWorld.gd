@@ -12,6 +12,7 @@ var areThereRemainingMetalDeposits := true
 
 
 func _ready():
+	Global.player = $Player
 	Global.world_nav = $Navigation2D
 	
 	var planet = Global.playerBaseData.planet
@@ -44,8 +45,6 @@ func _ready():
 			areThereRemainingMetalDeposits = false
 		else:
 			re_spawn_metal_deposits()
-	
-	Global.player = $Player
 
 func _physics_process(_delta):
 	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:

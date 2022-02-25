@@ -292,3 +292,6 @@ func planet_tile_value(ind):
 
 func player_stat_modifier_formula(value: float) -> float:
 	return (1.0 + (value * 0.1))
+
+func push_player_notification(new_notification: String) -> void:
+	player.notifications.notification_queue.append(new_notification)

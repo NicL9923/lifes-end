@@ -386,7 +386,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -444,14 +444,17 @@ __meta__ = {
 margin_left = 448.0
 margin_right = 640.0
 margin_bottom = 40.0
+theme = ExtResource( 9 )
 script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="UI/Notifications"]
-margin_right = 192.0
-margin_bottom = 32.0
+margin_left = -8.0
+margin_top = 8.0
+margin_right = 184.0
+margin_bottom = 40.0
 grow_horizontal = 0
 align = 2
 autowrap = true
@@ -1021,7 +1024,7 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 4
+frame = 7
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
