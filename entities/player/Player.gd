@@ -34,6 +34,7 @@ onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
+	health = Global.playerStats.max_health
 	self.add_to_group("player_team")
 	
 	# Hide these in case we leave it visible in the editor by accident
