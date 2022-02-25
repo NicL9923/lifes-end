@@ -47,7 +47,7 @@ func execute_dev_commands():
 	var output_to_add = []
 	
 	# TODO: add ammo, place building
-	# TODO: handle commands w/ invalid parameters, stop all the crashing involving cmd_history when switching scenes
+	# TODO: handle commands w/ invalid parameters
 	if cmdTxt[0] == "help":
 		output_to_add.append("god - player is invincible and has unlimited ammo")
 		output_to_add.append("metal/energy/food/water x - gives player x of specified rsc")
@@ -86,11 +86,15 @@ func execute_dev_commands():
 		get_tree().paused = false
 	elif cmdTxt[0] == "clear_saves":
 		var file_deleter = Directory.new()
-		
-		for i in range(1, Global.MAX_SAVES):
-			var path := "user://save" + String(i) + ".save"
-			if file_deleter.file_exists(path):
-				file_deleter.remove(path)
+		file_deleter.open("user://")
+		file_deleter.list_dir_begin(true, true)
+		var file_name = file_deleter.get_next()
+		while file_name != "":
+			if ".save" in file_name:
+				file_deleter.remove("user://" + file_name)
+			file_name = file_deleter.get_next()
+		file_deleter.list_dir_end()
+			
 		output_to_add.append("Cleared saves!")
 	else:
 		line_edit.placeholder_text = "Error: Invalid command"

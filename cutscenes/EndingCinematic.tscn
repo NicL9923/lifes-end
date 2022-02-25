@@ -4,7 +4,6 @@
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
 
-
 [sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
@@ -166,3 +165,5 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="Skip Button" to="." method="_on_Skip_Button_pressed"]

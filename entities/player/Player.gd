@@ -24,14 +24,26 @@ onready var camera := $Camera2D
 onready var healthbar := $UI/Healthbar
 onready var earth_days_lbl := $UI/Days_Label
 onready var building_panel := $UI/BuildingUI/Building_Panel
-onready var ship_panel := $UI/ShipUI/Ship_Panel
-onready var research_panel := $UI/ResearchUI/Research_Panel
+onready var research_ui := $UI/ResearchUI
+onready var crafting_ui := $UI/CraftingUI
+onready var ship_ui := $UI/ShipUI
+onready var player_stats_ui := $UI/PlayerStatsUI
+onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
 
 
 func _ready():
 	Global.player = self
 	self.add_to_group("player_team")
+	
+	# Hide these in case we leave it visible in the editor by accident
+	dev_console.visible = false
+	esc_menu.visible = false
+	research_ui.visible = false
+	ship_ui.visible = false
+	player_stats_ui.visible = false
+	crafting_ui.visible = false
+	
 
 func _physics_process(delta):
 	player_movement()
@@ -45,6 +57,8 @@ func _physics_process(delta):
 	
 	if isInCombat:
 		weapon_handling(delta)
+	else:
+		gun_rotation_point.visible = false
 
 func player_movement():
 	var input_vector := Vector2.ZERO
@@ -136,7 +150,7 @@ func die(): # TODO - maybe respawn back at colony and lose some resources?
 	pass
 
 func check_if_ui_open():
-	if building_panel.visible or ship_panel.visible or research_panel.visible:
+	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
 		ui_is_open = true
 	else:
 		ui_is_open = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
@@ -9,6 +9,36 @@
 [ext_resource path="res://objects/planets/sprites/Pluto.png" type="Texture" id=7]
 [ext_resource path="res://objects/planets/sprites/Mercury.png" type="Texture" id=8]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=9]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 2.2974 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.827451 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -22,6 +52,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/fade_out = SubResource( 3 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 320, 180 )
@@ -155,6 +189,15 @@ margin_right = 410.0
 margin_bottom = 38.0
 text = "Earth's Moon"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeTransition" type="ColorRect" parent="."]
+margin_right = 644.0
+margin_bottom = 363.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,15 +1,16 @@
 extends Building
 
-export var energy_produced_per_day := 30
+export var energy_produced := 75
 
 
 func _init():
 	cost_to_build = 75
 	bldg_name = "Geothermal Power Plant"
-	bldg_desc = "Produces " + str(energy_produced_per_day) + " Energy per day"
+	bldg_desc = "Produces " + str(energy_produced) + " Energy"
+	has_to_be_unlocked = true
 
 func _ready():
-	connect_to_daynight_cycle()
+	Global.playerResources.energy += energy_produced
 
-func handle_new_day():
-	add_energy(energy_produced_per_day)
+func _exit_tree():
+	Global.playerResources.energy -= energy_produced

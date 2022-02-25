@@ -1,12 +1,22 @@
 extends Building
 
+export var cost_to_recruit_colonist := 30
+
 func _init():
 	cost_to_build = 25
 	bldg_name = "Barracks"
 	bldg_desc = "Recruit colonists, and view your stats"
 
+func _ready():
+	cost_to_recruit_colonist *= Global.player_stat_modifier_formula(Global.playerStats.cmdr)
+
 func _process(_delta):
 	$PopupUI.visible = is_player_in_popup_distance()
+	
+	if Global.playerResources.metal >= cost_to_recruit_colonist:
+		$PopupUI/RecruitColonist_Button.disabled = false
+	else:
+		$PopupUI/RecruitColonist_Button.disabled = true
 
 func _on_RecruitColonist_Button_pressed():
 	# TODO: some cost for recruiting colonists
@@ -23,4 +33,4 @@ func _on_RecruitColonist_Button_pressed():
 	get_tree().get_current_scene().add_child(new_colonist)
 
 func _on_ViewStats_Button_pressed():
-	pass # TODO
+	Global.player.player_stats_ui.show()

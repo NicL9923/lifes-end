@@ -31,4 +31,4 @@ func _on_Bullet_area_entered(area):
 func _on_Bullet_body_entered(body):
 	if able_to_take_dmg(body):
 		queue_free()
-		body.take_damage(damage)
+		body.take_damage(damage * (Global.modifiers.playerTeamWeaponDamage if body.is_in_group("enemy") else 1.0))

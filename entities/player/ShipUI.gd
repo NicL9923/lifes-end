@@ -1,6 +1,5 @@
 extends Control
 
-onready var ship_panel := $Ship_Panel
 onready var ship_upgrade_progress_bar := $Ship_Panel/TextureProgress
 onready var upgrade_btn := $Ship_Panel/Upgrade_Button
 onready var cost_lbl := $Ship_Panel/Cost_Label
@@ -30,4 +29,4 @@ func _on_Upgrade_Button_pressed():
 
 
 func _on_Close_Button_pressed():
-	ship_panel.visible = false
+	self.visible = false

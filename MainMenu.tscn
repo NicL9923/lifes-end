@@ -1,11 +1,67 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=2]
+[ext_resource path="res://ui/MainMenuBG.png" type="Texture" id=2]
+[ext_resource path="res://objects/ship.png" type="Texture" id=3]
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/Earth.png" type="Texture" id=5]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=6]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=7]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "transition_to_char_creation"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.15, 0.15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 485, 240 ) ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -16,25 +72,60 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 321, 180 )
-scale = Vector2( 0.500231, 0.500411 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/transition_to_char_creation = SubResource( 2 )
+
+[node name="MainMenuBg" type="Sprite" parent="."]
+position = Vector2( 320, 180 )
 texture = ExtResource( 2 )
 
-[node name="Moon" type="Sprite" parent="."]
-position = Vector2( 8, 136 )
-scale = Vector2( 0.40625, 0.40625 )
-texture = ExtResource( 6 )
+[node name="Camera2D" type="Camera2D" parent="."]
+rotation = 0.0510079
+anchor_mode = 0
+current = true
 
-[node name="Earth" type="Sprite" parent="."]
-position = Vector2( 69.4967, 290.605 )
-scale = Vector2( 1.66411, 1.6516 )
+[node name="WindowView" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Earth" type="Sprite" parent="WindowView"]
+position = Vector2( 392, 144 )
+scale = Vector2( 0.562499, 0.558271 )
 texture = ExtResource( 5 )
 
-[node name="Title" type="Sprite" parent="."]
-position = Vector2( 320, 96 )
-scale = Vector2( 0.994375, 0.994375 )
-texture = ExtResource( 4 )
+[node name="Ship" type="Sprite" parent="WindowView/Earth"]
+position = Vector2( 14.2222, -71.6499 )
+scale = Vector2( 0.125001, 0.125001 )
+texture = ExtResource( 3 )
+
+[node name="Ship2" type="Sprite" parent="WindowView/Earth"]
+position = Vector2( 28.4448, -57.3198 )
+scale = Vector2( 0.125001, 0.125001 )
+texture = ExtResource( 3 )
+
+[node name="Ship3" type="Sprite" parent="WindowView/Earth"]
+position = Vector2( 42.667, -71.6499 )
+scale = Vector2( 0.125001, 0.125001 )
+texture = ExtResource( 3 )
+
+[node name="Ship4" type="Sprite" parent="WindowView/Earth"]
+position = Vector2( 56.8892, -42.99 )
+scale = Vector2( 0.125001, 0.125001 )
+texture = ExtResource( 3 )
+
+[node name="Ship5" type="Sprite" parent="WindowView/Earth"]
+position = Vector2( 0, -57.3198 )
+scale = Vector2( 0.125001, 0.125001 )
+texture = ExtResource( 3 )
+
+[node name="Moon" type="Sprite" parent="WindowView"]
+position = Vector2( 520, 96 )
+scale = Vector2( 0.265625, 0.265625 )
+texture = ExtResource( 6 )
 
 [node name="MainMenuContainer" type="Control" parent="."]
 margin_right = 40.0
@@ -43,54 +134,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenuVBox" type="VBoxContainer" parent="MainMenuContainer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 244.0
-margin_top = 188.0
-margin_right = 358.0
-margin_bottom = 309.0
-alignment = 1
+[node name="Title" type="Sprite" parent="MainMenuContainer"]
+position = Vector2( 120, 88 )
+scale = Vector2( 0.994375, 0.994375 )
+texture = ExtResource( 4 )
+
+[node name="NewGameButton" type="Button" parent="MainMenuContainer"]
+margin_left = 8.0
+margin_top = 224.0
+margin_right = 88.0
+margin_bottom = 249.0
+rect_min_size = Vector2( 0, 25 )
+focus_neighbour_top = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../LoadGameButton")
+custom_constants/hseparation = 0
+text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NewGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 4.0
-margin_right = 114.0
-margin_bottom = 29.0
-rect_min_size = Vector2( 0, 25 )
-focus_neighbour_top = NodePath("../QuitButton")
-focus_neighbour_bottom = NodePath("../LoadGameButton")
-text = "New Game"
-
-[node name="LoadGameButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 33.0
-margin_right = 114.0
-margin_bottom = 58.0
+[node name="LoadGameButton" type="Button" parent="MainMenuContainer"]
+anchor_right = 0.122
+margin_left = 8.0
+margin_top = 256.0
+margin_right = 83.12
+margin_bottom = 281.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../NewGameButton")
 focus_neighbour_bottom = NodePath("../SettingsButton")
+custom_constants/hseparation = 0
 text = "Load Game"
 
-[node name="SettingsButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 62.0
-margin_right = 114.0
-margin_bottom = 87.0
+[node name="SettingsButton" type="Button" parent="MainMenuContainer"]
+margin_left = 8.0
+margin_top = 288.0
+margin_right = 80.0
+margin_bottom = 313.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../LoadGameButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
+custom_constants/hseparation = 0
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="MainMenuContainer/MainMenuVBox"]
-margin_top = 91.0
-margin_right = 114.0
-margin_bottom = 116.0
+[node name="QuitButton" type="Button" parent="MainMenuContainer"]
+margin_left = 8.0
+margin_top = 321.0
+margin_right = 48.0
+margin_bottom = 346.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../SettingsButton")
 focus_neighbour_bottom = NodePath("../NewGameButton")
+custom_constants/hseparation = 0
 text = "Quit"
 
 [node name="SettingsContainer" type="Control" parent="."]
@@ -162,10 +256,10 @@ text = "[ No saves found ]"
 align = 1
 valign = 1
 
-[connection signal="pressed" from="MainMenuContainer/MainMenuVBox/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/MainMenuVBox/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/MainMenuVBox/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/MainMenuVBox/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="MainMenuContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="MainMenuContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="MainMenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="MainMenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="SettingsContainer/S_GoBackBN" to="." method="_on_S_GoBackBN_pressed"]
 [connection signal="value_changed" from="SettingsContainer/SettingsVBox/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="pressed" from="LoadGameContainer/LG_GoBackBN" to="." method="_on_LG_GoBackBN_pressed"]

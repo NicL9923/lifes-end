@@ -1,13 +1,152 @@
 extends Control
 
-onready var research_panel := $Research_Panel
+const research_tree = [
+	{ id = 0, cur_progress = 0, pts_to_complete = 1500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 1.5 } }, # improved_weapons_1
+	{ id = 1, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.WPN_DMG, value = 2.0 }, prereqs = [0] }, # improved_weapons_2
+	{ id = 2, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG } }, # modular_construction
+	{ id = 3, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } }, # advanced_healthcare
+	{ id = 4, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } }, # carbon_scrubbing
+	{ id = 5, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION } }, # metal_by_any_means
+	{ id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_FACTORY }, prereqs = [5] }, # production_is_power
+	{ id = 7, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [6] }, # natural_gas_is_natural
+	{ id = 8, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [7] }, # oil_is_what_we_know
+	{ id = 9, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_construction_practices
+	{ id = 10, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.CRAFT_SPEED, value = 2.0 }, prereqs = [9] }, # efficient_engineering
+	{ id = 11, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [10] }, # this_is_what_weve_become
+	{ id = 12, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } }, # careful_extraction
+	{ id = 13, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP }, prereqs = [12] }, # quality_from_passion
+	{ id = 14, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER }, prereqs = [13] }, # harness_our_planets_energy
+	{ id = 15, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER }, prereqs = [14] }, # harness_the_power_of_the_stars
+	{ id = 16, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } }, # advanced_solar_cells
+	{ id = 17, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.FOOD, value = 1.5 }, prereqs = [16] }, # maximizing_natures_bounty
+	{ id = 18, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE, value = 2.0 }, prereqs = [17] }, # maximizing_natures_bounty_2
+	{ id = 19, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[8, 11], [15, 18]] } # discover_your_fate
+]
+
+export var daily_research_points := 250
+onready var research_btn_cont := $Research_Panel/Research_Btn_Container
+var cur_research_id := -1 # -1 means no current research
 
 
 func _ready():
-	pass 
+	connect_to_daynight_cycle()
+	load_completed_research()
+	connect_research_buttons()
 
-func _on_Research_Button_pressed():
-	pass
+func _process(_delta):
+	set_current_research_options()
+
+func set_current_research_options():
+	for btn in research_btn_cont.get_children():
+		var research_id = int(btn.name.replace("research_", ""))
+		
+		btn.get_node("TextureProgress").value = (research_tree[research_id].cur_progress / research_tree[research_id].pts_to_complete) * 100
+		
+		# Handle prereqs for ending (discover your fate)
+		if "ending_prereqs" in research_tree[research_id]:
+			var one_set_of_prereqs_met := false
+			
+			for prereq_opt_grp in research_tree[research_id].ending_prereqs:
+				var all_prereqs_in_opt_grp_met := true
+				for prereq_id in prereq_opt_grp:
+					if research_tree[prereq_id].cur_progress != research_tree[prereq_id].pts_to_complete:
+						all_prereqs_in_opt_grp_met = false
+						break
+				
+				if all_prereqs_in_opt_grp_met:
+					one_set_of_prereqs_met = true
+					break
+			
+			btn.disabled = false if one_set_of_prereqs_met else true
+			break
+		
+		# Handle prereqs for all normal research
+		if "prereqs" in research_tree[research_id]:
+			var all_prereqs_met := true
+			for prereq_id in research_tree[research_id].prereqs:
+				if research_tree[prereq_id].cur_progress != research_tree[prereq_id].pts_to_complete:
+					all_prereqs_met = false
+					break
+			
+			btn.disabled = false if all_prereqs_met else true
+			
+
+func connect_research_buttons():
+	for btn in research_btn_cont.get_children():
+		var research_id = int(btn.name.replace("research_", ""))
+		btn.connect("pressed", self, "set_current_research", [research_id])
+
+func connect_to_daynight_cycle():
+	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
+
+func handle_new_day():
+	update_current_research()
+
+func set_current_research(id):
+	cur_research_id = id
+
+func update_current_research():
+	if cur_research_id == -1:
+		return
+	
+	# Add daily progress to current research
+	research_tree[cur_research_id].cur_progress = clamp(research_tree[cur_research_id].cur_progress + (daily_research_points * Global.modifiers.researchSpeed), 0, research_tree[cur_research_id].pts_to_complete)
+	
+	if research_tree[cur_research_id].cur_progress >= research_tree[cur_research_id].pts_to_complete:
+		Global.playerResearchedItemIds.append(cur_research_id) # Add its id to Global.completedResearchIds
+		
+		# Notification that the research item is complete
+		
+		# Handle ending here so we don't redo it after loading a savegame
+		if research_tree[cur_research_id].effect.id == Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE:
+			handle_ending_trigger()
+			return
+		
+		handle_completed_research(cur_research_id)
+
+func load_completed_research():
+	for id in Global.playerResearchedItemIds:
+		handle_completed_research(id)
+
+func handle_completed_research(research_id):
+	# Set flag/effect of completed research
+	if research_tree[cur_research_id].effect.id >= Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG:
+		handle_building_unlock(research_tree[cur_research_id].effect.id)
+	else:
+		handle_modifier_update(research_tree[cur_research_id].effect.id, research_tree[cur_research_id].effect.value)
+
+func handle_modifier_update(effect_id, effect_val):
+	match effect_id:
+		# *= so different modifier effects stack (ex: planet traits)
+		Global.RESEARCH_EFFECTS.WPN_DMG: Global.modifiers.playerTeamWeaponDamage *= effect_val
+		Global.RESEARCH_EFFECTS.SOLAR: Global.modifiers.solarEnergyProduction *= effect_val
+		Global.RESEARCH_EFFECTS.RESEARCH_SPEED: Global.modifiers.researchSpeed *= effect_val
+		Global.RESEARCH_EFFECTS.BUILD_SPEED: Global.modifiers.buildSpeed *= effect_val
+		Global.RESEARCH_EFFECTS.CRAFT_SPEED: Global.modifiers.craftSpeed *= effect_val
+		Global.RESEARCH_EFFECTS.FOOD: Global.modifiers.foodProduction *= effect_val
+		Global.RESEARCH_EFFECTS.POLLUTION_DMG: Global.modifiers.pollutionDamage *= effect_val
+		Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE: Global.modifiers.metalDepositValue *= effect_val
+
+func handle_building_unlock(effect_id):
+	match effect_id:
+		Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Maintenance)
+		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Medbay)
+		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Carbon_Scrubber)
+		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Mining_Operation)
+		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Factory)
+		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Gas)
+		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Oil)
+		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Smeltery)
+		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Workshop)
+		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Geothermal)
+		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Nuclear)
+	
+	Global.player.get_node("UI/BuildingUI").generate_building_buttons() # Regenerate building buttons so the newly unlocked bldg appears
+
+func handle_ending_trigger():
+	# TODO: fade out to white then fade in to ending cinematic
+	
+	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
 
 func _on_Close_Button_pressed():
-	research_panel.visible = false
+	self.visible = false

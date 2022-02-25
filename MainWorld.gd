@@ -1,40 +1,37 @@
 extends Node2D
 
-var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
 onready var tilemap = get_node("Navigation2D/TileMap")
+onready var build_hq_btn := Global.player.get_node("UI/BuildingUI/Build_HQ_Button")
 var areThereRemainingMetalDeposits := true
-var rng := RandomNumberGenerator.new()
-enum Cell {GROUND, OUTER_TOP, OUTER_BOTTOM, OUTER_LEFT, OUTER_RIGHT}
+
+# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
 
 
 func _ready():
 	Global.world_nav = $Navigation2D
 	
 	var planet = Global.playerBaseData.planet
-	#TODO: may be worth just merging all planet tiles into single tileset if they all have 1 to 4 tiles at most...
-	tilemap.tile_set = load("res://objects/planets/tilesets/planetTileset.tres")
 	
-	generate_map_border_tiles()
-	generate_map_inner_tiles()
+	Global.generate_map_tiles(tilemap)
 	
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 	
 	if Global.isPlayerBaseFirstLoad:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = true
-		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
+		build_hq_btn.disabled = true
+		build_hq_btn.visible = true
 		
 		spawn_metal_deposits()
 		
 		generate_npc_colonies()
 		generate_resource_collection_sites()
 		
-		$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
+		$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 		
-		# TODO: set Global.modifiers based on player stats
+		init_modifiers()
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
@@ -51,8 +48,8 @@ func _ready():
 	Global.player = $Player
 
 func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
+	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
+		build_hq_btn.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = $Player.global_position
 	
@@ -63,70 +60,30 @@ func _physics_process(_delta):
 				updatedMetalDepositArr.append(node.global_position)
 		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
 
-func generate_map_border_tiles():
-	#find first and last tiles in indexing for corner pieces
-	#determine left, right, top and bottom sides
+func init_modifiers():
+	# Set modifiers based on player stats/attributes
+	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
 	
-	#corner tiles
-	tilemap.set_cell(0, 0, planet_tile_value(0))
-	tilemap.set_cell(0, 49, planet_tile_value(8))
-	tilemap.set_cell(49, 0, planet_tile_value(3))
-	tilemap.set_cell(49, 49, planet_tile_value(11))
+	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
+	Global.modifiers.craftSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr)
 	
-	#vertical column tiles
-	for x in [0, worldTileSize.x - 1]:
-		for y in range(0, worldTileSize.y - 1):
-			#wall tiles
-			if y > 0 and y < worldTileSize.y and x == 0:
-				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_LEFT)))
-			if y > 0 and y < worldTileSize.y and x == worldTileSize.x - 1:
-				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_RIGHT)))
-			
-	#horizontal row tiles
-	for x in range(1, worldTileSize.x - 1):
-		for y in [0, worldTileSize.y - 1]:
-			#top edge
-			if y == 0:
-				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_TOP)))
-			#bottom edge
-			if y == worldTileSize.y - 1:
-				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_BOTTOM)))
-				
-
-func generate_map_inner_tiles():
-		for x in range(1, worldTileSize.x - 1):
-			for y in range(1, worldTileSize.y - 1):
-				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.GROUND)))
-
-func generate_random_tile(cell_type):
-	var range_vector := Vector2()
+	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
+	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
 	
-	if cell_type == Cell.OUTER_TOP:
-		range_vector = Vector2(1, 2)
-	elif cell_type == Cell.OUTER_BOTTOM:
-		range_vector = Vector2(9,10)
-	elif cell_type == Cell.OUTER_LEFT:
-		range_vector = Vector2(4, 5)
-	elif cell_type == Cell.OUTER_RIGHT:
-		range_vector = Vector2(6, 7)
-	elif cell_type == Cell.GROUND:
-		range_vector = Vector2(12,15)
+	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc) # TODO (doc): increased max health for allied colonists too + faster health recovery for player only + more effective medbay
 	
-	return rng.randi_range(range_vector.x, range_vector.y)
-	
-func planet_tile_value(ind):
-	var planet = Global.playerBaseData.planet
-	
-	if planet == "Mars":
-		return ind
-	if planet == "Venus":
-		return ind + 16
-	if planet == "Mercury":
-		return ind + 32
-	if planet == "Earth's Moon":
-		return ind + 48
-	if planet == "Pluto":
-		return ind + 64
+	# Set Global.modifiers based on planet traits
+	match Global.playerBaseData.planet:
+		"Mercury":
+			Global.modifiers.solarEnergyProduction *= 2.5
+		"Venus":
+			pass # TODO: more natural events - less raids
+		"Earth's Moon":
+			Global.modifiers.solarEnergyProduction *= 0.75
+		"Mars":
+			Global.modifiers.waterProduction *= 2.0
+		"Pluto":
+			pass
 
 func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):
