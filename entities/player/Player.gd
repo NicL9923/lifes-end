@@ -23,6 +23,7 @@ var gun_angle: float
 onready var camera := $Camera2D
 onready var healthbar := $UI/Healthbar
 onready var earth_days_lbl := $UI/Days_Label
+onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var research_ui := $UI/ResearchUI
 onready var crafting_ui := $UI/CraftingUI
@@ -34,6 +35,7 @@ onready var esc_menu := $UI/EscMenu
 
 func _ready():
 	Global.player = self
+	health = Global.playerStats.max_health
 	self.add_to_group("player_team")
 	
 	# Hide these in case we leave it visible in the editor by accident

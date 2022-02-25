@@ -10,8 +10,8 @@ const research_tree = [
 	{ id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_FACTORY }, prereqs = [5] }, # production_is_power
 	{ id = 7, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [6] }, # natural_gas_is_natural
 	{ id = 8, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [7] }, # oil_is_what_we_know
-	{ id = 9, cur_progress = 0, pts_to_complete = 2500, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_construction_practices
-	{ id = 10, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.CRAFT_SPEED, value = 2.0 }, prereqs = [9] }, # efficient_engineering
+	{ id = 9, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_engineering
+	{ id = 10, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 3.0 }, prereqs = [9] }, # advanced_manufacturing
 	{ id = 11, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [10] }, # this_is_what_weve_become
 	{ id = 12, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } }, # careful_extraction
 	{ id = 13, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP }, prereqs = [12] }, # quality_from_passion
@@ -122,7 +122,6 @@ func handle_modifier_update(effect_id, effect_val):
 		Global.RESEARCH_EFFECTS.SOLAR: Global.modifiers.solarEnergyProduction *= effect_val
 		Global.RESEARCH_EFFECTS.RESEARCH_SPEED: Global.modifiers.researchSpeed *= effect_val
 		Global.RESEARCH_EFFECTS.BUILD_SPEED: Global.modifiers.buildSpeed *= effect_val
-		Global.RESEARCH_EFFECTS.CRAFT_SPEED: Global.modifiers.craftSpeed *= effect_val
 		Global.RESEARCH_EFFECTS.FOOD: Global.modifiers.foodProduction *= effect_val
 		Global.RESEARCH_EFFECTS.POLLUTION_DMG: Global.modifiers.pollutionDamage *= effect_val
 		Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE: Global.modifiers.metalDepositValue *= effect_val
