@@ -13,6 +13,8 @@ func _ready():
 
 func _on_Select_Button_pressed():
 	Global.playerBaseData.planet = Global.planets[currently_selected_planet]
+	$AnimationPlayer.play("fade_out")
+	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func _on_Left_Button_pressed():

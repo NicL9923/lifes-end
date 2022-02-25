@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://ui/Earth.png" type="Texture" id=6]
 [ext_resource path="res://objects/ship.png" type="Texture" id=7]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=8]
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
@@ -20,10 +19,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5, 12.5, 15.5, 22.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 12.5, 15.5, 22.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "[ Incoming transmission ]", "Earth...she was once our beautiful home. Her oceans spanned over half the planet, and her vast mountain ranges covered in snowy forests housed the most majestic wildlife.", "But no more...", "Her ecosystems have been ravaged to the point that not even us humans can survive within them, and so we look to space.", "Perhaps there is something to be learned from this...or perhaps not." ]
+"values": [ "[ Incoming transmission ]", "", "[ Incoming transmission ]", "", "[ Incoming transmission ]", "Earth...she was once our beautiful home. Her oceans spanned over half the planet, and her vast mountain ranges covered in snowy forests housed the most majestic wildlife.", "But no more...", "Her ecosystems have been ravaged to the point that not even us humans can survive within them, and so we look to space.", "Perhaps there is something to be learned from this...or perhaps not." ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -40,6 +39,33 @@ tracks/0/keys = {
 "update": 0,
 "values": [ "[ Incoming transmission ]" ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeTransition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.784314 ) ]
+}
 
 [node name="IntroCinematic" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,6 +73,7 @@ script = ExtResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IntroCinematicAnim = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+anims/fade_out = SubResource( 3 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 320.056, 180 )
@@ -141,6 +168,15 @@ text = "[ Incoming transmission ]"
 align = 1
 valign = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeTransition" type="ColorRect" parent="."]
+margin_right = 644.0
+margin_bottom = 363.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

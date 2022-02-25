@@ -89,6 +89,8 @@ func _on_Doc_SpinBox_value_changed(value):
 
 
 func _on_Launch_Button_pressed():
+	$AnimationPlayer.play("fade_out")
+	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://cutscenes/IntroCinematic.tscn")
 
 
