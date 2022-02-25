@@ -74,11 +74,16 @@ func init_modifiers():
 	
 	# Set Global.modifiers based on planet traits
 	match Global.playerBaseData.planet:
-		"Mercury": pass
-		"Venus": pass
-		"Earth's Moon": pass
-		"Mars": pass
-		"Pluto": pass
+		"Mercury":
+			Global.modifiers.solarEnergyProduction *= 2.5
+		"Venus":
+			pass # TODO: more natural events - less raids
+		"Earth's Moon":
+			Global.modifiers.solarEnergyProduction *= 0.75
+		"Mars":
+			Global.modifiers.waterProduction *= 2.0
+		"Pluto":
+			pass
 
 func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):
