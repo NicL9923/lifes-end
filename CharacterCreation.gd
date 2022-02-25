@@ -19,6 +19,8 @@ var cur_doc: int
 # just replace the spin boxes entirely w/ a btn-only system
 
 func _ready():
+	$AnimationPlayer.play("fade_in")
+	
 	launch_btn.disabled = true
 	update_remaining_points_lbl()
 	
