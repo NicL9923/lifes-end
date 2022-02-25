@@ -1,10 +1,55 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://CharacterCreation.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/CharacterScreen.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.709804 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeTransition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.364706 ), Color( 0, 0, 0, 0.862745 ) ]
+}
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -57,6 +102,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 11 )
+anims/fade_in = SubResource( 10 )
+anims/fade_out = SubResource( 12 )
+
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 319.5, 181.5 )
 scale = Vector2( 1.00156, 1.00278 )
@@ -67,7 +117,6 @@ position = Vector2( 505, 169 )
 scale = Vector2( 2.82292, 2.99479 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
@@ -212,6 +261,16 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 220, 0 )
 max_length = 20
 placeholder_text = "Choose your name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeTransition" type="ColorRect" parent="."]
+margin_left = -3.0
+margin_top = -1.0
+margin_right = 641.0
+margin_bottom = 363.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

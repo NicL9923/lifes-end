@@ -15,6 +15,8 @@ func _ready():
 	$SettingsContainer/SettingsVBox/HSlider.value = Global.audioVolume
 
 func _on_NewGameButton_pressed():
+	$AnimationPlayer.play("transition_to_char_creation")
+	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://CharacterCreation.tscn")
 
 func _on_LoadGameButton_pressed():

@@ -5,6 +5,7 @@ export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
 onready var tilemap = get_node("Navigation2D/TileMap")
+onready var build_hq_btn := Global.player.get_node("UI/BuildingUI/Build_HQ_Button")
 var areThereRemainingMetalDeposits := true
 
 # TODO: handle pollution visuals, and damage to player/colonists (daily check?)
@@ -20,8 +21,8 @@ func _ready():
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 	
 	if Global.isPlayerBaseFirstLoad:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = true
-		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
+		build_hq_btn.disabled = true
+		build_hq_btn.visible = true
 		
 		spawn_metal_deposits()
 		
@@ -30,7 +31,7 @@ func _ready():
 		
 		$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 		
-		# TODO: set Global.modifiers based on player stats
+		init_modifiers()
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
@@ -47,8 +48,8 @@ func _ready():
 	Global.player = $Player
 
 func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
+	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
+		build_hq_btn.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = $Player.global_position
 	
@@ -58,6 +59,31 @@ func _physics_process(_delta):
 			if node.is_in_group("metal_deposit"):
 				updatedMetalDepositArr.append(node.global_position)
 		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
+
+func init_modifiers():
+	# Set modifiers based on player stats/attributes
+	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
+	
+	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
+	Global.modifiers.craftSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr)
+	
+	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
+	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
+	
+	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc) # TODO (doc): increased max health for allied colonists too + faster health recovery for player only + more effective medbay
+	
+	# Set Global.modifiers based on planet traits
+	match Global.playerBaseData.planet:
+		"Mercury":
+			Global.modifiers.solarEnergyProduction *= 2.5
+		"Venus":
+			pass # TODO: more natural events - less raids
+		"Earth's Moon":
+			Global.modifiers.solarEnergyProduction *= 0.75
+		"Mars":
+			Global.modifiers.waterProduction *= 2.0
+		"Pluto":
+			pass
 
 func spawn_metal_deposits():
 	for _i in range(0, minerals_to_spawn):

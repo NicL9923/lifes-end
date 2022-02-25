@@ -47,7 +47,7 @@ func execute_dev_commands():
 	var output_to_add = []
 	
 	# TODO: add ammo, place building
-	# TODO: handle commands w/ invalid parameters, stop all the crashing involving cmd_history when switching scenes
+	# TODO: handle commands w/ invalid parameters
 	if cmdTxt[0] == "help":
 		output_to_add.append("god - player is invincible and has unlimited ammo")
 		output_to_add.append("metal/energy/food/water x - gives player x of specified rsc")
