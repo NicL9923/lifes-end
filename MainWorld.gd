@@ -64,7 +64,6 @@ func init_modifiers():
 	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
 	
 	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
-	Global.modifiers.craftSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr)
 	
 	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
 	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)

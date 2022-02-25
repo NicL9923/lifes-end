@@ -386,7 +386,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 6
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -750,7 +750,7 @@ margin_top = 144.0
 margin_right = 208.0
 margin_bottom = 184.0
 rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Efficient Construction Practices"
+research_name = "Efficient Engineering"
 research_description = "Increases build speed by 2.0x"
 
 [node name="research_10" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
@@ -761,8 +761,8 @@ margin_top = 200.0
 margin_right = 208.0
 margin_bottom = 240.0
 rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Efficient Engineering"
-research_description = "Increases craft speed by 2.0x"
+research_name = "Advanced Manufacturing"
+research_description = "Increases build speed by 3.0x"
 
 [node name="research_11" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
@@ -978,7 +978,6 @@ __meta__ = {
 }
 
 [node name="PlayerStatsUI" type="Control" parent="UI"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 9 )
@@ -999,10 +998,10 @@ position = Vector2( 320, 179 )
 texture = ExtResource( 12 )
 
 [node name="Title_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 128.0
-margin_top = 24.0
-margin_right = 192.0
-margin_bottom = 41.0
+margin_left = 144.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 49.0
 text = "Stats"
 align = 1
 __meta__ = {
@@ -1024,66 +1023,144 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 7
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 56.0
-margin_right = 167.0
-margin_bottom = 73.0
+margin_left = 112.0
+margin_top = 64.0
+margin_right = 247.0
+margin_bottom = 81.0
 text = "Max Health: X"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Cmdr_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
+margin_left = 56.0
 margin_top = 96.0
-margin_right = 131.0
+margin_right = 168.0
 margin_bottom = 113.0
 text = "Commander: X"
 
 [node name="Engr_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 120.0
-margin_right = 108.0
-margin_bottom = 137.0
+margin_left = 208.0
+margin_top = 96.0
+margin_right = 296.0
+margin_bottom = 113.0
 text = "Engineer: X"
 
 [node name="Biol_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 144.0
-margin_right = 108.0
-margin_bottom = 161.0
+margin_left = 56.0
+margin_top = 120.0
+margin_right = 144.0
+margin_bottom = 137.0
 text = "Biologist: X"
 
 [node name="Doc_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
+margin_left = 208.0
+margin_top = 120.0
+margin_right = 288.0
+margin_bottom = 137.0
+text = "Doctor: X"
+
+[node name="Modifiers" type="Control" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
 margin_top = 168.0
-margin_right = 95.0
-margin_bottom = 185.0
-text = "Doctor: X"
+margin_right = 320.0
+margin_bottom = 248.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers"]
+margin_top = -16.0
+margin_right = 66.0
+margin_bottom = 1.0
+text = "Modifiers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers"]
+margin_right = 12.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 275, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer"]
+margin_right = 275.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 275, 80 )
+
+[node name="Dmg_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_right = 275.0
+margin_bottom = 17.0
+text = "Damage: X"
+
+[node name="Solar_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 275.0
+margin_bottom = 38.0
+text = "Solar Energy: X"
+
+[node name="Research_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 275.0
+margin_bottom = 59.0
+text = "Research Speed: X"
+
+[node name="BuildSpeed_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 63.0
+margin_right = 275.0
+margin_bottom = 80.0
+text = "Build Speed: X"
+
+[node name="FoodProd_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 275.0
+margin_bottom = 101.0
+text = "Food Production: X"
+
+[node name="WaterProd_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 105.0
+margin_right = 275.0
+margin_bottom = 122.0
+text = "Water Production: X"
+
+[node name="PollutionDmg_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 126.0
+margin_right = 275.0
+margin_bottom = 143.0
+text = "Pollution Damage: X"
+
+[node name="MetalDepValue_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 147.0
+margin_right = 275.0
+margin_bottom = 164.0
+text = "Metal Deposit Value: X"
 
 [node name="CurColonists_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 216.0
+margin_top = 256.0
 margin_right = 167.0
-margin_bottom = 233.0
+margin_bottom = 273.0
 text = "Current Colonists: X"
 
 [node name="ColoniesDestroyed_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 240.0
-margin_right = 167.0
-margin_bottom = 257.0
+margin_top = 280.0
+margin_right = 178.0
+margin_bottom = 297.0
 text = "Colonies Destroyed: X"
 
 [node name="Alignment_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 296.0
+margin_top = 312.0
 margin_right = 167.0
-margin_bottom = 313.0
+margin_bottom = 329.0
 text = "Alignment: X"
 
 [node name="DevConsole" type="Control" parent="UI"]
