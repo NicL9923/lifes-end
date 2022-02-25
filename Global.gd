@@ -289,3 +289,6 @@ func planet_tile_value(ind):
 		"Mercury": return ind + 32
 		"Earth's Moon": return ind + 48
 		"Pluto": return ind + 64
+
+func player_stat_modifier_formula(value: float) -> float:
+	return (1.0 + (value * 0.1))

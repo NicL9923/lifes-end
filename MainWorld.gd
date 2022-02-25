@@ -62,15 +62,15 @@ func _physics_process(_delta):
 
 func init_modifiers():
 	# Set modifiers based on player stats/attributes
-	Global.modifiers.playerTeamWeaponDamage *= (1.0 + (Global.playerStats.cmdr * 0.1)) # TODO (cmdr): cheaper colonist recruiting + allied colonists shoot faster
+	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
 	
-	Global.modifiers.buildSpeed *= (1.0 + (Global.playerStats.engr * 0.1)) # TODO (engr): maybe give faster industrial research? thinking no...
-	Global.modifiers.craftSpeed *= (1.0 + (Global.playerStats.engr * 0.1))
+	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
+	Global.modifiers.craftSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr)
 	
-	Global.modifiers.foodProduction *= (1.0 + (Global.playerStats.biol * 0.1)) # TODO (biol): faster SUSTAINABLE research modifier
-	Global.modifiers.waterProduction *= (1.0 + (Global.playerStats.biol * 0.1))
+	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
+	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
 	
-	Global.playerStats.max_health *= (1.0 + (Global.playerStats.doc * 0.1)) # TODO (doc): increased max health for allied colonists too + faster health recovery for player only + more effective medbay
+	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc) # TODO (doc): increased max health for allied colonists too + faster health recovery for player only + more effective medbay
 	
 	# Set Global.modifiers based on planet traits
 	match Global.playerBaseData.planet:
