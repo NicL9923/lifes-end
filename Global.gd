@@ -193,6 +193,8 @@ func load_game(save_name):
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
+	player = null
+	world_nav = null
 	playerName = ""
 	playerWeaponId = -1
 	playerStats = Global.defaultPlayerStats

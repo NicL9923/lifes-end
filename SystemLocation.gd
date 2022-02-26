@@ -38,9 +38,6 @@ func _physics_process(_delta):
 		
 		remaining_enemies = enemy_count
 		
-		if remaining_enemies <= 3:
-			Global.push_player_notification("Remaining enemies: " + str(remaining_enemies))
-		
 		if remaining_enemies == 0:
 			Global.npcColonyData[location_index].isDestroyed = true
 			are_enemies_present = false

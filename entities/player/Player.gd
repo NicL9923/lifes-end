@@ -31,6 +31,7 @@ onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
+onready var base_manager := $BaseManager
 
 
 func _ready():
