@@ -96,6 +96,7 @@ func update_current_research():
 		Global.playerResearchedItemIds.append(cur_research_id) # Add its id to Global.completedResearchIds
 		
 		# Notification that the research item is complete
+		Global.push_player_notification("Your current research just finished!")
 		
 		# Handle ending here so we don't redo it after loading a savegame
 		if research_tree[cur_research_id].effect.id == Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE:

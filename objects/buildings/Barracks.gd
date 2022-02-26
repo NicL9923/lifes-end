@@ -1,11 +1,13 @@
 extends Building
 
+onready var recruit_colonist_btn := $PopupUI/RecruitColonist_Button
 export var cost_to_recruit_colonist := 30
 
 func _init():
 	cost_to_build = 25
 	bldg_name = "Barracks"
 	bldg_desc = "Recruit colonists, and view your stats"
+	energy_cost_to_run = 5
 
 func _ready():
 	cost_to_recruit_colonist *= Global.player_stat_modifier_formula(Global.playerStats.cmdr)
@@ -13,13 +15,13 @@ func _ready():
 func _process(_delta):
 	$PopupUI.visible = is_player_in_popup_distance()
 	
-	if Global.playerResources.metal >= cost_to_recruit_colonist:
-		$PopupUI/RecruitColonist_Button.disabled = false
+	if Global.playerResources.metal < cost_to_recruit_colonist or not self.has_energy:
+		recruit_colonist_btn.disabled = true
 	else:
-		$PopupUI/RecruitColonist_Button.disabled = true
+		recruit_colonist_btn.disabled = false
 
 func _on_RecruitColonist_Button_pressed():
-	# TODO: some cost for recruiting colonists
+	Global.playerResources.metal -= cost_to_recruit_colonist
 	
 	var new_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
 	new_colonist.id = Global.playerBaseData.colonists.size() # This keeps IDs simple and incremental

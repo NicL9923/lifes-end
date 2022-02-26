@@ -162,10 +162,7 @@ func save_game():
 	
 	save_game.store_var(save_dictionary, true)
 	
-	var popup = AcceptDialog.new()
-	popup.dialog_text = "Successfully saved! (" + playerName + ".save)"
-	Global.player.get_node("UI").add_child(popup)
-	popup.popup_centered()
+	push_player_notification("Successfully saved! (" + playerName + ".save)")
 	
 	save_game.close()
 
@@ -196,6 +193,8 @@ func load_game(save_name):
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
+	player = null
+	world_nav = null
 	playerName = ""
 	playerWeaponId = -1
 	playerStats = Global.defaultPlayerStats
