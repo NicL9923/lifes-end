@@ -38,10 +38,16 @@ func _physics_process(_delta):
 		
 		remaining_enemies = enemy_count
 		
+		if remaining_enemies <= 3:
+			Global.push_player_notification("Remaining enemies: " + str(remaining_enemies))
+		
 		if remaining_enemies == 0:
 			Global.npcColonyData[location_index].isDestroyed = true
 			are_enemies_present = false
 			Global.player.toggle_combat(false)
+			Global.push_player_notification("You successfully overtook the colony!")
+			
+			# TODO: give player resources (maybe a set base amt + something based on the kind of bldgs it had)
 
 func load_npc_colony():
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]

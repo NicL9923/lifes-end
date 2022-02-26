@@ -147,9 +147,10 @@ func take_damage(dmg_amt):
 	if health == 0:
 		die()
 
-func die(): # TODO - maybe respawn back at colony and lose some resources?
-	print("Player is deaded")
-	pass
+func die():
+	Global.push_player_notification("You've met Life's End.")
+	
+	# TODO - maybe respawn back at colony and lose some resources?
 
 func check_if_ui_open():
 	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
