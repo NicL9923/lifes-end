@@ -37,7 +37,7 @@ func handle_rsc_production():
 				add_pollution(bldg.pollution_produced_per_day)
 			
 			if "pollution_removed_per_day" in bldg:
-				remove_pollution(bldg.pollution_removed_per_day) # TODO: Carbon Scrubber when implemented
+				remove_pollution(bldg.pollution_removed_per_day)
 
 func handle_energy_production():
 	var total_energy_produced := 0

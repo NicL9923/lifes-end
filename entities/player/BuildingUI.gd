@@ -68,9 +68,6 @@ func generate_building_buttons():
 		bldg_btn.queue_free()
 	
 	for bldg in Global.BUILDING_TYPES:
-		if bldg == Global.BUILDING_TYPES.Carbon_Scrubber:
-			continue # Skip this as it's not implemented yet
-		
 		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
 			continue
 		
