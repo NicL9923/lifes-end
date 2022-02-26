@@ -2,6 +2,7 @@ extends Control
 
 var buildings := []
 # TODO: may need to manage colonists here as well (for altering health, when we add more detailed backgrounds/names, pollution damage, etc)
+	# Also to handle food/water consumption by player + colonists each day
 
 
 func _ready():
