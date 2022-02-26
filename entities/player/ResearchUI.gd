@@ -104,6 +104,8 @@ func update_current_research():
 			return
 		
 		handle_completed_research(cur_research_id)
+		
+		set_current_research(-1)
 
 func load_completed_research():
 	for id in Global.playerResearchedItemIds:
