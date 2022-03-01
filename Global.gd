@@ -49,7 +49,8 @@ const defaultModifiers = {
 	waterProduction = 1.0,
 	pollutionDamage = 1.0,
 	metalDepositValue = 1.0,
-	medbayHealing = 1.0
+	medbayHealing = 1.0,
+	colonistMaxHealth = 100
 }
 
 const defaultGameTime = { ticks = 800.0, earthDays = 0 }
