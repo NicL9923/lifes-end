@@ -4,7 +4,8 @@ export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
-onready var tilemap = get_node("Navigation2D/TileMap")
+onready var tilemap := $Navigation2D/TileMap
+onready var base_mgr := $BaseManager
 var build_hq_btn
 var areThereRemainingMetalDeposits := true
 
@@ -194,7 +195,7 @@ func load_buildings():
 		building_node.isPlayerBldg = true
 		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
-		Global.player.base_manager.add_building(building_node)
+		base_mgr.add_building(building_node)
 		add_child(building_node)
 
 func load_colonists():

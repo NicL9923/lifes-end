@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://ui/CharacterScreen.png" type="Texture" id=12]
 [ext_resource path="res://ui/ResearchButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://entities/player/Notifications.gd" type="Script" id=14]
-[ext_resource path="res://entities/player/BaseManager.gd" type="Script" id=15]
 [ext_resource path="res://ui/resources/food.png" type="Texture" id=16]
 [ext_resource path="res://ui/resources/metal.png" type="Texture" id=17]
 [ext_resource path="res://ui/resources/water.png" type="Texture" id=18]
@@ -391,7 +390,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 2
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1041,7 +1040,6 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
@@ -1263,14 +1261,6 @@ margin_right = 152.0
 margin_bottom = 87.0
 theme = SubResource( 4 )
 text = "Quit to Main Menu"
-
-[node name="BaseManager" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="UI/RTB_Button" to="." method="_on_RTB_Button_pressed"]
 [connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
