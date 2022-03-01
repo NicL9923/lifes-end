@@ -14,7 +14,6 @@ func _ready():
 	connect_to_daynight_cycle()
 
 func _physics_process(_delta):
-	print(buildings)
 	handle_energy_production()
 	
 	handle_energy_distribution()
@@ -103,6 +102,7 @@ func change_colonists_health(amt: int):
 	
 	for colonist in colonists:
 		colonist.health = clamp(colonist.health + amt, min_health_from_base_stuff, colonist.max_health)
+		Global.playerBaseData.colonists[colonist.id].health = colonist.health
 
 func handle_food_and_water_usage():
 	var take_dmg_for_no_rscs := false
