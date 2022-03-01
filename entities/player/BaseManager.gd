@@ -4,11 +4,14 @@ var buildings := []
 # TODO: may need to manage colonists here as well (for altering health, when we add more detailed backgrounds/names, pollution damage, etc)
 	# Also to handle food/water consumption by player + colonists each day
 
+# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
+
 
 func _ready():
 	connect_to_daynight_cycle()
 
 func _physics_process(_delta):
+	print(buildings)
 	handle_energy_production()
 	
 	handle_energy_distribution()

@@ -5,15 +5,18 @@ export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
 onready var tilemap = get_node("Navigation2D/TileMap")
-onready var build_hq_btn := Global.player.get_node("UI/BuildingUI/Build_HQ_Button")
+var build_hq_btn
 var areThereRemainingMetalDeposits := true
-
-# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
 
 
 func _ready():
-	Global.player = $Player
+	# Create a node to be the Global(ly instantiated) player if there isn't already one
+	if not Global.player:
+		Global.player = load("res://entities/player/Player.tscn").instance()
+	get_tree().get_current_scene().add_child(Global.player)
+	
 	Global.world_nav = $Navigation2D
+	build_hq_btn = Global.player.build_hq_btn
 	
 	var planet = Global.playerBaseData.planet
 	
@@ -30,13 +33,13 @@ func _ready():
 		generate_npc_colonies()
 		generate_resource_collection_sites()
 		
-		$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
+		Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 		
 		init_modifiers()
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
-		$Player.global_position = Global.playerBaseData.lastPlayerPos
+		Global.player.global_position = Global.playerBaseData.lastPlayerPos
 		
 		load_buildings()
 		load_colonists()
@@ -50,7 +53,7 @@ func _physics_process(_delta):
 	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
 		build_hq_btn.disabled = false
 	
-	Global.playerBaseData.lastPlayerPos = $Player.global_position
+	Global.playerBaseData.lastPlayerPos = Global.player.global_position
 	
 	if areThereRemainingMetalDeposits:
 		var updatedMetalDepositArr := []

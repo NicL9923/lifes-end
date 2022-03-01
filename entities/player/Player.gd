@@ -32,11 +32,11 @@ onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
 onready var base_manager := $BaseManager
+onready var rtb_btn := $UI/RTB_Button
+onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 
 
 func _ready():
-	Global.player = self
-	health = Global.playerStats.max_health
 	self.add_to_group("player_team")
 	
 	# Hide these in case we leave it visible in the editor by accident
@@ -160,4 +160,5 @@ func check_if_ui_open():
 		ui_is_open = false
 
 func _on_RTB_Button_pressed():
+	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	get_tree().change_scene("res://MainWorld.tscn")

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/barracks.png-dacf9bdcf74828fabac8e62375fadc77.stex"
+path="res://.import/communications_array.png-bec6c44a1c4545f749f4015c15740ced.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/buildings/barracks.png"
-dest_files=[ "res://.import/barracks.png-dacf9bdcf74828fabac8e62375fadc77.stex" ]
+source_file="res://objects/buildings/communications_array.png"
+dest_files=[ "res://.import/communications_array.png-bec6c44a1c4545f749f4015c15740ced.stex" ]
 
 [params]
 
