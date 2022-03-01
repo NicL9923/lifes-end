@@ -204,4 +204,5 @@ func load_colonists():
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
+		base_mgr.add_colonist(loaded_colonist)
 		add_child(loaded_colonist)

@@ -120,6 +120,7 @@ func die():
 	queue_free()
 	
 	if self.is_in_group("player_team") and Global.playerBaseData.colonists.size() > id:
+		Global.push_player_notification("Colonist " + str(id) + " has been KIA.")
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():
