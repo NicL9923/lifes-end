@@ -18,7 +18,7 @@ var will_flee_on_low_health := false
 var dist_to_advance
 
 var timer := -1.0 # a value of -1.0 is "null" state
-var pathfinding_timer := 0.25
+var pathfinding_timer := 0.3
 var current_path
 var last_movement_dir
 var next_patrol_point
@@ -43,7 +43,7 @@ func pathfind_to_point(delta, pos: Vector2):
 		pathfinding_timer -= delta
 	else:
 		current_path = Global.world_nav.get_simple_path(self.global_position, pos)
-		pathfinding_timer = 0.25
+		pathfinding_timer = 0.3
 	
 	while current_path.size() > 0:
 		var dist_to_next_point = self.global_position.distance_to(current_path[0])
