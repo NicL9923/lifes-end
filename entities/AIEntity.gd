@@ -7,7 +7,7 @@ onready var col_det = get_node("CollisionDetector")
 onready var healthbar = get_node("Healthbar")
 
 var speed := 125
-var health := 100
+var health := 100.0
 var max_health := 100
 var accuracy := 50
 

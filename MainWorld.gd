@@ -75,7 +75,7 @@ func init_modifiers():
 	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	Global.modifiers.medbayHealing *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	Global.modifiers.colonistMaxHealth *= Global.player_stat_modifier_formula(Global.playerStats.doc)
-	# TODO (doc): faster health recovery for player only
+	Global.modifiers.playerHealthRecovery *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	
 	# Set Global.modifiers based on planet traits
 	match Global.playerBaseData.planet:

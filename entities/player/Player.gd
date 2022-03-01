@@ -1,10 +1,11 @@
 extends KinematicBody2D
 class_name Player
 
-export var health := 100
+export var health := 100.0
 export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
+export var health_recovered_per_second := 1
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
 onready var animatedSprite = $AnimatedSprite
@@ -52,6 +53,8 @@ func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
 	check_if_ui_open()
+	
+	health += (delta * Global.modifiers.playerHealthRecovery * health_recovered_per_second)
 	
 	healthbar.value = health
 	healthbar.max_value = Global.playerStats.max_health
