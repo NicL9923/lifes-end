@@ -20,14 +20,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Navigation2D" type="Navigation2D" parent="."]
-
-[node name="TileMap" type="TileMap" parent="Navigation2D"]
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 32, 32 )
-cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
-format = 1
-
 [node name="BaseManager" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -35,3 +27,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Navigation2D"]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+format = 1
