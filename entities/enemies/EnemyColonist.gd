@@ -85,10 +85,10 @@ func process_idle(delta):
 func process_patrolling(delta):
 	handle_enemies_in_line_of_sight()
 	
-	# NOTE: The below two if statements use 10 as the value because the entity can't always get perfectly close to the point
-	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 10:
+	# NOTE: The below two if statements are used because the entity can't always get perfectly close to the point
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > Global.cellSize * 0.66:
 		pathfind_to_point(delta, last_known_player_team_pos)
-	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 10:
+	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > Global.cellSize * 0.66:
 		#print(self.global_position.distance_to(next_patrol_point))
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
