@@ -31,7 +31,7 @@ func handle_new_day():
 	# NOTE: building nodes are responsible for maintaining how much they should be producing per day (i.e. based on bldg_level, etc)
 func handle_rsc_production():
 	for bldg in buildings:
-		if bldg.has_energy:
+		if bldg.has_energy and not bldg.isBeingPlaced:
 			if "metal_produced_per_day" in bldg:
 				add_metal(bldg.metal_produced_per_day)
 			

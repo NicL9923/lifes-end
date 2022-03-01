@@ -7,3 +7,6 @@ func _init():
 	bldg_name = "Greenhouse"
 	bldg_desc = "Produces " + str(food_produced_per_day) + " Food per day"
 	energy_cost_to_run = 2
+
+func _process(delta):
+	handle_energy_display(delta)

@@ -18,9 +18,12 @@ var will_flee_on_low_health := false
 var dist_to_advance
 
 var timer := -1.0 # a value of -1.0 is "null" state
+var pathfinding_timer := 0.25
+var current_path
 var last_movement_dir
 var next_patrol_point
 var last_known_player_team_pos
+var closest_hostile
 var hostiles_in_los := []
 var potential_cover_in_los := []
 var num_bullets_in_los := 0
@@ -35,13 +38,18 @@ var currentWeapon
 
 func pathfind_to_point(delta, pos: Vector2):
 	var move_dist = speed * delta
-	var path := Global.world_nav.get_simple_path(self.global_position, pos)
 	
-	while path.size() > 0:
-		var dist_to_next_point = self.global_position.distance_to(path[0])
+	if pathfinding_timer > 0 and current_path:
+		pathfinding_timer -= delta
+	else:
+		current_path = Global.world_nav.get_simple_path(self.global_position, pos)
+		pathfinding_timer = 0.25
+	
+	while current_path.size() > 0:
+		var dist_to_next_point = self.global_position.distance_to(current_path[0])
 		
 		if move_dist <= dist_to_next_point:
-			var move_rot = get_angle_to(self.global_position.linear_interpolate(path[0], move_dist / dist_to_next_point))
+			var move_rot = get_angle_to(self.global_position.linear_interpolate(current_path[0], move_dist / dist_to_next_point))
 			
 			# Mke sure we're not running into something, and if we are, run perpendicular to it in the direction closest to the original
 			if nearby_col_objects.size() > 0:
@@ -52,7 +60,7 @@ func pathfind_to_point(delta, pos: Vector2):
 				var move2 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj - deg2rad(90))
 				
 				# Check which distance is shorter, and make sure the difference is great enough so we eliminate MOST (not all) indecisive glitching in place
-				if move1.distance_to(path[0]) < move2.distance_to(path[0]) and abs(move1.distance_to(path[0]) - move2.distance_to(path[0])) > 50:
+				if move1.distance_to(current_path[0]) < move2.distance_to(current_path[0]) and abs(move1.distance_to(current_path[0]) - move2.distance_to(current_path[0])) > 50:
 					move_rot = angle_to_obj + deg2rad(90)
 				else:
 					move_rot = angle_to_obj - deg2rad(90)
@@ -74,7 +82,7 @@ func pathfind_to_point(delta, pos: Vector2):
 				last_movement_dir = Global.MOVEMENT_DIR.DOWN
 			break
 		
-		path.remove(0)
+		current_path.remove(0)
 		move_dist -= dist_to_next_point
 
 func get_closest_of(type):

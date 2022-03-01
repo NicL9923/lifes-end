@@ -5,7 +5,8 @@ extends Building
 func _init():
 	cost_to_build = Global.cost_to_build_HQ
 
-func _process(_delta):
+func _process(delta):
+	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 
 func _on_Building_Button_pressed():

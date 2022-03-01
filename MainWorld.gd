@@ -50,7 +50,7 @@ func _ready():
 		else:
 			re_spawn_metal_deposits()
 
-func _physics_process(_delta):
+func _process(_delta):
 	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
 		build_hq_btn.disabled = false
 	

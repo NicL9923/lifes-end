@@ -8,3 +8,6 @@ func _init():
 	bldg_desc = "Removes " + str(pollution_removed_per_day) + " pollution per day"
 	has_to_be_unlocked = true
 	energy_cost_to_run = 4
+
+func _process(delta):
+	handle_energy_display(delta)

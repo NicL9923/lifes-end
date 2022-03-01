@@ -11,7 +11,8 @@ func _init():
 	bldg_desc = "View the System Map"
 	energy_cost_to_run = 5
 
-func _process(_delta):
+func _process(delta):
+	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 	
 	world_map_btn.disabled = false if self.has_energy else true
