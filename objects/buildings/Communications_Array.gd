@@ -17,4 +17,5 @@ func _process(_delta):
 	world_map_btn.disabled = false if self.has_energy else true
 
 func _on_WorldMap_Button_pressed():
+	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	get_tree().change_scene("res://SystemMap.tscn")

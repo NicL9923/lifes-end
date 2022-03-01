@@ -7,7 +7,7 @@ onready var col_det = get_node("CollisionDetector")
 onready var healthbar = get_node("Healthbar")
 
 var speed := 125
-var health := 100
+var health := 100.0
 var max_health := 100
 var accuracy := 50
 
@@ -120,6 +120,7 @@ func die():
 	queue_free()
 	
 	if self.is_in_group("player_team") and Global.playerBaseData.colonists.size() > id:
+		Global.push_player_notification("Colonist " + str(id) + " has been KIA.")
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():

@@ -1,8 +1,13 @@
 extends Control
 
+export var daily_food_water_usage := 2
+export var min_health_from_base_stuff := 25
+export var daily_dmg_from_no_food_water := 15
+export var daily_dmg_from_pollution := 10
 var buildings := []
-# TODO: may need to manage colonists here as well (for altering health, when we add more detailed backgrounds/names, pollution damage, etc)
-	# Also to handle food/water consumption by player + colonists each day
+var colonists := []
+
+# TODO: handle pollution visuals (convey pollution amt to player)
 
 
 func _ready():
@@ -18,6 +23,9 @@ func connect_to_daynight_cycle():
 
 func handle_new_day():
 	handle_rsc_production()
+	handle_medbay()
+	handle_pollution_damage()
+	handle_food_and_water_usage()
 
 # Iterate through buildings, and add resource of each type if it's in that building
 	# NOTE: building nodes are responsible for maintaining how much they should be producing per day (i.e. based on bldg_level, etc)
@@ -62,6 +70,9 @@ func handle_energy_distribution():
 func add_building(bldg_node):
 	buildings.append(bldg_node)
 
+func add_colonist(colonist_node):
+	colonists.append(colonist_node)
+
 # Called when PLAYER removes building (not when they're unloaded from a scene tree)
 func remove_building(bldg_node):
 	buildings.erase(bldg_node)
@@ -85,3 +96,49 @@ func add_pollution(amt: float):
 func remove_pollution(amt: float):
 	var cur_pol = Global.playerBaseData.pollutionLevel
 	cur_pol = clamp(cur_pol - amt, 0, 100)
+
+func change_colonists_health(amt: int):
+	Global.player.health = clamp(Global.player.health + amt, min_health_from_base_stuff, Global.playerStats.max_health)
+	
+	for colonist in colonists:
+		colonist.health = clamp(colonist.health + amt, min_health_from_base_stuff, colonist.max_health)
+		Global.playerBaseData.colonists[colonist.id].health = colonist.health
+
+func handle_food_and_water_usage():
+	var take_dmg_for_no_rscs := false
+	
+	var total_colonist_usage = (1 + Global.playerBaseData.colonists.size()) * daily_food_water_usage
+	if Global.playerResources.food - total_colonist_usage < 0:
+		Global.playerResources.food = 0
+		Global.push_player_notification("You've run out of food!")
+		
+		take_dmg_for_no_rscs = true
+	else:
+		Global.playerResources.food -= total_colonist_usage
+	
+	
+	if Global.playerResources.water - total_colonist_usage < 0:
+		Global.playerResources.water = 0
+		Global.push_player_notification("You've run out of water!")
+		
+		take_dmg_for_no_rscs = true
+	else:
+		Global.playerResources.water -= total_colonist_usage
+	
+	# TODO: add a water cost to greenhouse food production
+	
+	# Don't stack damage if we're out of both food AND water, just do it once
+	if take_dmg_for_no_rscs:
+		change_colonists_health(-1 * daily_dmg_from_no_food_water)
+
+func handle_pollution_damage():
+	# Multiply daily pollution damage by percent player base is polluted
+	change_colonists_health(-1 * daily_dmg_from_pollution * Global.playerBaseData.pollutionLevel * Global.modifiers.pollutionDamage)
+
+# Medbay just going to heal colonists - player heals over time
+func handle_medbay():
+	for bldg in buildings:
+		if "daily_colonist_healing_amt" in bldg:
+			# If we find a/the medbay (which will have the above property), go ahead and heal colonists (daily)
+			change_colonists_health(bldg.daily_colonist_healing_amt * Global.modifiers.medbayHealing)
+			return

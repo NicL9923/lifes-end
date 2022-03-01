@@ -164,7 +164,7 @@ func place_building():
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
 	
-	Global.player.base_manager.add_building(building_node)
+	get_tree().get_current_scene().base_mgr.add_building(building_node)
 	
 	building_node = null
 	in_building_mode = false

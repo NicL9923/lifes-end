@@ -32,6 +32,7 @@ func _on_RecruitColonist_Button_pressed():
 		health = new_colonist.health
 	})
 	
+	get_tree().get_current_scene().base_mgr.add_colonist(new_colonist)
 	get_tree().get_current_scene().add_child(new_colonist)
 
 func _on_ViewStats_Button_pressed():

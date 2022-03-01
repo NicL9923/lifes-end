@@ -17,8 +17,8 @@ func _ready():
 	cur_state = STATE.IDLE
 	self.add_to_group("player_team")
 	speed = 125
-	health = 100
-	max_health = 100
+	max_health = Global.modifiers.colonistMaxHealth
+	health = max_health
 	accuracy = 50
 	bullets_to_take_cover = 10 # Default: 10
 	percent_chance_to_flee = 1 # Default: 1
@@ -31,6 +31,8 @@ func _ready():
 func _physics_process(delta):
 	handle_healthbar()
 	process_states(delta)
+	
+	max_health = Global.modifiers.colonistMaxHealth
 	
 	if health < 50 and will_flee_on_low_health:
 		enter_state(STATE.FLEEING)
