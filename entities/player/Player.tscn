@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -13,6 +13,11 @@
 [ext_resource path="res://entities/player/PlayerStatsUI.gd" type="Script" id=11]
 [ext_resource path="res://ui/CharacterScreen.png" type="Texture" id=12]
 [ext_resource path="res://ui/ResearchButton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://entities/player/Notifications.gd" type="Script" id=14]
+[ext_resource path="res://ui/resources/food.png" type="Texture" id=16]
+[ext_resource path="res://ui/resources/metal.png" type="Texture" id=17]
+[ext_resource path="res://ui/resources/water.png" type="Texture" id=18]
+[ext_resource path="res://ui/resources/energy.png" type="Texture" id=19]
 [ext_resource path="res://objects/ship.png" type="Texture" id=20]
 [ext_resource path="res://entities/player/ShipUI.gd" type="Script" id=21]
 [ext_resource path="res://entities/player/EscMenu.gd" type="Script" id=22]
@@ -20,102 +25,6 @@
 [ext_resource path="res://ui/bar_black_bg.png" type="Texture" id=24]
 [ext_resource path="res://ui/ship_upgrades.png" type="Texture" id=25]
 [ext_resource path="res://ui/fonts/Montserrat.ttf" type="DynamicFontData" id=26]
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 192, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 288, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 288, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
@@ -149,6 +58,38 @@ region = Rect2( 192, 96, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 96, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1056, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 576, 96, 96 )
@@ -180,6 +121,38 @@ region = Rect2( 192, 672, 96, 96 )
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 192, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 288, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 288, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
@@ -245,6 +218,38 @@ region = Rect2( 192, 1440, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1440, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 480, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1152, 96, 96 )
@@ -279,9 +284,9 @@ region = Rect2( 288, 1248, 96, 96 )
 
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
-"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "rightIdle",
+"name": "leftIdle",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
@@ -289,19 +294,14 @@ animations = [ {
 "name": "upRun",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
-"loop": true,
-"name": "leftRun",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "leftIdle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "rightRun",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"loop": true,
+"name": "leftRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
@@ -313,6 +313,11 @@ animations = [ {
 "loop": true,
 "name": "downRun",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
+"loop": true,
+"name": "rightIdle",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": true,
@@ -385,7 +390,6 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -429,71 +433,104 @@ __meta__ = {
 }
 
 [node name="Days_Label" type="Label" parent="UI"]
-margin_left = 448.0
+margin_left = 8.0
 margin_top = 8.0
-margin_right = 633.0
+margin_right = 113.0
 margin_bottom = 25.0
-grow_horizontal = 0
 theme = ExtResource( 9 )
 text = "Earth Days: X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notifications" type="Control" parent="UI"]
+margin_left = 448.0
+margin_right = 640.0
+margin_bottom = 40.0
+theme = ExtResource( 9 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Notifications"]
+margin_left = -8.0
+margin_top = 8.0
+margin_right = 184.0
+margin_bottom = 40.0
+grow_horizontal = 0
 align = 2
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ResourceUI" type="Control" parent="UI"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = 24.0
+margin_right = 80.0
+margin_bottom = 112.0
 theme = ExtResource( 9 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ResourceUI"]
-margin_left = 8.0
+[node name="MetalSprite" type="Sprite" parent="UI/ResourceUI"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 17 )
+
+[node name="MetalLabel" type="Label" parent="UI/ResourceUI"]
+margin_left = 32.0
 margin_top = 8.0
-margin_right = 70.0
-margin_bottom = 88.0
+margin_right = 96.0
+margin_bottom = 25.0
+theme = SubResource( 2 )
+text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MetalLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
-margin_right = 64.0
-margin_bottom = 17.0
+[node name="EnergySprite" type="Sprite" parent="UI/ResourceUI"]
+position = Vector2( 16, 40 )
+texture = ExtResource( 19 )
+
+[node name="EnergyLabel" type="Label" parent="UI/ResourceUI"]
+margin_left = 32.0
+margin_top = 29.0
+margin_right = 96.0
+margin_bottom = 46.0
 theme = SubResource( 2 )
-text = "Metal: X"
+text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EnergyLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
-margin_top = 21.0
-margin_right = 64.0
-margin_bottom = 38.0
+[node name="FoodSprite" type="Sprite" parent="UI/ResourceUI"]
+position = Vector2( 16, 56 )
+texture = ExtResource( 16 )
+
+[node name="FoodLabel" type="Label" parent="UI/ResourceUI"]
+margin_left = 32.0
+margin_top = 48.0
+margin_right = 96.0
+margin_bottom = 65.0
 theme = SubResource( 2 )
-text = "Energy: X"
+text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaterLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
-margin_top = 42.0
-margin_right = 64.0
-margin_bottom = 59.0
-theme = SubResource( 2 )
-text = "Water: X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="WaterSprite" type="Sprite" parent="UI/ResourceUI"]
+position = Vector2( 16, 80 )
+texture = ExtResource( 18 )
 
-[node name="FoodLabel" type="Label" parent="UI/ResourceUI/VBoxContainer"]
-margin_top = 63.0
-margin_right = 64.0
-margin_bottom = 80.0
+[node name="WaterLabel" type="Label" parent="UI/ResourceUI"]
+margin_left = 32.0
+margin_top = 72.0
+margin_right = 96.0
+margin_bottom = 89.0
 theme = SubResource( 2 )
-text = "Food: X"
+text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -728,7 +765,7 @@ margin_top = 144.0
 margin_right = 208.0
 margin_bottom = 184.0
 rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Efficient Construction Practices"
+research_name = "Efficient Engineering"
 research_description = "Increases build speed by 2.0x"
 
 [node name="research_10" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
@@ -739,8 +776,8 @@ margin_top = 200.0
 margin_right = 208.0
 margin_bottom = 240.0
 rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Efficient Engineering"
-research_description = "Increases craft speed by 2.0x"
+research_name = "Advanced Manufacturing"
+research_description = "Increases build speed by 3.0x"
 
 [node name="research_11" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
@@ -977,10 +1014,10 @@ position = Vector2( 320, 179 )
 texture = ExtResource( 12 )
 
 [node name="Title_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 128.0
-margin_top = 24.0
-margin_right = 192.0
-margin_bottom = 41.0
+margin_left = 144.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 49.0
 text = "Stats"
 align = 1
 __meta__ = {
@@ -1002,66 +1039,145 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 7
+frame = 1
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 56.0
-margin_right = 167.0
-margin_bottom = 73.0
+margin_left = 112.0
+margin_top = 64.0
+margin_right = 247.0
+margin_bottom = 81.0
 text = "Max Health: X"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Cmdr_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
+margin_left = 56.0
 margin_top = 96.0
-margin_right = 131.0
+margin_right = 168.0
 margin_bottom = 113.0
 text = "Commander: X"
 
 [node name="Engr_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 120.0
-margin_right = 108.0
-margin_bottom = 137.0
+margin_left = 208.0
+margin_top = 96.0
+margin_right = 296.0
+margin_bottom = 113.0
 text = "Engineer: X"
 
 [node name="Biol_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
-margin_left = 32.0
-margin_top = 144.0
-margin_right = 108.0
-margin_bottom = 161.0
+margin_left = 56.0
+margin_top = 120.0
+margin_right = 144.0
+margin_bottom = 137.0
 text = "Biologist: X"
 
 [node name="Doc_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
+margin_left = 208.0
+margin_top = 120.0
+margin_right = 288.0
+margin_bottom = 137.0
+text = "Doctor: X"
+
+[node name="Modifiers" type="Control" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
 margin_top = 168.0
-margin_right = 95.0
-margin_bottom = 185.0
-text = "Doctor: X"
+margin_right = 320.0
+margin_bottom = 248.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers"]
+margin_top = -16.0
+margin_right = 66.0
+margin_bottom = 1.0
+text = "Modifiers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers"]
+margin_right = 12.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 275, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer"]
+margin_right = 275.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 275, 80 )
+
+[node name="Dmg_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_right = 275.0
+margin_bottom = 17.0
+text = "Damage: X"
+
+[node name="Solar_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 275.0
+margin_bottom = 38.0
+text = "Solar Energy: X"
+
+[node name="Research_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 275.0
+margin_bottom = 59.0
+text = "Research Speed: X"
+
+[node name="BuildSpeed_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 63.0
+margin_right = 275.0
+margin_bottom = 80.0
+text = "Build Speed: X"
+
+[node name="FoodProd_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 275.0
+margin_bottom = 101.0
+text = "Food Production: X"
+
+[node name="WaterProd_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 105.0
+margin_right = 275.0
+margin_bottom = 122.0
+text = "Water Production: X"
+
+[node name="PollutionDmg_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 126.0
+margin_right = 275.0
+margin_bottom = 143.0
+text = "Pollution Damage: X"
+
+[node name="MetalDepValue_Lbl" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel/Modifiers/ScrollContainer/VBoxContainer"]
+margin_top = 147.0
+margin_right = 275.0
+margin_bottom = 164.0
+text = "Metal Deposit Value: X"
 
 [node name="CurColonists_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 216.0
+margin_top = 256.0
 margin_right = 167.0
-margin_bottom = 233.0
+margin_bottom = 273.0
 text = "Current Colonists: X"
 
 [node name="ColoniesDestroyed_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 240.0
-margin_right = 167.0
-margin_bottom = 257.0
+margin_top = 280.0
+margin_right = 178.0
+margin_bottom = 297.0
 text = "Colonies Destroyed: X"
 
 [node name="Alignment_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
 margin_left = 32.0
-margin_top = 296.0
+margin_top = 312.0
 margin_right = 167.0
-margin_bottom = 313.0
+margin_bottom = 329.0
 text = "Alignment: X"
 
 [node name="DevConsole" type="Control" parent="UI"]

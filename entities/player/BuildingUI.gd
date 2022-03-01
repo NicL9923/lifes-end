@@ -68,9 +68,6 @@ func generate_building_buttons():
 		bldg_btn.queue_free()
 	
 	for bldg in Global.BUILDING_TYPES:
-		if bldg == Global.BUILDING_TYPES.Carbon_Scrubber:
-			continue # Skip this as it's not implemented yet
-		
 		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
 			continue
 		
@@ -166,6 +163,8 @@ func place_building():
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
+	
+	get_tree().get_current_scene().base_mgr.add_building(building_node)
 	
 	building_node = null
 	in_building_mode = false

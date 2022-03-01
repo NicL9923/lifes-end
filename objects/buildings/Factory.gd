@@ -2,7 +2,8 @@ extends Building
 
 # TODO: makes weapons, and other things but what???
 # TODO: make pollution, but daily or probably only when actively crafting
-var seconds_to_craft = 30 / Global.modifiers.craftSpeed
+# TODO: handle power/no power states
+var seconds_to_craft = 30 / Global.modifiers.buildSpeed
 
 
 func _init():

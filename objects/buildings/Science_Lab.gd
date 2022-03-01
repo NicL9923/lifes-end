@@ -1,5 +1,6 @@
 extends Building
 
+# TODO: handle power/no power states (will likely involve some tying into Player/ResearchUI to stop adding research progress)
 # TODO: Upgrades -> faster research and more research "slots"
 const BUILDING_LIMIT := 1
 

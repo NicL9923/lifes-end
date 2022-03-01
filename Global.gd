@@ -8,22 +8,21 @@ enum RESEARCH_EFFECTS {
 	SOLAR = 1,
 	RESEARCH_SPEED = 2,
 	BUILD_SPEED = 3,
-	CRAFT_SPEED = 4,
-	FOOD = 5,
-	POLLUTION_DMG = 6,
-	METAL_DEPOSIT_VALUE = 7,
-	UNLOCK_MAINTENANCE_BLDG = 8,
-	UNLOCK_MEDBAY = 9,
-	UNLOCK_CARBON_SCRUBBER = 10,
-	UNLOCK_MINING_OPERATION = 11,
-	UNLOCK_FACTORY = 12,
-	UNLOCK_GAS_POWER = 13,
-	UNLOCK_OIL_POWER = 14,
-	UNLOCK_SMELTERY = 15,
-	UNLOCK_WORKSHOP = 16,
-	UNLOCK_GEOTHERMAL_POWER = 17,
-	UNLOCK_NUCLEAR_POWER = 18,
-	DISCOVER_YOUR_FATE = 19
+	FOOD = 4,
+	POLLUTION_DMG = 5,
+	METAL_DEPOSIT_VALUE = 6,
+	UNLOCK_MAINTENANCE_BLDG = 7,
+	UNLOCK_MEDBAY = 8,
+	UNLOCK_CARBON_SCRUBBER = 9,
+	UNLOCK_MINING_OPERATION = 10,
+	UNLOCK_FACTORY = 11,
+	UNLOCK_GAS_POWER = 12,
+	UNLOCK_OIL_POWER = 13,
+	UNLOCK_SMELTERY = 14,
+	UNLOCK_WORKSHOP = 15,
+	UNLOCK_GEOTHERMAL_POWER = 16,
+	UNLOCK_NUCLEAR_POWER = 17,
+	DISCOVER_YOUR_FATE = 18
 }
 
 #Game classes/types
@@ -46,11 +45,13 @@ const defaultModifiers = {
 	solarEnergyProduction = 1.0,
 	researchSpeed = 1.0,
 	buildSpeed = 1.0,
-	craftSpeed = 1.0,
 	foodProduction = 1.0,
 	waterProduction = 1.0,
 	pollutionDamage = 1.0,
-	metalDepositValue = 1.0
+	metalDepositValue = 1.0,
+	medbayHealing = 1.0,
+	colonistMaxHealth = 100,
+	playerHealthRecovery = 1.0
 }
 
 const defaultGameTime = { ticks = 800.0, earthDays = 0 }
@@ -164,10 +165,7 @@ func save_game():
 	
 	save_game.store_var(save_dictionary, true)
 	
-	var popup = AcceptDialog.new()
-	popup.dialog_text = "Successfully saved! (" + playerName + ".save)"
-	Global.player.get_node("UI").add_child(popup)
-	popup.popup_centered()
+	push_player_notification("Successfully saved! (" + playerName + ".save)")
 	
 	save_game.close()
 
@@ -198,6 +196,8 @@ func load_game(save_name):
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
+	player = null
+	world_nav = null
 	playerName = ""
 	playerWeaponId = -1
 	playerStats = Global.defaultPlayerStats
@@ -292,3 +292,6 @@ func planet_tile_value(ind):
 
 func player_stat_modifier_formula(value: float) -> float:
 	return (1.0 + (value * 0.1))
+
+func push_player_notification(new_notification: String) -> void:
+	player.notifications.notification_queue.append(new_notification)

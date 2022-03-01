@@ -9,12 +9,13 @@ var location_index: int
 
 
 func _ready():
+	get_tree().get_current_scene().add_child(Global.player)
+	
 	location_type = Global.location_to_load.type
 	location_index = Global.location_to_load.index
 	
 	Global.world_nav = $Navigation2D
-	$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
-	Global.player = $Player
+	Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 	
 	Global.generate_map_tiles(tilemap)
 	
@@ -28,7 +29,7 @@ func _ready():
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 
 func _physics_process(_delta):
-	$Player.get_node("UI/RTB_Button").visible = !are_enemies_present
+	Global.player.rtb_btn.visible = !are_enemies_present
 	
 	var enemy_count := 0
 	if isARaid:
@@ -42,6 +43,9 @@ func _physics_process(_delta):
 			Global.npcColonyData[location_index].isDestroyed = true
 			are_enemies_present = false
 			Global.player.toggle_combat(false)
+			Global.push_player_notification("You successfully overtook the colony!")
+			
+			# TODO: give player resources (maybe a set base amt + something based on the kind of bldgs it had)
 
 func load_npc_colony():
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]

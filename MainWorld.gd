@@ -4,15 +4,20 @@ export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
-onready var tilemap = get_node("Navigation2D/TileMap")
-onready var build_hq_btn := Global.player.get_node("UI/BuildingUI/Build_HQ_Button")
+onready var tilemap := $Navigation2D/TileMap
+onready var base_mgr := $BaseManager
+var build_hq_btn
 var areThereRemainingMetalDeposits := true
-
-# TODO: handle pollution visuals, and damage to player/colonists (daily check?)
 
 
 func _ready():
+	# Create a node to be the Global(ly instantiated) player if there isn't already one
+	if not Global.player:
+		Global.player = load("res://entities/player/Player.tscn").instance()
+	get_tree().get_current_scene().add_child(Global.player)
+	
 	Global.world_nav = $Navigation2D
+	build_hq_btn = Global.player.build_hq_btn
 	
 	var planet = Global.playerBaseData.planet
 	
@@ -29,13 +34,13 @@ func _ready():
 		generate_npc_colonies()
 		generate_resource_collection_sites()
 		
-		$Player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
+		Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 		
 		init_modifiers()
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
-		$Player.global_position = Global.playerBaseData.lastPlayerPos
+		Global.player.global_position = Global.playerBaseData.lastPlayerPos
 		
 		load_buildings()
 		load_colonists()
@@ -44,14 +49,12 @@ func _ready():
 			areThereRemainingMetalDeposits = false
 		else:
 			re_spawn_metal_deposits()
-	
-	Global.player = $Player
 
 func _physics_process(_delta):
 	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
 		build_hq_btn.disabled = false
 	
-	Global.playerBaseData.lastPlayerPos = $Player.global_position
+	Global.playerBaseData.lastPlayerPos = Global.player.global_position
 	
 	if areThereRemainingMetalDeposits:
 		var updatedMetalDepositArr := []
@@ -65,12 +68,14 @@ func init_modifiers():
 	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
 	
 	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
-	Global.modifiers.craftSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr)
 	
 	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
 	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
 	
-	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc) # TODO (doc): increased max health for allied colonists too + faster health recovery for player only + more effective medbay
+	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.medbayHealing *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.colonistMaxHealth *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.playerHealthRecovery *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	
 	# Set Global.modifiers based on planet traits
 	match Global.playerBaseData.planet:
@@ -193,6 +198,7 @@ func load_buildings():
 		building_node.isPlayerBldg = true
 		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
+		base_mgr.add_building(building_node)
 		add_child(building_node)
 
 func load_colonists():
@@ -201,4 +207,5 @@ func load_colonists():
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
+		base_mgr.add_colonist(loaded_colonist)
 		add_child(loaded_colonist)

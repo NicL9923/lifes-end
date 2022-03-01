@@ -3,6 +3,8 @@ extends Control
 onready var tn_highlight = $Planet_Thumbnail_Container/Highlight
 onready var planet_name_lbl = $PlanetName_Label
 onready var planet_sprite = $Planet_Sprite
+onready var trait1_lbl = $TraitsRect/Trait1_Lbl
+onready var trait2_lbl = $TraitsRect/Trait2_Lbl
 
 var currently_selected_planet := 2
 
@@ -39,24 +41,20 @@ func display_planet(planet_index):
 	# Display planet traits
 	match plt_name:
 		"Mercury":
-			pass
-			# Sol Amplexus (2.5x solar production)
-			# Sparsely populated
-			# Resource rich
+			trait1_lbl.text = "-Sol Amplexus (2.5x solar production)"
+			trait2_lbl.text = "-Resource rich"
 		"Venus":
-			pass # Volatile (more natural events - less raids)
+			trait1_lbl.text = "-Volatile (more natural events - less raids)"
+			trait2_lbl.text = ""
 		"Earth's Moon":
-			pass
-			# Dark Side of the Moon (0.75x solar production)
-			# Close to Home (Heavily populated)
+			trait1_lbl.text = "-Dark Side of the Moon (.75x solar production)"
+			trait2_lbl.text = "-Close to Home (Heavily populated)"
 		"Mars":
-			pass
-			# Polar Ice Caps (2x water production)
-			# The Next Frontier (Heavily populated)
+			trait1_lbl.text = "-Polar Ice Caps (2x water production)"
+			trait2_lbl.text = "-The Next Frontier (Heavily populated)"
 		"Pluto":
-			pass
-			# Isolated
-			# Resource rich
+			trait1_lbl.text = "-Isolated"
+			trait2_lbl.text = "-Resource rich"
 	
 	update_thumbnail_highlight_pos()
 

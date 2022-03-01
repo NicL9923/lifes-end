@@ -2,7 +2,7 @@ extends Building
 
 # TODO: makes weapons, and other things but what??? -> see factory
 # TODO: crafts slower than factory
-var seconds_to_craft = 60 / Global.modifiers.craftSpeed
+var seconds_to_craft = 60 / Global.modifiers.buildSpeed
 
 
 func _init():

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HQ.png-b71382892f33a9e206c36d9e7cc54c03.stex"
+path="res://.import/communications_array.png-bec6c44a1c4545f749f4015c15740ced.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/buildings/HQ.png"
-dest_files=[ "res://.import/HQ.png-b71382892f33a9e206c36d9e7cc54c03.stex" ]
+source_file="res://objects/buildings/communications_array.png"
+dest_files=[ "res://.import/communications_array.png-bec6c44a1c4545f749f4015c15740ced.stex" ]
 
 [params]
 

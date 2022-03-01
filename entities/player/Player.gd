@@ -1,10 +1,11 @@
 extends KinematicBody2D
 class_name Player
 
-export var health := 100
+export var health := 100.0
 export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
+export var health_recovered_per_second := 1
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
 onready var animatedSprite = $AnimatedSprite
@@ -23,6 +24,7 @@ var gun_angle: float
 onready var camera := $Camera2D
 onready var healthbar := $UI/Healthbar
 onready var earth_days_lbl := $UI/Days_Label
+onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var research_ui := $UI/ResearchUI
 onready var crafting_ui := $UI/CraftingUI
@@ -30,10 +32,12 @@ onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
+onready var base_manager := $BaseManager
+onready var rtb_btn := $UI/RTB_Button
+onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 
 
 func _ready():
-	Global.player = self
 	self.add_to_group("player_team")
 	
 	# Hide these in case we leave it visible in the editor by accident
@@ -49,6 +53,8 @@ func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
 	check_if_ui_open()
+	
+	health += (delta * Global.modifiers.playerHealthRecovery * health_recovered_per_second)
 	
 	healthbar.value = health
 	healthbar.max_value = Global.playerStats.max_health
@@ -145,9 +151,10 @@ func take_damage(dmg_amt):
 	if health == 0:
 		die()
 
-func die(): # TODO - maybe respawn back at colony and lose some resources?
-	print("Player is deaded")
-	pass
+func die():
+	Global.push_player_notification("You've met Life's End.")
+	
+	# TODO - maybe respawn back at colony and lose some resources? (slow fade to black)
 
 func check_if_ui_open():
 	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
@@ -156,4 +163,5 @@ func check_if_ui_open():
 		ui_is_open = false
 
 func _on_RTB_Button_pressed():
+	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	get_tree().change_scene("res://MainWorld.tscn")
