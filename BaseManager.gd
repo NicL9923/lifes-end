@@ -132,7 +132,8 @@ func handle_food_and_water_usage():
 		change_colonists_health(-1 * daily_dmg_from_no_food_water)
 
 func handle_pollution_damage():
-	change_colonists_health(-1 * daily_dmg_from_pollution * Global.modifiers.pollutionDamage)
+	# Multiply daily pollution damage by percent player base is polluted
+	change_colonists_health(-1 * daily_dmg_from_pollution * Global.playerBaseData.pollutionLevel * Global.modifiers.pollutionDamage)
 
 # Medbay just going to heal colonists - player heals over time
 func handle_medbay():
