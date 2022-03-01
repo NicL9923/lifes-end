@@ -134,6 +134,10 @@ func handle_food_and_water_usage():
 func handle_pollution_damage():
 	change_colonists_health(-1 * daily_dmg_from_pollution * Global.modifiers.pollutionDamage)
 
+# Medbay just going to heal colonists - player heals over time
 func handle_medbay():
-	change_colonists_health(1)
-	pass # TODO: heal all player + colonists a certain amt (check doc modifier init in MainWorld)
+	for bldg in buildings:
+		if "daily_colonist_healing_amt" in bldg:
+			# If we find a/the medbay (which will have the above property), go ahead and heal colonists (daily)
+			change_colonists_health(bldg.daily_colonist_healing_amt * Global.modifiers.medbayHealing)
+			return
