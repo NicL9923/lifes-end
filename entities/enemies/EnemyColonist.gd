@@ -26,7 +26,7 @@ func _ready():
 	current_weapons = [$Position2D/Rifle]
 	currentWeapon = current_weapons[selectedWeaponIdx]
 
-func _physics_process(delta):
+func _process(delta):
 	handle_healthbar()
 	process_states(delta)
 	
@@ -115,11 +115,13 @@ func process_taking_cover(delta):
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		enter_state(STATE.PATROLLING)
 		return
 	
 	# Advance towards closest hostile
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
 		enter_state(STATE.ATTACKING)
@@ -130,6 +132,7 @@ func process_advancing(delta):
 func process_attacking(delta):
 	# If no more enemies present in LoS, enter_state(patrolling)
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		reset_weapon_rotation()
 		enter_state(STATE.PATROLLING)
 		return
@@ -137,7 +140,8 @@ func process_attacking(delta):
 	handle_idle_anim()
 	
 	# Find closest hostile and engage them
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	# Rotate weapon towards entity we're attacking
 		# TODO: predict player_team entities position w/ var accuracy (using current motion)

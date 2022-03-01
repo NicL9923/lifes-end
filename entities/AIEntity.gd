@@ -21,6 +21,7 @@ var timer := -1.0 # a value of -1.0 is "null" state
 var last_movement_dir
 var next_patrol_point
 var last_known_player_team_pos
+var closest_hostile
 var hostiles_in_los := []
 var potential_cover_in_los := []
 var num_bullets_in_los := 0

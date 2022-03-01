@@ -6,6 +6,7 @@ var remaining_enemies := 0
 var isARaid := false
 var location_type: String
 var location_index: int
+var colony_destroyed := false
 
 
 func _ready():
@@ -39,7 +40,8 @@ func _physics_process(_delta):
 		
 		remaining_enemies = enemy_count
 		
-		if remaining_enemies == 0:
+		if remaining_enemies == 0 and not colony_destroyed:
+			colony_destroyed = true # Only trigger this block once after all enemies have been deaded
 			Global.npcColonyData[location_index].isDestroyed = true
 			are_enemies_present = false
 			Global.player.toggle_combat(false)

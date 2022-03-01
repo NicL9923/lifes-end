@@ -8,7 +8,3 @@ func _init():
 	cost_to_build = 15
 	bldg_name = "Coal Power Plant"
 	bldg_desc = "Produces " + str(energy_produced) + " Energy, and " + str(pollution_produced_per_day) + " Pollution per day"
-	energy_cost_to_run = 3
-
-func _process(delta):
-	handle_energy_display(delta)
