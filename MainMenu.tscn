@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://ui/MainMenuBG.png" type="Texture" id=2]
-[ext_resource path="res://objects/ship.png" type="Texture" id=3]
+[ext_resource path="res://objects/$plz.png" type="Texture" id=2]
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
-[ext_resource path="res://ui/Earth.png" type="Texture" id=5]
-[ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=6]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=7]
 
 [sub_resource type="Animation" id=1]
@@ -63,6 +60,190 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 485, 240 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 2 )
+region = Rect2( 3840, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 2 )
+region = Rect2( 5120, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 2 )
+region = Rect2( 6400, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 2 )
+region = Rect2( 7680, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 2 )
+region = Rect2( 1280, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 2 )
+region = Rect2( 2560, 4320, 1280, 720 )
+
+[sub_resource type="SpriteFrames" id=47]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,56 +257,17 @@ __meta__ = {
 anims/RESET = SubResource( 1 )
 anims/transition_to_char_creation = SubResource( 2 )
 
-[node name="MainMenuBg" type="Sprite" parent="."]
-position = Vector2( 320, 180 )
-texture = ExtResource( 2 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = 0.0510079
 anchor_mode = 0
 current = true
 
-[node name="WindowView" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Earth" type="Sprite" parent="WindowView"]
-position = Vector2( 392, 144 )
-scale = Vector2( 0.562499, 0.558271 )
-texture = ExtResource( 5 )
-
-[node name="Ship" type="Sprite" parent="WindowView/Earth"]
-position = Vector2( 14.2222, -71.6499 )
-scale = Vector2( 0.125001, 0.125001 )
-texture = ExtResource( 3 )
-
-[node name="Ship2" type="Sprite" parent="WindowView/Earth"]
-position = Vector2( 28.4448, -57.3198 )
-scale = Vector2( 0.125001, 0.125001 )
-texture = ExtResource( 3 )
-
-[node name="Ship3" type="Sprite" parent="WindowView/Earth"]
-position = Vector2( 42.667, -71.6499 )
-scale = Vector2( 0.125001, 0.125001 )
-texture = ExtResource( 3 )
-
-[node name="Ship4" type="Sprite" parent="WindowView/Earth"]
-position = Vector2( 56.8892, -42.99 )
-scale = Vector2( 0.125001, 0.125001 )
-texture = ExtResource( 3 )
-
-[node name="Ship5" type="Sprite" parent="WindowView/Earth"]
-position = Vector2( 0, -57.3198 )
-scale = Vector2( 0.125001, 0.125001 )
-texture = ExtResource( 3 )
-
-[node name="Moon" type="Sprite" parent="WindowView"]
-position = Vector2( 520, 96 )
-scale = Vector2( 0.265625, 0.265625 )
-texture = ExtResource( 6 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 319, 180 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 47 )
+frame = 9
+playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
 margin_right = 40.0
