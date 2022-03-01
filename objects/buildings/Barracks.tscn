@@ -81,5 +81,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 2 )
 
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="PopupUI/RecruitColonist_Button" to="." method="_on_RecruitColonist_Button_pressed"]
 [connection signal="pressed" from="PopupUI/ViewStats_Button" to="." method="_on_ViewStats_Button_pressed"]
