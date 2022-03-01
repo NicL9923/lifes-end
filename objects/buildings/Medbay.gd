@@ -9,3 +9,6 @@ func _init():
 	bldg_name = "Medbay"
 	bldg_desc = "Heals colonists by " + str(daily_colonist_healing_amt) + " per day"
 	has_to_be_unlocked = true
+
+func _process(delta):
+	handle_energy_display(delta)

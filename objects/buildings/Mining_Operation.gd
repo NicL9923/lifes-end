@@ -9,3 +9,6 @@ func _init():
 	bldg_desc = "Produces " + str(metal_produced_per_day) + " Metal and " + str(pollution_produced_per_day) + " Pollution per day"
 	has_to_be_unlocked = true
 	energy_cost_to_run = 2
+
+func _process(delta):
+	handle_energy_display(delta)

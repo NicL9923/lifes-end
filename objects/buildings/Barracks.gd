@@ -12,7 +12,8 @@ func _init():
 func _ready():
 	cost_to_recruit_colonist *= Global.player_stat_modifier_formula(Global.playerStats.cmdr)
 
-func _process(_delta):
+func _process(delta):
+	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 	
 	if Global.playerResources.metal < cost_to_recruit_colonist or not self.has_energy:

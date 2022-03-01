@@ -10,7 +10,8 @@ func _init():
 	bldg_name = "Science Lab"
 	bldg_desc = "Allows the player to conduct research"
 
-func _process(_delta):
+func _process(delta):
+	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 
 func _on_Research_Button_pressed():
