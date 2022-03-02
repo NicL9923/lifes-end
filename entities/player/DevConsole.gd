@@ -58,6 +58,7 @@ func execute_dev_commands():
 		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
 		output_to_add.append("instant_build - instantly build buildings")
 		output_to_add.append("push_player_notification x - pushes a player notification that says x")
+		output_to_add.append("trigger_event x - starts event (0 - acidic rain/1 - intense freeze/2 - npc raid/ 3 - solar flare)")
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
 	elif cmdTxt[0] == "god":
@@ -86,6 +87,16 @@ func execute_dev_commands():
 		output_to_add.append("Instant build " + ("on" if Global.debug.instant_build else "off"))
 	elif cmdTxt[0] == "push_player_notification" and cmdTxt[1] != null:
 		Global.push_player_notification(cmdTxt[1])
+	elif cmdTxt[0] == "trigger_event" and cmdTxt[1] != null:
+		if get_tree().get_current_scene().name != "MainWorld":
+			output_to_add.append("Events can only be triggered in MainWorld!")
+			return
+		
+		match int(cmdTxt[1]):
+			0: get_tree().get_current_scene().event_mgr.event_acidic_rain()
+			1: get_tree().get_current_scene().event_mgr.event_intense_freeze()
+			2: get_tree().get_current_scene().event_mgr.event_npc_raid()
+			3: get_tree().get_current_scene().event_mgr.event_solar_flare()
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld
 		var path = "res://" + cmdTxt[1] + ".tscn"
 		get_tree().change_scene(path)

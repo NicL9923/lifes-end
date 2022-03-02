@@ -6,6 +6,7 @@ export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
 onready var tilemap := $Navigation2D/TileMap
 onready var base_mgr := $BaseManager
+onready var event_mgr := $EventManager
 var build_hq_btn
 var areThereRemainingMetalDeposits := true
 
