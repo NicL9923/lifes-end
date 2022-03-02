@@ -56,7 +56,7 @@ func execute_dev_commands():
 		output_to_add.append("set_time 0-2400 - sets time of day to given num")
 		output_to_add.append("set_day x - sets game Earth days passed to x")
 		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
-		output_to_add.append("set_build_speed x - sets build speed modifier")
+		output_to_add.append("instant_build - instantly build buildings")
 		output_to_add.append("push_player_notification x - pushes a player notification that says x")
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
 		output_to_add.append("clear_saves - removes all save files in default directory")
@@ -81,9 +81,9 @@ func execute_dev_commands():
 	elif cmdTxt[0] == "set_time_speed" and cmdTxt[1] != null:
 		Global.time_speed = int(cmdTxt[1])
 		output_to_add.append("Set time speed to " + cmdTxt[1])
-	elif cmdTxt[0] == "set_time_speed" and cmdTxt[1] != null:
-		Global.modifiers.buildSpeed = float(cmdTxt[1])
-		output_to_add.append("Set building speed modifier to " + cmdTxt[1])
+	elif cmdTxt[0] == "instant_build":
+		Global.debug.instant_build = !Global.debug.instant_build
+		output_to_add.append("Instant build " + ("on" if Global.debug.instant_build else "off"))
 	elif cmdTxt[0] == "push_player_notification" and cmdTxt[1] != null:
 		Global.push_player_notification(cmdTxt[1])
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld

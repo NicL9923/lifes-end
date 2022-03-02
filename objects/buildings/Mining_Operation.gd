@@ -11,4 +11,5 @@ func _init():
 	energy_cost_to_run = 2
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)

@@ -13,6 +13,7 @@ func _init():
 	has_to_be_unlocked = true
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)
 
 func _on_Upgrade_Button_pressed():

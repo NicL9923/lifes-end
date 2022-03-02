@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://objects/buildings/shipyard.png" type="Texture" id=1]
 [ext_resource path="res://objects/buildings/Shipyard.gd" type="Script" id=2]
 [ext_resource path="res://ui/PopupBox.png" type="Texture" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
+[ext_resource path="res://ui/radial-bg.png" type="Texture" id=6]
+[ext_resource path="res://ui/radial-fg.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 45, 41 )
@@ -35,6 +37,19 @@ __meta__ = {
 [node name="EnergyIcon" type="Sprite" parent="."]
 scale = Vector2( 2.125, 2.125 )
 texture = ExtResource( 5 )
+
+[node name="BuildingProgress" type="TextureProgress" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 112.0
+margin_bottom = 112.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 3 )

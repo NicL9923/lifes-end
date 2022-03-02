@@ -132,7 +132,8 @@ var debug = {
 		output_stream = [],
 		current_history_index = 0
 	},
-	god_mode = false
+	god_mode = false,
+	instant_build = false
 }
 
 ############### FUNCTIONS ##################

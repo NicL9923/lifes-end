@@ -12,6 +12,7 @@ func _init():
 	energy_cost_to_run = 5
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 	

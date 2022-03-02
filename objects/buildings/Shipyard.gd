@@ -10,6 +10,7 @@ func _init():
 	bldg_desc = "Allows the player to upgrade their ship"
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 
