@@ -6,6 +6,7 @@ func _init():
 	cost_to_build = Global.cost_to_build_HQ
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 

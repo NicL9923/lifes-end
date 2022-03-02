@@ -149,6 +149,8 @@ func place_building():
 	# Place building on map
 	building_node.modulate.a = 1.0
 	building_node.isBeingPlaced = false
+	if not Global.debug.instant_build:
+		building_node.isBeingBuilt = true
 	building_node.isPlayerBldg = true
 	building_node.bldgLvl = 1
 	Global.playerResources.metal -= building_node.cost_to_build

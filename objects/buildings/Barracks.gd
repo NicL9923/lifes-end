@@ -13,6 +13,7 @@ func _ready():
 	cost_to_recruit_colonist *= Global.player_stat_modifier_formula(Global.playerStats.cmdr)
 
 func _process(delta):
+	._process(delta)
 	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 	

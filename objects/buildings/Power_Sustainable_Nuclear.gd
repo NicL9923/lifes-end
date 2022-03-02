@@ -8,3 +8,6 @@ func _init():
 	bldg_name = "Nuclear Power Plant"
 	bldg_desc = "Produces " + str(energy_produced) + " Energy"
 	has_to_be_unlocked = true
+
+func _process(delta):
+	._process(delta)

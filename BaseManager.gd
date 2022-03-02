@@ -31,7 +31,7 @@ func handle_new_day():
 	# NOTE: building nodes are responsible for maintaining how much they should be producing per day (i.e. based on bldg_level, etc)
 func handle_rsc_production():
 	for bldg in buildings:
-		if bldg.has_energy and not bldg.isBeingPlaced:
+		if bldg.has_energy and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			if "metal_produced_per_day" in bldg:
 				add_metal(bldg.metal_produced_per_day)
 			
@@ -51,7 +51,7 @@ func handle_energy_production():
 	var total_energy_produced := 0
 	
 	for bldg in buildings:
-		if "energy_produced" in bldg:
+		if "energy_produced" in bldg and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			total_energy_produced += bldg.energy_produced
 	
 	Global.playerResources.energy = total_energy_produced
@@ -138,7 +138,7 @@ func handle_pollution_damage():
 # Medbay just going to heal colonists - player heals over time
 func handle_medbay():
 	for bldg in buildings:
-		if "daily_colonist_healing_amt" in bldg:
+		if "daily_colonist_healing_amt" in bldg and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			# If we find a/the medbay (which will have the above property), go ahead and heal colonists (daily)
 			change_colonists_health(bldg.daily_colonist_healing_amt * Global.modifiers.medbayHealing)
 			return
