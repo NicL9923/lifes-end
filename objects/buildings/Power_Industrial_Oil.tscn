@@ -6,10 +6,10 @@
 [ext_resource path="res://ui/radial-fg.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 42, 33.5 )
+extents = Vector2( 64, 61.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 42, 33.5 )
+extents = Vector2( 64, 61.5 )
 
 [node name="Power_Industrial_Oil" type="Area2D"]
 script = ExtResource( 1 )
@@ -45,7 +45,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2, -6.5 )
+position = Vector2( 0, -2.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -54,4 +54,5 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, -2.5 )
 shape = SubResource( 2 )

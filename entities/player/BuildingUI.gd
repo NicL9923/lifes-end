@@ -82,7 +82,8 @@ func generate_building_buttons():
 		
 		var bldg_sprite = Sprite.new()
 		bldg_sprite.texture = load(base_bldg_path + bldg.to_lower() + ".png")
-		bldg_sprite.scale = Vector2(0.75, 0.75)
+		print(bldg_sprite.texture.get_size())
+		bldg_sprite.scale = Vector2(72 / bldg_sprite.texture.get_size().x, 72 / bldg_sprite.texture.get_size().y)
 		new_bldg_btn.add_child(bldg_sprite)
 		bldg_sprite.position = Vector2(50, new_bldg_btn.rect_min_size.y / 2)
 		
