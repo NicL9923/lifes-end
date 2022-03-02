@@ -9,7 +9,7 @@
 extents = Vector2( 42, 33.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 42, 33.5 )
+extents = Vector2( 42.5, 33.75 )
 
 [node name="Power_Industrial_Coal" type="Area2D"]
 script = ExtResource( 2 )
@@ -54,4 +54,5 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1.5, -6.75 )
 shape = SubResource( 2 )

@@ -12,7 +12,7 @@
 extents = Vector2( 42, 33.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 42, 33.5 )
+extents = Vector2( 42.5, 33.5 )
 
 [node name="Communications_Array" type="Area2D"]
 script = ExtResource( 3 )
@@ -85,6 +85,7 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1.5, -7 )
 shape = SubResource( 2 )
 
 [connection signal="pressed" from="PopupUI/WorldMap_Button" to="." method="_on_WorldMap_Button_pressed"]

@@ -9,10 +9,10 @@
 [ext_resource path="res://ui/radial-fg.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 45, 41 )
+extents = Vector2( 45, 38.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 45, 41 )
+extents = Vector2( 45, 38.5 )
 
 [node name="Shipyard" type="Area2D"]
 script = ExtResource( 2 )
@@ -52,7 +52,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 3 )
+position = Vector2( -1, 5.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -85,6 +85,7 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -1, 5.5 )
 shape = SubResource( 2 )
 
 [connection signal="pressed" from="PopupUI/ShipUpgrade_Button" to="." method="_on_ShipUpgrade_Button_pressed"]

@@ -6,10 +6,10 @@
 [ext_resource path="res://ui/radial-fg.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 36 )
+extents = Vector2( 64, 64 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40, 36 )
+extents = Vector2( 64, 64 )
 
 [node name="Power_Sustainable_Geothermal" type="Area2D"]
 script = ExtResource( 2 )
@@ -45,7 +45,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
