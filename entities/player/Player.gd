@@ -32,7 +32,6 @@ onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
-onready var base_manager := $BaseManager
 onready var rtb_btn := $UI/RTB_Button
 onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 

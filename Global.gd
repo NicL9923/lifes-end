@@ -476,7 +476,7 @@ func generate_random_tile(cell_type):
 	return int(rand_range(range_vector.x, range_vector.y))
 	
 func planet_tile_value(ind):
-	var planet = Global.playerBaseData.planet
+	var planet = playerBaseData.planet
 	
 	match planet:
 		"Mars": return ind

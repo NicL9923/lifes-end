@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 export var depositValue := 3
-export var collectionDist := 35
+export var collectionDist := 35.0
 var canBeCollected := false
 
 

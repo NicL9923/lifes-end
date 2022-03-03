@@ -29,11 +29,11 @@ var energy_produced = null
 var pollution_produced_per_day = null
 var pollution_removed_per_day = null
 
-onready var col_hlt := get_node("CollisionHighlight")
-onready var static_body := get_node("StaticBody2D")
-onready var bldg_progr := get_node("BuildingProgress")
-onready var bldg_sprite := get_node("BuildingSprite")
-onready var popup_panel := get_node("PopupUI")
+onready var col_hlt := $CollisionHighlight
+onready var static_body := $StaticBody2D
+onready var bldg_progr := $BuildingProgress
+onready var bldg_sprite := $BuildingSprite
+onready var popup_panel := $PopupUI
 
 # TODO: Need to handle bldg levels (and those w/o any)
 	# Probably handle most of this in BaseManager?
@@ -47,8 +47,8 @@ onready var popup_panel := get_node("PopupUI")
 	# Probably need to start giving buildings unique IDs (or something to track it in both playerBaseData and game tree)
 
 
-func init(bldg_key, bldg_template_obj, building_lvl):
-	self.bldg_key = bldg_key
+func init(b_key, bldg_template_obj, building_lvl):
+	self.bldg_key = b_key
 	bldg_name = bldg_template_obj.bldg_name
 	bldg_desc = bldg_template_obj.bldg_desc
 	cost_to_build = bldg_template_obj.cost_to_build
@@ -98,8 +98,6 @@ func _ready():
 	col_hlt.rect_position = Vector2(-1 * col_hlt.rect_size.x / 2, -1 * col_hlt.rect_size.y / 2)
 	$CollisionShape2D.shape.extents = sprite_size / 2
 	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
-	
-	# TODO: set EnergyIcon and BuildingProgress to center (may not need to be moved if default to (0, 0)
 	
 	if popup != null:
 		generate_and_connect_popup()

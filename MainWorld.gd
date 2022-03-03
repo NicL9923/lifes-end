@@ -20,8 +20,6 @@ func _ready():
 	Global.world_nav = $Navigation2D
 	build_hq_btn = Global.player.build_hq_btn
 	
-	var planet = Global.playerBaseData.planet
-	
 	Global.generate_map_tiles(tilemap)
 	
 	Global.set_player_camera_bounds(tilemap.get_used_rect())

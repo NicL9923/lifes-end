@@ -21,7 +21,7 @@ func _physics_process(_delta):
 func handle_building_placement():
 	#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
 	var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
-	building_node.global_position = snapped_mouse_pos + (Vector2.ONE * (Global.cellSize / 2))
+	building_node.global_position = snapped_mouse_pos
 	
 	if Input.is_action_pressed("ui_cancel"):
 		in_building_mode = false
@@ -62,7 +62,7 @@ func is_building_unlocked(bldg_key):
 	
 	return false
 
-# Since we generate them based on the order of Global.BUILDING_TYPES, we can safely assume that order stays the same when referencing it elsewhere
+# Since we generate them based on the order of Global.buildings, we can safely assume that order stays the same when referencing it elsewhere
 func generate_building_buttons():
 	for bldg_btn in building_button_box.get_children():
 		bldg_btn.queue_free()
@@ -141,7 +141,7 @@ func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
 		building_node.get_child(0).color = Color(0.0, 1.0, 0.0, highlight_opacity)
 		
-		if Input.is_action_pressed("shoot"):
+		if Input.is_action_just_pressed("shoot"):
 			place_building()
 	else:
 		building_node.get_child(0).color = Color(1.0, 0.0, 0.0, highlight_opacity)

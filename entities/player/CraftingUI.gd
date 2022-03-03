@@ -7,8 +7,8 @@ var isFactory := false # TODO: use this when calculating if pollution is produce
 func _ready():
 	pass
 
-func show_crafting_ui(isFactory: bool):
-	self.isFactory = isFactory
+func show_crafting_ui(is_factory: bool):
+	self.isFactory = is_factory
 	self.visible = true
 
 func _on_Close_Button_pressed():
