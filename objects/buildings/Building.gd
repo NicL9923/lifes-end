@@ -90,12 +90,16 @@ func init(b_key, bldg_template_obj, building_lvl):
 	handle_special_bldg_cases(bldg_template_obj)
 
 func _ready():
-	bldg_sprite.texture= load("res://objects/buildings/" + bldg_key.to_lower() + ".png")
+	bldg_sprite.texture = load("res://objects/buildings/" + bldg_key.to_lower() + ".png")
 	var sprite_size = bldg_sprite.texture.get_size()
 	
 	col_hlt.rect_size = sprite_size
 	col_hlt.rect_position = Vector2(-1 * col_hlt.rect_size.x / 2, -1 * col_hlt.rect_size.y / 2)
+	
+	$CollisionShape2D.shape = RectangleShape2D.new()
 	$CollisionShape2D.shape.extents = sprite_size / 2
+	
+	static_body.get_node("CollisionShape2D").shape = RectangleShape2D.new()
 	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
 	
 	if popup != null:

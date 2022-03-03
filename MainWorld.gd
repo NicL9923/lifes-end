@@ -162,8 +162,8 @@ func generate_npc_colonies():
 		
 		# TODO: Randomly generate other buildings within npc colony
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
-		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.HQ, global_pos = Vector2(0, 0), building_lvl = 1 })
-		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.Barracks, global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
 		
 		Global.npcColonyData.append(newNpcColony)
 

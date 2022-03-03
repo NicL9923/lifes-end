@@ -12,7 +12,7 @@ const base_bldg_path := "res://objects/buildings/"
 func _ready():
 	generate_building_buttons()
 
-func _physics_process(_delta):
+func _process(_delta):
 	if in_building_mode:
 		handle_building_placement()
 	
@@ -23,7 +23,7 @@ func handle_building_placement():
 	var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
 	building_node.global_position = snapped_mouse_pos
 	
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		in_building_mode = false
 		building_node.queue_free()
 		building_node = null
@@ -135,7 +135,7 @@ func start_building(bldg_key: String):
 	building_node.modulate.a = 0.75
 	building_node.isBeingPlaced = true
 	building_node.get_node("CollisionHighlight").visible = true
-	get_tree().get_current_scene().add_child(building_node) # Note: Second child of root is scene's top level node (first is utils)
+	get_tree().get_current_scene().add_child(building_node)
 
 func check_building_placement():
 	if building_node.get_overlapping_bodies().size() == 0:
