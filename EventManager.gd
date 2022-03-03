@@ -15,6 +15,7 @@ func _ready():
 	connect_to_daynight_cycle()
 
 func connect_to_daynight_cycle():
+# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 # Check if day will have event, and then check which event will happen
