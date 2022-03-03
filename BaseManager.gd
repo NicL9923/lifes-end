@@ -19,6 +19,7 @@ func _physics_process(_delta):
 	handle_energy_distribution()
 
 func connect_to_daynight_cycle():
+# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 func handle_new_day():

@@ -77,6 +77,7 @@ func connect_research_buttons():
 		btn.connect("pressed", self, "set_current_research", [research_id])
 
 func connect_to_daynight_cycle():
+# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 func handle_new_day():
@@ -148,6 +149,7 @@ func handle_building_unlock(effect_id):
 func handle_ending_trigger():
 	# TODO: fade out to white then fade in to ending cinematic
 	
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
 
 func _on_Close_Button_pressed():

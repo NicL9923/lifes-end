@@ -387,6 +387,7 @@ func load_game(save_name):
 	save_game.close()
 	
 	# Load the MainWorld scene now that we've parsed in the save data
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():

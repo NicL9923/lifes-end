@@ -29,6 +29,7 @@ var pollution_produced_per_day = null
 var pollution_removed_per_day = null
 
 onready var col_hlt := $CollisionHighlight
+onready var energy_icon := $EnergyIcon
 onready var static_body := $StaticBody2D
 onready var bldg_progr := $BuildingProgress
 onready var bldg_sprite := $BuildingSprite
@@ -109,15 +110,14 @@ func _ready():
 	bldg_progr.visible = false
 
 func _process(delta):
-	if isBeingBuilt:
-		handle_building_building(delta)
-	
 	if popup != null:
 		popup_panel.visible = is_player_in_popup_distance()
 		
 		for btn in popup_panel.get_children():
 			btn.disabled = not self.has_energy
 	
+	if isBeingBuilt:
+		handle_building_building(delta)
 	handle_energy_display(delta)
 
 func generate_and_connect_popup():
@@ -169,23 +169,18 @@ func is_player_in_popup_distance():
 	return (Global.player.position.distance_to(self.position) < popup_activation_distance and !Global.player.isInCombat and !isBeingPlaced)
 
 func handle_building_building(delta):
-	var bldg_radial_progress := get_node("BuildingProgress")
-	
-	if cur_seconds_to_build <= 0:
-		bldg_radial_progress.value = 100
-		isBeingBuilt = false
+	if cur_seconds_to_build <= 0.0:
+		bldg_progr.visible = false
 		bldg_sprite.self_modulate = Color(1, 1, 1)
-		bldg_radial_progress.visible = false
+		bldg_progr.value = 100
+		isBeingBuilt = false
 	else:
-		bldg_radial_progress.visible = true
-		cur_seconds_to_build -= delta
 		bldg_sprite.self_modulate = Color(0.25, 0.25, 0.25) # Darken the building
-		bldg_radial_progress.value = ((sec_to_build - cur_seconds_to_build) / sec_to_build) * 100
-		
+		bldg_progr.visible = true
+		cur_seconds_to_build -= delta
+		bldg_progr.value = ((sec_to_build - cur_seconds_to_build) / sec_to_build) * 100
 
 func handle_energy_display(delta):
-	var energy_icon = get_node("EnergyIcon")
-	
 	if self.has_energy:
 		energy_icon.visible = false
 		bldg_sprite.self_modulate = Color(1, 1, 1)
@@ -224,6 +219,7 @@ func _on_ViewStats_Button_pressed():
 
 func _on_SystemMap_Button_pressed():
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://SystemMap.tscn")
 
 func _on_Craft_Button_pressed():

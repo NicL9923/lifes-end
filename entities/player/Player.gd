@@ -78,6 +78,7 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	player_animation(input_vector)
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
@@ -164,4 +165,5 @@ func check_if_ui_open():
 func _on_RTB_Button_pressed():
 	Global.player.rtb_btn.visible = false
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
+# warning-ignore:return_value_discarded
 	Global.get_tree().change_scene("res://MainWorld.tscn")
