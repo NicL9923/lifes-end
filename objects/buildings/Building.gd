@@ -118,7 +118,8 @@ func _process(delta):
 	
 	if isBeingBuilt:
 		handle_building_building(delta)
-	handle_energy_display(delta)
+	else:
+		handle_energy_display(delta)
 
 func generate_and_connect_popup():
 	popup_panel.rect_size.x = 125

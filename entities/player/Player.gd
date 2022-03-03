@@ -82,25 +82,25 @@ func player_movement():
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
-	#right animations
+	# Right animations
 	if input_vector.x > 0:
 		animatedSprite.play("rightRun")
 	elif Input.is_action_just_released("ui_right"):
 		animatedSprite.play("rightIdle")
 		
-	#left animations
+	# Left animations
 	if input_vector.x < 0:
 		animatedSprite.play("leftRun")
 	elif Input.is_action_just_released("ui_left"):
 		animatedSprite.play("leftIdle")
 	
-	#down animations
+	# Down animations
 	if input_vector.y > 0 and input_vector.x == 0:
 		animatedSprite.play("downRun")
 	elif Input.is_action_just_released("ui_down"):
 		animatedSprite.play("downIdle")
 	
-	#up animations
+	# Up animations
 	if input_vector.y < 0 and input_vector.x == 0:
 		animatedSprite.play("upRun")
 	elif Input.is_action_just_released("ui_up"):
