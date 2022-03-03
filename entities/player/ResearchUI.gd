@@ -113,10 +113,10 @@ func load_completed_research():
 
 func handle_completed_research(research_id):
 	# Set flag/effect of completed research
-	if research_tree[cur_research_id].effect.id >= Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG:
-		handle_building_unlock(research_tree[cur_research_id].effect.id)
+	if research_tree[research_id].effect.id >= Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG:
+		handle_building_unlock(research_tree[research_id].effect.id)
 	else:
-		handle_modifier_update(research_tree[cur_research_id].effect.id, research_tree[cur_research_id].effect.value)
+		handle_modifier_update(research_tree[research_id].effect.id, research_tree[research_id].effect.value)
 
 func handle_modifier_update(effect_id, effect_val):
 	match effect_id:
