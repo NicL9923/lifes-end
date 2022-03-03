@@ -50,7 +50,7 @@ func _ready():
 			re_spawn_metal_deposits()
 
 func _process(_delta):
-	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
+	if build_hq_btn.visible and Global.playerResources.metal >= Global.buildings.HQ.cost_to_build:
 		build_hq_btn.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = Global.player.global_position

@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
-[ext_resource path="res://objects/buildings/barracks.png" type="Texture" id=2]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
 [ext_resource path="res://ui/radial-bg.png" type="Texture" id=6]
@@ -27,7 +26,6 @@ __meta__ = {
 }
 
 [node name="BuildingSprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
 
 [node name="EnergyIcon" type="Sprite" parent="."]
 scale = Vector2( 2.125, 2.125 )
@@ -47,7 +45,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -3.5 )
 shape = SubResource( 1 )
 
 [node name="PopupUI" type="ColorRect" parent="."]
@@ -60,11 +57,4 @@ color = Color( 0.0196078, 0.439216, 0.717647, 0.705882 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0.5, -3.5 )
 shape = SubResource( 2 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -4.0
-margin_top = -4.0
-margin_right = 4.0
-margin_bottom = 4.0

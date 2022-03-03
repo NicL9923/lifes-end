@@ -296,7 +296,6 @@ const buildings = {
 		has_to_be_unlocked = true
 	}
 }
-const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 const planet_distances := [31, 36, 33, 3000] # in millions of miles
 const location_type := { playerColony = "playerColony", npcColony = "npcColony", rscSite = "rscSite" }
