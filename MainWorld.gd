@@ -194,10 +194,11 @@ func generate_resource_collection_sites():
 
 func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
-		var building_node = load("res://objects/buildings/" + Global.BUILDING_TYPES[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/Building.tscn").instance()
+		building_node.init(bldg.type, Global.buildings[bldg.type], bldg.building_lvl)
+		
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
-		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
 		base_mgr.add_building(building_node)
 		add_child(building_node)

@@ -43,7 +43,7 @@ func check_building_requirements():
 		
 		# Check how many of each limited building player has, and disable the button if they're at the limit
 		if node.get_children().size() == 5:
-			var num_placed := get_num_bldgs_placed(Global.BUILDING_TYPES.values()[cur_bldg_idx])
+			var num_placed := get_num_bldgs_placed(Global.buildings.keys()[cur_bldg_idx])
 			var limit_lbl = node.get_child(4)
 			var max_placeable := int(limit_lbl.text.split(" / ")[1])
 			
@@ -55,9 +55,9 @@ func check_building_requirements():
 		node.disabled = btn_is_disabled
 		cur_bldg_idx += 1
 
-func is_building_unlocked(bldg):
+func is_building_unlocked(bldg_key):
 	for unlocked_bldg in Global.playerBaseData.unlockedBuildings:
-		if bldg == unlocked_bldg:
+		if bldg_key == unlocked_bldg:
 			return true
 	
 	return false
@@ -67,22 +67,22 @@ func generate_building_buttons():
 	for bldg_btn in building_button_box.get_children():
 		bldg_btn.queue_free()
 	
-	for bldg in Global.BUILDING_TYPES:
-		if bldg == Global.BUILDING_TYPES.HQ: # Skip HQ
+	for bldg_key in Global.buildings.keys():
+		if bldg_key == "HQ": # Skip HQ
 			continue
 		
-		var bldg_info = load(base_bldg_path + bldg + ".tscn").instance()
+		var bldg_info = load(base_bldg_path + "Building.tscn").instance()
+		bldg_info.init(bldg_key, Global.buildings[bldg_key], 1)
 		
 		# Skip if building needs to be unlocked and hasn't
-		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg):
+		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg_key):
 			continue
 		
 		var new_bldg_btn = Button.new()
 		new_bldg_btn.rect_min_size = Vector2(590, 100)
 		
 		var bldg_sprite = Sprite.new()
-		bldg_sprite.texture = load(base_bldg_path + bldg.to_lower() + ".png")
-		print(bldg_sprite.texture.get_size())
+		bldg_sprite.texture = load(base_bldg_path + bldg_key.to_lower() + ".png")
 		bldg_sprite.scale = Vector2(72 / bldg_sprite.texture.get_size().x, 72 / bldg_sprite.texture.get_size().y)
 		new_bldg_btn.add_child(bldg_sprite)
 		bldg_sprite.position = Vector2(50, new_bldg_btn.rect_min_size.y / 2)
@@ -104,32 +104,32 @@ func generate_building_buttons():
 		new_bldg_btn.add_child(cost_lbl)
 		cost_lbl.rect_position = Vector2(125, 75)
 		
-		if "BUILDING_LIMIT" in bldg_info:
+		if bldg_info.bldg_limit != null:
 			var limit_lbl = Label.new()
-			# TODO: make func to look through playerBaseData and see how many we already have -> will be used in bldg-count check in _process() too
-			limit_lbl.text = str(get_num_bldgs_placed(bldg)) + " / " + str(bldg_info.BUILDING_LIMIT)
+			limit_lbl.text = str(get_num_bldgs_placed(bldg_key)) + " / " + str(bldg_info.bldg_limit)
 			new_bldg_btn.add_child(limit_lbl)
 			limit_lbl.rect_position = Vector2(550, (new_bldg_btn.rect_min_size.y / 2) - 5)
 		
-		new_bldg_btn.connect("pressed", self, "start_building", [bldg])
+		new_bldg_btn.connect("pressed", self, "start_building", [bldg_key])
 		building_button_box.add_child(new_bldg_btn)
 
-func get_num_bldgs_placed(bldg_type: String) -> int:
+func get_num_bldgs_placed(bldg_key: String) -> int:
 	var bldgs_found := 0
 	
 	for bldg in Global.playerBaseData.buildings:
-		if bldg.type == bldg_type:
+		if bldg.type == bldg_key:
 			bldgs_found += 1
 	
 	return bldgs_found
 
-func start_building(bldg_type):
+func start_building(bldg_key: String):
 	building_panel.hide()
 	in_building_mode = true
-	building_type = bldg_type
+	building_type = bldg_key
 	
 	# Set the building_node based on type
-	building_node = load(base_bldg_path + building_type + ".tscn").instance()
+	building_node = load(base_bldg_path + "Building.tscn").instance()
+	building_node.init(bldg_key, Global.buildings[bldg_key], 1)
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
@@ -174,7 +174,7 @@ func place_building():
 
 func _on_Build_HQ_Button_pressed():
 	$Build_HQ_Button.visible = false
-	start_building(Global.BUILDING_TYPES.HQ)
+	start_building("HQ")
 
 func _on_Close_Button_pressed():
 	building_panel.hide()

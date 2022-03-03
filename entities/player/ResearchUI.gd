@@ -131,17 +131,17 @@ func handle_modifier_update(effect_id, effect_val):
 
 func handle_building_unlock(effect_id):
 	match effect_id:
-		Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Maintenance)
-		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Medbay)
-		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Carbon_Scrubber)
-		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Mining_Operation)
-		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Factory)
-		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Gas)
-		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Oil)
-		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Smeltery)
-		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Workshop)
-		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Geothermal)
-		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Nuclear)
+		Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG: Global.playerBaseData.unlockedBuildings.append("Maintenance")
+		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append("Medbay")
+		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append("Carbon_Scrubber")
+		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append("Mining_Operation")
+		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append("Factory")
+		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Gas")
+		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Oil")
+		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append("Smeltery")
+		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append("Workshop")
+		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Geothermal")
+		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Nuclear")
 	
 	Global.player.get_node("UI/BuildingUI").generate_building_buttons() # Regenerate building buttons so the newly unlocked bldg appears
 
