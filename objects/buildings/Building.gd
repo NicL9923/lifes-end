@@ -127,13 +127,12 @@ func generate_and_connect_popup():
 	popup_panel.rect_pivot_offset = popup_panel.rect_size / 2
 	popup_panel.rect_position = Vector2(-1 * popup_panel.rect_size.x / 2, -1 * popup_panel.rect_size.y / 2)
 	
-	var btn_height := 8
+	var btn_height := 3
 	for btn in self.popup:
-		var new_btn = Button.new()
-		new_btn.text = btn.btn_text
-		new_btn.rect_size += Vector2(5, 10)
-		new_btn.rect_position = Vector2((125 / 2) - (new_btn.rect_size.x / 2), btn_height)
-		new_btn.connect("pressed", self, btn.connect_fn)
+		var new_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
+		new_btn.button_text = btn.btn_text
+		new_btn.rect_position = Vector2((125 / 2) - (new_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
+		new_btn.connect("button_pressed", self, btn.connect_fn)
 		
 		popup_panel.add_child(new_btn)
 		btn_height += 30

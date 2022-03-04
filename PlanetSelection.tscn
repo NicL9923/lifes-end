@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://PlanetSelection.gd" type="Script" id=1]
-[ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=3]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=4]
 [ext_resource path="res://objects/planets/sprites/Venus.png" type="Texture" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://objects/planets/sprites/Pluto.png" type="Texture" id=7]
 [ext_resource path="res://objects/planets/sprites/Mercury.png" type="Texture" id=8]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=9]
+[ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -49,9 +50,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 9 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
@@ -62,16 +60,12 @@ position = Vector2( 320, 180 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
-[node name="Select_Button" type="Button" parent="."]
-margin_left = 288.0
-margin_top = 328.0
-margin_right = 351.0
-margin_bottom = 351.0
-custom_fonts/font = ExtResource( 2 )
-text = "SELECT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Select_Button" parent="." instance=ExtResource( 2 )]
+margin_left = 282.0
+margin_top = 325.0
+margin_right = 282.0
+margin_bottom = 325.0
+button_text = "SELECT"
 
 [node name="Planet_Thumbnail_Container" type="ColorRect" parent="."]
 margin_left = 240.0
@@ -157,25 +151,19 @@ texture = ExtResource( 7 )
 position = Vector2( 144, 16 )
 shape = SubResource( 1 )
 
-[node name="Left_Button" type="Button" parent="."]
+[node name="Left_Button" parent="." instance=ExtResource( 10 )]
 margin_left = 64.0
-margin_top = 128.0
-margin_right = 97.0
-margin_bottom = 161.0
-text = "<"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right_Button" type="Button" parent="."]
-margin_left = 544.0
-margin_top = 128.0
-margin_right = 578.0
+margin_top = 160.0
+margin_right = 64.0
 margin_bottom = 160.0
-text = ">"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+rect_rotation = 270.0
+
+[node name="Right_Button" parent="." instance=ExtResource( 10 )]
+margin_left = 576.0
+margin_top = 128.0
+margin_right = 576.0
+margin_bottom = 128.0
+rect_rotation = 90.0
 
 [node name="Planet_Sprite" type="Sprite" parent="."]
 position = Vector2( 320, 152 )
@@ -223,11 +211,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Select_Button" to="." method="_on_Select_Button_pressed"]
+[connection signal="button_pressed" from="Select_Button" to="." method="_on_Select_Button_button_pressed"]
 [connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Mercury_Area" to="." method="_on_Mercury_Area_input_event"]
 [connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Venus_Area" to="." method="_on_Venus_Area_input_event"]
 [connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Earth'sMoon_Area" to="." method="_on_EarthsMoon_Area_input_event"]
 [connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Mars_Area" to="." method="_on_Mars_Area_input_event"]
 [connection signal="input_event" from="Planet_Thumbnail_Container/HBoxContainer/Pluto_Area" to="." method="_on_Pluto_Area_input_event"]
-[connection signal="pressed" from="Left_Button" to="." method="_on_Left_Button_pressed"]
-[connection signal="pressed" from="Right_Button" to="." method="_on_Right_Button_pressed"]
+[connection signal="button_pressed" from="Left_Button" to="." method="_on_Left_Button_button_pressed"]
+[connection signal="button_pressed" from="Right_Button" to="." method="_on_Right_Button_button_pressed"]

@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://ui/ResearchButton.gd" type="Script" id=1]
-[ext_resource path="res://ui/ship_upgrades.png" type="Texture" id=2]
+[ext_resource path="res://ui/buttons/ResearchButton.gd" type="Script" id=1]
+[ext_resource path="res://ui/progress_bars/ship_upgrades.png" type="Texture" id=2]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=3]
+
 
 [node name="ResearchButton" type="Button"]
 anchor_right = 1.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/radial-bg.png-5671d3996f4f6386fc8a963a8a8fb2f9.stex"
+path="res://.import/button_disabled.png-dacb73902ea392eebd7db584303a8d44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/radial-bg.png"
-dest_files=[ "res://.import/radial-bg.png-5671d3996f4f6386fc8a963a8a8fb2f9.stex" ]
+source_file="res://ui/buttons/button_disabled.png"
+dest_files=[ "res://.import/button_disabled.png-dacb73902ea392eebd7db584303a8d44.stex" ]
 
 [params]
 

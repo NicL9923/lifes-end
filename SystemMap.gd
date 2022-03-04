@@ -198,5 +198,5 @@ func _on_Pluto_Area_input_event(_viewport, event, _shape_idx):
 		currently_selected_planet = 4
 		display_planet(currently_selected_planet)
 
-func _on_Return_Button_pressed():
+func _on_Return_Btn_button_pressed():
 	get_tree().change_scene("res://MainWorld.tscn")

@@ -9,7 +9,7 @@ func _ready():
 	
 	get_tree().change_scene("res://PlanetSelection.tscn")
 
-func _on_Skip_Button_pressed():
+func _on_Skip_Button_button_pressed():
 	$AnimationPlayer.play("fade_out")
 	yield($AnimationPlayer, "animation_finished")
 	

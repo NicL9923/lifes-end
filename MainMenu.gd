@@ -3,7 +3,6 @@ extends Control
 func _ready():
 	$SettingsContainer.visible = false
 	$LoadGameContainer.visible = false
-	$MainMenuContainer/NewGameButton.grab_focus()
 	
 	var config = ConfigFile.new()
 	
@@ -14,13 +13,23 @@ func _ready():
 	
 	$SettingsContainer/SettingsVBox/HSlider.value = Global.audioVolume
 
-func _on_NewGameButton_pressed():
+func _on_HSlider_value_changed(value):
+	Global.audioVolume = int(value)
+	
+	var config = ConfigFile.new()
+	config.load(Global.GAME_SETTINGS_CONFIG_PATH)
+	
+	config.set_value("audio", "volume", int(value))
+	
+	config.save(Global.GAME_SETTINGS_CONFIG_PATH)
+
+func _on_NewGame_Btn_button_pressed():
 	$AnimationPlayer.play("transition_to_char_creation")
 	yield($AnimationPlayer, "animation_finished")
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://CharacterCreation.tscn")
 
-func _on_LoadGameButton_pressed():
+func _on_LoadGame_Btn_button_pressed():
 	$MainMenuContainer.visible = false
 	var save_files = []
 	
@@ -73,30 +82,17 @@ func _on_LoadGameButton_pressed():
 	save_game.close()
 	$LoadGameContainer.visible = true
 
-func _on_SettingsButton_pressed():
+func _on_Settings_Btn_button_pressed():
 	$MainMenuContainer.visible = false
 	$SettingsContainer.visible = true
 
-func _on_QuitButton_pressed():
+func _on_Quit_Btn_button_pressed():
 	get_tree().quit()
 
-
-func _on_S_GoBackBN_pressed():
+func _on_Stgs_GoBack_Btn_button_pressed():
 	$SettingsContainer.visible = false
 	$MainMenuContainer.visible = true
 
-
-func _on_LG_GoBackBN_pressed():
+func _on_Load_GoBack_Btn_button_pressed():
 	$LoadGameContainer.visible = false
 	$MainMenuContainer.visible = true
-
-
-func _on_HSlider_value_changed(value):
-	Global.audioVolume = int(value)
-	
-	var config = ConfigFile.new()
-	config.load(Global.GAME_SETTINGS_CONFIG_PATH)
-	
-	config.set_value("audio", "volume", int(value))
-	
-	config.save(Global.GAME_SETTINGS_CONFIG_PATH)
