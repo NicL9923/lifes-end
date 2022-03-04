@@ -28,7 +28,7 @@ enum RESEARCH_EFFECTS {
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
-const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0 }
 const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
@@ -79,29 +79,223 @@ var modifiers := defaultModifiers
 #Game flags/vars
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
-const BUILDING_TYPES = {
-	HQ = "HQ",
-	Shipyard = "Shipyard",
-	Communications_Array = "Communications_Array",
-	Science_Lab = "Science_Lab",
-	Maintenance = "Maintenance",
-	Factory = "Factory",
-	Workshop = "Workshop",
-	Barracks = "Barracks",
-	Medbay = "Medbay",
-	Greenhouse = "Greenhouse",
-	Water_Recycling_System = "Water_Recycling_System",
-	Power_Industrial_Coal = "Power_Industrial_Coal",
-	Power_Industrial_Oil = "Power_Industrial_Oil",
-	Power_Industrial_Gas = "Power_Industrial_Gas",
-	Power_Sustainable_Solar = "Power_Sustainable_Solar",
-	Power_Sustainable_Geothermal = "Power_Sustainable_Geothermal",
-	Power_Sustainable_Nuclear = "Power_Sustainable_Nuclear",
-	Smeltery = "Smeltery",
-	Mining_Operation = "Mining_Operation",
-	Carbon_Scrubber = "Carbon_Scrubber"
+const buildings = {
+	HQ = {
+		bldg_name = "HQ",
+		bldg_desc = "The foundation of every colony",
+		cost_to_build = 15,
+		bldg_limit = 1,
+		popup = [
+			{
+				btn_text = "Build",
+				connect_fn = "_on_Build_Button_pressed"
+			},
+			{
+				btn_text = "Save Game",
+				connect_fn = "_on_SaveGame_Button_pressed"
+			}
+		]
+	},
+	Shipyard = {
+		bldg_name = "Shipyard",
+		bldg_desc = "Allows the player to upgrade their ship",
+		cost_to_build = 25,
+		bldg_limit = 1,
+		energy_cost_to_run = 5,
+		popup = [
+			{
+				btn_text = "View Ship",
+				connect_fn = "_on_ViewShip_Button_pressed"
+			}
+		]
+	},
+	Communications_Array = {
+		bldg_name = "Communications Array",
+		bldg_desc = "View the System Map",
+		cost_to_build = 30,
+		bldg_limit = 1,
+		energy_cost_to_run = 5,
+		popup = [
+			{
+				btn_text = "System Map",
+				connect_fn = "_on_SystemMap_Button_pressed"
+			}
+		]
+	},
+	Science_Lab = {
+		bldg_name = "Science Lab",
+		bldg_desc = "Allows the player to conduct research",
+		cost_to_build = 25,
+		energy_cost_to_run = 10, # Handle power/no power states in Player/ResearchUI
+		bldg_limit = 1,
+		popup = [
+			{
+				btn_text = "Research",
+				connect_fn = "_on_Research_Button_pressed"
+			}
+		]
+	},
+	Maintenance = {
+		bldg_name = "Maintenance",
+		bldg_desc = "Upgrade, move, repair, and scrap buildings",
+		cost_to_build = 30,
+		has_to_be_unlocked = true,
+		energy_cost_to_run = 4,
+		bldg_limit = 1,
+		popup = [
+			{
+				btn_text = "Upgrade",
+				connect_fn = "_on_BldgUpgrade_Button_pressed"
+			},
+			{
+				btn_text = "Move",
+				connect_fn = "_on_BldgMove_Button_pressed"
+			},
+			{
+				btn_text = "Repair",
+				connect_fn = "_on_BldgRepair_Button_pressed"
+			},
+			{
+				btn_text = "Scrap",
+				connect_fn = "_on_BldgScrap_Button_pressed"
+			}
+		]
+	},
+	Factory = {
+		bldg_name = "Factory",
+		bldg_desc = "Manufacture weaponry (produces pollution while active)",
+		cost_to_build = 50,
+		has_to_be_unlocked = true,
+		energy_cost_to_run = 5,
+		popup = [
+			{
+				btn_text = "Manufacture",
+				connect_fn = "_on_Craft_Button_pressed"
+			}
+		]
+	},
+	Workshop = {
+		bldg_name = "Workshop",
+		bldg_desc = "Craft weaponry",
+		cost_to_build = 30,
+		has_to_be_unlocked = true,
+		energy_cost_to_run = 5,
+		popup = [
+			{
+				btn_text = "Craft",
+				connect_fn = "_on_Craft_Button_pressed"
+			}
+		]
+	},
+	Barracks = {
+		bldg_name = "Barracks",
+		bldg_desc = "Recruit colonists, and view your stats",
+		cost_to_build = 25,
+		energy_cost_to_run = 5,
+		cost_to_recruit_colonist = 30,
+		popup = [
+			{
+				btn_text = "Recruit Colonist",
+				connect_fn = "_on_RecruitColonist_Button_pressed"
+			},
+			{
+				btn_text = "View Stats",
+				connect_fn = "_on_ViewStats_Button_pressed"
+			}
+		]
+	},
+	Medbay = {
+		bldg_name = "Medbay",
+		bldg_desc = "TODO",
+		cost_to_build = 25,
+		energy_cost_to_run = 5,
+		daily_colonist_healing_amt = 20,
+		bldg_limit = 1,
+		has_to_be_unlocked = true
+	},
+	Greenhouse = {
+		bldg_name = "Greenhouse",
+		bldg_desc = "TODO",
+		cost_to_build = 10,
+		energy_cost_to_run = 2,
+		food_produced_per_day = 5
+	},
+	Water_Recycling_System = {
+		bldg_name = "Water Recycling System",
+		bldg_desc = "TODO",
+		cost_to_build = 10,
+		energy_cost_to_run = 2,
+		water_produced_per_day = 10
+	},
+	Power_Industrial_Coal = {
+		bldg_name = "Coal Power Plant",
+		bldg_desc = "TODO",
+		cost_to_build = 15,
+		energy_produced = 15,
+		pollution_produced_per_day = 0.1
+	},
+	Power_Industrial_Gas = {
+		bldg_name = "Gas Power Plant",
+		bldg_desc = "TODO",
+		cost_to_build = 50,
+		has_to_be_unlocked = true,
+		energy_produced = 50,
+		pollution_produced_per_day = 0.2
+	},
+	Power_Industrial_Oil = {
+		bldg_name = "Oil Power Plant",
+		bldg_desc = "TODO",
+		cost_to_build = 100,
+		has_to_be_unlocked = true,
+		energy_produced = 150,
+		pollution_produced_per_day = 0.4
+	},
+	Power_Sustainable_Solar = {
+		bldg_name = "Solar Array",
+		bldg_desc = "TODO",
+		cost_to_build = 10,
+		energy_produced = 5
+	},
+	Power_Sustainable_Geothermal = {
+		bldg_name = "Geothermal Power Plant",
+		bldg_desc = "TODO",
+		cost_to_build = 75,
+		energy_produced = 75,
+		has_to_be_unlocked = true
+	},
+	Power_Sustainable_Nuclear = {
+		bldg_name = "Nuclear Power Plant",
+		bldg_desc = "TODO",
+		cost_to_build = 200,
+		energy_produced = 200,
+		has_to_be_unlocked = true
+	},
+	Smeltery = {
+		bldg_name = "Smeltery",
+		bldg_desc = "TODO",
+		cost_to_build = 20,
+		energy_cost_to_run = 2,
+		metal_produced_per_day = 2,
+		has_to_be_unlocked = true
+	},
+	Mining_Operation = {
+		bldg_name = "Mining Operation",
+		bldg_desc = "TODO",
+		cost_to_build = 25,
+		energy_cost_to_run = 5,
+		metal_produced_per_day = 4,
+		has_to_be_unlocked = true,
+		pollution_produced_per_day = 0.4
+	},
+	Carbon_Scrubber = {
+		bldg_name = "Carbon Scrubber",
+		bldg_desc = "TODO",
+		cost_to_build = 0,
+		energy_cost_to_run = 10,
+		pollution_removed_per_day = 0.05,
+		has_to_be_unlocked = true
+	}
 }
-const cost_to_build_HQ := 15
 const planets := ["Mercury", "Venus", "Earth's Moon", "Mars", "Pluto"]
 const planet_distances := [31, 36, 33, 3000] # in millions of miles
 const location_type := { playerColony = "playerColony", npcColony = "npcColony", rscSite = "rscSite" }
@@ -112,7 +306,6 @@ const longitude_range := [-180, 180]
 const ship_upgrade_costs := [15, 30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20 # Default: 20
-const building_activiation_distance := 75
 var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
 
 var isPlayerBaseFirstLoad := true
@@ -132,7 +325,8 @@ var debug = {
 		output_stream = [],
 		current_history_index = 0
 	},
-	god_mode = false
+	god_mode = false,
+	instant_build = false
 }
 
 ############### FUNCTIONS ##################
@@ -193,6 +387,7 @@ func load_game(save_name):
 	save_game.close()
 	
 	# Load the MainWorld scene now that we've parsed in the save data
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
@@ -281,7 +476,7 @@ func generate_random_tile(cell_type):
 	return int(rand_range(range_vector.x, range_vector.y))
 	
 func planet_tile_value(ind):
-	var planet = Global.playerBaseData.planet
+	var planet = playerBaseData.planet
 	
 	match planet:
 		"Mars": return ind

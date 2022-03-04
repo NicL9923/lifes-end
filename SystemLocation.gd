@@ -6,6 +6,7 @@ var remaining_enemies := 0
 var isARaid := false
 var location_type: String
 var location_index: int
+var colony_destroyed := false
 
 
 func _ready():
@@ -28,8 +29,7 @@ func _ready():
 	
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 
-func _physics_process(_delta):
-	Global.player.rtb_btn.visible = !are_enemies_present
+func _process(_delta):
 	
 	var enemy_count := 0
 	if isARaid:
@@ -39,7 +39,9 @@ func _physics_process(_delta):
 		
 		remaining_enemies = enemy_count
 		
-		if remaining_enemies == 0:
+		if remaining_enemies == 0 and not colony_destroyed:
+			Global.player.rtb_btn.visible = true
+			colony_destroyed = true # Only trigger this block once after all enemies have been deaded
 			Global.npcColonyData[location_index].isDestroyed = true
 			are_enemies_present = false
 			Global.player.toggle_combat(false)
@@ -60,6 +62,7 @@ func load_npc_colony():
 	Global.player.toggle_combat(are_enemies_present)
 
 func load_resource_collection_site():
+	Global.player.rtb_btn.visible = true
 	var rscSite = Global.rscCollectionSiteData[Global.location_to_load.index]
 	
 	spawn_metal_deposits(rscSite.numMetalDeposits)
@@ -71,9 +74,10 @@ func load_resource_collection_site():
 
 func spawn_buildings(bldg_list: Array):
 	for bldg in bldg_list:
-		var building_node = load("res://objects/buildings/" + Global.BUILDING_TYPES[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/Building.tscn").instance()
+		building_node.init(bldg, Global.buildings[bldg], 1)
+		
 		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
-		building_node.bldgLvl = 1
 		add_child(building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony

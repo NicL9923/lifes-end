@@ -6,6 +6,7 @@ export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
 onready var tilemap := $Navigation2D/TileMap
 onready var base_mgr := $BaseManager
+onready var event_mgr := $EventManager
 var build_hq_btn
 var areThereRemainingMetalDeposits := true
 
@@ -18,8 +19,6 @@ func _ready():
 	
 	Global.world_nav = $Navigation2D
 	build_hq_btn = Global.player.build_hq_btn
-	
-	var planet = Global.playerBaseData.planet
 	
 	Global.generate_map_tiles(tilemap)
 	
@@ -50,8 +49,8 @@ func _ready():
 		else:
 			re_spawn_metal_deposits()
 
-func _physics_process(_delta):
-	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
+func _process(_delta):
+	if build_hq_btn.visible and Global.playerResources.metal >= Global.buildings.HQ.cost_to_build:
 		build_hq_btn.disabled = false
 	
 	Global.playerBaseData.lastPlayerPos = Global.player.global_position
@@ -73,6 +72,7 @@ func init_modifiers():
 	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
 	
 	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.player.health = Global.playerStats.max_health
 	Global.modifiers.medbayHealing *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	Global.modifiers.colonistMaxHealth *= Global.player_stat_modifier_formula(Global.playerStats.doc)
 	Global.modifiers.playerHealthRecovery *= Global.player_stat_modifier_formula(Global.playerStats.doc)
@@ -163,8 +163,8 @@ func generate_npc_colonies():
 		
 		# TODO: Randomly generate other buildings within npc colony
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
-		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.HQ, global_pos = Vector2(0, 0), building_lvl = 1 })
-		newNpcColony.buildings.append({ type = Global.BUILDING_TYPES.Barracks, global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
 		
 		Global.npcColonyData.append(newNpcColony)
 
@@ -193,10 +193,11 @@ func generate_resource_collection_sites():
 
 func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
-		var building_node = load("res://objects/buildings/" + Global.BUILDING_TYPES[bldg.type] + ".tscn").instance()
+		var building_node = load("res://objects/buildings/Building.tscn").instance()
+		building_node.init(bldg.type, Global.buildings[bldg.type], bldg.building_lvl)
+		
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
-		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
 		base_mgr.add_building(building_node)
 		add_child(building_node)

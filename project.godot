@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/AIEntity.gd"
 }, {
-"base": "Area2D",
-"class": "Building",
-"language": "GDScript",
-"path": "res://objects/buildings/Building.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -26,7 +21,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AIEntity": "",
-"Building": "",
 "Player": ""
 }
 
@@ -40,6 +34,10 @@ config/windows_native_icon="res://ui/icon.ico"
 [autoload]
 
 Global="*res://Global.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

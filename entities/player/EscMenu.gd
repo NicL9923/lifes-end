@@ -7,6 +7,7 @@ func _process(_delta):
 		get_tree().paused = self.visible
 
 func _load_main_menu():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu.tscn")
 	Global.reset_global_data()
 	get_tree().paused = false

@@ -19,6 +19,7 @@ func _physics_process(_delta):
 	handle_energy_distribution()
 
 func connect_to_daynight_cycle():
+# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 func handle_new_day():
@@ -31,27 +32,27 @@ func handle_new_day():
 	# NOTE: building nodes are responsible for maintaining how much they should be producing per day (i.e. based on bldg_level, etc)
 func handle_rsc_production():
 	for bldg in buildings:
-		if bldg.has_energy:
-			if "metal_produced_per_day" in bldg:
+		if bldg.has_energy and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
+			if bldg.metal_produced_per_day != null:
 				add_metal(bldg.metal_produced_per_day)
 			
-			if "food_produced_per_day" in bldg:
+			if bldg.food_produced_per_day != null:
 				add_food(bldg.food_produced_per_day)
 			
-			if "water_produced_per_day" in bldg:
+			if bldg.water_produced_per_day != null:
 				add_water(bldg.water_produced_per_day)
 			
-			if "pollution_produced_per_day" in bldg:
+			if bldg.pollution_produced_per_day != null:
 				add_pollution(bldg.pollution_produced_per_day)
 			
-			if "pollution_removed_per_day" in bldg:
+			if bldg.pollution_removed_per_day != null:
 				remove_pollution(bldg.pollution_removed_per_day)
 
 func handle_energy_production():
 	var total_energy_produced := 0
 	
 	for bldg in buildings:
-		if "energy_produced" in bldg:
+		if bldg.energy_produced != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			total_energy_produced += bldg.energy_produced
 	
 	Global.playerResources.energy = total_energy_produced
@@ -59,6 +60,9 @@ func handle_energy_production():
 # Currently just distributes power in order - in future, TODO: will give player some influence over power distribution preference
 func handle_energy_distribution():
 	for bldg in buildings:
+		if bldg.energy_produced != null:
+			continue # Skip energy-producing buildings
+		
 		# Handle not having enough remaining energy for this bldg (other than rsc production (i.e. btns), offload handling of no energy to specific bldgs)
 		if Global.playerResources.energy - bldg.energy_cost_to_run < 0:
 			bldg.has_energy = false
@@ -138,7 +142,7 @@ func handle_pollution_damage():
 # Medbay just going to heal colonists - player heals over time
 func handle_medbay():
 	for bldg in buildings:
-		if "daily_colonist_healing_amt" in bldg:
+		if bldg.daily_colonist_healing_amt != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			# If we find a/the medbay (which will have the above property), go ahead and heal colonists (daily)
 			change_colonists_health(bldg.daily_colonist_healing_amt * Global.modifiers.medbayHealing)
 			return

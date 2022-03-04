@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export var health := 100.0
+var health = Global.playerStats.max_health
 export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
@@ -32,7 +32,6 @@ onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
-onready var base_manager := $BaseManager
 onready var rtb_btn := $UI/RTB_Button
 onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 
@@ -79,28 +78,29 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	player_animation(input_vector)
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
-	#right animations
+	# Right animations
 	if input_vector.x > 0:
 		animatedSprite.play("rightRun")
 	elif Input.is_action_just_released("ui_right"):
 		animatedSprite.play("rightIdle")
 		
-	#left animations
+	# Left animations
 	if input_vector.x < 0:
 		animatedSprite.play("leftRun")
 	elif Input.is_action_just_released("ui_left"):
 		animatedSprite.play("leftIdle")
 	
-	#down animations
+	# Down animations
 	if input_vector.y > 0 and input_vector.x == 0:
 		animatedSprite.play("downRun")
 	elif Input.is_action_just_released("ui_down"):
 		animatedSprite.play("downIdle")
 	
-	#up animations
+	# Up animations
 	if input_vector.y < 0 and input_vector.x == 0:
 		animatedSprite.play("upRun")
 	elif Input.is_action_just_released("ui_up"):
@@ -163,5 +163,7 @@ func check_if_ui_open():
 		ui_is_open = false
 
 func _on_RTB_Button_pressed():
+	Global.player.rtb_btn.visible = false
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
-	get_tree().change_scene("res://MainWorld.tscn")
+# warning-ignore:return_value_discarded
+	Global.get_tree().change_scene("res://MainWorld.tscn")

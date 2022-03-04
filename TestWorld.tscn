@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/enemies/EnemyColonist.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TestWorld.gd" type="Script" id=3]
 [ext_resource path="res://objects/MetalDeposit.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/buildings/HQ.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/planets/tilesets/planetTileset.tres" type="TileSet" id=6]
-[ext_resource path="res://objects/buildings/Communications_Array.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=8]
 [ext_resource path="res://entities/allies/AlliedColonist.tscn" type="PackedScene" id=9]
 
@@ -40,12 +38,6 @@ position = Vector2( 840, 256 )
 
 [node name="MetalDeposit" parent="." instance=ExtResource( 4 )]
 position = Vector2( 124, 135 )
-
-[node name="HQ" parent="." groups=["building"] instance=ExtResource( 5 )]
-position = Vector2( 296, 104 )
-
-[node name="Communications_Array" parent="." groups=["building"] instance=ExtResource( 7 )]
-position = Vector2( 448, 104 )
 
 [node name="AlliedColonist" parent="." instance=ExtResource( 9 )]
 position = Vector2( -144, -136 )

@@ -77,6 +77,7 @@ func connect_research_buttons():
 		btn.connect("pressed", self, "set_current_research", [research_id])
 
 func connect_to_daynight_cycle():
+# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 func handle_new_day():
@@ -113,10 +114,10 @@ func load_completed_research():
 
 func handle_completed_research(research_id):
 	# Set flag/effect of completed research
-	if research_tree[cur_research_id].effect.id >= Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG:
-		handle_building_unlock(research_tree[cur_research_id].effect.id)
+	if research_tree[research_id].effect.id >= Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG:
+		handle_building_unlock(research_tree[research_id].effect.id)
 	else:
-		handle_modifier_update(research_tree[cur_research_id].effect.id, research_tree[cur_research_id].effect.value)
+		handle_modifier_update(research_tree[research_id].effect.id, research_tree[research_id].effect.value)
 
 func handle_modifier_update(effect_id, effect_val):
 	match effect_id:
@@ -131,23 +132,24 @@ func handle_modifier_update(effect_id, effect_val):
 
 func handle_building_unlock(effect_id):
 	match effect_id:
-		Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Maintenance)
-		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Medbay)
-		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Carbon_Scrubber)
-		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Mining_Operation)
-		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Factory)
-		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Gas)
-		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Industrial_Oil)
-		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Smeltery)
-		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Workshop)
-		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Geothermal)
-		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append(Global.BUILDING_TYPES.Power_Sustainable_Nuclear)
+		Global.RESEARCH_EFFECTS.UNLOCK_MAINTENANCE_BLDG: Global.playerBaseData.unlockedBuildings.append("Maintenance")
+		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append("Medbay")
+		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append("Carbon_Scrubber")
+		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append("Mining_Operation")
+		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append("Factory")
+		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Gas")
+		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Oil")
+		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append("Smeltery")
+		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append("Workshop")
+		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Geothermal")
+		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Nuclear")
 	
 	Global.player.get_node("UI/BuildingUI").generate_building_buttons() # Regenerate building buttons so the newly unlocked bldg appears
 
 func handle_ending_trigger():
 	# TODO: fade out to white then fade in to ending cinematic
 	
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
 
 func _on_Close_Button_pressed():

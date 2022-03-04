@@ -26,7 +26,7 @@ func _ready():
 	current_weapons = [$Position2D/Rifle]
 	currentWeapon = current_weapons[selectedWeaponIdx]
 
-func _physics_process(delta):
+func _process(delta):
 	handle_healthbar()
 	process_states(delta)
 	
@@ -85,10 +85,10 @@ func process_idle(delta):
 func process_patrolling(delta):
 	handle_enemies_in_line_of_sight()
 	
-	# NOTE: The below two if statements use 10 as the value because the entity can't always get perfectly close to the point
-	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 10:
+	# NOTE: The below two if statements are used because the entity can't always get perfectly close to the point
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > Global.cellSize * 0.66:
 		pathfind_to_point(delta, last_known_player_team_pos)
-	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 10:
+	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > Global.cellSize * 0.66:
 		#print(self.global_position.distance_to(next_patrol_point))
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
@@ -115,11 +115,13 @@ func process_taking_cover(delta):
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		enter_state(STATE.PATROLLING)
 		return
 	
 	# Advance towards closest hostile
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
 		enter_state(STATE.ATTACKING)
@@ -130,6 +132,7 @@ func process_advancing(delta):
 func process_attacking(delta):
 	# If no more enemies present in LoS, enter_state(patrolling)
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		reset_weapon_rotation()
 		enter_state(STATE.PATROLLING)
 		return
@@ -137,7 +140,8 @@ func process_attacking(delta):
 	handle_idle_anim()
 	
 	# Find closest hostile and engage them
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	# Rotate weapon towards entity we're attacking
 		# TODO: predict player_team entities position w/ var accuracy (using current motion)
