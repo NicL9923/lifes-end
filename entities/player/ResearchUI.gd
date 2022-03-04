@@ -149,8 +149,8 @@ func handle_building_unlock(effect_id):
 func handle_ending_trigger():
 	# TODO: fade out to white then fade in to ending cinematic
 	
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
 
-func _on_Close_Button_pressed():
+func _on_Close_Button_button_pressed():
 	self.visible = false

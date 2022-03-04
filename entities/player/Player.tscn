@@ -388,7 +388,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -554,15 +554,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Close_Button" type="Button" parent="UI/BuildingUI/Building_Panel"]
-margin_left = 608.0
-margin_top = 8.0
-margin_right = 632.0
-margin_bottom = 32.0
-text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Close_Button" parent="UI/BuildingUI/Building_Panel" instance=ExtResource( 15 )]
+margin_left = 573.0
+margin_top = 1.0
+margin_right = 573.0
+margin_bottom = 1.0
+button_text = "Close"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/BuildingUI/Building_Panel"]
 margin_left = 16.0
@@ -578,16 +575,13 @@ __meta__ = {
 margin_right = 590.0
 rect_min_size = Vector2( 590, 0 )
 
-[node name="Build_HQ_Button" type="Button" parent="UI/BuildingUI"]
+[node name="Build_HQ_Button" parent="UI/BuildingUI" instance=ExtResource( 15 )]
 visible = false
 margin_left = 280.0
-margin_top = 320.0
-margin_right = 364.0
-margin_bottom = 340.0
-text = "Build HQ"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_top = 312.0
+margin_right = 280.0
+margin_bottom = 312.0
+button_text = "Build HQ"
 
 [node name="ResearchUI" type="Control" parent="UI"]
 visible = false
@@ -636,15 +630,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Close_Button" type="Button" parent="UI/ResearchUI/Research_Panel"]
-margin_left = 600.0
-margin_top = 8.0
-margin_right = 624.0
-margin_bottom = 27.0
-text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Close_Button" parent="UI/ResearchUI/Research_Panel" instance=ExtResource( 15 )]
+margin_left = 573.0
+margin_top = 1.0
+margin_right = 573.0
+margin_bottom = 1.0
+button_text = "Close"
 
 [node name="Research_Btn_Container" type="Control" parent="UI/ResearchUI/Research_Panel"]
 margin_right = 40.0
@@ -897,15 +888,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Close_Button" type="Button" parent="UI/CraftingUI/Crafting_Panel"]
-margin_left = 600.0
-margin_top = 8.0
-margin_right = 624.0
-margin_bottom = 27.0
-text = "X"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Close_Button" parent="UI/CraftingUI/Crafting_Panel" instance=ExtResource( 15 )]
+margin_left = 573.0
+margin_top = 1.0
+margin_right = 573.0
+margin_bottom = 1.0
+button_text = "Close"
 
 [node name="ShipUI" type="Control" parent="UI"]
 visible = false
@@ -1028,7 +1016,7 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 5
+frame = 2
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
@@ -1242,10 +1230,10 @@ margin_bottom = 70.0
 button_text = "Quit to Main Menu"
 
 [connection signal="button_pressed" from="UI/RTB_Button" to="." method="_on_RTB_Button_button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_pressed"]
-[connection signal="pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_pressed"]
-[connection signal="pressed" from="UI/ResearchUI/Research_Panel/Close_Button" to="UI/ResearchUI" method="_on_Close_Button_pressed"]
-[connection signal="pressed" from="UI/CraftingUI/Crafting_Panel/Close_Button" to="UI/CraftingUI" method="_on_Close_Button_pressed"]
+[connection signal="button_pressed" from="UI/BuildingUI/Building_Panel/Close_Button" to="UI/BuildingUI" method="_on_Close_Button_button_pressed"]
+[connection signal="button_pressed" from="UI/BuildingUI/Build_HQ_Button" to="UI/BuildingUI" method="_on_Build_HQ_Button_button_pressed"]
+[connection signal="button_pressed" from="UI/ResearchUI/Research_Panel/Close_Button" to="UI/ResearchUI" method="_on_Close_Button_button_pressed"]
+[connection signal="button_pressed" from="UI/CraftingUI/Crafting_Panel/Close_Button" to="UI/CraftingUI" method="_on_Close_Button_button_pressed"]
 [connection signal="button_pressed" from="UI/ShipUI/Ship_Panel/Close_Button" to="UI/ShipUI" method="_on_Close_Button_button_pressed"]
 [connection signal="button_pressed" from="UI/ShipUI/Ship_Panel/Upgrade_Button" to="UI/ShipUI" method="_on_Upgrade_Button_button_pressed"]
 [connection signal="button_pressed" from="UI/PlayerStatsUI/PlayerStats_Panel/Close_Button" to="UI/PlayerStatsUI" method="_on_Close_Button_button_pressed"]

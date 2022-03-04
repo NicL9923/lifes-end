@@ -172,9 +172,9 @@ func place_building():
 	building_node = null
 	in_building_mode = false
 
-func _on_Build_HQ_Button_pressed():
+func _on_Close_Button_button_pressed():
+	building_panel.hide()
+
+func _on_Build_HQ_Button_button_pressed():
 	$Build_HQ_Button.visible = false
 	start_building("HQ")
-
-func _on_Close_Button_pressed():
-	building_panel.hide()
