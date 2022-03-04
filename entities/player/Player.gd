@@ -48,7 +48,7 @@ func _ready():
 	crafting_ui.visible = false
 	
 
-func _physics_process(delta):
+func _process(delta):
 	player_movement()
 	handle_camera_zoom()
 	check_if_ui_open()
