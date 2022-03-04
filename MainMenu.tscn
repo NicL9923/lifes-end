@@ -1,9 +1,11 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://objects/$plz.png" type="Texture" id=2]
 [ext_resource path="res://audio/music/MainMenu_Song.wav" type="AudioStream" id=3]
 [ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
+[ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=7]
 
 [sub_resource type="Animation" id=1]
@@ -268,7 +270,7 @@ current = true
 position = Vector2( 319, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 32
+frame = 24
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
@@ -283,65 +285,46 @@ position = Vector2( 120, 88 )
 scale = Vector2( 0.994375, 0.994375 )
 texture = ExtResource( 4 )
 
-[node name="NewGameButton" type="Button" parent="MainMenuContainer"]
+[node name="NewGame_Btn" parent="MainMenuContainer" instance=ExtResource( 5 )]
 margin_left = 8.0
-margin_top = 224.0
-margin_right = 88.0
-margin_bottom = 249.0
-rect_min_size = Vector2( 0, 25 )
-focus_neighbour_top = NodePath("../QuitButton")
-focus_neighbour_bottom = NodePath("../LoadGameButton")
-custom_constants/hseparation = 0
-text = "New Game"
+margin_top = 208.0
+margin_right = 8.0
+margin_bottom = 208.0
+button_text = "New Game"
 
-[node name="LoadGameButton" type="Button" parent="MainMenuContainer"]
-anchor_right = 0.122
+[node name="LoadGame_Btn" parent="MainMenuContainer" instance=ExtResource( 5 )]
 margin_left = 8.0
-margin_top = 256.0
-margin_right = 83.12
-margin_bottom = 281.0
-rect_min_size = Vector2( 0, 25 )
-focus_neighbour_top = NodePath("../NewGameButton")
-focus_neighbour_bottom = NodePath("../SettingsButton")
-custom_constants/hseparation = 0
-text = "Load Game"
+margin_top = 240.0
+margin_right = 8.0
+margin_bottom = 240.0
+button_text = "Load Game"
 
-[node name="SettingsButton" type="Button" parent="MainMenuContainer"]
+[node name="Settings_Btn" parent="MainMenuContainer" instance=ExtResource( 5 )]
 margin_left = 8.0
-margin_top = 288.0
-margin_right = 80.0
-margin_bottom = 313.0
-rect_min_size = Vector2( 0, 25 )
-focus_neighbour_top = NodePath("../LoadGameButton")
-focus_neighbour_bottom = NodePath("../QuitButton")
-custom_constants/hseparation = 0
-text = "Settings"
+margin_top = 272.0
+margin_right = 8.0
+margin_bottom = 272.0
+button_text = "Settings"
 
-[node name="QuitButton" type="Button" parent="MainMenuContainer"]
+[node name="Quit_Btn" parent="MainMenuContainer" instance=ExtResource( 5 )]
 margin_left = 8.0
-margin_top = 321.0
-margin_right = 48.0
-margin_bottom = 346.0
-rect_min_size = Vector2( 0, 25 )
-focus_neighbour_top = NodePath("../SettingsButton")
-focus_neighbour_bottom = NodePath("../NewGameButton")
-custom_constants/hseparation = 0
-text = "Quit"
+margin_top = 304.0
+margin_right = 8.0
+margin_bottom = 304.0
+button_text = "Quit"
 
 [node name="SettingsContainer" type="Control" parent="."]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="S_GoBackBN" type="Button" parent="SettingsContainer"]
-margin_left = 24.0
-margin_top = 16.0
-margin_right = 44.0
-margin_bottom = 36.0
-text = "<"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Stgs_GoBack_Btn" parent="SettingsContainer" instance=ExtResource( 6 )]
+margin_left = 21.0
+margin_top = 39.0
+margin_right = 21.0
+margin_bottom = 39.0
+rect_rotation = 270.0
+rect_scale = Vector2( 0.8, 0.8 )
 
 [node name="SettingsVBox" type="VBoxContainer" parent="SettingsContainer"]
 margin_left = 203.0
@@ -354,13 +337,13 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="SettingsContainer/SettingsVBox"]
 margin_right = 238.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "Volume"
 
 [node name="HSlider" type="HSlider" parent="SettingsContainer/SettingsVBox"]
-margin_top = 18.0
+margin_top = 21.0
 margin_right = 238.0
-margin_bottom = 34.0
+margin_bottom = 37.0
 tick_count = 3
 
 [node name="LoadGameContainer" type="Control" parent="."]
@@ -368,15 +351,13 @@ visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="LG_GoBackBN" type="Button" parent="LoadGameContainer"]
-margin_left = 25.0
-margin_top = 17.0
-margin_right = 45.0
-margin_bottom = 37.0
-text = "<"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Load_GoBack_Btn" parent="LoadGameContainer" instance=ExtResource( 6 )]
+margin_left = 21.0
+margin_top = 39.0
+margin_right = 21.0
+margin_bottom = 39.0
+rect_rotation = 270.0
+rect_scale = Vector2( 0.8, 0.8 )
 
 [node name="SaveGamesVBox" type="VBoxContainer" parent="LoadGameContainer"]
 margin_left = 171.0
@@ -397,10 +378,10 @@ text = "[ No saves found ]"
 align = 1
 valign = 1
 
-[connection signal="pressed" from="MainMenuContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="MainMenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="SettingsContainer/S_GoBackBN" to="." method="_on_S_GoBackBN_pressed"]
+[connection signal="button_pressed" from="MainMenuContainer/NewGame_Btn" to="." method="_on_NewGame_Btn_button_pressed"]
+[connection signal="button_pressed" from="MainMenuContainer/LoadGame_Btn" to="." method="_on_LoadGame_Btn_button_pressed"]
+[connection signal="button_pressed" from="MainMenuContainer/Settings_Btn" to="." method="_on_Settings_Btn_button_pressed"]
+[connection signal="button_pressed" from="MainMenuContainer/Quit_Btn" to="." method="_on_Quit_Btn_button_pressed"]
+[connection signal="button_pressed" from="SettingsContainer/Stgs_GoBack_Btn" to="." method="_on_Stgs_GoBack_Btn_button_pressed"]
 [connection signal="value_changed" from="SettingsContainer/SettingsVBox/HSlider" to="." method="_on_HSlider_value_changed"]
-[connection signal="pressed" from="LoadGameContainer/LG_GoBackBN" to="." method="_on_LG_GoBackBN_pressed"]
+[connection signal="button_pressed" from="LoadGameContainer/Load_GoBack_Btn" to="." method="_on_Load_GoBack_Btn_button_pressed"]

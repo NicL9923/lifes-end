@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/buttons/LE_Arrow_Button.gd" type="Script" id=2]
+[ext_resource path="res://ui/buttons/arrow_button_pressed.png" type="Texture" id=3]
+[ext_resource path="res://ui/buttons/arrow_button.png" type="Texture" id=4]
+[ext_resource path="res://ui/buttons/arrow_button_hover.png" type="Texture" id=5]
+[ext_resource path="res://ui/buttons/arrow_button_disabled.png" type="Texture" id=6]
+
+[node name="LE_Arrow_Button" type="Control"]
+margin_right = -208.0
+margin_bottom = -59.08
+mouse_filter = 1
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 6 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_TextureButton_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

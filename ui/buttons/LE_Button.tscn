@@ -1,23 +1,39 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/buttons/LE_Button.gd" type="Script" id=2]
+[ext_resource path="res://ui/buttons/button_hover.png" type="Texture" id=3]
+[ext_resource path="res://ui/buttons/button.png" type="Texture" id=4]
+[ext_resource path="res://ui/buttons/button_pressed.png" type="Texture" id=5]
+[ext_resource path="res://ui/buttons/button_mask.bmp" type="BitMap" id=6]
+[ext_resource path="res://ui/buttons/button_disabled.png" type="Texture" id=7]
 
 [node name="LE_Button" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = -37.0
+margin_bottom = -40.08
 mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 45.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 150.5, 12.5 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 7 )
+texture_click_mask = ExtResource( 6 )
+expand = true
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "Default"
+margin_left = 12.5
+margin_top = 6.5
+margin_right = 32.5
+margin_bottom = 23.5
+text = "OK"
+align = 1
+valign = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
