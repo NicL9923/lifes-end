@@ -10,7 +10,7 @@ onready var history_vbox = $ColorRect/ScrollContainer/CmdHistory_VBox
 func _ready():
 	self.visible = false
 
-func _physics_process(_delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("dev_menu"):
 		if isMenuUp:
 			self.visible = false

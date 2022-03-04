@@ -13,7 +13,7 @@ var colonists := []
 func _ready():
 	connect_to_daynight_cycle()
 
-func _physics_process(_delta):
+func _process(_delta):
 	handle_energy_production()
 	
 	handle_energy_distribution()
