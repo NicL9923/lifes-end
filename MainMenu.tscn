@@ -249,9 +249,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
@@ -266,7 +263,7 @@ current = true
 position = Vector2( 319, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 11
+frame = 30
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]

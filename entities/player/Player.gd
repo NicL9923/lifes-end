@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export var health := 100.0
+var health = Global.playerStats.max_health
 export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in

@@ -28,7 +28,7 @@ enum RESEARCH_EFFECTS {
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
-const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0 }
 const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
