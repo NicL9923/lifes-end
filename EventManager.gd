@@ -53,9 +53,9 @@ func event_acidic_rain():
 	
 	rain_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
 	rain_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
-	rain_particles.global_position = Global.world_tile_size * Global.cellSize / 2
+	rain_particles.visibility_rect = Rect2(0, 0, rain_particles.process_material.emission_box_extents.x, rain_particles.process_material.emission_box_extents.y)
 	
-	rain_particles.amount = 2000
+	rain_particles.amount = 2500
 	rain_particles.emitting = true
 
 # Pluto only
