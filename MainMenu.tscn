@@ -268,7 +268,7 @@ current = true
 position = Vector2( 319, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 22
+frame = 32
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
@@ -293,9 +293,6 @@ focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../LoadGameButton")
 custom_constants/hseparation = 0
 text = "New Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LoadGameButton" type="Button" parent="MainMenuContainer"]
 anchor_right = 0.122

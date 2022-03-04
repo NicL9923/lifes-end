@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/radial-fg.png-7cabde644ea7292aea4d90caae76174b.stex"
+path="res://.import/radial-fg.png-07d082d4502dbbe4c34047b6e996cea1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/radial-fg.png"
-dest_files=[ "res://.import/radial-fg.png-7cabde644ea7292aea4d90caae76174b.stex" ]
+source_file="res://ui/progress_bars/radial-fg.png"
+dest_files=[ "res://.import/radial-fg.png-07d082d4502dbbe4c34047b6e996cea1.stex" ]
 
 [params]
 
