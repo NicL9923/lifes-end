@@ -56,5 +56,5 @@ func get_destroyed_colonies_count():
 	
 	return destr_colonies
 
-func _on_Close_Button_pressed():
+func _on_Close_Button_button_pressed():
 	self.visible = false

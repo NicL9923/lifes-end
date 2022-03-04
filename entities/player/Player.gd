@@ -162,8 +162,8 @@ func check_if_ui_open():
 	else:
 		ui_is_open = false
 
-func _on_RTB_Button_pressed():
+func _on_RTB_Button_button_pressed():
 	Global.player.rtb_btn.visible = false
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	Global.get_tree().change_scene("res://MainWorld.tscn")
