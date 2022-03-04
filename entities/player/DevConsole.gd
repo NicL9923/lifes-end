@@ -46,7 +46,7 @@ func execute_dev_commands():
 	var cmdTxt = Array(line_edit.text.split(' '))
 	var output_to_add = []
 	
-	# TODO: add ammo, place building
+	# TODO: add ammo, place building (get Player/BuildingUI and call start_building with bldgID)
 	# TODO: handle commands w/ invalid parameters
 	if cmdTxt[0] == "help":
 		output_to_add.append("god - player is invincible and has unlimited ammo")
@@ -56,6 +56,7 @@ func execute_dev_commands():
 		output_to_add.append("set_time 0-2400 - sets time of day to given num")
 		output_to_add.append("set_day x - sets game Earth days passed to x")
 		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
+		output_to_add.append("set_pollution x - sets pollution (x must be between 0 and 100.0)")
 		output_to_add.append("instant_build - instantly build buildings")
 		output_to_add.append("push_player_notification x - pushes a player notification that says x")
 		output_to_add.append("trigger_event x - starts event (0 - acidic rain/1 - intense freeze/2 - npc raid/ 3 - solar flare)")
@@ -82,6 +83,9 @@ func execute_dev_commands():
 	elif cmdTxt[0] == "set_time_speed" and cmdTxt[1] != null:
 		Global.time_speed = int(cmdTxt[1])
 		output_to_add.append("Set time speed to " + cmdTxt[1])
+	elif cmdTxt[0] == "set_pollution" and cmdTxt[1] != null:
+		Global.playerBaseData.pollutionLevel = float(cmdTxt[1])
+		output_to_add.append("Player colony pollution set to " + cmdTxt[1])
 	elif cmdTxt[0] == "instant_build":
 		Global.debug.instant_build = !Global.debug.instant_build
 		output_to_add.append("Instant build " + ("on" if Global.debug.instant_build else "off"))

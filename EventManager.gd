@@ -2,6 +2,7 @@ extends Control
 
 export var daily_event_chance := 0.15
 onready var rain_particles := $ParticleFX/Rain_Particles
+onready var pol_particles := $ParticleFX/Pollution_Particles
 
 const events = {
 	npc_raid = { event_name = "NPC raid", chance = 0.4 },
@@ -13,6 +14,15 @@ const events = {
 
 func _ready():
 	connect_to_daynight_cycle()
+	
+	# Set particle emitter sizes
+	pol_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
+	pol_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
+	pol_particles.visibility_rect = Rect2(0, 0, pol_particles.process_material.emission_box_extents.x, pol_particles.process_material.emission_box_extents.y)
+	
+	rain_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
+	rain_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
+	rain_particles.visibility_rect = Rect2(0, 0, rain_particles.process_material.emission_box_extents.x, rain_particles.process_material.emission_box_extents.y)
 
 func connect_to_daynight_cycle():
 # warning-ignore:return_value_discarded
@@ -22,6 +32,15 @@ func connect_to_daynight_cycle():
 func handle_new_day():
 	randomize()
 	
+	# Set pollution
+	var cur_pol = Global.playerBaseData.pollutionLevel
+	if cur_pol < 5.0:
+		pol_particles.emitting = false
+	else:
+		pol_particles.emitting = true
+		pol_particles.amount = int(Global.playerBaseData.pollutionLevel)
+	
+	# Handle events
 	clean_up_prev_event()
 	
 	if rand_range(0, 1.0) < daily_event_chance:
@@ -50,10 +69,6 @@ func event_solar_flare():
 # Venus only
 func event_acidic_rain():
 	Global.push_player_notification("An acidic rain system is approaching your colony!")
-	
-	rain_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
-	rain_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
-	rain_particles.visibility_rect = Rect2(0, 0, rain_particles.process_material.emission_box_extents.x, rain_particles.process_material.emission_box_extents.y)
 	
 	rain_particles.amount = 2500
 	rain_particles.emitting = true

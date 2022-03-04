@@ -96,10 +96,12 @@ func add_water(amt: int):
 func add_pollution(amt: float):
 	var cur_pol = Global.playerBaseData.pollutionLevel
 	cur_pol = clamp(cur_pol + amt, 0, 100)
+	Global.playerBaseData.pollutionLevel = cur_pol
 
 func remove_pollution(amt: float):
 	var cur_pol = Global.playerBaseData.pollutionLevel
 	cur_pol = clamp(cur_pol - amt, 0, 100)
+	Global.playerBaseData.pollutionLevel = cur_pol
 
 func change_colonists_health(amt: int):
 	Global.player.health = clamp(Global.player.health + amt, min_health_from_base_stuff, Global.playerStats.max_health)
