@@ -127,15 +127,16 @@ func generate_and_connect_popup():
 	popup_panel.rect_pivot_offset = popup_panel.rect_size / 2
 	popup_panel.rect_position = Vector2(-1 * popup_panel.rect_size.x / 2, -1 * popup_panel.rect_size.y / 2)
 	
-	var btn_pos := Vector2(40, 10)
+	var btn_height := 8
 	for btn in self.popup:
 		var new_btn = Button.new()
 		new_btn.text = btn.btn_text
-		new_btn.rect_position = btn_pos
+		new_btn.rect_size += Vector2(5, 10)
+		new_btn.rect_position = Vector2((125 / 2) - (new_btn.rect_size.x / 2), btn_height)
 		new_btn.connect("pressed", self, btn.connect_fn)
 		
 		popup_panel.add_child(new_btn)
-		btn_pos.y += 30
+		btn_height += 30
 
 func handle_special_bldg_cases(bto):
 	match bto.bldg_name:

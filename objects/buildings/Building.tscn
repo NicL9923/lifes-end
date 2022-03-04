@@ -45,7 +45,7 @@ visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
-color = Color( 0.0196078, 0.439216, 0.717647, 0.705882 )
+color = Color( 0.0196078, 0.439216, 0.717647, 0.901961 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
