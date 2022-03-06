@@ -4,7 +4,7 @@
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
-[ext_resource path="res://ui/CharacterScreen.png" type="Texture" id=5]
+[ext_resource path="res://ui/characterCreationBG.png" type="Texture" id=5]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=11]
@@ -114,18 +114,18 @@ scale = Vector2( 1.00156, 1.00278 )
 texture = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 505, 169 )
-scale = Vector2( 2.82292, 2.99479 )
+position = Vector2( 512, 177 )
+scale = Vector2( 2.58854, 2.6224 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 6
+frame = 3
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
-margin_left = 96.0
-margin_top = 33.0
-margin_right = 237.0
-margin_bottom = 50.0
+margin_left = 100.0
+margin_top = 44.0
+margin_right = 241.0
+margin_bottom = 61.0
 text = "Character Attributes"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -133,9 +133,9 @@ __meta__ = {
 
 [node name="Lbl_RemPnts" type="Label" parent="."]
 margin_left = 48.0
-margin_top = 65.0
+margin_top = 66.0
 margin_right = 192.0
-margin_bottom = 82.0
+margin_bottom = 83.0
 text = "Points remaining: 0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -146,6 +146,9 @@ margin_left = 48.0
 margin_top = 97.0
 margin_right = 191.0
 margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Lbl_Cmdr" type="Label" parent="Cmdr_HBox"]
 margin_top = 5.0
