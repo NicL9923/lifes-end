@@ -15,7 +15,7 @@ func _ready():
 	# Create a node to be the Global(ly instantiated) player if there isn't already one
 	if not Global.player:
 		Global.player = load("res://entities/player/Player.tscn").instance()
-	get_tree().get_current_scene().add_child(Global.player)
+	get_tree().get_current_scene().add_child_below_node($Navigation2D, Global.player)
 	
 	Global.world_nav = $Navigation2D
 	build_hq_btn = Global.player.build_hq_btn
@@ -95,13 +95,13 @@ func spawn_metal_deposits():
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
 		metal_deposit.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		metal_deposit.add_to_group("metal_deposit")
-		add_child(metal_deposit)
+		add_child_below_node($Navigation2D, metal_deposit)
 
 func re_spawn_metal_deposits():
 	for deposit_pos in Global.playerBaseData.metalDeposits:
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
 		metal_deposit.global_position = deposit_pos
-		add_child(metal_deposit)
+		add_child_below_node($Navigation2D, metal_deposit)
 
 func randomly_select_planet(bias: String):
 	randomize()
@@ -200,7 +200,7 @@ func load_buildings():
 		building_node.isPlayerBldg = true
 		building_node.get_node("CollisionHighlight").visible = false
 		base_mgr.add_building(building_node)
-		add_child(building_node)
+		add_child_below_node($Navigation2D, building_node)
 
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:
@@ -209,4 +209,4 @@ func load_colonists():
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
 		base_mgr.add_colonist(loaded_colonist)
-		add_child(loaded_colonist)
+		add_child_below_node($Navigation2D, loaded_colonist)

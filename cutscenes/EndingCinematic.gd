@@ -25,8 +25,7 @@ func _ready():
 			$AnimationPlayer.play("badBadSubEnding")
 	
 	yield($AnimationPlayer, "animation_finished")
-	_on_Skip_Button_pressed()
+	_on_Skip_Button_button_pressed()
 
-func _on_Skip_Button_pressed():
-	# Go back to MainWorld so player can continue playing game
+func _on_Skip_Button_button_pressed():
 	get_tree().change_scene("res://MainWorld.tscn")

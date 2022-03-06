@@ -12,23 +12,6 @@ var currently_selected_planet := 2
 func _ready():
 	display_planet(currently_selected_planet)
 
-
-func _on_Select_Button_pressed():
-	Global.playerBaseData.planet = Global.planets[currently_selected_planet]
-	$AnimationPlayer.play("fade_out")
-	yield($AnimationPlayer, "animation_finished")
-	get_tree().change_scene("res://MainWorld.tscn")
-
-func _on_Left_Button_pressed():
-	if currently_selected_planet != 0:
-		currently_selected_planet -= 1
-		display_planet(currently_selected_planet)
-
-func _on_Right_Button_pressed():
-	if currently_selected_planet != Global.planets.size() - 1:
-		currently_selected_planet += 1
-		display_planet(currently_selected_planet)
-
 func update_thumbnail_highlight_pos():
 	tn_highlight.rect_position.x = currently_selected_planet * 32 + 2
 
@@ -81,4 +64,20 @@ func _on_Mars_Area_input_event(_viewport, event, _shape_idx):
 func _on_Pluto_Area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		currently_selected_planet = 4
+		display_planet(currently_selected_planet)
+
+func _on_Select_Button_button_pressed():
+	Global.playerBaseData.planet = Global.planets[currently_selected_planet]
+	$AnimationPlayer.play("fade_out")
+	yield($AnimationPlayer, "animation_finished")
+	get_tree().change_scene("res://MainWorld.tscn")
+
+func _on_Left_Button_button_pressed():
+	if currently_selected_planet != 0:
+		currently_selected_planet -= 1
+		display_planet(currently_selected_planet)
+
+func _on_Right_Button_button_pressed():
+	if currently_selected_planet != Global.planets.size() - 1:
+		currently_selected_planet += 1
 		display_planet(currently_selected_planet)

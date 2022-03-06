@@ -3,8 +3,8 @@
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
-[ext_resource path="res://ui/radial-bg.png" type="Texture" id=6]
-[ext_resource path="res://ui/radial-fg.png" type="Texture" id=7]
+[ext_resource path="res://ui/progress_bars/radial-bg.png" type="Texture" id=6]
+[ext_resource path="res://ui/progress_bars/radial-fg.png" type="Texture" id=7]
 
 [node name="Building" type="Area2D"]
 script = ExtResource( 1 )
@@ -45,7 +45,7 @@ visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 4 )
-color = Color( 0.0196078, 0.439216, 0.717647, 0.901961 )
+color = Color( 0, 0, 0, 0.901961 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

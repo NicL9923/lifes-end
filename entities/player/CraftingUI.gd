@@ -11,5 +11,5 @@ func show_crafting_ui(is_factory: bool):
 	self.isFactory = is_factory
 	self.visible = true
 
-func _on_Close_Button_pressed():
+func _on_Close_Button_button_pressed():
 	self.visible = false

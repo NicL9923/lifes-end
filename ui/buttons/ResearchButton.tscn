@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/buttons/ResearchButton.gd" type="Script" id=1]
+[ext_resource path="res://ui/progress_bars/ship_upgrades.png" type="Texture" id=2]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=3]
+
+
+[node name="ResearchButton" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -392.0
+margin_bottom = -208.0
+rect_min_size = Vector2( 248, 152 )
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name_Label" type="Label" parent="."]
+margin_right = 248.0
+margin_bottom = 32.0
+text = "Default name"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Desc_Label" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 48.0
+margin_right = 232.0
+margin_bottom = 128.0
+text = "Default description"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_top = 128.0
+margin_right = 326.0
+margin_bottom = 431.0
+rect_scale = Vector2( 0.760058, 0.0791618 )
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

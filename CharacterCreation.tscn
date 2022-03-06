@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://CharacterCreation.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/$player-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/CharacterScreen.png" type="Texture" id=5]
+[ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -117,6 +118,7 @@ position = Vector2( 505, 169 )
 scale = Vector2( 2.82292, 2.99479 )
 frames = SubResource( 9 )
 animation = "idle"
+frame = 6
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
@@ -144,9 +146,6 @@ margin_left = 48.0
 margin_top = 97.0
 margin_right = 191.0
 margin_bottom = 124.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Lbl_Cmdr" type="Label" parent="Cmdr_HBox"]
 margin_top = 5.0
@@ -154,13 +153,32 @@ margin_right = 86.0
 margin_bottom = 22.0
 text = "Commander:"
 
-[node name="Cmdr_SpinBox" type="SpinBox" parent="Cmdr_HBox"]
+[node name="Pts_Label" type="Label" parent="Cmdr_HBox"]
 margin_left = 90.0
-margin_right = 140.0
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 22.0
+text = "5"
+
+[node name="ArrowCont" type="Control" parent="Cmdr_HBox"]
+margin_left = 103.0
+margin_right = 103.0
 margin_bottom = 27.0
-max_value = 10.0
-value = 5.0
-rounded = true
+
+[node name="Up_Arrow" parent="Cmdr_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 1.0
+margin_top = 4.0
+margin_right = 1.0
+margin_bottom = 31.0
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Down_Arrow" parent="Cmdr_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 9.0
+margin_bottom = 49.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
 
 [node name="Bio_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
@@ -174,22 +192,38 @@ margin_right = 63.0
 margin_bottom = 22.0
 text = "Biologist:"
 
-[node name="Biol_SpinBox" type="SpinBox" parent="Bio_HBox"]
+[node name="Pts_Label" type="Label" parent="Bio_HBox"]
 margin_left = 67.0
-margin_right = 117.0
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 22.0
+text = "5"
+
+[node name="ArrowCont" type="Control" parent="Bio_HBox"]
+margin_left = 80.0
+margin_right = 80.0
 margin_bottom = 27.0
-max_value = 10.0
-value = 5.0
-rounded = true
+
+[node name="Up_Arrow" parent="Bio_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 1.0
+margin_top = 4.0
+margin_right = 1.0
+margin_bottom = 31.0
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Down_Arrow" parent="Bio_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 9.0
+margin_bottom = 49.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
 
 [node name="Engr_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
 margin_top = 193.0
 margin_right = 191.0
 margin_bottom = 220.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Lbl_Engr" type="Label" parent="Engr_HBox"]
 margin_top = 5.0
@@ -197,22 +231,38 @@ margin_right = 63.0
 margin_bottom = 22.0
 text = "Engineer:"
 
-[node name="Engr_SpinBox" type="SpinBox" parent="Engr_HBox"]
+[node name="Pts_Label" type="Label" parent="Engr_HBox"]
 margin_left = 67.0
-margin_right = 117.0
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 22.0
+text = "5"
+
+[node name="ArrowCont" type="Control" parent="Engr_HBox"]
+margin_left = 80.0
+margin_right = 80.0
 margin_bottom = 27.0
-max_value = 10.0
-value = 5.0
-rounded = true
+
+[node name="Up_Arrow" parent="Engr_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 1.0
+margin_top = 4.0
+margin_right = 1.0
+margin_bottom = 31.0
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Down_Arrow" parent="Engr_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 9.0
+margin_bottom = 49.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
 
 [node name="Doc_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
 margin_top = 241.0
 margin_right = 191.0
 margin_bottom = 268.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Lbl_Doc" type="Label" parent="Doc_HBox"]
 margin_top = 5.0
@@ -220,24 +270,40 @@ margin_right = 50.0
 margin_bottom = 22.0
 text = "Doctor:"
 
-[node name="Doc_SpinBox" type="SpinBox" parent="Doc_HBox"]
+[node name="Pts_Label" type="Label" parent="Doc_HBox"]
 margin_left = 54.0
-margin_right = 104.0
-margin_bottom = 27.0
-max_value = 10.0
-value = 5.0
-rounded = true
+margin_top = 5.0
+margin_right = 63.0
+margin_bottom = 22.0
+text = "5"
 
-[node name="Launch Button" type="Button" parent="."]
-margin_left = 456.0
-margin_top = 313.0
-margin_right = 564.0
-margin_bottom = 346.0
-custom_fonts/font = ExtResource( 3 )
-text = "LAUNCH"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ArrowCont" type="Control" parent="Doc_HBox"]
+margin_left = 67.0
+margin_right = 67.0
+margin_bottom = 27.0
+
+[node name="Up_Arrow" parent="Doc_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 1.0
+margin_top = 4.0
+margin_right = 1.0
+margin_bottom = 31.0
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Down_Arrow" parent="Doc_HBox/ArrowCont" instance=ExtResource( 3 )]
+margin_left = 9.0
+margin_top = 22.0
+margin_right = 9.0
+margin_bottom = 49.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+
+[node name="Launch_Btn" parent="." instance=ExtResource( 6 )]
+margin_left = 452.0
+margin_top = 309.0
+margin_right = 452.0
+margin_bottom = 309.0
+rect_scale = Vector2( 1.5, 1.5 )
+button_text = "LAUNCH"
 
 [node name="CharName_HBox" type="HBoxContainer" parent="."]
 margin_left = 48.0
@@ -266,6 +332,7 @@ __meta__ = {
 }
 
 [node name="FadeTransition" type="ColorRect" parent="."]
+visible = false
 margin_left = -3.0
 margin_top = -1.0
 margin_right = 641.0
@@ -275,9 +342,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="value_changed" from="Cmdr_HBox/Cmdr_SpinBox" to="." method="_on_Cmdr_SpinBox_value_changed"]
-[connection signal="value_changed" from="Bio_HBox/Biol_SpinBox" to="." method="_on_Biol_SpinBox_value_changed"]
-[connection signal="value_changed" from="Engr_HBox/Engr_SpinBox" to="." method="_on_Engr_SpinBox_value_changed"]
-[connection signal="value_changed" from="Doc_HBox/Doc_SpinBox" to="." method="_on_Doc_SpinBox_value_changed"]
-[connection signal="pressed" from="Launch Button" to="." method="_on_Launch_Button_pressed"]
+[connection signal="button_pressed" from="Launch_Btn" to="." method="_on_Launch_Btn_button_pressed"]
 [connection signal="text_changed" from="CharName_HBox/LineEdit" to="." method="_on_LineEdit_text_changed"]

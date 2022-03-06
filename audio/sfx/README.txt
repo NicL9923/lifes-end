@@ -1,1 +1,0 @@
-This folder is for sound effects (Ex: gunshot)
