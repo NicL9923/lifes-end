@@ -3,7 +3,7 @@
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://objects/$plz.png" type="Texture" id=2]
 [ext_resource path="res://audio/music/MainMenu_Song.wav" type="AudioStream" id=3]
-[ext_resource path="res://ui/LifesEndTitle.png" type="Texture" id=4]
+[ext_resource path="res://ui/gameTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=7]
@@ -269,7 +269,7 @@ current = true
 position = Vector2( 319, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 29
+frame = 6
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
@@ -280,8 +280,8 @@ __meta__ = {
 }
 
 [node name="Title" type="Sprite" parent="MainMenuContainer"]
-position = Vector2( 120, 88 )
-scale = Vector2( 0.994375, 0.994375 )
+position = Vector2( 130, 108 )
+scale = Vector2( 0.570797, 0.425297 )
 texture = ExtResource( 4 )
 
 [node name="NewGame_Btn" parent="MainMenuContainer" instance=ExtResource( 5 )]
