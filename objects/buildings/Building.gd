@@ -111,7 +111,7 @@ func _ready():
 
 func _process(delta):
 	if popup != null:
-		popup_panel.visible = is_player_in_popup_distance()
+		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt
 		
 		for btn in popup_panel.get_children():
 			btn.disabled = not self.has_energy
@@ -167,7 +167,7 @@ func handle_special_bldg_cases(bto):
 			bldg_desc = "Removes " + str(self.pollution_removed_per_day) + " pollution per day"
 
 func is_player_in_popup_distance():
-	return (Global.player.position.distance_to(self.position) < popup_activation_distance and !Global.player.isInCombat and !isBeingPlaced)
+	return (Global.player.position.distance_to(self.position) < popup_activation_distance)
 
 func handle_building_building(delta):
 	if cur_seconds_to_build <= 0.0:
