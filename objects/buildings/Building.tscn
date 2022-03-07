@@ -1,10 +1,55 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
+[ext_resource path="res://ui/hologram-lines.png" type="Texture" id=2]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
 [ext_resource path="res://ui/progress_bars/radial-bg.png" type="Texture" id=6]
 [ext_resource path="res://ui/progress_bars/radial-fg.png" type="Texture" id=7]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 baseColor: hint_color = vec4(0.3058, 0.835, 0.960, 1.);
+uniform float speed = 0.5;
+uniform vec4 linesColor: hint_color = vec4(0.633232, 0.910156, 0.555693, 1.);
+uniform float linesColorIntensity = 3.;
+uniform sampler2D hologramTexture;
+uniform vec2 hologramTextureTiling = vec2(0.75, 0.75);
+
+vec2 tilingAndOffset(vec2 uv, vec2 tiling, vec2 offset) {
+    return mod(uv / tiling + offset, 1);
+}
+
+void fragment() {
+    vec2 offset = vec2(TIME * speed / 100.0);
+    vec2 tiling = tilingAndOffset(UV, hologramTextureTiling, offset);
+    
+    vec4 noise = texture(hologramTexture, tiling);
+    
+    float fresnel = 0.71;
+    vec4 colorLines = linesColor * vec4(vec3(linesColorIntensity), 1.0);
+    vec4 emission = colorLines * fresnel * noise;
+    
+    vec4 albedo = baseColor;
+    float alpha = dot(noise.rgb, vec3(1.0));
+    vec4 hologram;
+    hologram.rgb = emission.rgb + (1.0 - emission.rgb) * albedo.rgb * albedo.a;
+    hologram.a = emission.a + (1.0 - emission.a) * alpha;
+    hologram.a = hologram.a + (1.0 - hologram.a) * albedo.a;
+    COLOR = texture(TEXTURE, UV);
+    COLOR.rgb = hologram.rgb; // COLOR.rgb + (1.0 - COLOR.rgb) *
+    COLOR.a = min(COLOR.a, hologram.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/baseColor = Color( 0.305882, 0.835294, 0.960784, 0.588235 )
+shader_param/speed = 0.5
+shader_param/linesColor = Color( 0.0745098, 0.623529, 0.635294, 0.862745 )
+shader_param/linesColorIntensity = 3.0
+shader_param/hologramTextureTiling = Vector2( 1, 5 )
+shader_param/hologramTexture = ExtResource( 2 )
 
 [node name="Building" type="Area2D"]
 script = ExtResource( 1 )
@@ -41,9 +86,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="PopupUI" type="ColorRect" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+material = SubResource( 2 )
+margin_right = 363.0
+margin_bottom = 190.0
 theme = ExtResource( 4 )
 color = Color( 0, 0, 0, 0.901961 )
 
