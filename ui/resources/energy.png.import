@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mercury_tileset.png-dd88db3e7e8a64080e1cfc07efeef4be.stex"
+path="res://.import/energy.png-451ebf8b645ab752315c8dbda7e3cc5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/planets/tilesets/Mercury_tileset.png"
-dest_files=[ "res://.import/Mercury_tileset.png-dd88db3e7e8a64080e1cfc07efeef4be.stex" ]
+source_file="res://ui/resources/energy.png"
+dest_files=[ "res://.import/energy.png-451ebf8b645ab752315c8dbda7e3cc5e.stex" ]
 
 [params]
 

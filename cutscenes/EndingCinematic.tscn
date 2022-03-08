@@ -4,7 +4,6 @@
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
 
-
 [sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
@@ -18,6 +17,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ "[ Incoming transmission ]" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -35,6 +46,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "Not only have we destroyed ourselves, however, but everyone else around us as well.", "If we aren't to live on, then neither will anyone else." ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 7, 7.9, 8, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "badGoodSubEnding"
@@ -51,6 +74,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "...but we have ensured that we will be the only ones standing to revel in it.", "Our actions, no matter their intentions, have left us vilified among the other remnants of humankind, and so what awaits us may be a very lonely, isolated future indeed..." ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 7, 7.9, 8, 14 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "badMainEnding"
@@ -62,10 +97,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 6, 12 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 6, 12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "[ Incoming transmission ]", "How has it come to this?", "We've devastated our home once more, and now very likely doomed the survival of our very species.", "Perhaps there is something to be learned from this...or perhaps not." ]
+"values": [ "[ Incoming transmission ]", "", "[ Incoming transmission ]", "", "How has it come to this?", "We've devastated our home once more, and now very likely doomed the survival of our very species.", "Perhaps there is something to be learned from this...or perhaps not." ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.9, 2, 5, 5.9, 6, 11, 11.9, 12, 17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -83,6 +130,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "At least we never lost sight of our humanity...", "While we have doomed ourselves, maybe others will live on from our good deeds." ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 7, 7.9, 8, 14 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "goodGoodSubEnding"
@@ -99,6 +158,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "...and not once did we forget our humanity.", "It's not enough for us thrive alone, we must do everything in our power to bring those around us up, and while some could not be saved, others would have never had a chance if not for us." ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4, 4.9, 5, 14 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "goodMainEnding"
@@ -110,10 +181,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 10 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "[ Incoming transmission ]", "Whereas our brethren have unfortunately repeated the very same cycle that destroyed our former homeworld right in front of our eyes, we have learned from our old ways.", "We have realized that we can only continue to exist if we ensure that our ecosystems continue to exist alongside us, and so there is hope yet for humankind and her future..." ]
+"values": [ "[ Incoming transmission ]", "", "[ Incoming transmission ]", "", "Whereas our brethren have unfortunately repeated the very same cycle that destroyed our former homeworld right in front of our eyes, we have learned from our old ways.", "We have realized that we can only continue to exist if we ensure that our ecosystems continue to exist alongside us, and so there is hope yet for humankind and her future..." ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Subtitles:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.9, 2, 9, 9.9, 10, 17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ]
 }
 
 [node name="EndingCinematic" type="Node2D"]
@@ -166,3 +249,5 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="Skip Button" to="." method="_on_Skip_Button_pressed"]

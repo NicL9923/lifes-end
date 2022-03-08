@@ -1,10 +1,11 @@
 extends KinematicBody2D
 class_name Player
 
-export var health := 100
+export var health := 100.0
 export var ACCELERATION := 50
 export var MAX_SPEED := 150
 export var MAX_ZOOM := 0.25 # 4X zoom in
+export var health_recovered_per_second := 1
 var MIN_ZOOM = Global.world_tile_size.x / 20 # zoom out
 
 onready var animatedSprite = $AnimatedSprite
@@ -20,27 +21,50 @@ var velocity := Vector2.ZERO
 onready var gun_rotation_point := $Position2D
 var gun_angle: float
 
+onready var camera := $Camera2D
+onready var healthbar := $UI/Healthbar
+onready var earth_days_lbl := $UI/Days_Label
+onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
-onready var ship_panel := $UI/ShipUI/Ship_Panel
-onready var research_panel := $UI/ResearchUI/Research_Panel
+onready var research_ui := $UI/ResearchUI
+onready var crafting_ui := $UI/CraftingUI
+onready var ship_ui := $UI/ShipUI
+onready var player_stats_ui := $UI/PlayerStatsUI
+onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
+onready var base_manager := $BaseManager
+onready var rtb_btn := $UI/RTB_Button
+onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
+
 
 func _ready():
-	Global.player = self
 	self.add_to_group("player_team")
+	
+	# Hide these in case we leave it visible in the editor by accident
+	dev_console.visible = false
+	esc_menu.visible = false
+	research_ui.visible = false
+	ship_ui.visible = false
+	player_stats_ui.visible = false
+	crafting_ui.visible = false
+	
 
 func _physics_process(delta):
 	player_movement()
 	handle_camera_zoom()
 	check_if_ui_open()
 	
-	$UI/Healthbar.value = health
-	$UI/Healthbar.max_value = Global.playerStats.max_health
+	health += (delta * Global.modifiers.playerHealthRecovery * health_recovered_per_second)
 	
-	$UI/Days_Label.text = "Earth Days: " + str(Global.game_time.earthDays)
+	healthbar.value = health
+	healthbar.max_value = Global.playerStats.max_health
+	
+	earth_days_lbl.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
 	if isInCombat:
 		weapon_handling(delta)
+	else:
+		gun_rotation_point.visible = false
 
 func player_movement():
 	var input_vector := Vector2.ZERO
@@ -88,10 +112,10 @@ func handle_camera_zoom():
 	
 	if Input.is_action_just_released("scroll_up"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom - 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
-		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
+		camera.zoom = Vector2(currentZoom, currentZoom)
 	elif Input.is_action_just_released("scroll_down"):
 		currentZoom = clamp(lerp(currentZoom, currentZoom + 0.25, 0.2), MAX_ZOOM, MIN_ZOOM)
-		$Camera2D.zoom = Vector2(currentZoom, currentZoom)
+		camera.zoom = Vector2(currentZoom, currentZoom)
 
 func weapon_handling(_delta):
 	var mouse_pos := get_global_mouse_position()
@@ -127,15 +151,18 @@ func take_damage(dmg_amt):
 	if health == 0:
 		die()
 
-func die(): # TODO - maybe respawn back at colony and lose some resources?
-	print("Player is deaded")
-	pass
+func die():
+	Global.push_player_notification("You've met Life's End.")
+	
+	# TODO - maybe respawn back at colony and lose some resources? (slow fade to black)
 
 func check_if_ui_open():
-	if building_panel.visible or ship_panel.visible or research_panel.visible:
+	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
 		ui_is_open = true
 	else:
 		ui_is_open = false
 
 func _on_RTB_Button_pressed():
-	get_tree().change_scene("res://MainWorld.tscn")
+	Global.player.rtb_btn.visible = false
+	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
+	Global.get_tree().change_scene("res://MainWorld.tscn")

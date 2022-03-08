@@ -7,7 +7,7 @@ onready var col_det = get_node("CollisionDetector")
 onready var healthbar = get_node("Healthbar")
 
 var speed := 125
-var health := 100
+var health := 100.0
 var max_health := 100
 var accuracy := 50
 
@@ -18,9 +18,12 @@ var will_flee_on_low_health := false
 var dist_to_advance
 
 var timer := -1.0 # a value of -1.0 is "null" state
+var pathfinding_timer := 0.3
+var current_path
 var last_movement_dir
 var next_patrol_point
 var last_known_player_team_pos
+var closest_hostile
 var hostiles_in_los := []
 var potential_cover_in_los := []
 var num_bullets_in_los := 0
@@ -35,13 +38,18 @@ var currentWeapon
 
 func pathfind_to_point(delta, pos: Vector2):
 	var move_dist = speed * delta
-	var path := Global.world_nav.get_simple_path(self.global_position, pos)
 	
-	while path.size() > 0:
-		var dist_to_next_point = self.global_position.distance_to(path[0])
+	if pathfinding_timer > 0 and current_path:
+		pathfinding_timer -= delta
+	else:
+		current_path = Global.world_nav.get_simple_path(self.global_position, pos)
+		pathfinding_timer = 0.3
+	
+	while current_path.size() > 0:
+		var dist_to_next_point = self.global_position.distance_to(current_path[0])
 		
 		if move_dist <= dist_to_next_point:
-			var move_rot = get_angle_to(self.global_position.linear_interpolate(path[0], move_dist / dist_to_next_point))
+			var move_rot = get_angle_to(self.global_position.linear_interpolate(current_path[0], move_dist / dist_to_next_point))
 			
 			# Mke sure we're not running into something, and if we are, run perpendicular to it in the direction closest to the original
 			if nearby_col_objects.size() > 0:
@@ -52,7 +60,7 @@ func pathfind_to_point(delta, pos: Vector2):
 				var move2 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj - deg2rad(90))
 				
 				# Check which distance is shorter, and make sure the difference is great enough so we eliminate MOST (not all) indecisive glitching in place
-				if move1.distance_to(path[0]) < move2.distance_to(path[0]) and abs(move1.distance_to(path[0]) - move2.distance_to(path[0])) > 50:
+				if move1.distance_to(current_path[0]) < move2.distance_to(current_path[0]) and abs(move1.distance_to(current_path[0]) - move2.distance_to(current_path[0])) > 50:
 					move_rot = angle_to_obj + deg2rad(90)
 				else:
 					move_rot = angle_to_obj - deg2rad(90)
@@ -74,7 +82,7 @@ func pathfind_to_point(delta, pos: Vector2):
 				last_movement_dir = Global.MOVEMENT_DIR.DOWN
 			break
 		
-		path.remove(0)
+		current_path.remove(0)
 		move_dist -= dist_to_next_point
 
 func get_closest_of(type):
@@ -101,6 +109,15 @@ func get_closest_of(type):
 		last_known_player_team_pos = closest_node.global_position
 	return closest_node
 
+func set_new_patrol_point():
+	var map_limits = Global.world_nav.get_child(0).get_used_rect()
+	randomize()
+	
+	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x * Global.cellSize, map_limits.end.x * Global.cellSize)
+	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y * Global.cellSize, map_limits.end.y * Global.cellSize)
+	
+	next_patrol_point = Vector2(next_x, next_y)
+
 func take_damage(dmg_amt):
 	health -= dmg_amt
 	
@@ -110,7 +127,8 @@ func take_damage(dmg_amt):
 func die():
 	queue_free()
 	
-	if self.is_in_group("player_team"):
+	if self.is_in_group("player_team") and Global.playerBaseData.colonists.size() > id:
+		Global.push_player_notification("Colonist " + str(id) + " has been KIA.")
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():

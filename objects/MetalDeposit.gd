@@ -6,7 +6,7 @@ var canBeCollected := false
 
 
 func _ready():
-	pass
+	randomly_scale_deposit()
 
 func _process(_delta):
 	#Check if player within collection distance
@@ -23,3 +23,11 @@ func _process(_delta):
 			queue_free()
 	else:
 		$PlayerHint.visible = false
+
+func randomly_scale_deposit():
+	randomize()
+	
+	var new_scale := rand_range(0.5, 2.0)
+	self.scale = Vector2(new_scale, new_scale)
+	depositValue *= new_scale * Global.modifiers.metalDepositValue
+	collectionDist = collectionDist * new_scale if new_scale > 1 else collectionDist

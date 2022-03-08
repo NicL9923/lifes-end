@@ -10,12 +10,19 @@ func _init():
 	cost_to_build = 30
 	bldg_name = "Maintenance"
 	bldg_desc = "Upgrade, move, and scrap buildings"
+	has_to_be_unlocked = true
+
+func _process(delta):
+	._process(delta)
+	handle_energy_display(delta)
 
 func _on_Upgrade_Button_pressed():
 	pass
 
 func _on_Move_Button_pressed():
 	pass
+
+# TODO: add Repair BTN and connect here
 
 func _on_Scrap_Button_pressed():
 	pass

@@ -1,12 +1,19 @@
 extends Spatial
 
-var player_planet_index := _get_player_planet_index()
-var currently_selected_planet := player_planet_index
 export var player_rotate_sensitivity := { x = 10 * 0.001, y = 10 * 0.001 }
-var mouse_pressed := false
 export var icon_scale := 0.25
+
+onready var planet := $Planet
+onready var map_ui := $UI
+onready var planet_name_lbl := $UI/PlanetName_Label
+onready var tn_highlight := $UI/Planet_Thumbnail_Container/Highlight
+onready var planet_mesh := $Planet/MeshInstance
+
 const col_shape_scale := 0.05
 const icon_base_path := "res://ui/icons/"
+var player_planet_index := _get_player_planet_index()
+var currently_selected_planet := player_planet_index
+var mouse_pressed := false
 
 
 func _ready():
@@ -21,11 +28,11 @@ func _input(event):
 	if event is InputEventMouseButton:
 		mouse_pressed = event.pressed
 	if event is InputEventMouseMotion and mouse_pressed:
-		$Planet.rotate_y(event.relative.x * player_rotate_sensitivity.x)
-		$Planet.rotate_x(event.relative.y * player_rotate_sensitivity.y)
+		planet.rotate_y(event.relative.x * player_rotate_sensitivity.x)
+		planet.rotate_x(event.relative.y * player_rotate_sensitivity.y)
 		
-		$Planet.rotation_degrees.x = clamp($Planet.rotation_degrees.x, -15, 15)
-		$Planet.rotation_degrees.z = clamp($Planet.rotation_degrees.z, -15, 15)
+		planet.rotation_degrees.x = clamp(planet.rotation_degrees.x, -15, 15)
+		planet.rotation_degrees.z = clamp(planet.rotation_degrees.z, -15, 15)
 
 func _setup_system_location(placeType: String, placeIndex: int):
 	Global.location_to_load.type = placeType
@@ -84,7 +91,7 @@ func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, pl
 			popup.rect_size = Vector2(300, 100)
 			
 			popup.pause_mode = Node.PAUSE_MODE_PROCESS
-			$UI.add_child(popup)
+			map_ui.add_child(popup)
 			popup.popup_centered()
 		else:
 			var popup = ConfirmationDialog.new()
@@ -97,7 +104,7 @@ func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, pl
 			
 			popup.connect("confirmed", self, "_setup_system_location", [placeType, placeIndex])
 			popup.pause_mode = Node.PAUSE_MODE_PROCESS
-			$UI.add_child(popup)
+			map_ui.add_child(popup)
 			popup.popup_centered()
 
 func create_icon(iconImgPath: String, coordinates, type: String, index: int):
@@ -116,15 +123,15 @@ func create_icon(iconImgPath: String, coordinates, type: String, index: int):
 	newIcon.add_child(colShape)
 	newIcon.add_child(newSprite)
 	newIcon.add_to_group("icon")
-	$Planet.add_child(newIcon)
+	planet.add_child(newIcon)
 	
-	newIcon.translation = $Planet.get_coords_from_lat_long(coordinates.lat, coordinates.long)
-	newIcon.transform = newIcon.transform.looking_at($Planet.translation, Vector3(0, 1, 0))
+	newIcon.translation = planet.get_coords_from_lat_long(coordinates.lat, coordinates.long)
+	newIcon.transform = newIcon.transform.looking_at(planet.translation, Vector3(0, 1, 0))
 	newSprite.scale = Vector3(icon_scale, icon_scale, icon_scale)
 	newIcon.connect("input_event", self, "_icon_area_clicked", [type, index])
 
 func remove_current_icons():
-	for node in $Planet.get_children():
+	for node in planet.get_children():
 		if node.is_in_group("icon"):
 			node.queue_free()
 
@@ -154,15 +161,15 @@ func map_icons_to_planet():
 		place_index += 1
 
 func update_thumbnail_highlight_pos():
-	$UI/Planet_Thumbnail_Container/Highlight.rect_position.x = currently_selected_planet * 32 + 2
+	tn_highlight.rect_position.x = currently_selected_planet * 32 + 2
 
 func display_planet(planet_index):
-	$UI/PlanetName_Label.text = Global.planets[planet_index]
+	planet_name_lbl.text = Global.planets[planet_index]
 	update_thumbnail_highlight_pos()
 	
 	var newMaterial = SpatialMaterial.new()
 	newMaterial.albedo_texture = load("res://objects/planets/3d_sprites/" + Global.planets[planet_index] + " 3D.png")
-	$Planet/MeshInstance.mesh.surface_set_material(0, newMaterial)
+	planet_mesh.mesh.surface_set_material(0, newMaterial)
 	
 	map_icons_to_planet()
 

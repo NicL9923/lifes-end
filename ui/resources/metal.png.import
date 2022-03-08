@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Venus_tileset.png-6b2c07a20e0cd82e80e4e4704b8bff74.stex"
+path="res://.import/metal.png-c2414786b52cc0d47c484c3831210533.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/planets/tilesets/Venus_tileset.png"
-dest_files=[ "res://.import/Venus_tileset.png-6b2c07a20e0cd82e80e4e4704b8bff74.stex" ]
+source_file="res://ui/resources/metal.png"
+dest_files=[ "res://.import/metal.png-c2414786b52cc0d47c484c3831210533.stex" ]
 
 [params]
 

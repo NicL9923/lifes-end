@@ -7,9 +7,9 @@ func _init():
 	cost_to_build = 20
 	bldg_name = "Smeltery"
 	bldg_desc = "Produces " + str(metal_produced_per_day) + " Metal per day"
+	has_to_be_unlocked = true
+	energy_cost_to_run = 2
 
-func _ready():
-	connect_to_daynight_cycle()
-
-func handle_new_day():
-	add_metal(metal_produced_per_day)
+func _process(delta):
+	._process(delta)
+	handle_energy_display(delta)

@@ -1,41 +1,48 @@
 extends Node2D
 
-var worldTileSize := Global.world_tile_size
 export var minerals_to_spawn := 30
 export var npc_colonies_to_generate := 50
 export var rsc_collection_sites_to_generate := 20
 export var location_radius := 10
-onready var tilemap = get_node("Navigation2D/TileMap")
+onready var tilemap := $Navigation2D/TileMap
+onready var base_mgr := $BaseManager
+onready var event_mgr := $EventManager
+var build_hq_btn
 var areThereRemainingMetalDeposits := true
 
 
 func _ready():
+	# Create a node to be the Global(ly instantiated) player if there isn't already one
+	if not Global.player:
+		Global.player = load("res://entities/player/Player.tscn").instance()
+	get_tree().get_current_scene().add_child(Global.player)
+	
 	Global.world_nav = $Navigation2D
+	build_hq_btn = Global.player.build_hq_btn
 	
 	var planet = Global.playerBaseData.planet
-	#TODO: may be worth just merging all planet tiles into single tileset if they all have 1 to 4 tiles at most...
-	tilemap.tile_set = load("res://objects/planets/tilesets/" + planet + "_Tileset.tres")
 	
-	generate_map_border_tiles()
-	generate_map_inner_tiles()
+	Global.generate_map_tiles(tilemap)
 	
-	set_player_camera_bounds()
+	Global.set_player_camera_bounds(tilemap.get_used_rect())
 	
 	if Global.isPlayerBaseFirstLoad:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = true
-		$Player/UI/BuildingUI/Build_HQ_Button.visible = true
+		build_hq_btn.disabled = true
+		build_hq_btn.visible = true
 		
 		spawn_metal_deposits()
 		
 		generate_npc_colonies()
 		generate_resource_collection_sites()
 		
-		$Player.global_position = Vector2(Global.cellSize * worldTileSize.x / 2, Global.cellSize * worldTileSize.y / 2)
+		Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
 		
-		# TODO: set Global.modifiers based on player stats
+		init_modifiers()
 		
 		Global.isPlayerBaseFirstLoad = false
 	else:
+		Global.player.global_position = Global.playerBaseData.lastPlayerPos
+		
 		load_buildings()
 		load_colonists()
 		
@@ -43,16 +50,12 @@ func _ready():
 			areThereRemainingMetalDeposits = false
 		else:
 			re_spawn_metal_deposits()
-		
-		$Player.global_position = Global.playerBaseData.lastPlayerPos
-	
-	Global.player = $Player
 
-func _physics_process(_delta):
-	if $Player/UI/BuildingUI/Build_HQ_Button.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
-		$Player/UI/BuildingUI/Build_HQ_Button.disabled = false
+func _process(_delta):
+	if build_hq_btn.visible and Global.playerResources.metal >= Global.cost_to_build_HQ:
+		build_hq_btn.disabled = false
 	
-	Global.playerBaseData.lastPlayerPos = $Player.global_position
+	Global.playerBaseData.lastPlayerPos = Global.player.global_position
 	
 	if areThereRemainingMetalDeposits:
 		var updatedMetalDepositArr := []
@@ -61,34 +64,37 @@ func _physics_process(_delta):
 				updatedMetalDepositArr.append(node.global_position)
 		Global.playerBaseData.metalDeposits = updatedMetalDepositArr
 
-func generate_map_border_tiles():
-	for x in [0, worldTileSize.x - 1]:
-		for y in range(0, worldTileSize.y):
-			tilemap.set_cell(x, y, 0)
+func init_modifiers():
+	# Set modifiers based on player stats/attributes
+	Global.modifiers.playerTeamWeaponDamage *= Global.player_stat_modifier_formula(Global.playerStats.cmdr) # TODO (cmdr): allied colonists shoot faster
 	
-	for x in range(1, worldTileSize.x - 1):
-		for y in [0, worldTileSize.y - 1]:
-			tilemap.set_cell(x, y, 0)
-
-func generate_map_inner_tiles():
-		for x in range(1, worldTileSize.x - 1):
-			for y in range(1, worldTileSize.y - 1):
-				tilemap.set_cell(x, y, 1)
-
-func set_player_camera_bounds():
-	var map_limits = tilemap.get_used_rect()
-	$Player/Camera2D.limit_left = map_limits.position.x * Global.cellSize
-	$Player/Camera2D.limit_right = map_limits.end.x * Global.cellSize
-	$Player/Camera2D.limit_top = map_limits.position.y * Global.cellSize
-	$Player/Camera2D.limit_bottom = map_limits.end.y * Global.cellSize
+	Global.modifiers.buildSpeed *= Global.player_stat_modifier_formula(Global.playerStats.engr) # TODO (engr): faster industrial research
+	
+	Global.modifiers.foodProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol) # TODO (biol): faster SUSTAINABLE research modifier
+	Global.modifiers.waterProduction *= Global.player_stat_modifier_formula(Global.playerStats.biol)
+	
+	Global.playerStats.max_health *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.medbayHealing *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.colonistMaxHealth *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	Global.modifiers.playerHealthRecovery *= Global.player_stat_modifier_formula(Global.playerStats.doc)
+	
+	# Set Global.modifiers based on planet traits
+	match Global.playerBaseData.planet:
+		"Mercury":
+			Global.modifiers.solarEnergyProduction *= 2.5
+		"Venus":
+			pass # TODO: more natural events - less raids
+		"Earth's Moon":
+			Global.modifiers.solarEnergyProduction *= 0.75
+		"Mars":
+			Global.modifiers.waterProduction *= 2.0
+		"Pluto":
+			pass
 
 func spawn_metal_deposits():
-	randomize()
-	var map_limits = tilemap.get_used_rect()
-	
 	for _i in range(0, minerals_to_spawn):
 		var metal_deposit := preload("res://objects/MetalDeposit.tscn").instance()
-		metal_deposit.global_position = Vector2(rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1)), rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1)))
+		metal_deposit.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		metal_deposit.add_to_group("metal_deposit")
 		add_child(metal_deposit)
 
@@ -193,50 +199,14 @@ func load_buildings():
 		building_node.isPlayerBldg = true
 		building_node.bldgLvl = bldg.building_lvl
 		building_node.get_node("CollisionHighlight").visible = false
-		get_tree().get_root().get_child(1).add_child(building_node)
+		base_mgr.add_building(building_node)
+		add_child(building_node)
 
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
-		loaded_colonist.global_position = Vector2(Global.player.global_position.x + rand_range(-15, 15), Global.player.global_position.y + rand_range(-15, 15))
+		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
+		base_mgr.add_colonist(loaded_colonist)
 		add_child(loaded_colonist)
-
-func save_game():
-	var save_game = File.new()
-	
-	for i in range(1, Global.MAX_SAVES):
-		var save_name = "user://save" + String(i) + ".save"
-		
-		if not save_game.file_exists(save_name):
-			save_game.open(save_name, File.WRITE)
-			
-			# This is what contains all properties we want to save/persist
-			var save_dictionary = {
-				"playerWeaponId": Global.playerWeaponId,
-				"playerStats": Global.playerStats,
-				"playerResearchedItemIds": Global.playerResearchedItemIds,
-				"playerResources": Global.playerResources,
-				"modifiers": Global.modifiers,
-				"gameTime": Global.game_time,
-				"playerShipData": Global.playerShipData,
-				"playerBaseData": Global.playerBaseData,
-				"npcColonyData": Global.npcColonyData,
-				"rscCollectionSiteData": Global.rscCollectionSiteData,
-				"saveTimestamp": OS.get_datetime()
-			}
-			
-			save_game.store_var(save_dictionary, true)
-			
-			save_game.close()
-			
-			var popup = AcceptDialog.new()
-			popup.dialog_text = "Successfully saved! (save" + String(i) + ")"
-			Global.player.get_node("UI").add_child(popup)
-			popup.popup_centered()
-			
-			return
-	
-	# TODO: prompt user to overwrite a save of their choice (between 1 and Global.MAX_SAVES)
-	save_game.close()

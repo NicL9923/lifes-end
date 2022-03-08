@@ -1,6 +1,7 @@
 extends Spatial
 
-onready var planet_radius = $MeshInstance.mesh.radius
+onready var mesh_inst = $MeshInstance
+onready var planet_radius = mesh_inst.mesh.radius
 
 func get_coords_from_lat_long(lat, long):
 	var x = planet_radius * cos(lat) * cos(long)

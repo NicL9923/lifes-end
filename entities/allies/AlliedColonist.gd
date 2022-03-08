@@ -17,8 +17,8 @@ func _ready():
 	cur_state = STATE.IDLE
 	self.add_to_group("player_team")
 	speed = 125
-	health = 100
-	max_health = 100
+	max_health = Global.modifiers.colonistMaxHealth
+	health = max_health
 	accuracy = 50
 	bullets_to_take_cover = 10 # Default: 10
 	percent_chance_to_flee = 1 # Default: 1
@@ -28,9 +28,11 @@ func _ready():
 	current_weapons = [$Position2D/Rifle]
 	currentWeapon = current_weapons[selectedWeaponIdx]
 
-func _physics_process(delta):
+func _process(delta):
 	handle_healthbar()
 	process_states(delta)
+	
+	max_health = Global.modifiers.colonistMaxHealth
 	
 	if health < 50 and will_flee_on_low_health:
 		enter_state(STATE.FLEEING)
@@ -64,15 +66,6 @@ func handle_idle_anim():
 		anim_sprt.play("idle_right")
 	else:
 		anim_sprt.play("idle_down")
-
-func set_new_patrol_point():
-	var map_limits = Global.world_nav.get_child(0).get_used_rect()
-	randomize()
-	
-	var next_x := clamp(self.global_position.x + rand_range(-100, 100), map_limits.position.x, map_limits.end.x)
-	var next_y := clamp(self.global_position.y + rand_range(-100, 100), map_limits.position.y, map_limits.end.y)
-	
-	next_patrol_point = Vector2(next_x, next_y)
 
 # Can go to/from patrolling
 func process_idle(delta):
@@ -125,11 +118,13 @@ func process_taking_cover(delta):
 # Can go to/from taking_cover, attacking, patrolling
 func process_advancing(delta):
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		enter_state(STATE.PATROLLING)
 		return
 	
 	# Advance towards closest hostile
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	if self.global_position.distance_to(closest_hostile.global_position) < dist_to_advance:
 		enter_state(STATE.ATTACKING)
@@ -140,6 +135,7 @@ func process_advancing(delta):
 func process_attacking(delta):
 	# If no more enemies present in LoS, enter_state(patrolling)
 	if hostiles_in_los.size() == 0:
+		closest_hostile = null
 		reset_weapon_rotation()
 		enter_state(STATE.PATROLLING)
 		return
@@ -147,7 +143,8 @@ func process_attacking(delta):
 	handle_idle_anim()
 	
 	# Find closest hostile and engage them
-	var closest_hostile = get_closest_of("hostile")
+	if not closest_hostile:
+		closest_hostile = get_closest_of("hostile")
 	
 	# Rotate weapon towards entity we're attacking
 		# TODO: predict player_team entities position w/ var accuracy (using current motion)

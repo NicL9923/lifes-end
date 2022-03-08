@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mars_tileset.png-c64b0326be2d6527c898fc8fd91ab377.stex"
+path="res://.import/$plz.png-1f73b02d686216f60996f4c355c9a6d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/planets/tilesets/Mars_tileset.png"
-dest_files=[ "res://.import/Mars_tileset.png-c64b0326be2d6527c898fc8fd91ab377.stex" ]
+source_file="res://objects/$plz.png"
+dest_files=[ "res://.import/$plz.png-1f73b02d686216f60996f4c355c9a6d7.stex" ]
 
 [params]
 

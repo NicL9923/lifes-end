@@ -9,8 +9,10 @@ func _init():
 	bldg_name = "Shipyard"
 	bldg_desc = "Allows the player to upgrade their ship"
 
-func _process(_delta):
+func _process(delta):
+	._process(delta)
+	handle_energy_display(delta)
 	$PopupUI.visible = is_player_in_popup_distance()
 
 func _on_ShipUpgrade_Button_pressed():
-	Global.player.ship_panel.show()
+	Global.player.ship_ui.show()
