@@ -16,13 +16,11 @@ func _ready():
 	connect_to_daynight_cycle()
 	
 	# Set particle emitter sizes
-	pol_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
-	pol_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
-	pol_particles.visibility_rect = Rect2(0, 0, pol_particles.process_material.emission_box_extents.x, pol_particles.process_material.emission_box_extents.y)
+	pol_particles.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
+	pol_particles.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
 	
-	rain_particles.process_material.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
-	rain_particles.process_material.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
-	rain_particles.visibility_rect = Rect2(0, 0, rain_particles.process_material.emission_box_extents.x, rain_particles.process_material.emission_box_extents.y)
+	rain_particles.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
+	rain_particles.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
 
 func connect_to_daynight_cycle():
 # warning-ignore:return_value_discarded

@@ -52,6 +52,7 @@ shader_param/hologramTextureTiling = Vector2( 1, 5 )
 shader_param/hologramTexture = ExtResource( 2 )
 
 [node name="Building" type="Area2D"]
+collision_mask = 7
 script = ExtResource( 1 )
 
 [node name="CollisionHighlight" type="ColorRect" parent="."]
@@ -94,5 +95,6 @@ theme = ExtResource( 4 )
 color = Color( 0, 0, 0, 0.901961 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

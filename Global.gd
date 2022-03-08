@@ -3,6 +3,12 @@ extends Node
 enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 enum Cell { GROUND, OUTER_TOP, OUTER_BOTTOM, OUTER_LEFT, OUTER_RIGHT }
 
+# Collision mask/layer notes:
+	# -Bullets: on: 3, collide_with: 1/2
+	# -Buildings: on: 1, collide_with: 1/2/3
+	# -Metal deposits -> on: 1, collide_with: 1/2/3
+	# -Entities + player -> on: 2, collide_with: 1
+
 enum RESEARCH_EFFECTS {
 	WPN_DMG = 0,
 	SOLAR = 1,
