@@ -103,6 +103,7 @@ func _ready():
 	static_body.get_node("CollisionShape2D").shape = RectangleShape2D.new()
 	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
 	
+	popup_panel.visible = false
 	if popup != null:
 		generate_and_connect_popup()
 	
@@ -220,7 +221,7 @@ func _on_ViewStats_Button_pressed():
 
 func _on_SystemMap_Button_pressed():
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://SystemMap.tscn")
 
 func _on_Craft_Button_pressed():

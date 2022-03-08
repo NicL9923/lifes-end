@@ -7,17 +7,13 @@
 extents = Vector2( 8.71597, 4.53919 )
 
 [node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
-local_coords = false
-tangential_accel = 64.64
-tangential_accel_random = 0.31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.134798 )

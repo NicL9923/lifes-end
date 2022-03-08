@@ -201,6 +201,9 @@ func load_buildings():
 		building_node.get_node("CollisionHighlight").visible = false
 		base_mgr.add_building(building_node)
 		add_child_below_node($Navigation2D, building_node)
+		
+		# Set tiles taken up by building on tilemap to tile/Concrete
+		Global.set_building_concrete_tiles(tilemap, building_node)
 
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:
