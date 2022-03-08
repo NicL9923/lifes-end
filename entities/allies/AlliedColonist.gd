@@ -90,9 +90,9 @@ func process_patrolling(delta):
 	handle_enemies_in_line_of_sight()
 	
 	# NOTE: The below two if statements use 5 as the value because the entity can't always get perfectly close to the point
-	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 5:
+	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 32:
 		pathfind_to_point(delta, last_known_player_team_pos)
-	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 5:
+	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 32:
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
@@ -207,12 +207,3 @@ func _on_LineOfSight_area_entered(area):
 func _on_LineOfSight_area_exited(area):
 	if area.is_in_group("bullets"):
 		num_bullets_in_los -= 1
-
-
-func _on_CollisionDetector_body_entered(body):
-	if body.is_in_group("building"):
-		nearby_col_objects.append(body)
-
-func _on_CollisionDetector_body_exited(body):
-	if body.is_in_group("building"):
-		nearby_col_objects.erase(body)

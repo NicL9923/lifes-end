@@ -35,10 +35,6 @@ config/windows_native_icon="res://ui/icon.ico"
 
 Global="*res://Global.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=640

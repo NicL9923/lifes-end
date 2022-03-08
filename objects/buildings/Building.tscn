@@ -86,12 +86,13 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="PopupUI" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 2 )
-margin_right = 363.0
-margin_bottom = 190.0
+margin_right = 128.0
+margin_bottom = 72.0
 theme = ExtResource( 4 )
 color = Color( 0, 0, 0, 0.901961 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

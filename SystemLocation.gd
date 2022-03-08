@@ -75,10 +75,13 @@ func load_resource_collection_site():
 func spawn_buildings(bldg_list: Array):
 	for bldg in bldg_list:
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
-		building_node.init(bldg, Global.buildings[bldg], 1)
+		building_node.init(bldg.type, Global.buildings[bldg.type], 1)
 		
 		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		add_child(building_node)
+		
+		# Set tiles taken up by building on tilemap to tile/Concrete
+		Global.set_building_concrete_tiles(tilemap, building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
 func spawn_colonists():

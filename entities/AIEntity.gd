@@ -27,7 +27,6 @@ var closest_hostile
 var hostiles_in_los := []
 var potential_cover_in_los := []
 var num_bullets_in_los := 0
-var nearby_col_objects := []
 
 var id
 var cur_state
@@ -50,20 +49,6 @@ func pathfind_to_point(delta, pos: Vector2):
 		
 		if move_dist <= dist_to_next_point:
 			var move_rot = get_angle_to(self.global_position.linear_interpolate(current_path[0], move_dist / dist_to_next_point))
-			
-			# Mke sure we're not running into something, and if we are, run perpendicular to it in the direction closest to the original
-			if nearby_col_objects.size() > 0:
-				var obj_to_avoid = get_closest_of("col_obj")
-				var angle_to_obj := get_angle_to(obj_to_avoid.global_position) # self.global_position.angle_to_point(obj_to_avoid.global_position)
-				
-				var move1 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj + deg2rad(90))
-				var move2 = self.global_position + Vector2(speed, 0).rotated(angle_to_obj - deg2rad(90))
-				
-				# Check which distance is shorter, and make sure the difference is great enough so we eliminate MOST (not all) indecisive glitching in place
-				if move1.distance_to(current_path[0]) < move2.distance_to(current_path[0]) and abs(move1.distance_to(current_path[0]) - move2.distance_to(current_path[0])) > 50:
-					move_rot = angle_to_obj + deg2rad(90)
-				else:
-					move_rot = angle_to_obj - deg2rad(90)
 			
 			var motion = Vector2(speed, 0).rotated(move_rot)
 			move_and_slide(motion)
@@ -90,8 +75,6 @@ func get_closest_of(type):
 	
 	if type == "hostile":
 		node_arr = hostiles_in_los
-	elif type == "col_obj":
-		node_arr = nearby_col_objects
 	elif type == "cover":
 		node_arr = potential_cover_in_los
 	else:
@@ -102,7 +85,7 @@ func get_closest_of(type):
 	
 	var closest_node = node_arr[0]
 	for node in node_arr:
-		if node.global_position.distance_to(self.global_position) < node.global_position.distance_to(self.global_position):
+		if node.global_position.distance_to(self.global_position) < closest_node.global_position.distance_to(self.global_position):
 			closest_node = node
 	
 	if type == "hostile":
