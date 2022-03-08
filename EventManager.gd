@@ -16,14 +16,14 @@ func _ready():
 	connect_to_daynight_cycle()
 	
 	# Set particle emitter sizes
-	pol_particles.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
-	pol_particles.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
+	pol_particles.emission_rect_extents.x = Global.world_tile_size.x * Global.cellSize
+	pol_particles.emission_rect_extents.y = Global.world_tile_size.y * Global.cellSize
 	
-	rain_particles.emission_box_extents.x = Global.world_tile_size.x * Global.cellSize
-	rain_particles.emission_box_extents.y = Global.world_tile_size.y * Global.cellSize
+	rain_particles.emission_rect_extents.x = Global.world_tile_size.x * Global.cellSize
+	rain_particles.emission_rect_extents.y = Global.world_tile_size.y * Global.cellSize
 
 func connect_to_daynight_cycle():
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 # Check if day will have event, and then check which event will happen
