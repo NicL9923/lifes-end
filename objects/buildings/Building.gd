@@ -98,7 +98,7 @@ func _ready():
 	col_hlt.rect_position = Vector2(-1 * col_hlt.rect_size.x / 2, -1 * col_hlt.rect_size.y / 2)
 	
 	$CollisionShape2D.shape = RectangleShape2D.new()
-	$CollisionShape2D.shape.extents = sprite_size / 2
+	$CollisionShape2D.shape.extents = (sprite_size / 2) - (Vector2.ONE * 16)
 	
 	static_body.get_node("CollisionShape2D").shape = RectangleShape2D.new()
 	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
@@ -112,10 +112,7 @@ func _ready():
 
 func _process(delta):
 	if popup != null:
-		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt
-		
-		for btn in popup_panel.get_children():
-			btn.disabled = not self.has_energy
+		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt and has_energy
 	
 	if isBeingBuilt:
 		handle_building_building(delta)
