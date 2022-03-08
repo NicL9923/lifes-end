@@ -77,10 +77,16 @@ func spawn_buildings(bldg_list: Array):
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
 		building_node.init(bldg.type, Global.buildings[bldg.type], 1)
 		
-		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
+		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize)
 		add_child(building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
+		var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+		if int(bldg_tile_size.x) % 2 == 1:
+			building_node.global_position.x += 16
+		if int(bldg_tile_size.y) % 2 == 1:
+			building_node.global_position.y += 16
+		
 		Global.set_building_concrete_tiles(tilemap, building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
