@@ -77,7 +77,7 @@ var playerResearchedItemIds: Array
 var playerShipData := defaultShipData
 var playerBaseData := defaultPlayerBaseData
 
-var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
+var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isGood and isDestroyed bools)
 var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
 
 var modifiers := defaultModifiers
@@ -121,6 +121,7 @@ const buildings = {
 		cost_to_build = 30,
 		bldg_limit = 1,
 		energy_cost_to_run = 5,
+		popup_activation_distance = 164,
 		popup = [
 			{
 				btn_text = "System Map",

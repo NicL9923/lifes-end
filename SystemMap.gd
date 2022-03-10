@@ -145,10 +145,18 @@ func map_icons_to_planet():
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
-			var iconPath = icon_base_path + "FriendlyNpcColonyIcon.png"
+			var iconPath = icon_base_path
 			
-			if colony.isDestroyed:
-				iconPath = icon_base_path + "DestroyedFriendlyColonyIcon.png"
+			if colony.isGood:
+				if colony.isDestroyed:
+					iconPath += "DestroyedFriendlyColonyIcon.png"
+				else:
+					iconPath += "FriendlyNpcColonyIcon.png"
+			else:
+				if colony.isDestroyed:
+					iconPath += "DestroyedHostileColonyIcon.png"
+				else:
+					iconPath += "HostileNpcColonyIcon.png"
 			
 			create_icon(iconPath, colony.coords, Global.location_type.npcColony, place_index)
 		place_index += 1

@@ -31,6 +31,7 @@ func _on_NewGame_Btn_button_pressed():
 
 func _on_LoadGame_Btn_button_pressed():
 	$MainMenuContainer.visible = false
+	$LoadGameContainer.visible = true
 	var save_files = []
 	
 	# Find and build list of .save files
