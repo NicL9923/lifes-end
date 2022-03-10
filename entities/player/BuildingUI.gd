@@ -19,9 +19,16 @@ func _process(_delta):
 	check_building_requirements()
 
 func handle_building_placement():
-	#NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
+	# NOTE: get_global_mouse_position() should work, but the CanvasLayer 'UI' in Player.tscn affects it in some way...meaning we have to use this monstrosity seen below
 	var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
 	building_node.global_position = snapped_mouse_pos
+	
+	# Handle odd-tile-sized buildings (to be placed on same "grid" as even-tile-sized ones which naturally work properly)
+	var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+	if int(bldg_tile_size.x) % 2 == 1:
+		building_node.global_position.x += 16
+	if int(bldg_tile_size.y) % 2 == 1:
+		building_node.global_position.y += 16
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		in_building_mode = false
@@ -158,6 +165,8 @@ func place_building():
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
+	
+	Global.set_building_concrete_tiles(get_tree().get_current_scene().tilemap, building_node)
 	
 	# Add building data to global player base data
 	var bldg_data = {

@@ -98,11 +98,12 @@ func _ready():
 	col_hlt.rect_position = Vector2(-1 * col_hlt.rect_size.x / 2, -1 * col_hlt.rect_size.y / 2)
 	
 	$CollisionShape2D.shape = RectangleShape2D.new()
-	$CollisionShape2D.shape.extents = sprite_size / 2
+	$CollisionShape2D.shape.extents = (sprite_size / 2) - (Vector2.ONE * 16)
 	
 	static_body.get_node("CollisionShape2D").shape = RectangleShape2D.new()
 	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
 	
+	popup_panel.visible = false
 	if popup != null:
 		generate_and_connect_popup()
 	
@@ -111,10 +112,7 @@ func _ready():
 
 func _process(delta):
 	if popup != null:
-		popup_panel.visible = is_player_in_popup_distance()
-		
-		for btn in popup_panel.get_children():
-			btn.disabled = not self.has_energy
+		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt and has_energy
 	
 	if isBeingBuilt:
 		handle_building_building(delta)
@@ -167,7 +165,7 @@ func handle_special_bldg_cases(bto):
 			bldg_desc = "Removes " + str(self.pollution_removed_per_day) + " pollution per day"
 
 func is_player_in_popup_distance():
-	return (Global.player.position.distance_to(self.position) < popup_activation_distance and !Global.player.isInCombat and !isBeingPlaced)
+	return (Global.player.position.distance_to(self.position) < popup_activation_distance)
 
 func handle_building_building(delta):
 	if cur_seconds_to_build <= 0.0:
@@ -220,7 +218,7 @@ func _on_ViewStats_Button_pressed():
 
 func _on_SystemMap_Button_pressed():
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://SystemMap.tscn")
 
 func _on_Craft_Button_pressed():

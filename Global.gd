@@ -3,6 +3,12 @@ extends Node
 enum MOVEMENT_DIR { UP, DOWN, LEFT, RIGHT }
 enum Cell { GROUND, OUTER_TOP, OUTER_BOTTOM, OUTER_LEFT, OUTER_RIGHT }
 
+# Collision mask/layer notes:
+	# -Bullets: on: 3, collide_with: 1/2
+	# -Buildings: on: 1, collide_with: 1/2/3
+	# -Metal deposits -> on: 1, collide_with: 1/2/3
+	# -Entities + player -> on: 2, collide_with: 1
+
 enum RESEARCH_EFFECTS {
 	WPN_DMG = 0,
 	SOLAR = 1,
@@ -407,16 +413,19 @@ func reset_global_data():
 	isPlayerBaseFirstLoad = true
 
 
-func set_player_camera_bounds(map_limits): # tilemap.get_used_rect()
-	player.get_node("Camera2D").limit_left = map_limits.position.x * Global.cellSize
-	player.get_node("Camera2D").limit_right = map_limits.end.x * Global.cellSize
-	player.get_node("Camera2D").limit_top = map_limits.position.y * Global.cellSize
-	player.get_node("Camera2D").limit_bottom = map_limits.end.y * Global.cellSize
+func set_player_camera_bounds(map_limits): # map_limits == tilemap.get_used_rect()
+	var p_cam = player.get_node("Camera2D")
+	p_cam.limit_left = map_limits.position.x * Global.cellSize
+	p_cam.limit_right = map_limits.end.x * Global.cellSize
+	p_cam.limit_top = map_limits.position.y * Global.cellSize
+	p_cam.limit_bottom = map_limits.end.y * Global.cellSize
 
 func get_random_location_in_map(map_limits):
 	randomize()
-	var x := rand_range(map_limits.position.x * (Global.cellSize + 1), map_limits.end.x * (Global.cellSize - 1))
-	var y := rand_range(map_limits.end.y * (Global.cellSize + 1), map_limits.position.y * (Global.cellSize - 1))
+	
+	var x := rand_range((map_limits.position.x + 2) * Global.cellSize , (map_limits.end.x - 2) * Global.cellSize)
+	var y := rand_range((map_limits.end.y - 2) * Global.cellSize, (map_limits.position.y + 2) * Global.cellSize)
+	
 	return Vector2(x, y)
 
 func get_position_in_radius_around(position: Vector2, radius: int) -> Vector2:
@@ -438,7 +447,7 @@ func generate_map_tiles(tilemap):
 	# Vertical column tiles
 	for x in [0, wts.x - 1]:
 		for y in range(0, wts.y - 1):
-			#wall tiles
+			# Wall tiles
 			if y > 0 and y < wts.y and x == 0:
 				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_LEFT)))
 			if y > 0 and y < wts.y and x == wts.x - 1:
@@ -447,10 +456,10 @@ func generate_map_tiles(tilemap):
 	# Horizontal row tiles
 	for x in range(1, wts.x - 1):
 		for y in [0, wts.y - 1]:
-			#top edge
+			# Top edge
 			if y == 0:
 				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_TOP)))
-			#bottom edge
+			# Bottom edge
 			if y == wts.y - 1:
 				tilemap.set_cell(x, y, planet_tile_value(generate_random_tile(Cell.OUTER_BOTTOM)))
 	
@@ -484,6 +493,28 @@ func planet_tile_value(ind):
 		"Mercury": return ind + 32
 		"Earth's Moon": return ind + 48
 		"Pluto": return ind + 64
+
+func set_building_concrete_tiles(tilemap, bldg_node):
+	# Set tiles taken up by building on tilemap to tile/Concrete
+	var bldg_size = bldg_node.bldg_sprite.texture.get_size()
+	var bldg_tile_size = bldg_size / Global.cellSize
+	var tl_corner_tile = tilemap.world_to_map(bldg_node.global_position) - (bldg_tile_size / 2)
+	
+	# Handle odd-tile-sized buildings
+	if int(bldg_tile_size.x) % 2 == 1:
+		tl_corner_tile.x += 1
+	if int(bldg_tile_size.y) % 2 == 1:
+		tl_corner_tile.y += 1
+	
+	var cur_tile = tl_corner_tile
+	for y in range(0, bldg_size.y / Global.cellSize):
+		for x in range(0, bldg_size.x / Global.cellSize):
+			
+			tilemap.set_cellv(cur_tile, 80) # Concrete
+			cur_tile.x += 1
+		
+		cur_tile.x = tl_corner_tile.x
+		cur_tile.y += 1
 
 func player_stat_modifier_formula(value: float) -> float:
 	return (1.0 + (value * 0.1))
