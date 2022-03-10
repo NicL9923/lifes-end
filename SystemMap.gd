@@ -1,7 +1,7 @@
 extends Spatial
 
 export var player_rotate_sensitivity := { x = 10 * 0.001, y = 10 * 0.001 }
-export var icon_scale := 0.25
+export var icon_scale := 0.4
 
 onready var planet := $Planet
 onready var map_ui := $UI
@@ -145,10 +145,10 @@ func map_icons_to_planet():
 	
 	for colony in Global.npcColonyData:
 		if colony.planet == Global.planets[currently_selected_planet]:
-			var iconPath = icon_base_path + "NpcColonyIcon.png"
+			var iconPath = icon_base_path + "FriendlyNpcColonyIcon.png"
 			
 			if colony.isDestroyed:
-				iconPath = icon_base_path + "DestroyedColonyIcon.png"
+				iconPath = icon_base_path + "DestroyedFriendlyColonyIcon.png"
 			
 			create_icon(iconPath, colony.coords, Global.location_type.npcColony, place_index)
 		place_index += 1
