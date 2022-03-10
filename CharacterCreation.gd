@@ -41,9 +41,6 @@ func _ready():
 	Global.playerStats.doc = cur_doc
 	
 	update_points_labels()
-	
-	yield($AnimationPlayer, "animation_finished")
-	$AnimationPlayer.play("RESET")
 
 func check_all_fields_completed():
 	if Global.playerName.length() > 0 and Global.playerName.length() <= 20 and remaining_attr_pts == 0:
@@ -110,6 +107,9 @@ func _on_LineEdit_text_changed(new_text):
 	check_all_fields_completed()
 
 func _on_Launch_Btn_button_pressed():
+	$AnimationPlayer.play("RESET")
+	yield($AnimationPlayer, "animation_finished")
+	
 	$AnimationPlayer.play("fade_out")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://cutscenes/IntroCinematic.tscn")
