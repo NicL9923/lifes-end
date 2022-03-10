@@ -25,6 +25,10 @@ func _ready():
 			$AnimationPlayer.play("badBadSubEnding")
 	
 	yield($AnimationPlayer, "animation_finished")
+	
+	$AnimationPlayer.play("credits")
+	yield($AnimationPlayer, "animation_finished")
+	
 	_on_Skip_Button_button_pressed()
 
 func _on_Skip_Button_button_pressed():

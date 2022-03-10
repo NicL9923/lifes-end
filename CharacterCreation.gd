@@ -107,6 +107,9 @@ func _on_LineEdit_text_changed(new_text):
 	check_all_fields_completed()
 
 func _on_Launch_Btn_button_pressed():
+	$AnimationPlayer.play("RESET")
+	yield($AnimationPlayer, "animation_finished")
+	
 	$AnimationPlayer.play("fade_out")
 	yield($AnimationPlayer, "animation_finished")
 	get_tree().change_scene("res://cutscenes/IntroCinematic.tscn")

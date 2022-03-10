@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ending_good_1.mp3-e7fb8a3d477c0a53d11f1dbfd59b73f7.mp3str"
+
+[deps]
+
+source_file="res://audio/voice/ending_good_1.mp3"
+dest_files=[ "res://.import/ending_good_1.mp3-e7fb8a3d477c0a53d11f1dbfd59b73f7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

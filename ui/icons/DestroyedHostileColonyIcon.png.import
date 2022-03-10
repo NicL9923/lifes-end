@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NpcColonyIcon.png-f3ab8db131ab22ef5a32a2741396583d.stex"
+path="res://.import/DestroyedHostileColonyIcon.png-d2f1696a80aa328a468b3d5870abff23.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/icons/NpcColonyIcon.png"
-dest_files=[ "res://.import/NpcColonyIcon.png-f3ab8db131ab22ef5a32a2741396583d.stex" ]
+source_file="res://ui/icons/DestroyedHostileColonyIcon.png"
+dest_files=[ "res://.import/DestroyedHostileColonyIcon.png-d2f1696a80aa328a468b3d5870abff23.stex" ]
 
 [params]
 
