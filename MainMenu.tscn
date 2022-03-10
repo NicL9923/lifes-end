@@ -269,7 +269,7 @@ current = true
 position = Vector2( 320, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 31
+frame = 42
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
