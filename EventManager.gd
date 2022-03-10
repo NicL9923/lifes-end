@@ -5,10 +5,11 @@ onready var rain_particles := $ParticleFX/Rain_Particles
 onready var pol_particles := $ParticleFX/Pollution_Particles
 
 const events = {
-	npc_raid = { event_name = "NPC raid", chance = 0.4 },
-	solar_flare = { event_name = "Solar flare", chance = 0.33 },
-	acidic_rain = { event_name = "Acidic rain", chance = 0.2 },
-	intense_freeze = { event_name = "Intense freeze", chance = 0.2 }
+	npc_raid = { event_name = "NPC raid", chance = 0.3 },
+	solar_flare = { event_name = "Solar flare", chance = 0.2 },
+	heat_wave = { event_name = "Heat wave", chance = 0.1 },
+	acidic_rain = { event_name = "Acidic rain", chance = 0.15 },
+	intense_freeze = { event_name = "Intense freeze", chance = 0.15 }
 }
 
 
@@ -42,7 +43,10 @@ func handle_new_day():
 	clean_up_prev_event()
 	
 	if rand_range(0, 1.0) < daily_event_chance:
-		if Global.playerBaseData.planet == "Venus" and rand_range(0, 1.0) < events.acidic_rain.chance:
+		if Global.playerBaseData.planet == "Mercury" and rand_range(0, 1.0) < events.heat_wave.chance:
+			event_heat_wave()
+			return
+		elif Global.playerBaseData.planet == "Venus" and rand_range(0, 1.0) < events.acidic_rain.chance:
 			event_acidic_rain()
 			return
 		elif Global.playerBaseData.planet == "Pluto" and rand_range(0, 1.0) < events.intense_freeze.chance:
@@ -63,6 +67,10 @@ func event_npc_raid():
 
 func event_solar_flare():
 	Global.push_player_notification("A solar flare is affecting your colony!")
+
+# Mercury only
+func event_heat_wave():
+	Global.push_player_notification("Your colony is experiencing a heat wave!")
 
 # Venus only
 func event_acidic_rain():
