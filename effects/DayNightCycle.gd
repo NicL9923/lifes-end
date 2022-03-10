@@ -24,7 +24,7 @@ func handle_daylight_based_on_planet():
 	elif Global.playerBaseData.planet == Global.planets[2]: # Earth's Moon - 1/30 Earth time
 		handle_planet_day_night_cycle(30)
 	elif Global.playerBaseData.planet == Global.planets[3]: # Mars - essentially same as Earth
-		if Global.game_time.ticks >= 1800:
+		if Global.game_time.ticks >= 2000:
 			transition_to_night()
 		elif Global.game_time.ticks >= 500:
 			transition_to_day()
