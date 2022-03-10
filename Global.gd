@@ -134,6 +134,7 @@ const buildings = {
 		cost_to_build = 25,
 		energy_cost_to_run = 10, # Handle power/no power states in Player/ResearchUI
 		bldg_limit = 1,
+		popup_activation_distance = 128,
 		popup = [
 			{
 				btn_text = "Research",
