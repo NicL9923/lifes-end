@@ -41,6 +41,9 @@ func _ready():
 	Global.playerStats.doc = cur_doc
 	
 	update_points_labels()
+	
+	yield($AnimationPlayer, "animation_finished")
+	$AnimationPlayer.play("RESET")
 
 func check_all_fields_completed():
 	if Global.playerName.length() > 0 and Global.playerName.length() <= 20 and remaining_attr_pts == 0:
