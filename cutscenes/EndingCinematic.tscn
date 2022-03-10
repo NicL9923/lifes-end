@@ -97,7 +97,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ "...but we have ensured that we will be the only ones standing to revel in it.", "Our actions, no matter their intentions, have left us vilified among the other remnants of humankind, and so what awaits us may be a very lonely, isolated future indeed..." ]
+"values": [ "...but we have ensured that we will be the only ones standing to revel in it.", "Our actions, no matter their intentions, have left us vilified among the other remnants of humanity, and so what awaits us may be a very lonely and isolated future indeed..." ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Subtitles:percent_visible")
@@ -209,7 +209,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ "...and not once did we forget our humanity.", "It's not enough for us thrive alone, we must do everything in our power to bring those around us up, and while some could not be saved, others would have never had a chance if not for us." ]
+"values": [ "...and not once did we forget our humanity.", "It's not enough for us to thrive alone, we must do everything in our power to bring those around us up, and while some could not be saved, others would have never had a chance if not for us." ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Subtitles:percent_visible")
