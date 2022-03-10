@@ -266,10 +266,10 @@ anchor_mode = 0
 current = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 319, 180 )
+position = Vector2( 320, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
-frame = 30
+frame = 36
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
