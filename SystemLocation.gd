@@ -81,7 +81,7 @@ func spawn_buildings(bldg_list: Array):
 		add_child(building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
-		var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+		var bldg_tile_size = building_node.bldg_size / Global.cellSize
 		if int(bldg_tile_size.x) % 2 == 1:
 			building_node.global_position.x += 16
 		if int(bldg_tile_size.y) % 2 == 1:

@@ -497,9 +497,7 @@ func planet_tile_value(ind):
 		"Pluto": return ind + 64
 
 func set_building_concrete_tiles(tilemap, bldg_node):
-	# Set tiles taken up by building on tilemap to tile/Concrete
-	var bldg_size = bldg_node.bldg_sprite.texture.get_size()
-	var bldg_tile_size = bldg_size / Global.cellSize
+	var bldg_tile_size = bldg_node.bldg_size / Global.cellSize
 	var tl_corner_tile = tilemap.world_to_map(bldg_node.global_position) - (bldg_tile_size / 2)
 	
 	# Handle odd-tile-sized buildings
@@ -509,8 +507,8 @@ func set_building_concrete_tiles(tilemap, bldg_node):
 		tl_corner_tile.y += 1
 	
 	var cur_tile = tl_corner_tile
-	for y in range(0, bldg_size.y / Global.cellSize):
-		for x in range(0, bldg_size.x / Global.cellSize):
+	for y in range(0, bldg_tile_size.y):
+		for x in range(0, bldg_tile_size.x):
 			
 			tilemap.set_cellv(cur_tile, 80) # Concrete
 			cur_tile.x += 1
