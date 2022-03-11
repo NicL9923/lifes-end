@@ -15,6 +15,7 @@ var popup = null
 var bldg_limit = null
 var popup_activation_distance = null
 
+var bldg_size: Vector2
 var bldg_key: String
 var bldg_name: String
 var bldg_desc: String
@@ -91,17 +92,22 @@ func init(b_key, bldg_template_obj, building_lvl):
 	handle_special_bldg_cases(bldg_template_obj)
 
 func _ready():
-	bldg_sprite.texture = load("res://objects/buildings/" + bldg_key.to_lower() + ".png")
-	var sprite_size = bldg_sprite.texture.get_size()
+	if self.bldg_key == "HQ":
+		bldg_sprite = load("res://objects/buildings/HQ_Anim_Sprite.tscn").instance()
+		add_child_below_node($BuildingSprite, bldg_sprite)
+		self.bldg_size = bldg_sprite.frames.get_frame("default", 0).get_size()
+	else:
+		bldg_sprite.texture = load("res://objects/buildings/" + bldg_key.to_lower() + ".png")
+		self.bldg_size = bldg_sprite.texture.get_size()
 	
-	col_hlt.rect_size = sprite_size
+	col_hlt.rect_size = self.bldg_size
 	col_hlt.rect_position = Vector2(-1 * col_hlt.rect_size.x / 2, -1 * col_hlt.rect_size.y / 2)
 	
 	$CollisionShape2D.shape = RectangleShape2D.new()
-	$CollisionShape2D.shape.extents = (sprite_size / 2) - (Vector2.ONE * 16)
+	$CollisionShape2D.shape.extents = (self.bldg_size / 2) - (Vector2.ONE * 16)
 	
 	static_body.get_node("CollisionShape2D").shape = RectangleShape2D.new()
-	static_body.get_node("CollisionShape2D").shape.extents = sprite_size / 2
+	static_body.get_node("CollisionShape2D").shape.extents = self.bldg_size / 2
 	
 	popup_panel.visible = false
 	if popup != null:

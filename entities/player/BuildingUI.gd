@@ -24,7 +24,7 @@ func handle_building_placement():
 	building_node.global_position = snapped_mouse_pos
 	
 	# Handle odd-tile-sized buildings (to be placed on same "grid" as even-tile-sized ones which naturally work properly)
-	var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+	var bldg_tile_size = building_node.bldg_size / Global.cellSize
 	if int(bldg_tile_size.x) % 2 == 1:
 		building_node.global_position.x += 16
 	if int(bldg_tile_size.y) % 2 == 1:
