@@ -201,18 +201,25 @@ func handle_energy_display(delta):
 ##################### BUILDING BUTTON FUNCS ################################
 
 func _on_RecruitColonist_Button_pressed():
+	randomize()
+	
 	if Global.playerResources.metal < self.cost_to_recruit_colonist:
 		Global.push_player_notification("You need " + self.cost_to_recruit_colonist + " metal to recruit a colonist!")
 		return
 	
 	Global.playerResources.metal -= self.cost_to_recruit_colonist
 	
+	var first_name_idx := int(rand_range(0, Global.entity_names.first.size() - 1))
+	var last_name_idx := int(rand_range(0, Global.entity_names.last.size() - 1))
+	
 	var new_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+	new_colonist.ent_name = Global.entity_names.first[first_name_idx] + " " + Global.entity_names.last[last_name_idx]
 	new_colonist.id = Global.playerBaseData.colonists.size() # This keeps IDs simple and incremental
 	new_colonist.global_position = Global.get_position_in_radius_around(self.global_position, 5)
 	
 	Global.playerBaseData.colonists.append({
 		id = new_colonist.id,
+		ent_name = new_colonist.ent_name,
 		health = new_colonist.health
 	})
 	

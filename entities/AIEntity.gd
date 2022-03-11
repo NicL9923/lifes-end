@@ -258,7 +258,10 @@ func die():
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():
+	print(health)
+	print(max_health)
 	healthbar.value = health
+	healthbar.max_value = max_health
 	
 	if health < max_health:
 		healthbar.visible = true

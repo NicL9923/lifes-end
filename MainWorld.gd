@@ -149,6 +149,7 @@ func generate_npc_colonies():
 			planet = "",
 			coords = { lat = 0, long = 0 },
 			buildings = [],
+			col_name = "",
 			isGood = true,
 			isDestroyed = false
 		}
@@ -166,6 +167,10 @@ func generate_npc_colonies():
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
 		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
 		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
+		
+		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
+		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
+		newNpcColony.col_name = Global.colony_names.adj[adj_idx] + " " + Global.colony_names.noun[noun_idx]
 		
 		# Set 50% of NPC colonies to be bad/evil
 		if rand_range(0, 100) < 50:
@@ -213,6 +218,7 @@ func load_buildings():
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.ent_name = colonist.ent_name
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)
