@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://ui/Earth.png" type="Texture" id=6]
 [ext_resource path="res://objects/ship.png" type="Texture" id=7]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=8]
+[ext_resource path="res://audio/voice/intro_2.mp3" type="AudioStream" id=9]
+[ext_resource path="res://audio/voice/intro_1.mp3" type="AudioStream" id=10]
+[ext_resource path="res://audio/voice/intro_3.mp3" type="AudioStream" id=11]
+[ext_resource path="res://audio/voice/intro_4.mp3" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
@@ -19,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 12.5, 15.5, 22.5 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 13.8, 16.5, 23.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ "[ Incoming transmission ]", "", "[ Incoming transmission ]", "", "[ Incoming transmission ]", "Earth...she was once our beautiful home. Her oceans spanned over half the planet, and her vast mountain ranges covered in snowy forests housed the most majestic wildlife.", "But no more...", "Her ecosystems have been ravaged to the point that not even us humans can survive within them, and so we look to space.", "Perhaps there is something to be learned from this...or perhaps not." ]
@@ -31,10 +35,34 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.4, 2.5, 10, 12.4, 12.5, 14, 15.4, 15.5, 21, 22.4, 22.5, 28 ),
+"times": PoolRealArray( 0, 2.4, 2.5, 10, 13.7, 13.8, 15, 16.4, 16.5, 22.3, 23.7, 23.8, 28 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1e-05, 1, 1, 2.01341e-05, 1, 1, 1e-05 ),
 "update": 0,
 "values": [ 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2.5, 13.8, 16.5, 23.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.5, 13.8, 16.5, 23.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true, true, true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -75,6 +103,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ null ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "fade_out"
@@ -98,6 +150,8 @@ script = ExtResource( 1 )
 anims/IntroCinematicAnim = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 320.056, 180 )
