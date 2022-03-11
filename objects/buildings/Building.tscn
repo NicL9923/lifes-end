@@ -68,7 +68,6 @@ __meta__ = {
 [node name="BuildingSprite" type="Sprite" parent="."]
 
 [node name="EnergyIcon" type="Sprite" parent="."]
-scale = Vector2( 2.125, 2.125 )
 texture = ExtResource( 5 )
 
 [node name="BuildingProgress" type="TextureProgress" parent="."]
