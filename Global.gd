@@ -77,7 +77,7 @@ var playerResearchedItemIds: Array
 var playerShipData := defaultShipData
 var playerBaseData := defaultPlayerBaseData
 
-var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isDestroyed bool)
+var npcColonyData: Array # (playerBaseData, but w/o colonists[]/playerPos/metalDeposits[] and w/ isGood and isDestroyed bools)
 var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: int }
 
 var modifiers := defaultModifiers
@@ -121,6 +121,7 @@ const buildings = {
 		cost_to_build = 30,
 		bldg_limit = 1,
 		energy_cost_to_run = 5,
+		popup_activation_distance = 164,
 		popup = [
 			{
 				btn_text = "System Map",
@@ -134,6 +135,7 @@ const buildings = {
 		cost_to_build = 25,
 		energy_cost_to_run = 10, # Handle power/no power states in Player/ResearchUI
 		bldg_limit = 1,
+		popup_activation_distance = 128,
 		popup = [
 			{
 				btn_text = "Research",
@@ -312,7 +314,7 @@ const longitude_range := [-180, 180]
 const ship_upgrade_costs := [15, 30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20 # Default: 20
-var time_speed := 8 # Default is 8, which makes 1 day last 5 real-world mins (2 = 20min; 40 = 1 min; 160 = 15 seconds)
+var time_speed := 40 # Default is 40, which makes 1 day last 1 real-world min (2 = 20min; 160 = 15 seconds)
 
 var isPlayerBaseFirstLoad := true
 var game_time := defaultGameTime # Game loads at 0800/8AM (goes from 0000 to 2400)

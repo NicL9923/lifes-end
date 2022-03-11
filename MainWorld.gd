@@ -149,6 +149,7 @@ func generate_npc_colonies():
 			planet = "",
 			coords = { lat = 0, long = 0 },
 			buildings = [],
+			isGood = true,
 			isDestroyed = false
 		}
 		
@@ -165,6 +166,10 @@ func generate_npc_colonies():
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
 		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
 		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
+		
+		# Set 50% of NPC colonies to be bad/evil
+		if rand_range(0, 100) < 50:
+			newNpcColony.isGood = false
 		
 		Global.npcColonyData.append(newNpcColony)
 

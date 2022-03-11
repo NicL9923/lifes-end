@@ -19,26 +19,76 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeTransition:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 644, 364 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FadeTransition:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -3, -1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Launch_Lbl:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "" ]
 }
 
 [sub_resource type="Animation" id=10]
 resource_name = "fade_in"
+length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("FadeTransition:color")
-tracks/0/interp = 1
+tracks/0/path = NodePath("FadeTransition:rect_position")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.709804 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( -2, -2 ), Vector2( -1, 375 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FadeTransition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=12]
 resource_name = "fade_out"
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeTransition:color")
 tracks/0/interp = 1
@@ -49,7 +99,19 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.364706 ), Color( 0, 0, 0, 0.862745 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.364706 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Launch_Lbl:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "LAUNCHING IN 3...", "LAUNCHING IN 3...2...", "LAUNCHING IN 3...2...1...", "ALL SYSTEMS GO" ]
 }
 
 [sub_resource type="AtlasTexture" id=1]
@@ -99,9 +161,6 @@ margin_top = -1.0
 margin_bottom = -1.0
 theme = ExtResource( 4 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 11 )
@@ -109,7 +168,7 @@ anims/fade_in = SubResource( 10 )
 anims/fade_out = SubResource( 12 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 319.5, 181.5 )
+position = Vector2( 320, 181 )
 scale = Vector2( 1.00156, 1.00278 )
 texture = ExtResource( 5 )
 
@@ -118,7 +177,6 @@ position = Vector2( 512, 177 )
 scale = Vector2( 2.58854, 2.6224 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="Lbl_CharAttr" type="Label" parent="."]
@@ -335,15 +393,19 @@ __meta__ = {
 }
 
 [node name="FadeTransition" type="ColorRect" parent="."]
-visible = false
 margin_left = -3.0
 margin_top = -1.0
 margin_right = 641.0
 margin_bottom = 363.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0, 0, 0, 1 )
+
+[node name="Launch_Lbl" type="Label" parent="."]
+margin_top = 1.0
+margin_right = 640.0
+margin_bottom = 363.0
+align = 1
+valign = 1
 
 [connection signal="button_pressed" from="Launch_Btn" to="." method="_on_Launch_Btn_button_pressed"]
 [connection signal="text_changed" from="CharName_HBox/LineEdit" to="." method="_on_LineEdit_text_changed"]
