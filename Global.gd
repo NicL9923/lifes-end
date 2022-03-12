@@ -83,6 +83,7 @@ var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: i
 var modifiers := defaultModifiers
 
 #Game flags/vars
+var is_in_mode_to_use_esc := false # Prioritizes only exiting a mode (i.e. building placement/moving), and if not in one of those, then open the esc menu
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
 const entity_names := {

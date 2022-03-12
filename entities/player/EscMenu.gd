@@ -2,7 +2,8 @@ extends Control
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	yield(get_tree(), "idle_frame") # Wait for this check so that we don't open this menu if we're in a mode that can be esc-d
+	if not Global.is_in_mode_to_use_esc and Input.is_action_just_pressed("ui_cancel"):
 		self.visible = !self.visible
 		get_tree().paused = self.visible
 

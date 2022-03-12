@@ -146,6 +146,8 @@ func _process(delta):
 		repair_icon.visible = false
 		move_mode = false
 		move_icon.visible = false
+		
+		Global.is_in_mode_to_use_esc = false
 	
 	if is_being_moved:
 		handle_being_moved()
@@ -330,6 +332,8 @@ func _on_BldgMove_Button_pressed():
 		bldg.move_icon.visible = true
 		bldg.scrap_mode = false
 		bldg.repair_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgRepair_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
@@ -337,6 +341,8 @@ func _on_BldgRepair_Button_pressed():
 		bldg.repair_icon.visible = true
 		bldg.scrap_mode = false
 		bldg.move_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgScrap_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
@@ -348,6 +354,8 @@ func _on_BldgScrap_Button_pressed():
 		
 		bldg.repair_mode = false
 		bldg.move_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_Research_Button_pressed():
 	Global.player.research_ui.show()

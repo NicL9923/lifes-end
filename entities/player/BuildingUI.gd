@@ -34,6 +34,7 @@ func handle_building_placement():
 		in_building_mode = false
 		building_node.queue_free()
 		building_node = null
+		Global.is_in_mode_to_use_esc = false
 		return
 	
 	check_building_placement()
@@ -134,10 +135,11 @@ func start_building(bldg_key: String):
 	building_panel.hide()
 	in_building_mode = true
 	building_type = bldg_key
+	Global.is_in_mode_to_use_esc = true
 	
 	# Set the building_node based on type
 	building_node = load(base_bldg_path + "Building.tscn").instance()
-	building_node.init(bldg_key, Global.buildings[bldg_key], 1)
+	building_node.init(bldg_key, Global.buildings[bldg_key])
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
@@ -179,6 +181,7 @@ func place_building():
 	
 	building_node = null
 	in_building_mode = false
+	Global.is_in_mode_to_use_esc = false
 
 func _on_Close_Button_button_pressed():
 	building_panel.hide()
