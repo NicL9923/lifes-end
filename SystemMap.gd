@@ -81,7 +81,7 @@ func _check_if_travel_possible():
 		return true
 
 func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, placeIndex):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		if not _check_if_travel_possible():
 			var popup = AcceptDialog.new()
 			popup.window_title = "Navigation System"

@@ -87,7 +87,7 @@ func spawn_buildings(bldg_list: Array):
 		if int(bldg_tile_size.y) % 2 == 1:
 			building_node.global_position.y += 16
 		
-		Global.set_building_concrete_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
 func spawn_colonists():
@@ -108,6 +108,7 @@ func spawn_metal_deposits(numMetalDeposits: int):
 func load_player_colonists():
 	for colonist in Global.playerBaseData.colonists:
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.ent_name = colonist.ent_name
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)

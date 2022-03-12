@@ -1,5 +1,7 @@
 extends AIEntity
 
+var ent_name: String
+
 # TODO: conversational popups (says random thing from conversation_text[] for now)
 
 func _ready():
@@ -24,6 +26,12 @@ func _process(delta):
 	process_states(delta)
 	
 	max_health = Global.modifiers.colonistMaxHealth
+	
+	if ent_name:
+		$Name_Lbl.text = ent_name
+		$Name_Lbl.visible = true
+	else:
+		$Name_Lbl.visible = false
 	
 	if health < 50 and will_flee_on_low_health:
 		enter_state(STATE.FLEEING)

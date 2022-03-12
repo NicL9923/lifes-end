@@ -85,12 +85,21 @@ var modifiers := defaultModifiers
 #Game flags/vars
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
+const entity_names := {
+	first = ["Rayce", "Nicolas", "Cameron", "Garrett", "Lei", "Evan", "Ben", "Reeech", "Devon", "Hanto", "Bryan", "David", "Michael"],
+	last = ["Peel", "Huang", "Powell", "Layne", "Johnson", "Garcia", "Smith", "Hernandez", "Miller", "Brown", "Williams", "Anderson"]
+}
+const colony_names := {
+	adj = ["Typical", "Ruthless", "Militant", "Separatist", "Consular", "Terrorist", "Tribal", "Warlike", "Religious", "Civilized", "Barbaric", "Independent", "Chauvinistic", "Patriotic", "United", "Savage", "Ecological", "Industrial", "Sustainable"],
+	noun = ["Colony", "Consulate", "Project", "Tribe", "Task Force", "Hegemony", "Empire", "Corporation", "Initiative", "Band", "Gang", "Cavalcade", "College"]
+}
 const buildings = {
 	HQ = {
 		bldg_name = "HQ",
 		bldg_desc = "The foundation of every colony",
 		cost_to_build = 15,
 		bldg_limit = 1,
+		popup_activation_distance = 164,
 		popup = [
 			{
 				btn_text = "Build",
@@ -395,7 +404,7 @@ func load_game(save_name):
 	save_game.close()
 	
 	# Load the MainWorld scene now that we've parsed in the save data
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func reset_global_data():
@@ -496,7 +505,7 @@ func planet_tile_value(ind):
 		"Earth's Moon": return ind + 48
 		"Pluto": return ind + 64
 
-func set_building_concrete_tiles(tilemap, bldg_node):
+func set_building_tiles(tilemap, bldg_node, toConcrete = true):
 	var bldg_tile_size = bldg_node.bldg_size / Global.cellSize
 	var tl_corner_tile = tilemap.world_to_map(bldg_node.global_position) - (bldg_tile_size / 2)
 	
@@ -507,10 +516,14 @@ func set_building_concrete_tiles(tilemap, bldg_node):
 		tl_corner_tile.y += 1
 	
 	var cur_tile = tl_corner_tile
-	for y in range(0, bldg_tile_size.y):
-		for x in range(0, bldg_tile_size.x):
+	for _y in range(0, bldg_tile_size.y):
+		for _x in range(0, bldg_tile_size.x):
 			
-			tilemap.set_cellv(cur_tile, 80) # Concrete
+			if toConcrete:
+				tilemap.set_cellv(cur_tile, 80) # Concrete
+			else:
+				# TODO: Doesn't handle edge tiles that were replaced atm
+				tilemap.set_cellv(cur_tile, planet_tile_value(generate_random_tile(Cell.GROUND)))
 			cur_tile.x += 1
 		
 		cur_tile.x = tl_corner_tile.x

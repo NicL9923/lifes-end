@@ -14,7 +14,7 @@ func _process(delta):
 	position += velocity * delta
 
 func able_to_take_dmg(node):
-	if not node.is_in_group("player_team") and not node.is_in_group("enemy"):
+	if not node.is_in_group("player_team") and not node.is_in_group("enemy") and not node.is_in_group("building"):
 		return false
 	
 	for exclusion in dmg_exclusion:
@@ -29,6 +29,9 @@ func _on_Bullet_area_entered(area):
 		area.take_damage(damage)
 
 func _on_Bullet_body_entered(body):
+	if body.is_in_group("building"):
+		return # Don't interact w/ bldgs' STATIC BODIES (but do interact w/ Area above ^)
+	
 	if able_to_take_dmg(body):
 		queue_free()
 		body.take_damage(damage * (Global.modifiers.playerTeamWeaponDamage if body.is_in_group("enemy") else 1.0))
