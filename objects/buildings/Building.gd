@@ -4,7 +4,6 @@ var cost_to_build: int
 var isBeingPlaced: bool # Need this var and check so menu doesn't show when building's being placed
 var isBeingBuilt := false
 var isPlayerBldg := false
-var bldgLvl: int
 var has_to_be_unlocked := false
 var sec_to_build := float(60 / Global.modifiers.buildSpeed)
 var cur_seconds_to_build := sec_to_build
@@ -23,7 +22,6 @@ var bldg_name: String
 var bldg_desc: String
 
 var repair_mode := false
-var upgrade_mode := false
 var move_mode := false
 var is_being_moved := false
 var idx_in_global_bldgs: int # Just used when moving this bldg to update its global_pos
@@ -57,12 +55,11 @@ onready var popup_panel := $PopupUI
 # TODO: Make sure crafting and research progress stop when respective bldgs are out of power (notify CraftingUI and ResearchUI somehow)
 
 
-func init(b_key, bldg_template_obj, building_lvl):
+func init(b_key, bldg_template_obj):
 	self.bldg_key = b_key
 	bldg_name = bldg_template_obj.bldg_name
 	bldg_desc = bldg_template_obj.bldg_desc
 	cost_to_build = bldg_template_obj.cost_to_build
-	bldgLvl = building_lvl
 	
 	if "max_health" in bldg_template_obj:
 		max_health = bldg_template_obj.max_health
@@ -147,10 +144,10 @@ func _process(delta):
 		scrap_icon.visible = false
 		repair_mode = false
 		repair_icon.visible = false
-		upgrade_mode = false
-		upgrade_icon.visible = false
 		move_mode = false
 		move_icon.visible = false
+		
+		Global.is_in_mode_to_use_esc = false
 	
 	if is_being_moved:
 		handle_being_moved()
@@ -329,29 +326,23 @@ func _on_Build_Button_pressed():
 func _on_SaveGame_Button_pressed():
 	Global.save_game()
 
-func _on_BldgUpgrade_Button_pressed():
-	for bldg in get_tree().get_current_scene().base_mgr.buildings:
-		bldg.upgrade_mode = true
-		bldg.upgrade_icon.visible = true
-		bldg.scrap_mode = false
-		bldg.repair_mode = false
-		bldg.move_mode = false
-
 func _on_BldgMove_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
 		bldg.move_mode = true
 		bldg.move_icon.visible = true
-		bldg.upgrade_mode = false
 		bldg.scrap_mode = false
 		bldg.repair_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgRepair_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
 		bldg.repair_mode = true
 		bldg.repair_icon.visible = true
-		bldg.upgrade_mode = false
 		bldg.scrap_mode = false
 		bldg.move_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgScrap_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
@@ -361,9 +352,10 @@ func _on_BldgScrap_Button_pressed():
 			bldg.scrap_mode = true
 			bldg.scrap_icon.visible = true
 		
-		bldg.upgrade_mode = false
 		bldg.repair_mode = false
 		bldg.move_mode = false
+	
+	Global.is_in_mode_to_use_esc = true
 
 func _on_Research_Button_pressed():
 	Global.player.research_ui.show()
@@ -383,8 +375,6 @@ func _on_Building_input_event(_viewport, event, _shape_idx):
 				health = max_health
 			else:
 				Global.push_player_notification("You need " + str(cost_to_repair) + " metal to repair this building!")
-		elif upgrade_mode:
-			pass # TODO: handle upgrading buildings (check if they even can be upgraded (if upgradeable and not max_level already))
 		elif move_mode:
 			Global.set_building_tiles(get_tree().get_current_scene().tilemap, self, false)
 			

@@ -34,6 +34,7 @@ func handle_building_placement():
 		in_building_mode = false
 		building_node.queue_free()
 		building_node = null
+		Global.is_in_mode_to_use_esc = false
 		return
 	
 	check_building_placement()
@@ -79,7 +80,7 @@ func generate_building_buttons():
 			continue
 		
 		var bldg_info = load(base_bldg_path + "Building.tscn").instance()
-		bldg_info.init(bldg_key, Global.buildings[bldg_key], 1)
+		bldg_info.init(bldg_key, Global.buildings[bldg_key])
 		
 		# Skip if building needs to be unlocked and hasn't
 		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg_key):
@@ -134,10 +135,11 @@ func start_building(bldg_key: String):
 	building_panel.hide()
 	in_building_mode = true
 	building_type = bldg_key
+	Global.is_in_mode_to_use_esc = true
 	
 	# Set the building_node based on type
 	building_node = load(base_bldg_path + "Building.tscn").instance()
-	building_node.init(bldg_key, Global.buildings[bldg_key], 1)
+	building_node.init(bldg_key, Global.buildings[bldg_key])
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
@@ -161,7 +163,6 @@ func place_building():
 	if not Global.debug.instant_build:
 		building_node.isBeingBuilt = true
 	building_node.isPlayerBldg = true
-	building_node.bldgLvl = 1
 	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
@@ -172,7 +173,6 @@ func place_building():
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
@@ -181,6 +181,7 @@ func place_building():
 	
 	building_node = null
 	in_building_mode = false
+	Global.is_in_mode_to_use_esc = false
 
 func _on_Close_Button_button_pressed():
 	building_panel.hide()

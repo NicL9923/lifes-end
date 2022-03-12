@@ -40,7 +40,7 @@ const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
 	unlockedBuildings = [], # String[] of BUILDING_TYPES
-	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
+	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2)
 	colonists = [], # Colonist{} -> health(int), global_pos(Vector2)
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [], # Vector2[]
@@ -83,6 +83,7 @@ var rscCollectionSiteData: Array # { planet: String, coords, numMetalDeposits: i
 var modifiers := defaultModifiers
 
 #Game flags/vars
+var is_in_mode_to_use_esc := false # Prioritizes only exiting a mode (i.e. building placement/moving), and if not in one of those, then open the esc menu
 const world_tile_size := Vector2(50, 50)
 const cellSize := 32
 const entity_names := {
@@ -160,10 +161,6 @@ const buildings = {
 		energy_cost_to_run = 4,
 		bldg_limit = 1,
 		popup = [
-			{
-				btn_text = "Upgrade",
-				connect_fn = "_on_BldgUpgrade_Button_pressed"
-			},
 			{
 				btn_text = "Move",
 				connect_fn = "_on_BldgMove_Button_pressed"

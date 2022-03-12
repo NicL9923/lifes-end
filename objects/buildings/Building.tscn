@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
 [ext_resource path="res://ui/hologram-lines.png" type="Texture" id=2]
-[ext_resource path="res://ui/Upgrade.png" type="Texture" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
 [ext_resource path="res://ui/progress_bars/radial-bg.png" type="Texture" id=6]
@@ -76,10 +75,6 @@ __meta__ = {
 [node name="EnergyIcon" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 5 )
-
-[node name="UpgradeIcon" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 3 )
 
 [node name="RepairIcon" type="Sprite" parent="."]
 visible = false
