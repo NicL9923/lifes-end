@@ -87,7 +87,7 @@ func spawn_buildings(bldg_list: Array):
 		if int(bldg_tile_size.y) % 2 == 1:
 			building_node.global_position.y += 16
 		
-		Global.set_building_concrete_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
 
 # NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
 func spawn_colonists():

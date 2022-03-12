@@ -505,7 +505,7 @@ func planet_tile_value(ind):
 		"Earth's Moon": return ind + 48
 		"Pluto": return ind + 64
 
-func set_building_concrete_tiles(tilemap, bldg_node):
+func set_building_tiles(tilemap, bldg_node, toConcrete = true):
 	var bldg_tile_size = bldg_node.bldg_size / Global.cellSize
 	var tl_corner_tile = tilemap.world_to_map(bldg_node.global_position) - (bldg_tile_size / 2)
 	
@@ -519,7 +519,11 @@ func set_building_concrete_tiles(tilemap, bldg_node):
 	for y in range(0, bldg_tile_size.y):
 		for x in range(0, bldg_tile_size.x):
 			
-			tilemap.set_cellv(cur_tile, 80) # Concrete
+			if toConcrete:
+				tilemap.set_cellv(cur_tile, 80) # Concrete
+			else:
+				# TODO: Doesn't handle edge tiles that were replaced atm
+				tilemap.set_cellv(cur_tile, planet_tile_value(generate_random_tile(Cell.GROUND)))
 			cur_tile.x += 1
 		
 		cur_tile.x = tl_corner_tile.x

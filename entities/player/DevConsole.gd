@@ -58,6 +58,7 @@ func execute_dev_commands():
 		output_to_add.append("set_time_speed x - sets time speed (8=5min day; 40=1min; 160=15s)")
 		output_to_add.append("set_pollution x - sets pollution (x must be between 0 and 100.0)")
 		output_to_add.append("instant_build - instantly build buildings")
+		output_to_add.append("toggle_combat - toggle player combat mode")
 		output_to_add.append("push_player_notification x - pushes a player notification that says x")
 		output_to_add.append("trigger_event x - starts event (0 - acidic rain/1 - intense freeze/2 - npc raid/ 3 - solar flare)")
 		output_to_add.append("load_scene scene_name_or_path - loads scene with given name/path")
@@ -89,6 +90,9 @@ func execute_dev_commands():
 	elif cmdTxt[0] == "instant_build":
 		Global.debug.instant_build = !Global.debug.instant_build
 		output_to_add.append("Instant build " + ("on" if Global.debug.instant_build else "off"))
+	elif cmdTxt[0] == "toggle_combat":
+		Global.player.toggle_combat(!Global.player.isInCombat)
+		output_to_add.append("Player combat mode " + ("on" if Global.player.isInCombat else "off"))
 	elif cmdTxt[0] == "push_player_notification" and cmdTxt[1] != null:
 		Global.push_player_notification(cmdTxt[1])
 	elif cmdTxt[0] == "trigger_event" and cmdTxt[1] != null:

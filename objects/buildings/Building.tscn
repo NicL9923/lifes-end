@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
 [ext_resource path="res://ui/hologram-lines.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://ui/resources/metal.png" type="Texture" id=8]
 [ext_resource path="res://ui/hammer.png" type="Texture" id=9]
 [ext_resource path="res://ui/move.png" type="Texture" id=10]
+[ext_resource path="res://ui/progress_bars/healthbar.png" type="Texture" id=11]
+[ext_resource path="res://ui/progress_bars/bar_black_bg.png" type="Texture" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -55,7 +57,7 @@ shader_param/linesColorIntensity = 3.0
 shader_param/hologramTextureTiling = Vector2( 1, 5 )
 shader_param/hologramTexture = ExtResource( 2 )
 
-[node name="Building" type="Area2D"]
+[node name="Building" type="Area2D" groups=["building"]]
 collision_mask = 7
 script = ExtResource( 1 )
 
@@ -105,6 +107,15 @@ fill_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Healthbar" type="TextureProgress" parent="."]
+margin_left = -44.0
+margin_top = -7.0
+margin_right = 44.0
+margin_bottom = 9.0
+texture_under = ExtResource( 12 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

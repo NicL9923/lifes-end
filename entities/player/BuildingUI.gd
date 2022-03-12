@@ -166,7 +166,7 @@ func place_building():
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
 	
-	Global.set_building_concrete_tiles(get_tree().get_current_scene().tilemap, building_node)
+	Global.set_building_tiles(get_tree().get_current_scene().tilemap, building_node)
 	
 	# Add building data to global player base data
 	var bldg_data = {

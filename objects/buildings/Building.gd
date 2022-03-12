@@ -14,6 +14,8 @@ var energy_blink_timer := 0.5
 var popup = null
 var bldg_limit = null
 var popup_activation_distance = null
+var max_health
+var health
 
 var bldg_size: Vector2
 var bldg_key: String
@@ -37,6 +39,7 @@ onready var move_icon := $MoveIcon
 onready var scrap_icon := $ScrapIcon
 onready var static_body := $StaticBody2D
 onready var bldg_progr := $BuildingProgress
+onready var healthbar := $Healthbar
 onready var bldg_sprite := $BuildingSprite
 onready var popup_panel := $PopupUI
 
@@ -58,6 +61,12 @@ func init(b_key, bldg_template_obj, building_lvl):
 	bldg_desc = bldg_template_obj.bldg_desc
 	cost_to_build = bldg_template_obj.cost_to_build
 	bldgLvl = building_lvl
+	
+	if "max_health" in bldg_template_obj:
+		max_health = bldg_template_obj.max_health
+	else:
+		max_health = 100
+	health = max_health
 	
 	if "energy_cost_to_run" in bldg_template_obj:
 		energy_cost_to_run = bldg_template_obj.energy_cost_to_run
@@ -128,6 +137,15 @@ func _process(delta):
 		handle_building_building(delta)
 	else:
 		handle_energy_display(delta)
+	
+	# Handle building healthbar
+	healthbar.max_value = max_health
+	healthbar.value = health
+	
+	if health == max_health:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
 
 func generate_and_connect_popup():
 	popup_panel.rect_size.x = 125
@@ -201,6 +219,28 @@ func handle_energy_display(delta):
 			energy_icon.visible = !energy_icon.visible
 			energy_blink_timer = 0.5
 
+func take_damage(amt):
+	health = clamp(health - amt, 0, max_health)
+	
+	if health == 0:
+		destruct(false)
+
+func destruct(isScrapping: bool):
+	# This is probably pretty terrible, but instead of an ID we're IDing bldgs based on their
+	# global_pos as it should technically be unique at all times
+	if isPlayerBldg:
+		for bldg in Global.playerBaseData.buildings:
+			if bldg.global_pos == self.global_position:
+				Global.playerBaseData.buildings.erase(bldg)
+				get_tree().get_current_scene().base_mgr.buildings.erase(bldg)
+				Global.set_building_tiles(get_tree().get_current_scene().tilemap, self, false)
+				break
+	
+	if isScrapping:
+		# Return a portion of the cost to construct the specific bldg to player's resources
+		Global.playerResources.metal += (cost_to_build / 4)
+	
+	queue_free()
 
 ##################### BUILDING BUTTON FUNCS ################################
 

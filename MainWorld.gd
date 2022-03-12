@@ -171,6 +171,7 @@ func generate_npc_colonies():
 		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
 		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
 		newNpcColony.col_name = Global.colony_names.adj[adj_idx] + " " + Global.colony_names.noun[noun_idx]
+		newNpcColony.col_name = Global.colony_names.adj[adj_idx] + " " + Global.colony_names.noun[noun_idx]
 		
 		# Set 50% of NPC colonies to be bad/evil
 		if rand_range(0, 100) < 50:
@@ -213,7 +214,7 @@ func load_buildings():
 		add_child_below_node($Navigation2D, building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
-		Global.set_building_concrete_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
 
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:

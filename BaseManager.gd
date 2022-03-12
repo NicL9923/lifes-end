@@ -52,7 +52,7 @@ func handle_energy_production():
 	var total_energy_produced := 0
 	
 	for bldg in buildings:
-		if bldg.energy_produced != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
+		if is_instance_valid(bldg) and bldg.energy_produced != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			total_energy_produced += bldg.energy_produced
 	
 	Global.playerResources.energy = total_energy_produced
@@ -60,6 +60,9 @@ func handle_energy_production():
 # Currently just distributes power in order - in future, TODO: will give player some influence over power distribution preference
 func handle_energy_distribution():
 	for bldg in buildings:
+		if not is_instance_valid(bldg):
+			continue
+		
 		if bldg.energy_produced != null:
 			continue # Skip energy-producing buildings
 		
