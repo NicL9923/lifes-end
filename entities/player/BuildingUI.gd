@@ -39,7 +39,7 @@ func handle_building_placement():
 	check_building_placement()
 
 func check_building_requirements():
-	var cur_bldg_idx := 1
+	var cur_bldg_idx := 1 # Set to 1 as we don't have a button for HQ (idx 0)
 	for node in building_button_box.get_children():
 		var btn_is_disabled := false
 		
@@ -50,7 +50,7 @@ func check_building_requirements():
 		
 		# Check how many of each limited building player has, and disable the button if they're at the limit
 		if node.get_children().size() == 5:
-			var num_placed := get_num_bldgs_placed(Global.buildings.keys()[cur_bldg_idx])
+			var num_placed := get_num_bldgs_placed(node.name)
 			var limit_lbl = node.get_child(4)
 			var max_placeable := int(limit_lbl.text.split(" / ")[1])
 			
@@ -118,6 +118,7 @@ func generate_building_buttons():
 			limit_lbl.rect_position = Vector2(550, (new_bldg_btn.rect_min_size.y / 2) - 5)
 		
 		new_bldg_btn.connect("pressed", self, "start_building", [bldg_key])
+		new_bldg_btn.name = bldg_key
 		building_button_box.add_child(new_bldg_btn)
 
 func get_num_bldgs_placed(bldg_key: String) -> int:

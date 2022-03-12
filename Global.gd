@@ -516,8 +516,8 @@ func set_building_tiles(tilemap, bldg_node, toConcrete = true):
 		tl_corner_tile.y += 1
 	
 	var cur_tile = tl_corner_tile
-	for y in range(0, bldg_tile_size.y):
-		for x in range(0, bldg_tile_size.x):
+	for _y in range(0, bldg_tile_size.y):
+		for _x in range(0, bldg_tile_size.x):
 			
 			if toConcrete:
 				tilemap.set_cellv(cur_tile, 80) # Concrete

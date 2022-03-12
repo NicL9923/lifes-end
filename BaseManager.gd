@@ -7,8 +7,6 @@ export var daily_dmg_from_pollution := 10
 var buildings := []
 var colonists := []
 
-# TODO: handle pollution visuals (convey pollution amt to player)
-
 
 func _ready():
 	connect_to_daynight_cycle()
@@ -32,7 +30,7 @@ func handle_new_day():
 	# NOTE: building nodes are responsible for maintaining how much they should be producing per day (i.e. based on bldg_level, etc)
 func handle_rsc_production():
 	for bldg in buildings:
-		if bldg.has_energy and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
+		if is_instance_valid(bldg) and bldg.has_energy and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			if bldg.metal_produced_per_day != null:
 				add_metal(bldg.metal_produced_per_day)
 			

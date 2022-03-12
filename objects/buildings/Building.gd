@@ -22,6 +22,13 @@ var bldg_key: String
 var bldg_name: String
 var bldg_desc: String
 
+var repair_mode := false
+var upgrade_mode := false
+var move_mode := false
+var is_being_moved := false
+var idx_in_global_bldgs: int # Just used when moving this bldg to update its global_pos
+var scrap_mode := false
+
 var cost_to_recruit_colonist = null
 var daily_colonist_healing_amt = null
 var metal_produced_per_day = null
@@ -48,11 +55,6 @@ onready var popup_panel := $PopupUI
 	# HQ upgrades allows upgrading other bldgs to higher levels
 
 # TODO: Make sure crafting and research progress stop when respective bldgs are out of power (notify CraftingUI and ResearchUI somehow)
-
-# TODO: Maintenance ideas:
-	# Clicking a button toggles that mode that shows applicable icons on each building it applies to (i.e. metal + cost-number/4-directions-arrows/hammer)
-	# Player clicks building to do the above operation and has to confirm (popup dialog)
-	# Probably need to start giving buildings unique IDs (or something to track it in both playerBaseData and game tree)
 
 
 func init(b_key, bldg_template_obj, building_lvl):
@@ -131,21 +133,27 @@ func _ready():
 
 func _process(delta):
 	if popup != null:
-		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt and has_energy
+		popup_panel.visible = is_player_in_popup_distance() and !Global.player.isInCombat and !isBeingPlaced and !isBeingBuilt and !is_being_moved and has_energy
 	
 	if isBeingBuilt:
 		handle_building_building(delta)
 	else:
 		handle_energy_display(delta)
 	
-	# Handle building healthbar
-	healthbar.max_value = max_health
-	healthbar.value = health
+	handle_healthbar()
 	
-	if health == max_health:
-		healthbar.visible = false
-	else:
-		healthbar.visible = true
+	if Input.is_action_just_pressed("ui_cancel"):
+		scrap_mode = false
+		scrap_icon.visible = false
+		repair_mode = false
+		repair_icon.visible = false
+		upgrade_mode = false
+		upgrade_icon.visible = false
+		move_mode = false
+		move_icon.visible = false
+	
+	if is_being_moved:
+		handle_being_moved()
 
 func generate_and_connect_popup():
 	popup_panel.rect_size.x = 125
@@ -194,6 +202,40 @@ func handle_special_bldg_cases(bto):
 
 func is_player_in_popup_distance():
 	return (Global.player.position.distance_to(self.position) < popup_activation_distance)
+
+func handle_healthbar():
+	healthbar.max_value = max_health
+	healthbar.value = health
+	
+	if health == max_health:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func handle_being_moved():
+	var snapped_mouse_pos = get_viewport().get_canvas_transform().affine_inverse().xform(get_viewport().get_mouse_position()).snapped(Vector2.ONE * Global.cellSize)
+	self.global_position = snapped_mouse_pos
+	
+	# Handle odd-tile-sized buildings (to be placed on same "grid" as even-tile-sized ones which naturally work properly)
+	var bldg_tile_size = self.bldg_size / Global.cellSize
+	if int(bldg_tile_size.x) % 2 == 1:
+		self.global_position.x += 16
+	if int(bldg_tile_size.y) % 2 == 1:
+		self.global_position.y += 16
+	
+	if self.get_overlapping_bodies().size() == 0:
+		col_hlt.color = Color(0.0, 1.0, 0.0, 0.5)
+		
+		if Input.is_action_just_pressed("shoot"):
+			Global.playerBaseData.buildings[idx_in_global_bldgs].global_pos = self.global_position
+			idx_in_global_bldgs = -1
+			Global.set_building_tiles(get_tree().get_current_scene().tilemap, self, true)
+			self.modulate.a = 1.0
+			col_hlt.visible = false
+			$StaticBody2D/CollisionShape2D.disabled = false
+			is_being_moved = false
+	else:
+		col_hlt.color = Color(1.0, 0.0, 0.0, 0.5)
 
 func handle_building_building(delta):
 	if cur_seconds_to_build <= 0.0:
@@ -288,19 +330,70 @@ func _on_SaveGame_Button_pressed():
 	Global.save_game()
 
 func _on_BldgUpgrade_Button_pressed():
-	pass
+	for bldg in get_tree().get_current_scene().base_mgr.buildings:
+		bldg.upgrade_mode = true
+		bldg.upgrade_icon.visible = true
+		bldg.scrap_mode = false
+		bldg.repair_mode = false
+		bldg.move_mode = false
 
 func _on_BldgMove_Button_pressed():
-	pass
+	for bldg in get_tree().get_current_scene().base_mgr.buildings:
+		bldg.move_mode = true
+		bldg.move_icon.visible = true
+		bldg.upgrade_mode = false
+		bldg.scrap_mode = false
+		bldg.repair_mode = false
 
 func _on_BldgRepair_Button_pressed():
-	pass
+	for bldg in get_tree().get_current_scene().base_mgr.buildings:
+		bldg.repair_mode = true
+		bldg.repair_icon.visible = true
+		bldg.upgrade_mode = false
+		bldg.scrap_mode = false
+		bldg.move_mode = false
 
 func _on_BldgScrap_Button_pressed():
-	pass
+	for bldg in get_tree().get_current_scene().base_mgr.buildings:
+		if bldg.bldg_key == "HQ":
+			bldg.scrap_mode = false
+		else:
+			bldg.scrap_mode = true
+			bldg.scrap_icon.visible = true
+		
+		bldg.upgrade_mode = false
+		bldg.repair_mode = false
+		bldg.move_mode = false
 
 func _on_Research_Button_pressed():
 	Global.player.research_ui.show()
 
 func _on_ViewShip_Button_pressed():
 	Global.player.ship_ui.show()
+
+func _on_Building_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		if scrap_mode:
+			destruct(true)
+		elif repair_mode:
+			var cost_to_repair = (max_health - health) / 20
+			
+			if Global.playerResources.metal >= cost_to_repair:
+				Global.playerResources.metal -= cost_to_repair
+				health = max_health
+			else:
+				Global.push_player_notification("You need " + str(cost_to_repair) + " metal to repair this building!")
+		elif upgrade_mode:
+			pass # TODO: handle upgrading buildings (check if they even can be upgraded (if upgradeable and not max_level already))
+		elif move_mode:
+			Global.set_building_tiles(get_tree().get_current_scene().tilemap, self, false)
+			
+			for i in range(0, Global.playerBaseData.buildings.size() - 1):
+				if Global.playerBaseData.buildings[i].global_pos == self.global_position:
+					idx_in_global_bldgs = i
+					break
+			
+			$StaticBody2D/CollisionShape2D.disabled = true
+			col_hlt.visible = true
+			self.modulate.a = 0.75
+			is_being_moved = true

@@ -72,7 +72,6 @@ __meta__ = {
 }
 
 [node name="BuildingSprite" type="Sprite" parent="."]
-visible = false
 
 [node name="EnergyIcon" type="Sprite" parent="."]
 visible = false
@@ -109,6 +108,7 @@ __meta__ = {
 }
 
 [node name="Healthbar" type="TextureProgress" parent="."]
+visible = false
 margin_left = -44.0
 margin_top = -7.0
 margin_right = 44.0
@@ -131,3 +131,5 @@ color = Color( 0, 0, 0, 0.901961 )
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+[connection signal="input_event" from="." to="." method="_on_Building_input_event"]
