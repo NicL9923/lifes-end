@@ -31,6 +31,10 @@ var pollution_removed_per_day = null
 
 onready var col_hlt := $CollisionHighlight
 onready var energy_icon := $EnergyIcon
+onready var upgrade_icon := $UpgradeIcon
+onready var repair_icon := $RepairIcon
+onready var move_icon := $MoveIcon
+onready var scrap_icon := $ScrapIcon
 onready var static_body := $StaticBody2D
 onready var bldg_progr := $BuildingProgress
 onready var bldg_sprite := $BuildingSprite

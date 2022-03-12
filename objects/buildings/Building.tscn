@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/buildings/Building.gd" type="Script" id=1]
 [ext_resource path="res://ui/hologram-lines.png" type="Texture" id=2]
+[ext_resource path="res://ui/Upgrade.png" type="Texture" id=3]
 [ext_resource path="res://ui/UI_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ui/resources/energy.png" type="Texture" id=5]
 [ext_resource path="res://ui/progress_bars/radial-bg.png" type="Texture" id=6]
 [ext_resource path="res://ui/progress_bars/radial-fg.png" type="Texture" id=7]
+[ext_resource path="res://ui/resources/metal.png" type="Texture" id=8]
+[ext_resource path="res://ui/hammer.png" type="Texture" id=9]
+[ext_resource path="res://ui/move.png" type="Texture" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -66,11 +70,30 @@ __meta__ = {
 }
 
 [node name="BuildingSprite" type="Sprite" parent="."]
+visible = false
 
 [node name="EnergyIcon" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 5 )
 
+[node name="UpgradeIcon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="RepairIcon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 9 )
+
+[node name="MoveIcon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 10 )
+
+[node name="ScrapIcon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 8 )
+
 [node name="BuildingProgress" type="TextureProgress" parent="."]
+visible = false
 margin_left = -16.0
 margin_top = -16.0
 margin_right = 112.0
