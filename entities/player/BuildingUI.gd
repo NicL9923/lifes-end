@@ -79,7 +79,7 @@ func generate_building_buttons():
 			continue
 		
 		var bldg_info = load(base_bldg_path + "Building.tscn").instance()
-		bldg_info.init(bldg_key, Global.buildings[bldg_key], 1)
+		bldg_info.init(bldg_key, Global.buildings[bldg_key])
 		
 		# Skip if building needs to be unlocked and hasn't
 		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg_key):
@@ -161,7 +161,6 @@ func place_building():
 	if not Global.debug.instant_build:
 		building_node.isBeingBuilt = true
 	building_node.isPlayerBldg = true
-	building_node.bldgLvl = 1
 	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
@@ -172,7 +171,6 @@ func place_building():
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)

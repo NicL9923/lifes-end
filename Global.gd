@@ -40,7 +40,7 @@ const defaultPlayerBaseData = {
 	planet = "",
 	coords = { lat = 0, long = 0 },
 	unlockedBuildings = [], # String[] of BUILDING_TYPES
-	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2), building_lvl(int *start is 1)
+	buildings = [], # BuildingData{} -> type(String), global_pos(Vector2)
 	colonists = [], # Colonist{} -> health(int), global_pos(Vector2)
 	lastPlayerPos = Vector2(0, 0),
 	metalDeposits = [], # Vector2[]
@@ -160,10 +160,6 @@ const buildings = {
 		energy_cost_to_run = 4,
 		bldg_limit = 1,
 		popup = [
-			{
-				btn_text = "Upgrade",
-				connect_fn = "_on_BldgUpgrade_Button_pressed"
-			},
 			{
 				btn_text = "Move",
 				connect_fn = "_on_BldgMove_Button_pressed"

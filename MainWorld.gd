@@ -165,8 +165,8 @@ func generate_npc_colonies():
 		
 		# TODO: Randomly generate other buildings within npc colony
 			# NOTE: currently randomly setting building locations in SystemLocation.gd
-		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
-		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
+		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0) })
+		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0) })
 		
 		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
 		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
@@ -205,7 +205,7 @@ func generate_resource_collection_sites():
 func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
-		building_node.init(bldg.type, Global.buildings[bldg.type], bldg.building_lvl)
+		building_node.init(bldg.type, Global.buildings[bldg.type])
 		
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
