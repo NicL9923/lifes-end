@@ -65,24 +65,13 @@ func _calculate_distance_to_planet(start_plt_idx, dest_plt_idx):
 	return total_dist
 
 func _check_if_travel_possible():
-	if Global.playerShipData.level == 1: # Unable to travel w/o upgrading ship
-		return false;
-	elif Global.playerShipData.level == 2: # Can travel on current planet
-		if currently_selected_planet == player_planet_index:
-			return true
-		else:
-			return false
-	elif Global.playerShipData.level == 3: # Can travel 40 distance (million miles) = ~1 planet
-		if _calculate_distance_to_planet(player_planet_index, currently_selected_planet) > 40:
-			return false
-		else:
-			return true
-	elif Global.playerShipData.level == 4: # Can travel 80 distance (million miles) = ~2 planets
-		if _calculate_distance_to_planet(player_planet_index, currently_selected_planet) > 80:
-			return false
-		else:
-			return true
-	elif Global.playerShipData.level == 5: # Can travel to any planet, and to/from Pluto
+	if Global.playerShipData.level == 1: # Can travel on current planet
+		return currently_selected_planet == player_planet_index
+	elif Global.playerShipData.level == 2: # Can travel 40 distance (million miles) = ~1 planet (excluding to/from Pluto)
+		return _calculate_distance_to_planet(player_planet_index, currently_selected_planet) <= 40
+	elif Global.playerShipData.level == 3: # Can travel 80 distance (million miles) = ~2 planets
+		return _calculate_distance_to_planet(player_planet_index, currently_selected_planet) <= 80
+	elif Global.playerShipData.level == 4: # Can travel anywhere
 		return true
 
 func _icon_area_clicked(_camera, event, _pos, _normal, _shape_idx, placeType, placeIndex):

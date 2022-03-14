@@ -318,7 +318,7 @@ const colony_biases := [10, 25, 65, 95, 100] # Used to determine concentration o
 const rsc_site_biases := [20, 45, 55, 70, 100] # Same idea as planet_biases (actual prob is 20/25/10/15/30)
 const latitude_range := [-90, 90]
 const longitude_range := [-180, 180]
-const ship_upgrade_costs := [15, 30, 50, 100]
+const ship_upgrade_costs := [30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20 # Default: 20
 var time_speed := 40 # Default is 40, which makes 1 day last 1 real-world min (2 = 20min; 160 = 15 seconds)

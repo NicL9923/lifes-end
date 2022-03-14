@@ -390,7 +390,7 @@ position = Vector2( 1.43051e-06, -4.76837e-07 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 69 )
 animation = "downIdle"
-frame = 6
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -902,7 +902,6 @@ margin_bottom = 1.0
 button_text = "Close"
 
 [node name="ShipUI" type="Control" parent="UI"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 9 )
@@ -938,10 +937,19 @@ position = Vector2( 320, 112 )
 scale = Vector2( 2.5, 2.375 )
 texture = ExtResource( 20 )
 
+[node name="Current_Lbl" type="Label" parent="UI/ShipUI/Ship_Panel"]
+margin_left = 96.0
+margin_top = 208.0
+margin_right = 544.0
+margin_bottom = 230.0
+text = "Current: X"
+align = 1
+autowrap = true
+
 [node name="NextUpgrade_Lbl" type="Label" parent="UI/ShipUI/Ship_Panel"]
-margin_left = 224.0
-margin_top = 207.0
-margin_right = 415.0
+margin_left = 96.0
+margin_top = 232.0
+margin_right = 544.0
 margin_bottom = 254.0
 text = "Next Upgrade: X"
 align = 1
@@ -1019,7 +1027,7 @@ position = Vector2( 504, 168 )
 scale = Vector2( 2.8, 3 )
 frames = SubResource( 79 )
 animation = "idle"
-frame = 7
+frame = 3
 playing = true
 
 [node name="MaxHealth_Label" type="Label" parent="UI/PlayerStatsUI/PlayerStats_Panel"]
