@@ -157,7 +157,6 @@ func process_patrolling(delta):
 	if last_known_player_team_pos and self.global_position.distance_to(last_known_player_team_pos) > 16:
 		pathfind_to_point(delta, last_known_player_team_pos)
 	elif next_patrol_point and self.global_position.distance_to(next_patrol_point) > 16:
-		#print(self.global_position.distance_to(next_patrol_point))
 		last_known_player_team_pos = null
 		pathfind_to_point(delta, next_patrol_point)
 	else:
@@ -258,8 +257,6 @@ func die():
 		Global.playerBaseData.colonists.remove(id)
 
 func handle_healthbar():
-	print(health)
-	print(max_health)
 	healthbar.value = health
 	healthbar.max_value = max_health
 	

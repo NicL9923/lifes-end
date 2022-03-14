@@ -91,7 +91,8 @@ const entity_names := {
 	last = ["Peel", "Huang", "Powell", "Layne", "Johnson", "Garcia", "Smith", "Hernandez", "Miller", "Brown", "Williams", "Anderson"]
 }
 const colony_names := {
-	adj = ["Typical", "Ruthless", "Militant", "Separatist", "Consular", "Terrorist", "Tribal", "Warlike", "Religious", "Civilized", "Barbaric", "Independent", "Chauvinistic", "Patriotic", "United", "Savage", "Ecological", "Industrial", "Sustainable"],
+	good_adj = ["Typical", "Militant", "Consular", "Tribal", "Religious", "Civilized", "Independent", "Chauvinistic", "Patriotic", "United", "Ecological", "Industrial", "Sustainable"],
+	bad_adj = ["Ruthless", "Terrorist", "Barbaric", "Savage", "Warlike", "Nationalist", "Separatist"],
 	noun = ["Colony", "Consulate", "Project", "Tribe", "Task Force", "Hegemony", "Empire", "Corporation", "Initiative", "Band", "Gang", "Cavalcade", "College"]
 }
 const buildings = {

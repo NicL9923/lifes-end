@@ -198,14 +198,14 @@ func generate_npc_colonies():
 			if rand_range(0, 100) < 10:
 				newNpcColony.buildings.append({ type = "Carbon_Scrubber", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
 		
-		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
-		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
-		newNpcColony.col_name = Global.colony_names.adj[adj_idx] + " " + Global.colony_names.noun[noun_idx]
-		newNpcColony.col_name = Global.colony_names.adj[adj_idx] + " " + Global.colony_names.noun[noun_idx]
+		newNpcColony.col_name = Global.colony_names.noun[int(rand_range(0, Global.colony_names.noun.size() - 1))]
 		
 		# Set 50% of NPC colonies to be bad/evil
 		if rand_range(0, 100) < 50:
 			newNpcColony.isGood = false
+			newNpcColony.col_name = Global.colony_names.bad_adj[int(rand_range(0, Global.colony_names.bad_adj.size() - 1))] + " " + newNpcColony.col_name
+		else:
+			newNpcColony.col_name = Global.colony_names.good_adj[int(rand_range(0, Global.colony_names.good_adj.size() - 1))] + " " + newNpcColony.col_name
 		
 		Global.npcColonyData.append(newNpcColony)
 
