@@ -45,7 +45,7 @@ func _process(_delta):
 	cur_colonists_lbl.text = "Current Colonists: " + str(Global.playerBaseData.colonists.size())
 	colonies_destr_lbl.text = "Colonies Destroyed: " + str(get_destroyed_colonies_count())
 	
-	alignment_lbl.text = "Alignment: " + ("Good" if Global.subEndingIsGood else "Evil")
+	alignment_lbl.text = "Alignment: " + ("Good" if Global.subEndingIsGood else "Evil") + " (" + str(int(Global.playerStats.humanity)) + ")"
 
 func get_destroyed_colonies_count():
 	var destr_colonies := 0

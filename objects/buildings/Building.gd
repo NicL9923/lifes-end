@@ -48,10 +48,6 @@ onready var healthbar := $Healthbar
 onready var bldg_sprite := $BuildingSprite
 onready var popup_panel := $PopupUI
 
-# TODO: Need to handle bldg levels (and those w/o any)
-	# Probably handle most of this in BaseManager?
-	# HQ upgrades allows upgrading other bldgs to higher levels
-
 # TODO: Make sure crafting and research progress stop when respective bldgs are out of power (notify CraftingUI and ResearchUI somehow)
 
 
@@ -65,6 +61,7 @@ func init(b_key, bldg_template_obj):
 		max_health = bldg_template_obj.max_health
 	else:
 		max_health = 100
+	
 	health = max_health
 	
 	if "energy_cost_to_run" in bldg_template_obj:
@@ -105,6 +102,7 @@ func init(b_key, bldg_template_obj):
 
 func _ready():
 	if self.bldg_key == "HQ":
+		# Set AnimatedSprite only for HQ
 		bldg_sprite = load("res://objects/buildings/HQ_Anim_Sprite.tscn").instance()
 		add_child_below_node($BuildingSprite, bldg_sprite)
 		self.bldg_size = bldg_sprite.frames.get_frame("default", 0).get_size()
@@ -153,20 +151,42 @@ func _process(delta):
 		handle_being_moved()
 
 func generate_and_connect_popup():
+	# This is a special case where NPC HQ will have "trade" in popup for friendly NPC colonies
+	if self.isPlayerBldg and self.bldg_key == "HQ":
+		popup_panel.rect_size.y = 35
+	else:
+		popup_panel.rect_size.y = self.popup.size() * 35
+	
 	popup_panel.rect_size.x = 125
-	popup_panel.rect_size.y = self.popup.size() * 35
 	popup_panel.rect_pivot_offset = popup_panel.rect_size / 2
 	popup_panel.rect_position = Vector2(-1 * popup_panel.rect_size.x / 2, -1 * popup_panel.rect_size.y / 2)
 	
 	var btn_height := 3
-	for btn in self.popup:
-		var new_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
-		new_btn.button_text = btn.btn_text
-		new_btn.rect_position = Vector2((125 / 2) - (new_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
-		new_btn.connect("button_pressed", self, btn.connect_fn)
+	
+	if self.isPlayerBldg and self.bldg_key == "HQ":
+		var new_trade_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
+		new_trade_btn.button_text = "Trade"
+		new_trade_btn.rect_position = Vector2((125 / 2) - (new_trade_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
+		new_trade_btn.connect("button_pressed", self, "_on_NPC_Trade_Button_pressed")
 		
-		popup_panel.add_child(new_btn)
+		popup_panel.add_child(new_trade_btn)
 		btn_height += 30
+		
+		var new_gift_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
+		new_gift_btn.button_text = "Gift"
+		new_gift_btn.rect_position = Vector2((125 / 2) - (new_gift_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
+		new_gift_btn.connect("button_pressed", self, "_on_NPC_Gift_Button_pressed")
+		
+		popup_panel.add_child(new_trade_btn)
+	else:
+		for btn in self.popup:
+			var new_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
+			new_btn.button_text = btn.btn_text
+			new_btn.rect_position = Vector2((125 / 2) - (new_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
+			new_btn.connect("button_pressed", self, btn.connect_fn)
+			
+			popup_panel.add_child(new_btn)
+			btn_height += 30
 
 func handle_special_bldg_cases(bto):
 	match bto.bldg_name:
@@ -282,6 +302,12 @@ func destruct(isScrapping: bool):
 	queue_free()
 
 ##################### BUILDING BUTTON FUNCS ################################
+
+func _on_NPC_Gift_Button_pressed():
+	pass # TODO: open player gift UI
+
+func _on_NPC_Trade_Button_pressed():
+	pass # TODO: open player trade UI
 
 func _on_RecruitColonist_Button_pressed():
 	randomize()

@@ -34,7 +34,7 @@ enum RESEARCH_EFFECTS {
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
-const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0, humanity = 0.0 } # Humanity can be float(-100 to 100)
 const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
@@ -91,7 +91,8 @@ const entity_names := {
 	last = ["Peel", "Huang", "Powell", "Layne", "Johnson", "Garcia", "Smith", "Hernandez", "Miller", "Brown", "Williams", "Anderson"]
 }
 const colony_names := {
-	adj = ["Typical", "Ruthless", "Militant", "Separatist", "Consular", "Terrorist", "Tribal", "Warlike", "Religious", "Civilized", "Barbaric", "Independent", "Chauvinistic", "Patriotic", "United", "Savage", "Ecological", "Industrial", "Sustainable"],
+	good_adj = ["Typical", "Militant", "Consular", "Tribal", "Religious", "Civilized", "Independent", "Chauvinistic", "Patriotic", "United", "Ecological", "Industrial", "Sustainable"],
+	bad_adj = ["Ruthless", "Terrorist", "Barbaric", "Savage", "Warlike", "Nationalist", "Separatist"],
 	noun = ["Colony", "Consulate", "Project", "Tribe", "Task Force", "Hegemony", "Empire", "Corporation", "Initiative", "Band", "Gang", "Cavalcade", "College"]
 }
 const buildings = {
@@ -317,7 +318,7 @@ const colony_biases := [10, 25, 65, 95, 100] # Used to determine concentration o
 const rsc_site_biases := [20, 45, 55, 70, 100] # Same idea as planet_biases (actual prob is 20/25/10/15/30)
 const latitude_range := [-90, 90]
 const longitude_range := [-180, 180]
-const ship_upgrade_costs := [15, 30, 50, 100]
+const ship_upgrade_costs := [30, 50, 100]
 const max_deposits_at_rsc_site := 100
 const max_colonists_at_npc_colony := 20 # Default: 20
 var time_speed := 40 # Default is 40, which makes 1 day last 1 real-world min (2 = 20min; 160 = 15 seconds)
@@ -327,11 +328,12 @@ var game_time := defaultGameTime # Game loads at 0800/8AM (goes from 0000 to 240
 var world_nav: Navigation2D
 var location_to_load := {
 	type = "",
-	index = 0
+	index = 0,
+	is_raiding = true
 }
 
 var mainEndingIsGood := false
-var subEndingIsGood := false
+var subEndingIsGood := false # Also actively represents if player is "Good" or "Evil" as they're playing (see playerStats.humanity)
 
 var debug = {
 	dev_console = {
@@ -531,3 +533,6 @@ func player_stat_modifier_formula(value: float) -> float:
 
 func push_player_notification(new_notification: String) -> void:
 	player.notifications.notification_queue.append(new_notification)
+
+func add_player_humanity(by_amt: float):
+	playerStats.humanity = clamp(playerStats.humanity + by_amt, -100.0, 100.0)
