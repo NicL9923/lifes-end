@@ -14,6 +14,7 @@ func _ready():
 	
 	location_type = Global.location_to_load.type
 	location_index = Global.location_to_load.index
+	isARaid = Global.location_to_load.isRaiding
 	
 	Global.world_nav = $Navigation2D
 	Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
@@ -30,7 +31,6 @@ func _ready():
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 
 func _process(_delta):
-	
 	var enemy_count := 0
 	if isARaid:
 		for node in get_children():
@@ -50,16 +50,17 @@ func _process(_delta):
 			# TODO: give player resources (maybe a set base amt + something based on the kind of bldgs it had)
 
 func load_npc_colony():
+	Global.player.rtb_btn.visible = !isARaid
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]
 	
 	spawn_buildings(npcColony.buildings)
-	spawn_colonists()
+	spawn_colonists(npcColony.num_colonists)
 	
 	load_player_colonists()
 	
-	isARaid = true
-	are_enemies_present = true
-	Global.player.toggle_combat(are_enemies_present)
+	if isARaid:
+		are_enemies_present = true
+		Global.player.toggle_combat(are_enemies_present)
 
 func load_resource_collection_site():
 	Global.player.rtb_btn.visible = true
@@ -77,7 +78,7 @@ func spawn_buildings(bldg_list: Array):
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
 		building_node.init(bldg.type, Global.buildings[bldg.type])
 		
-		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize)
+		building_node.global_position = bldg.global_pos
 		add_child(building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
@@ -90,11 +91,15 @@ func spawn_buildings(bldg_list: Array):
 		Global.set_building_tiles(tilemap, building_node)
 		Global.set_building_tiles(tilemap, building_node)
 
-# NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
-func spawn_colonists():
-	var num_colonists = rand_range(1, Global.max_colonists_at_npc_colony)
+func spawn_colonists(num_colonists: int):
 	for _i in range(num_colonists):
-		var new_colonist = load("res://entities/enemies/EnemyColonist.tscn").instance()
+		var new_colonist
+		
+		if isARaid:
+			new_colonist = load("res://entities/enemies/EnemyColonist.tscn").instance()
+		else:
+			new_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		
 		new_colonist.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		add_child(new_colonist)
 		

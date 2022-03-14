@@ -327,7 +327,8 @@ var game_time := defaultGameTime # Game loads at 0800/8AM (goes from 0000 to 240
 var world_nav: Navigation2D
 var location_to_load := {
 	type = "",
-	index = 0
+	index = 0,
+	is_raiding = true
 }
 
 var mainEndingIsGood := false

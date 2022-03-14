@@ -39,9 +39,6 @@ fov = 75.0
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Planet_Thumbnail_Container" type="ColorRect" parent="UI"]
 margin_left = 240.0
@@ -135,12 +132,81 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PltDist_Lbl" type="Label" parent="UI"]
+margin_left = 232.0
+margin_top = 16.0
+margin_right = 410.0
+margin_bottom = 33.0
+text = "XX million mi"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Return_Btn" parent="UI" instance=ExtResource( 10 )]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 16.0
 margin_bottom = 16.0
 button_text = "Return"
+
+[node name="LocationInfo" type="ColorRect" parent="UI"]
+visible = false
+margin_left = 464.0
+margin_top = 16.0
+margin_right = 622.0
+margin_bottom = 104.0
+color = Color( 0.0196078, 0.439216, 0.717647, 0.45098 )
+
+[node name="LocationLbl" type="Label" parent="UI/LocationInfo"]
+margin_right = 160.0
+margin_bottom = 17.0
+text = "Location"
+align = 1
+valign = 1
+
+[node name="RscSite_Grp" type="Control" parent="UI/LocationInfo"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ExploreBtn" parent="UI/LocationInfo/RscSite_Grp" instance=ExtResource( 10 )]
+margin_left = 40.0
+margin_top = 32.0
+margin_right = 40.0
+margin_bottom = 32.0
+button_text = "Explore"
+
+[node name="GoodCol_Grp" type="Control" parent="UI/LocationInfo"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RaidBtn" parent="UI/LocationInfo/GoodCol_Grp" instance=ExtResource( 10 )]
+margin_left = 54.0
+margin_top = 53.0
+margin_right = 54.0
+margin_bottom = 53.0
+button_text = "Raid"
+
+[node name="VisitBtn" parent="UI/LocationInfo/GoodCol_Grp" instance=ExtResource( 10 )]
+margin_left = 51.0
+margin_top = 22.0
+margin_right = 51.0
+margin_bottom = 22.0
+button_text = "Visit"
+
+[node name="EvilCol_Grp" type="Control" parent="UI/LocationInfo"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RaidBtn" parent="UI/LocationInfo/EvilCol_Grp" instance=ExtResource( 10 )]
+margin_left = 51.0
+margin_top = 32.0
+margin_right = 51.0
+margin_bottom = 32.0
+button_text = "Raid"
 
 [node name="Planet" type="Spatial" parent="."]
 script = ExtResource( 7 )
@@ -162,3 +228,7 @@ environment = SubResource( 6 )
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Mars_Area" to="." method="_on_Mars_Area_input_event"]
 [connection signal="input_event" from="UI/Planet_Thumbnail_Container/HBoxContainer/Pluto_Area" to="." method="_on_Pluto_Area_input_event"]
 [connection signal="button_pressed" from="UI/Return_Btn" to="." method="_on_Return_Btn_button_pressed"]
+[connection signal="button_pressed" from="UI/LocationInfo/RscSite_Grp/ExploreBtn" to="." method="_on_ExploreBtn_button_pressed"]
+[connection signal="button_pressed" from="UI/LocationInfo/GoodCol_Grp/RaidBtn" to="." method="_on_RaidBtn_button_pressed"]
+[connection signal="button_pressed" from="UI/LocationInfo/GoodCol_Grp/VisitBtn" to="." method="_on_VisitBtn_button_pressed"]
+[connection signal="button_pressed" from="UI/LocationInfo/EvilCol_Grp/RaidBtn" to="." method="_on_RaidBtn_button_pressed"]

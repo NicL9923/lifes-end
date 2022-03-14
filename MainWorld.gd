@@ -149,6 +149,7 @@ func generate_npc_colonies():
 			planet = "",
 			coords = { lat = 0, long = 0 },
 			buildings = [],
+			num_colonists = rand_range(1, Global.max_colonists_at_npc_colony),
 			col_name = "",
 			isGood = true,
 			isDestroyed = false
@@ -164,9 +165,9 @@ func generate_npc_colonies():
 			newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
 		# TODO: Randomly generate other buildings within npc colony
-			# NOTE: currently randomly setting building locations in SystemLocation.gd
-		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0) })
-		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0) })
+			# NOTE: This should technically be using the SystemLocation tilemap, but they (MainWorld & that) are (as of writing this) the same, so it's fine FOR NOW
+		newNpcColony.buildings.append({ type = "HQ", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		newNpcColony.buildings.append({ type = "Barracks", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
 		
 		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
 		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
