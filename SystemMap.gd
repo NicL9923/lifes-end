@@ -216,7 +216,7 @@ func display_planet(planet_index):
 	newMaterial.albedo_texture = load("res://objects/planets/3d_sprites/" + Global.planets[planet_index] + " 3D.png")
 	planet_mesh.mesh.surface_set_material(0, newMaterial)
 	
-	$UI/PltDist_Lbl.text = str(_calculate_distance_to_planet(player_planet_index, planet_index))
+	$UI/PltDist_Lbl.text = str(_calculate_distance_to_planet(player_planet_index, planet_index)) + " million mi"
 	
 	map_icons_to_planet()
 
