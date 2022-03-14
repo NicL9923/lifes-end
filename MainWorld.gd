@@ -169,10 +169,34 @@ func generate_npc_colonies():
 			newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 			newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
-		# TODO: Randomly generate other buildings within npc colony
+		# Add buildings to NPC colony
 			# NOTE: This should technically be using the SystemLocation tilemap, but they (MainWorld & that) are (as of writing this) the same, so it's fine FOR NOW
 		newNpcColony.buildings.append({ type = "HQ", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
 		newNpcColony.buildings.append({ type = "Barracks", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		
+		if rand_range(0, 100) < 30:
+			newNpcColony.buildings.append({ type = "Science_Lab", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			newNpcColony.buildings.append({ type = "Medbay", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		if rand_range(0, 100) < 50:
+			newNpcColony.buildings.append({ type = "Communications_Array", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			newNpcColony.buildings.append({ type = "Shipyard", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			
+		
+		if rand_range(0, 100) < 50:
+			# Colony will have sustainable buildings
+			for _x in range(1, 3):
+				newNpcColony.buildings.append({ type = "Power_Sustainable_Solar", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+				
+			newNpcColony.buildings.append({ type = "Power_Sustainable_Geothermal", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		else:
+			# Colony will have industrial buildings
+			for _x in range(1, 3):
+				newNpcColony.buildings.append({ type = "Power_Industrial_Coal", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+				
+			newNpcColony.buildings.append({ type = "Power_Industrial_Gas", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			
+			if rand_range(0, 100) < 10:
+				newNpcColony.buildings.append({ type = "Carbon_Scrubber", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
 		
 		var adj_idx := int(rand_range(0, Global.colony_names.adj.size() - 1))
 		var noun_idx := int(rand_range(0, Global.colony_names.noun.size() - 1))
