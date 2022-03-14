@@ -150,8 +150,6 @@ func create_icon(iconImgPath: String, coordinates, type: String, index: int):
 	var colShape = CollisionShape.new()
 	colShape.shape = BoxShape.new()
 	colShape.scale = Vector3.ONE * col_shape_scale
-	if type == Global.location_type.playerColony:
-		colShape.disabled = true
 	
 	var newSprite = Sprite3D.new()
 	newSprite.texture = load(iconImgPath)
