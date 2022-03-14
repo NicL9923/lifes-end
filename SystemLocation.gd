@@ -47,7 +47,12 @@ func _process(_delta):
 			Global.player.toggle_combat(false)
 			Global.push_player_notification("You successfully overtook the colony!")
 			
-			# TODO: give player resources (maybe a set base amt + something based on the kind of bldgs it had)
+			# Transfer the colony's resources to the player
+			Global.playerResources.metal += Global.npcColonyData[location_index].resources.metal
+			Global.playerResources.food += Global.npcColonyData[location_index].resources.food
+			Global.playerResources.water += Global.npcColonyData[location_index].resources.water
+			
+			Global.push_player_notification("Looted " + str(Global.npcColonyData[location_index].resources.metal) + " metal, " + str(Global.npcColonyData[location_index].resources.food) + " food, " + str(Global.npcColonyData[location_index].resources.water) + " water")
 
 func load_npc_colony():
 	Global.player.rtb_btn.visible = !isARaid
@@ -61,6 +66,13 @@ func load_npc_colony():
 	if isARaid:
 		are_enemies_present = true
 		Global.player.toggle_combat(are_enemies_present)
+		
+		if npcColony.isGood:
+			Global.add_player_humanity(10)
+			Global.push_player_notification("Your humanity increased by 10!")
+		else:
+			Global.add_player_humanity(-25)
+			Global.push_player_notification("Your humanity decreased by 25.")
 
 func load_resource_collection_site():
 	Global.player.rtb_btn.visible = true

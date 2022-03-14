@@ -150,6 +150,11 @@ func generate_npc_colonies():
 			coords = { lat = 0, long = 0 },
 			buildings = [],
 			num_colonists = rand_range(1, Global.max_colonists_at_npc_colony),
+			resources = {
+				metal = rand_range(25, 200),
+				food = rand_range(10, 75),
+				water = rand_range(15, 60)
+			},
 			col_name = "",
 			isGood = true,
 			isDestroyed = false

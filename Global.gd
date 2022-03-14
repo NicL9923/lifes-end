@@ -34,7 +34,7 @@ enum RESEARCH_EFFECTS {
 #Game classes/types
 # NOTE: Was using custom classes for base data, but that doesn't let it be serialized for savegames so that's a no go
 const defaultShipData = { level = 1 }
-const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0 }
+const defaultPlayerStats = { cmdr = 0, engr = 0, biol = 0, doc = 0, max_health = 100.0, humanity = 0.0 } # Humanity can be float(-100 to 100)
 const defaultPlayerResources = { metal = 0, food = 0, water = 0, energy = 0 }
 const defaultPlayerBaseData = {
 	planet = "",
@@ -332,7 +332,7 @@ var location_to_load := {
 }
 
 var mainEndingIsGood := false
-var subEndingIsGood := false
+var subEndingIsGood := false # Also actively represents if player is "Good" or "Evil" as they're playing (see playerStats.humanity)
 
 var debug = {
 	dev_console = {
@@ -532,3 +532,6 @@ func player_stat_modifier_formula(value: float) -> float:
 
 func push_player_notification(new_notification: String) -> void:
 	player.notifications.notification_queue.append(new_notification)
+
+func add_player_humanity(by_amt: float):
+	playerStats.humanity = clamp(playerStats.humanity + by_amt, -100.0, 100.0)
