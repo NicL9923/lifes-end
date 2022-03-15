@@ -23,7 +23,7 @@ const research_tree = [
 	{ id = 19, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[8, 11], [15, 18]] } # discover_your_fate
 ]
 
-export var daily_research_points := 250
+export var daily_research_points := 350
 onready var research_btn_cont := $Research_Panel/Research_Btn_Container
 var cur_research_id := -1 # -1 means no current research
 
