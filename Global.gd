@@ -222,7 +222,7 @@ const buildings = {
 	},
 	Medbay = {
 		bldg_name = "Medbay",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 30,
 		energy_cost_to_run = 8,
 		daily_colonist_healing_amt = 20,
@@ -231,64 +231,64 @@ const buildings = {
 	},
 	Greenhouse = {
 		bldg_name = "Greenhouse",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 10,
 		energy_cost_to_run = 10,
 		food_produced_per_day = 4
 	},
 	Water_Recycling_System = {
 		bldg_name = "Water Recycling System",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 15,
 		energy_cost_to_run = 5,
 		water_produced_per_day = 8
 	},
 	Power_Industrial_Coal = {
 		bldg_name = "Coal Power Plant",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 5,
 		energy_produced = 10,
-		pollution_produced_per_day = 0.1
+		pollution_produced_per_day = 1
 	},
 	Power_Industrial_Gas = {
 		bldg_name = "Gas Power Plant",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 50,
 		has_to_be_unlocked = true,
 		energy_produced = 75,
-		pollution_produced_per_day = 0.2
+		pollution_produced_per_day = 2
 	},
 	Power_Industrial_Oil = {
 		bldg_name = "Oil Power Plant",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 100,
 		has_to_be_unlocked = true,
 		energy_produced = 150,
-		pollution_produced_per_day = 0.4
+		pollution_produced_per_day = 4
 	},
 	Power_Sustainable_Solar = {
 		bldg_name = "Solar Array",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 10,
 		energy_produced = 5
 	},
 	Power_Sustainable_Geothermal = {
 		bldg_name = "Geothermal Power Plant",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 75,
 		energy_produced = 30,
 		has_to_be_unlocked = true
 	},
 	Power_Sustainable_Nuclear = {
 		bldg_name = "Nuclear Power Plant",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 200,
 		energy_produced = 100,
 		has_to_be_unlocked = true
 	},
 	Smeltery = {
 		bldg_name = "Smeltery",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 50,
 		energy_cost_to_run = 2,
 		metal_produced_per_day = 5,
@@ -296,19 +296,19 @@ const buildings = {
 	},
 	Mining_Operation = {
 		bldg_name = "Mining Operation",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 30,
 		energy_cost_to_run = 5,
 		metal_produced_per_day = 15,
 		has_to_be_unlocked = true,
-		pollution_produced_per_day = 0.4
+		pollution_produced_per_day = 2
 	},
 	Carbon_Scrubber = {
 		bldg_name = "Carbon Scrubber",
-		bldg_desc = "TODO",
+		bldg_desc = "N/A",
 		cost_to_build = 30,
 		energy_cost_to_run = 15,
-		pollution_removed_per_day = 0.05,
+		pollution_removed_per_day = 1,
 		has_to_be_unlocked = true
 	}
 }
