@@ -60,6 +60,8 @@ func _process(delta):
 	
 	earth_days_lbl.text = "Earth Days: " + str(Global.game_time.earthDays)
 	
+	Global.subEndingIsGood = true if Global.playerStats.humanity > 0 else false
+	
 	if isInCombat:
 		weapon_handling(delta)
 	else:

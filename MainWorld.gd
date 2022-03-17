@@ -149,6 +149,13 @@ func generate_npc_colonies():
 			planet = "",
 			coords = { lat = 0, long = 0 },
 			buildings = [],
+			num_colonists = rand_range(1, Global.max_colonists_at_npc_colony),
+			resources = {
+				metal = rand_range(25, 200),
+				food = rand_range(10, 75),
+				water = rand_range(15, 60)
+			},
+			col_name = "",
 			isGood = true,
 			isDestroyed = false
 		}
@@ -162,14 +169,43 @@ func generate_npc_colonies():
 			newNpcColony.coords.lat = rand_range(Global.latitude_range[0], Global.latitude_range[1])
 			newNpcColony.coords.long = rand_range(Global.longitude_range[0], Global.longitude_range[1])
 		
-		# TODO: Randomly generate other buildings within npc colony
-			# NOTE: currently randomly setting building locations in SystemLocation.gd
-		newNpcColony.buildings.append({ type = "HQ", global_pos = Vector2(0, 0), building_lvl = 1 })
-		newNpcColony.buildings.append({ type = "Barracks", global_pos = Vector2(0, 0), building_lvl = 1 })
+		# Add buildings to NPC colony
+			# NOTE: This should technically be using the SystemLocation tilemap, but they (MainWorld & that) are (as of writing this) the same, so it's fine FOR NOW
+		newNpcColony.buildings.append({ type = "HQ", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		newNpcColony.buildings.append({ type = "Barracks", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		
+		if rand_range(0, 100) < 30:
+			newNpcColony.buildings.append({ type = "Science_Lab", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			newNpcColony.buildings.append({ type = "Medbay", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		if rand_range(0, 100) < 50:
+			newNpcColony.buildings.append({ type = "Communications_Array", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			newNpcColony.buildings.append({ type = "Shipyard", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			
+		
+		if rand_range(0, 100) < 50:
+			# Colony will have sustainable buildings
+			for _x in range(1, 3):
+				newNpcColony.buildings.append({ type = "Power_Sustainable_Solar", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+				
+			newNpcColony.buildings.append({ type = "Power_Sustainable_Geothermal", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		else:
+			# Colony will have industrial buildings
+			for _x in range(1, 3):
+				newNpcColony.buildings.append({ type = "Power_Industrial_Coal", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+				
+			newNpcColony.buildings.append({ type = "Power_Industrial_Gas", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+			
+			if rand_range(0, 100) < 10:
+				newNpcColony.buildings.append({ type = "Carbon_Scrubber", global_pos = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize) })
+		
+		newNpcColony.col_name = Global.colony_names.noun[int(rand_range(0, Global.colony_names.noun.size() - 1))]
 		
 		# Set 50% of NPC colonies to be bad/evil
 		if rand_range(0, 100) < 50:
 			newNpcColony.isGood = false
+			newNpcColony.col_name = Global.colony_names.bad_adj[int(rand_range(0, Global.colony_names.bad_adj.size() - 1))] + " " + newNpcColony.col_name
+		else:
+			newNpcColony.col_name = Global.colony_names.good_adj[int(rand_range(0, Global.colony_names.good_adj.size() - 1))] + " " + newNpcColony.col_name
 		
 		Global.npcColonyData.append(newNpcColony)
 
@@ -199,7 +235,7 @@ func generate_resource_collection_sites():
 func load_buildings():
 	for bldg in Global.playerBaseData.buildings:
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
-		building_node.init(bldg.type, Global.buildings[bldg.type], bldg.building_lvl)
+		building_node.init(bldg.type, Global.buildings[bldg.type])
 		
 		building_node.global_position = bldg.global_pos
 		building_node.isPlayerBldg = true
@@ -208,11 +244,12 @@ func load_buildings():
 		add_child_below_node($Navigation2D, building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
-		Global.set_building_concrete_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
 
 func load_colonists():
 	for colonist in Global.playerBaseData.colonists:
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.ent_name = colonist.ent_name
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)

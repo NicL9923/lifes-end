@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mars.png-11d3ce62564e67043f26f0adcaf016a8.stex"
+path="res://.import/hammer.png-9f509dd377ad15b585051026667d4220.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/planets/sprites/Mars.png"
-dest_files=[ "res://.import/Mars.png-11d3ce62564e67043f26f0adcaf016a8.stex" ]
+source_file="res://ui/hammer.png"
+dest_files=[ "res://.import/hammer.png-9f509dd377ad15b585051026667d4220.stex" ]
 
 [params]
 

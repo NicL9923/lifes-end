@@ -23,7 +23,7 @@ const research_tree = [
 	{ id = 19, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[8, 11], [15, 18]] } # discover_your_fate
 ]
 
-export var daily_research_points := 250
+export var daily_research_points := 350
 onready var research_btn_cont := $Research_Panel/Research_Btn_Container
 var cur_research_id := -1 # -1 means no current research
 
@@ -77,7 +77,7 @@ func connect_research_buttons():
 		btn.connect("pressed", self, "set_current_research", [research_id])
 
 func connect_to_daynight_cycle():
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
 
 func handle_new_day():
@@ -110,6 +110,7 @@ func update_current_research():
 
 func load_completed_research():
 	for id in Global.playerResearchedItemIds:
+		research_tree[id].cur_progress = research_tree[id].pts_to_complete
 		handle_completed_research(id)
 
 func handle_completed_research(research_id):

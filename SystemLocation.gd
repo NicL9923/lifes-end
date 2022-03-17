@@ -14,6 +14,7 @@ func _ready():
 	
 	location_type = Global.location_to_load.type
 	location_index = Global.location_to_load.index
+	isARaid = Global.location_to_load.isRaiding
 	
 	Global.world_nav = $Navigation2D
 	Global.player.global_position = Vector2(Global.cellSize * Global.world_tile_size.x / 2, Global.cellSize * Global.world_tile_size.y / 2)
@@ -30,7 +31,6 @@ func _ready():
 	Global.set_player_camera_bounds(tilemap.get_used_rect())
 
 func _process(_delta):
-	
 	var enemy_count := 0
 	if isARaid:
 		for node in get_children():
@@ -47,19 +47,32 @@ func _process(_delta):
 			Global.player.toggle_combat(false)
 			Global.push_player_notification("You successfully overtook the colony!")
 			
-			# TODO: give player resources (maybe a set base amt + something based on the kind of bldgs it had)
+			# Transfer the colony's resources to the player
+			Global.playerResources.metal += Global.npcColonyData[location_index].resources.metal
+			Global.playerResources.food += Global.npcColonyData[location_index].resources.food
+			Global.playerResources.water += Global.npcColonyData[location_index].resources.water
+			
+			Global.push_player_notification("Looted " + str(Global.npcColonyData[location_index].resources.metal) + " metal, " + str(Global.npcColonyData[location_index].resources.food) + " food, " + str(Global.npcColonyData[location_index].resources.water) + " water")
 
 func load_npc_colony():
+	Global.player.rtb_btn.visible = !isARaid
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]
 	
 	spawn_buildings(npcColony.buildings)
-	spawn_colonists()
+	spawn_colonists(npcColony.num_colonists)
 	
 	load_player_colonists()
 	
-	isARaid = true
-	are_enemies_present = true
-	Global.player.toggle_combat(are_enemies_present)
+	if isARaid:
+		are_enemies_present = true
+		Global.player.toggle_combat(are_enemies_present)
+		
+		if npcColony.isGood:
+			Global.add_player_humanity(10)
+			Global.push_player_notification("Your humanity increased by 10!")
+		else:
+			Global.add_player_humanity(-25)
+			Global.push_player_notification("Your humanity decreased by 25.")
 
 func load_resource_collection_site():
 	Global.player.rtb_btn.visible = true
@@ -75,25 +88,30 @@ func load_resource_collection_site():
 func spawn_buildings(bldg_list: Array):
 	for bldg in bldg_list:
 		var building_node = load("res://objects/buildings/Building.tscn").instance()
-		building_node.init(bldg.type, Global.buildings[bldg.type], 1)
+		building_node.init(bldg.type, Global.buildings[bldg.type])
 		
-		building_node.global_position = Global.get_random_location_in_map(tilemap.get_used_rect()).snapped(Vector2.ONE * Global.cellSize)
+		building_node.global_position = bldg.global_pos
 		add_child(building_node)
 		
 		# Set tiles taken up by building on tilemap to tile/Concrete
-		var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+		var bldg_tile_size = building_node.bldg_size / Global.cellSize
 		if int(bldg_tile_size.x) % 2 == 1:
 			building_node.global_position.x += 16
 		if int(bldg_tile_size.y) % 2 == 1:
 			building_node.global_position.y += 16
 		
-		Global.set_building_concrete_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
+		Global.set_building_tiles(tilemap, building_node)
 
-# NOTE: Until this changes, this is just randomly decided (i.e. not saved/persisted) on loading the colony
-func spawn_colonists():
-	var num_colonists = rand_range(1, Global.max_colonists_at_npc_colony)
+func spawn_colonists(num_colonists: int):
 	for _i in range(num_colonists):
-		var new_colonist = load("res://entities/enemies/EnemyColonist.tscn").instance()
+		var new_colonist
+		
+		if isARaid:
+			new_colonist = load("res://entities/enemies/EnemyColonist.tscn").instance()
+		else:
+			new_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		
 		new_colonist.global_position = Global.get_random_location_in_map(tilemap.get_used_rect())
 		add_child(new_colonist)
 		
@@ -108,6 +126,7 @@ func spawn_metal_deposits(numMetalDeposits: int):
 func load_player_colonists():
 	for colonist in Global.playerBaseData.colonists:
 		var loaded_colonist = load("res://entities/allies/AlliedColonist.tscn").instance()
+		loaded_colonist.ent_name = colonist.ent_name
 		loaded_colonist.id = colonist.id
 		loaded_colonist.health = colonist.health
 		loaded_colonist.global_position = Global.get_position_in_radius_around(Global.player.global_position, 5)

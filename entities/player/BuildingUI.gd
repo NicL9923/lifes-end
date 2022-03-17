@@ -24,7 +24,7 @@ func handle_building_placement():
 	building_node.global_position = snapped_mouse_pos
 	
 	# Handle odd-tile-sized buildings (to be placed on same "grid" as even-tile-sized ones which naturally work properly)
-	var bldg_tile_size = building_node.bldg_sprite.texture.get_size() / Global.cellSize
+	var bldg_tile_size = building_node.bldg_size / Global.cellSize
 	if int(bldg_tile_size.x) % 2 == 1:
 		building_node.global_position.x += 16
 	if int(bldg_tile_size.y) % 2 == 1:
@@ -34,12 +34,13 @@ func handle_building_placement():
 		in_building_mode = false
 		building_node.queue_free()
 		building_node = null
+		Global.is_in_mode_to_use_esc = false
 		return
 	
 	check_building_placement()
 
 func check_building_requirements():
-	var cur_bldg_idx := 1
+	var cur_bldg_idx := 1 # Set to 1 as we don't have a button for HQ (idx 0)
 	for node in building_button_box.get_children():
 		var btn_is_disabled := false
 		
@@ -50,7 +51,7 @@ func check_building_requirements():
 		
 		# Check how many of each limited building player has, and disable the button if they're at the limit
 		if node.get_children().size() == 5:
-			var num_placed := get_num_bldgs_placed(Global.buildings.keys()[cur_bldg_idx])
+			var num_placed := get_num_bldgs_placed(node.name)
 			var limit_lbl = node.get_child(4)
 			var max_placeable := int(limit_lbl.text.split(" / ")[1])
 			
@@ -79,7 +80,7 @@ func generate_building_buttons():
 			continue
 		
 		var bldg_info = load(base_bldg_path + "Building.tscn").instance()
-		bldg_info.init(bldg_key, Global.buildings[bldg_key], 1)
+		bldg_info.init(bldg_key, Global.buildings[bldg_key])
 		
 		# Skip if building needs to be unlocked and hasn't
 		if bldg_info.has_to_be_unlocked and not is_building_unlocked(bldg_key):
@@ -118,6 +119,7 @@ func generate_building_buttons():
 			limit_lbl.rect_position = Vector2(550, (new_bldg_btn.rect_min_size.y / 2) - 5)
 		
 		new_bldg_btn.connect("pressed", self, "start_building", [bldg_key])
+		new_bldg_btn.name = bldg_key
 		building_button_box.add_child(new_bldg_btn)
 
 func get_num_bldgs_placed(bldg_key: String) -> int:
@@ -133,10 +135,11 @@ func start_building(bldg_key: String):
 	building_panel.hide()
 	in_building_mode = true
 	building_type = bldg_key
+	Global.is_in_mode_to_use_esc = true
 	
 	# Set the building_node based on type
 	building_node = load(base_bldg_path + "Building.tscn").instance()
-	building_node.init(bldg_key, Global.buildings[bldg_key], 1)
+	building_node.init(bldg_key, Global.buildings[bldg_key])
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
@@ -160,18 +163,16 @@ func place_building():
 	if not Global.debug.instant_build:
 		building_node.isBeingBuilt = true
 	building_node.isPlayerBldg = true
-	building_node.bldgLvl = 1
 	Global.playerResources.metal -= building_node.cost_to_build
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings
 	
-	Global.set_building_concrete_tiles(get_tree().get_current_scene().tilemap, building_node)
+	Global.set_building_tiles(get_tree().get_current_scene().tilemap, building_node)
 	
 	# Add building data to global player base data
 	var bldg_data = {
 		type = building_type,
-		building_lvl = building_node.bldgLvl,
 		global_pos = building_node.global_position
 	}
 	Global.playerBaseData.buildings.append(bldg_data)
@@ -180,6 +181,7 @@ func place_building():
 	
 	building_node = null
 	in_building_mode = false
+	Global.is_in_mode_to_use_esc = false
 
 func _on_Close_Button_button_pressed():
 	building_panel.hide()
