@@ -154,7 +154,13 @@ func take_damage(dmg_amt):
 func die():
 	Global.push_player_notification("You've met Life's End.")
 	
-	# TODO - maybe respawn back at colony and lose some resources? (slow fade to black)
+	# TODO - slow fade to black
+	
+	# Respawn back at colony and lose 1/4 of all resources
+	Global.change_metal_by(-(Global.playerResources.metal / 4))
+	Global.change_food_by(-(Global.playerResources.food / 4))
+	Global.change_water_by(-(Global.playerResources.water / 4))
+	get_tree().change_scene("res://MainWorld.tscn")
 
 func check_if_ui_open():
 	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible:
