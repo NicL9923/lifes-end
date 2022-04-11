@@ -31,6 +31,8 @@ onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
+onready var gift_ui := $UI/GiftUI
+onready var trade_ui := $UI/TradeUI
 onready var rtb_btn := $UI/RTB_Button
 onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 
@@ -44,7 +46,8 @@ func _ready():
 	research_ui.visible = false
 	ship_ui.visible = false
 	player_stats_ui.visible = false
-	
+	gift_ui.visible = false
+	trade_ui.visible = false
 
 func _process(delta):
 	player_movement()
@@ -78,7 +81,7 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	player_animation(input_vector)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
@@ -163,7 +166,7 @@ func die():
 	get_tree().change_scene("res://MainWorld.tscn")
 
 func check_if_ui_open():
-	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible:
+	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or gift_ui.visible or trade_ui.visible:
 		ui_is_open = true
 	else:
 		ui_is_open = false

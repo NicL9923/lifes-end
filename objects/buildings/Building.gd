@@ -153,7 +153,7 @@ func _process(delta):
 func generate_and_connect_popup():
 	# This is a special case where NPC HQ will have "trade" in popup for friendly NPC colonies
 	if not self.isPlayerBldg and self.bldg_key == "HQ":
-		popup_panel.rect_size.y = 35
+		popup_panel.rect_size.y = 70
 	else:
 		popup_panel.rect_size.y = self.popup.size() * 35
 	
@@ -177,8 +177,8 @@ func generate_and_connect_popup():
 		new_gift_btn.rect_position = Vector2((125 / 2) - (new_gift_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
 		new_gift_btn.connect("button_pressed", self, "_on_NPC_Gift_Button_pressed")
 		
-		popup_panel.add_child(new_trade_btn)
-	else:
+		popup_panel.add_child(new_gift_btn)
+	elif self.isPlayerBldg:
 		for btn in self.popup:
 			var new_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
 			new_btn.button_text = btn.btn_text
@@ -304,10 +304,10 @@ func destruct(isScrapping: bool):
 ##################### BUILDING BUTTON FUNCS ################################
 
 func _on_NPC_Gift_Button_pressed():
-	pass # TODO: open player gift UI
+	Global.player.gift_ui.show()
 
 func _on_NPC_Trade_Button_pressed():
-	pass # TODO: open player trade UI
+	Global.player.trade_ui.show()
 
 func _on_RecruitColonist_Button_pressed():
 	randomize()
@@ -342,9 +342,6 @@ func _on_SystemMap_Button_pressed():
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://SystemMap.tscn")
-
-func _on_Craft_Button_pressed():
-	Global.player.crafting_ui.visible.show()
 
 func _on_Build_Button_pressed():
 	Global.player.building_panel.show()
