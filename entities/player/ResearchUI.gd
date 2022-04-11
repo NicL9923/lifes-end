@@ -7,14 +7,12 @@ const research_tree = [
 	{ id = 3, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } }, # advanced_healthcare
 	{ id = 4, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } }, # carbon_scrubbing
 	{ id = 5, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION } }, # metal_by_any_means
-	{ id = 6, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_FACTORY }, prereqs = [5] }, # production_is_power
 	{ id = 7, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [6] }, # natural_gas_is_natural
 	{ id = 8, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [7] }, # oil_is_what_we_know
 	{ id = 9, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_engineering
 	{ id = 10, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 3.0 }, prereqs = [9] }, # advanced_manufacturing
 	{ id = 11, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [10] }, # this_is_what_weve_become
 	{ id = 12, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } }, # careful_extraction
-	{ id = 13, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP }, prereqs = [12] }, # quality_from_passion
 	{ id = 14, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER }, prereqs = [13] }, # harness_our_planets_energy
 	{ id = 15, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER }, prereqs = [14] }, # harness_the_power_of_the_stars
 	{ id = 16, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } }, # advanced_solar_cells

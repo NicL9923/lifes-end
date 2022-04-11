@@ -48,9 +48,9 @@ func _process(_delta):
 			Global.push_player_notification("You successfully overtook the colony!")
 			
 			# Transfer the colony's resources to the player
-			Global.playerResources.metal += Global.npcColonyData[location_index].resources.metal
-			Global.playerResources.food += Global.npcColonyData[location_index].resources.food
-			Global.playerResources.water += Global.npcColonyData[location_index].resources.water
+			Global.change_metal_by(Global.npcColonyData[location_index].resources.metal)
+			Global.change_food_by(Global.npcColonyData[location_index].resources.food)
+			Global.change_water_by(Global.npcColonyData[location_index].resources.water)
 			
 			Global.push_player_notification("Looted " + str(Global.npcColonyData[location_index].resources.metal) + " metal, " + str(Global.npcColonyData[location_index].resources.food) + " food, " + str(Global.npcColonyData[location_index].resources.water) + " water")
 

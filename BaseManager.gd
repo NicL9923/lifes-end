@@ -83,16 +83,16 @@ func remove_building(bldg_node):
 	buildings.erase(bldg_node)
 
 func add_metal(amt: int):
-	Global.playerResources.metal += amt
+	Global.change_metal_by(amt)
 
 func add_energy(amt: int):
 	Global.playerResources.energy += amt
 
 func add_food(amt: int):
-	Global.playerResources.food += (amt * Global.modifiers.foodProduction)
+	Global.change_food_by(amt * Global.modifiers.foodProduction)
 
 func add_water(amt: int):
-	Global.playerResources.water += (amt * Global.modifiers.waterProduction)
+	Global.change_water_by(amt * Global.modifiers.waterProduction)
 
 func add_pollution(amt: float):
 	var cur_pol = Global.playerBaseData.pollutionLevel
@@ -121,7 +121,7 @@ func handle_food_and_water_usage():
 		
 		take_dmg_for_no_rscs = true
 	else:
-		Global.playerResources.food -= total_colonist_usage
+		Global.change_food_by(-total_colonist_usage)
 	
 	
 	if Global.playerResources.water - total_colonist_usage < 0:
@@ -130,9 +130,9 @@ func handle_food_and_water_usage():
 		
 		take_dmg_for_no_rscs = true
 	else:
-		Global.playerResources.water -= total_colonist_usage
+		Global.change_water_by(-total_colonist_usage)
 	
-	# TODO: add a water cost to greenhouse food production
+	# TODO: add a water cost to greenhouse food production?
 	
 	# Don't stack damage if we're out of both food AND water, just do it once
 	if take_dmg_for_no_rscs:
