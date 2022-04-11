@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/resources/rsc_notification.gd" type="Script" id=1]
+[ext_resource path="res://ui/UI_theme.tres" type="Theme" id=2]
+
+[node name="Resource Notification" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )

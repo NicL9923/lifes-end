@@ -509,3 +509,24 @@ func push_player_notification(new_notification: String) -> void:
 
 func add_player_humanity(by_amt: float):
 	playerStats.humanity = clamp(playerStats.humanity + by_amt, -100.0, 100.0)
+
+func change_metal_by(amt):
+	playerResources.metal += amt
+	var rsc_n = RscNotification.new()
+	rsc_n.rsc_type = RscNotification.RSC_TYPE.METAL
+	rsc_n.amt = amt
+	player.add_child(rsc_n)
+
+func change_food_by(amt):
+	playerResources.food += amt
+	var rsc_n = RscNotification.new()
+	rsc_n.rsc_type = RscNotification.RSC_TYPE.FOOD
+	rsc_n.amt = amt
+	player.add_child(rsc_n)
+
+func change_water_by(amt):
+	playerResources.water += amt
+	var rsc_n = RscNotification.new()
+	rsc_n.rsc_type = RscNotification.RSC_TYPE.WATER
+	rsc_n.amt = amt
+	player.add_child(rsc_n)

@@ -163,7 +163,7 @@ func place_building():
 	if not Global.debug.instant_build:
 		building_node.isBeingBuilt = true
 	building_node.isPlayerBldg = true
-	Global.playerResources.metal -= building_node.cost_to_build
+	Global.change_metal_by(-building_node.cost_to_build)
 	
 	building_node.get_child(0).visible = false # Hide collision colorRect
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = false # Enable StaticBody2D so player can collide with placed buildings

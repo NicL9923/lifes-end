@@ -28,5 +28,5 @@ func _on_Close_Button_button_pressed():
 	self.visible = false
 
 func _on_Upgrade_Button_button_pressed():
-	Global.playerResources.metal -= Global.ship_upgrade_costs[Global.playerShipData.level - 1]
+	Global.change_metal_by(-Global.ship_upgrade_costs[Global.playerShipData.level - 1])
 	Global.playerShipData.level += 1

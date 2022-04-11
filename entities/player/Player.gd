@@ -27,7 +27,6 @@ onready var earth_days_lbl := $UI/Days_Label
 onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var research_ui := $UI/ResearchUI
-onready var crafting_ui := $UI/CraftingUI
 onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
@@ -45,7 +44,6 @@ func _ready():
 	research_ui.visible = false
 	ship_ui.visible = false
 	player_stats_ui.visible = false
-	crafting_ui.visible = false
 	
 
 func _process(delta):
@@ -159,7 +157,7 @@ func die():
 	# TODO - maybe respawn back at colony and lose some resources? (slow fade to black)
 
 func check_if_ui_open():
-	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
+	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible:
 		ui_is_open = true
 	else:
 		ui_is_open = false

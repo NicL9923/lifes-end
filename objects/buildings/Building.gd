@@ -38,7 +38,6 @@ var pollution_removed_per_day = null
 
 onready var col_hlt := $CollisionHighlight
 onready var energy_icon := $EnergyIcon
-onready var upgrade_icon := $UpgradeIcon
 onready var repair_icon := $RepairIcon
 onready var move_icon := $MoveIcon
 onready var scrap_icon := $ScrapIcon
@@ -297,7 +296,7 @@ func destruct(isScrapping: bool):
 	
 	if isScrapping:
 		# Return a portion of the cost to construct the specific bldg to player's resources
-		Global.playerResources.metal += (cost_to_build / 4)
+		Global.change_metal_by(cost_to_build / 4)
 	
 	queue_free()
 
@@ -316,7 +315,7 @@ func _on_RecruitColonist_Button_pressed():
 		Global.push_player_notification("You need " + self.cost_to_recruit_colonist + " metal to recruit a colonist!")
 		return
 	
-	Global.playerResources.metal -= self.cost_to_recruit_colonist
+	Global.change_metal_by(-self.cost_to_recruit_colonist)
 	
 	var first_name_idx := int(rand_range(0, Global.entity_names.first.size() - 1))
 	var last_name_idx := int(rand_range(0, Global.entity_names.last.size() - 1))
@@ -397,7 +396,7 @@ func _on_Building_input_event(_viewport, event, _shape_idx):
 			var cost_to_repair = (max_health - health) / 20
 			
 			if Global.playerResources.metal >= cost_to_repair:
-				Global.playerResources.metal -= cost_to_repair
+				Global.change_metal_by(-cost_to_repair)
 				health = max_health
 			else:
 				Global.push_player_notification("You need " + str(cost_to_repair) + " metal to repair this building!")
