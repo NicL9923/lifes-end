@@ -59,134 +59,6 @@ region = Rect2( 192, 1248, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1248, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 576, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 672, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=55]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=56]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1344, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 864, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 192, 96, 96 )
@@ -283,31 +155,139 @@ region = Rect2( 192, 96, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 96, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 576, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 672, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1344, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1440, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1440, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
 "frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": true,
 "name": "downIdle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": true,
-"name": "rightRun",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
-"loop": true,
-"name": "rightIdle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
-"loop": true,
-"name": "downRun",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
-"loop": true,
-"name": "upIdle",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
@@ -324,6 +304,26 @@ animations = [ {
 "loop": true,
 "name": "leftIdle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "upIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "rightRun",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
+"loop": true,
+"name": "rightIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
+"loop": true,
+"name": "downRun",
+"speed": 15.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -617,9 +617,9 @@ __meta__ = {
 }
 
 [node name="Industrial_Label" type="Label" parent="UI/ResearchUI/Research_Panel"]
-margin_left = 176.0
+margin_left = 128.0
 margin_top = 112.0
-margin_right = 240.0
+margin_right = 193.0
 margin_bottom = 129.0
 text = "Industrial"
 __meta__ = {
@@ -627,9 +627,9 @@ __meta__ = {
 }
 
 [node name="Sustainable_Label" type="Label" parent="UI/ResearchUI/Research_Panel"]
-margin_left = 384.0
+margin_left = 440.0
 margin_top = 112.0
-margin_right = 463.0
+margin_right = 519.0
 margin_bottom = 129.0
 text = "Sustainable"
 __meta__ = {
@@ -706,31 +706,20 @@ research_description = "Unlocks Carbon Scrubber"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 72.0
-margin_top = 112.0
-margin_right = 112.0
-margin_bottom = 152.0
+margin_top = 144.0
+margin_right = 320.0
+margin_bottom = 296.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Metal by Any Means"
 research_description = "Unlocks Mining Operation"
-
-[node name="research_6" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 72.0
-margin_top = 168.0
-margin_right = 112.0
-margin_bottom = 208.0
-rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Production is Power"
-research_description = "Unlocks Factory"
 
 [node name="research_7" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 72.0
-margin_top = 224.0
-margin_right = 112.0
-margin_bottom = 264.0
+margin_top = 200.0
+margin_right = 320.0
+margin_bottom = 352.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Natural Gas is Natural"
 research_description = "Unlocks Gas Power Plant"
@@ -739,9 +728,9 @@ research_description = "Unlocks Gas Power Plant"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 72.0
-margin_top = 280.0
-margin_right = 112.0
-margin_bottom = 320.0
+margin_top = 256.0
+margin_right = 320.0
+margin_bottom = 408.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Oil is What We Know"
 research_description = "Unlocks Oil Power Plan t"
@@ -783,31 +772,20 @@ research_description = "Pollution damage to player and colonists' health halved"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
-margin_top = 112.0
-margin_right = 520.0
-margin_bottom = 152.0
+margin_top = 144.0
+margin_right = 728.0
+margin_bottom = 296.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Careful Extraction"
 research_description = "Unlocks Smeltery"
-
-[node name="research_13" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 480.0
-margin_top = 168.0
-margin_right = 520.0
-margin_bottom = 208.0
-rect_scale = Vector2( 0.35, 0.35 )
-research_name = "Quality from Passion"
-research_description = "Unlocks Workshop"
 
 [node name="research_14" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
-margin_top = 224.0
-margin_right = 520.0
-margin_bottom = 264.0
+margin_top = 200.0
+margin_right = 728.0
+margin_bottom = 352.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness Our Planet's Energy"
 research_description = "Unlocks Geothermal Power Plant"
@@ -816,9 +794,9 @@ research_description = "Unlocks Geothermal Power Plant"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
-margin_top = 280.0
-margin_right = 520.0
-margin_bottom = 320.0
+margin_top = 256.0
+margin_right = 728.0
+margin_bottom = 408.0
 rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness the Power of the Stars"
 research_description = "Unlocks Nuclear Power Plant"
@@ -902,6 +880,7 @@ margin_bottom = 1.0
 button_text = "Close"
 
 [node name="ShipUI" type="Control" parent="UI"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 9 )

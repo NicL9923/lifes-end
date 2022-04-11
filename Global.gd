@@ -21,11 +21,9 @@ enum RESEARCH_EFFECTS {
 	UNLOCK_MEDBAY = 8,
 	UNLOCK_CARBON_SCRUBBER = 9,
 	UNLOCK_MINING_OPERATION = 10,
-	UNLOCK_FACTORY = 11,
 	UNLOCK_GAS_POWER = 12,
 	UNLOCK_OIL_POWER = 13,
 	UNLOCK_SMELTERY = 14,
-	UNLOCK_WORKSHOP = 15,
 	UNLOCK_GEOTHERMAL_POWER = 16,
 	UNLOCK_NUCLEAR_POWER = 17,
 	DISCOVER_YOUR_FATE = 18
@@ -174,32 +172,6 @@ const buildings = {
 			{
 				btn_text = "Scrap",
 				connect_fn = "_on_BldgScrap_Button_pressed"
-			}
-		]
-	},
-	Factory = {
-		bldg_name = "Factory",
-		bldg_desc = "Manufacture weaponry (produces pollution while active)",
-		cost_to_build = 50,
-		has_to_be_unlocked = true,
-		energy_cost_to_run = 10,
-		popup = [
-			{
-				btn_text = "Manufacture",
-				connect_fn = "_on_Craft_Button_pressed"
-			}
-		]
-	},
-	Workshop = {
-		bldg_name = "Workshop",
-		bldg_desc = "Craft weaponry",
-		cost_to_build = 30,
-		has_to_be_unlocked = true,
-		energy_cost_to_run = 5,
-		popup = [
-			{
-				btn_text = "Craft",
-				connect_fn = "_on_Craft_Button_pressed"
 			}
 		]
 	},
