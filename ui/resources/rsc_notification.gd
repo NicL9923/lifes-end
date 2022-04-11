@@ -15,8 +15,7 @@ var amt: int
 func _ready():
 	if amt >= 0:
 		self.text = "+"
-	else:
-		self.text = "-"
+	
 	self.text += str(amt) + " "
 	
 	match rsc_type:

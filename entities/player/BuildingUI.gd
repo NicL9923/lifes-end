@@ -50,15 +50,16 @@ func check_building_requirements():
 			btn_is_disabled = true
 		
 		# Check how many of each limited building player has, and disable the button if they're at the limit
-		if node.get_children().size() == 5:
+		if node.get_children().size() >= 5:
 			var num_placed := get_num_bldgs_placed(node.name)
 			var limit_lbl = node.get_child(4)
-			var max_placeable := int(limit_lbl.text.split(" / ")[1])
-			
-			if num_placed == max_placeable:
-				btn_is_disabled = true
-			
-			limit_lbl.text = str(num_placed) + " / " + str(max_placeable)
+			if "/" in limit_lbl.text: # Make sure we have the right label
+				var max_placeable := int(limit_lbl.text.split(" / ")[1])
+				
+				if num_placed == max_placeable:
+					btn_is_disabled = true
+				
+				limit_lbl.text = str(num_placed) + " / " + str(max_placeable)
 		
 		node.disabled = btn_is_disabled
 		cur_bldg_idx += 1
@@ -117,6 +118,12 @@ func generate_building_buttons():
 			limit_lbl.text = str(get_num_bldgs_placed(bldg_key)) + " / " + str(bldg_info.bldg_limit)
 			new_bldg_btn.add_child(limit_lbl)
 			limit_lbl.rect_position = Vector2(550, (new_bldg_btn.rect_min_size.y / 2) - 5)
+		
+		if bldg_info.energy_cost_to_run != 0:
+			var energy_req_lbl = Label.new()
+			energy_req_lbl.text = "Energy Req: " + str(bldg_info.energy_cost_to_run)
+			new_bldg_btn.add_child(energy_req_lbl)
+			energy_req_lbl.rect_position = Vector2(300, 75)
 		
 		new_bldg_btn.connect("pressed", self, "start_building", [bldg_key])
 		new_bldg_btn.name = bldg_key

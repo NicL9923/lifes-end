@@ -50,7 +50,8 @@ onready var popup_panel := $PopupUI
 # TODO: Make sure crafting and research progress stop when respective bldgs are out of power (notify CraftingUI and ResearchUI somehow)
 
 
-func init(b_key, bldg_template_obj):
+func init(b_key, bldg_template_obj, is_player_bldg := false):
+	self.isPlayerBldg = is_player_bldg
 	self.bldg_key = b_key
 	bldg_name = bldg_template_obj.bldg_name
 	bldg_desc = bldg_template_obj.bldg_desc
@@ -151,7 +152,7 @@ func _process(delta):
 
 func generate_and_connect_popup():
 	# This is a special case where NPC HQ will have "trade" in popup for friendly NPC colonies
-	if self.isPlayerBldg and self.bldg_key == "HQ":
+	if not self.isPlayerBldg and self.bldg_key == "HQ":
 		popup_panel.rect_size.y = 35
 	else:
 		popup_panel.rect_size.y = self.popup.size() * 35
@@ -162,7 +163,7 @@ func generate_and_connect_popup():
 	
 	var btn_height := 3
 	
-	if self.isPlayerBldg and self.bldg_key == "HQ":
+	if not self.isPlayerBldg and self.bldg_key == "HQ":
 		var new_trade_btn = preload("res://ui/buttons/LE_Button.tscn").instance()
 		new_trade_btn.button_text = "Trade"
 		new_trade_btn.rect_position = Vector2((125 / 2) - (new_trade_btn.get_node("TextureButton").rect_size.x / 2), btn_height)
