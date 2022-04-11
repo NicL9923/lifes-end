@@ -57,6 +57,7 @@ func _process(_delta):
 func load_npc_colony():
 	Global.player.rtb_btn.visible = !isARaid
 	var npcColony = Global.npcColonyData[Global.location_to_load.index]
+	Global.player.trade_ui.npc_col_id = Global.location_to_load.index
 	
 	spawn_buildings(npcColony.buildings)
 	spawn_colonists(npcColony.num_colonists)
