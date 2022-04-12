@@ -27,11 +27,12 @@ onready var earth_days_lbl := $UI/Days_Label
 onready var notifications := $UI/Notifications
 onready var building_panel := $UI/BuildingUI/Building_Panel
 onready var research_ui := $UI/ResearchUI
-onready var crafting_ui := $UI/CraftingUI
 onready var ship_ui := $UI/ShipUI
 onready var player_stats_ui := $UI/PlayerStatsUI
 onready var dev_console := $UI/DevConsole
 onready var esc_menu := $UI/EscMenu
+onready var gift_ui := $UI/GiftUI
+onready var trade_ui := $UI/TradeUI
 onready var rtb_btn := $UI/RTB_Button
 onready var build_hq_btn := $UI/BuildingUI/Build_HQ_Button
 
@@ -45,8 +46,8 @@ func _ready():
 	research_ui.visible = false
 	ship_ui.visible = false
 	player_stats_ui.visible = false
-	crafting_ui.visible = false
-	
+	gift_ui.visible = false
+	trade_ui.visible = false
 
 func _process(delta):
 	player_movement()
@@ -80,7 +81,7 @@ func player_movement():
 		velocity = Vector2.ZERO
 	
 	player_animation(input_vector)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	move_and_slide(velocity)
 
 func player_animation(input_vector):
@@ -156,10 +157,16 @@ func take_damage(dmg_amt):
 func die():
 	Global.push_player_notification("You've met Life's End.")
 	
-	# TODO - maybe respawn back at colony and lose some resources? (slow fade to black)
+	# TODO - slow fade to black
+	
+	# Respawn back at colony and lose 1/4 of all resources
+	Global.change_metal_by(-(Global.playerResources.metal / 4))
+	Global.change_food_by(-(Global.playerResources.food / 4))
+	Global.change_water_by(-(Global.playerResources.water / 4))
+	get_tree().change_scene("res://MainWorld.tscn")
 
 func check_if_ui_open():
-	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or crafting_ui.visible:
+	if building_panel.visible or ship_ui.visible or research_ui.visible or player_stats_ui.visible or gift_ui.visible or trade_ui.visible:
 		ui_is_open = true
 	else:
 		ui_is_open = false

@@ -19,7 +19,7 @@ func _process(_delta):
 		$PlayerHint.visible = true
 		
 		if Input.is_action_pressed("activate"):
-			Global.playerResources.metal += depositValue
+			Global.change_metal_by(depositValue)
 			queue_free()
 	else:
 		$PlayerHint.visible = false

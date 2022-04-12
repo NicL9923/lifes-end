@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://entities/player/Player.gd"
+}, {
+"base": "Label",
+"class": "RscNotification",
+"language": "GDScript",
+"path": "res://ui/resources/rsc_notification.gd"
 } ]
 _global_script_class_icons={
 "AIEntity": "",
-"Player": ""
+"Player": "",
+"RscNotification": ""
 }
 
 [application]
