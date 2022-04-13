@@ -1,17 +1,291 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://cutscenes/IntroCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
-[ext_resource path="res://objects/planets/sprites/Earth's Moon.png" type="Texture" id=4]
-[ext_resource path="res://objects/planets/sprites/Mars.png" type="Texture" id=5]
-[ext_resource path="res://ui/Earth.png" type="Texture" id=6]
-[ext_resource path="res://objects/ship.png" type="Texture" id=7]
+[ext_resource path="res://cutscenes/$ctscn4-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://cutscenes/$ctscn3-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://cutscenes/$ctscn2-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://cutscenes/$ctscn1-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=8]
 [ext_resource path="res://audio/voice/intro_2.mp3" type="AudioStream" id=9]
 [ext_resource path="res://audio/voice/intro_1.mp3" type="AudioStream" id=10]
 [ext_resource path="res://audio/voice/intro_3.mp3" type="AudioStream" id=11]
 [ext_resource path="res://audio/voice/intro_4.mp3" type="AudioStream" id=12]
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 640, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 960, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 640, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 960, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 6 )
+region = Rect2( 640, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 6 )
+region = Rect2( 960, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 6 )
+region = Rect2( 320, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 6 )
+region = Rect2( 640, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 6 )
+region = Rect2( 960, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 3 )
+region = Rect2( 640, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 3 )
+region = Rect2( 320, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 3 )
+region = Rect2( 640, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 4 )
+region = Rect2( 1280, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 4 )
+region = Rect2( 1600, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 4 )
+region = Rect2( 1280, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 4 )
+region = Rect2( 1600, 180, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 4 )
+region = Rect2( 1280, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 4 )
+region = Rect2( 1600, 360, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 4 )
+region = Rect2( 1280, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 4 )
+region = Rect2( 1600, 540, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 720, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 720, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 720, 320, 180 )
+
+[sub_resource type="SpriteFrames" id=67]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "ctsn2",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "ctsn1",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "ctsn4",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"loop": true,
+"name": "ctsn3",
+"speed": 10.0
+} ]
 
 [sub_resource type="Animation" id=1]
 resource_name = "IntroCinematicAnim"
@@ -59,10 +333,34 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2.5, 13.8, 16.5, 23.8 ),
+"times": PoolRealArray( 0, 2.3, 13.8, 16.5, 23.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, true, true, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CtsnSprite:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 12.5, 12.6, 18.6, 18.7, 23.7, 23.8, 30 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 0.00704103, 0.0473661, 3.03143 ),
+"update": 1,
+"values": [ "ctsn1", "ctsn1", "ctsn2", "ctsn2", "ctsn3", "ctsn3", "ctsn4", "ctsn4" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CtsnSprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3.7, 8.9, 12.9, 13.8, 17, 18.6, 18.7, 19.5, 21.8, 23.9, 24.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 0.937255 ), Color( 1, 1, 1, 0.937255 ), Color( 0.0352941, 0.0352941, 0.0313726, 0.776471 ), Color( 1, 1, 1, 0.937255 ), Color( 1, 1, 1, 0.811765 ), Color( 0, 0, 0, 0.74902 ), Color( 0, 0, 0, 0.74902 ), Color( 1, 1, 1, 0.937255 ), Color( 1, 1, 1, 0.937255 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.937255 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -146,74 +444,22 @@ tracks/0/keys = {
 [node name="IntroCinematic" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="CtsnSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 320, 180 )
+scale = Vector2( 1.99995, 2.00842 )
+frames = SubResource( 67 )
+animation = "ctsn1"
+frame = 1
+playing = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IntroCinematicAnim = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 320.056, 180 )
-scale = Vector2( 0.499913, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Mars" type="Sprite" parent="."]
-position = Vector2( 615, 184 )
-scale = Vector2( 0.183594, 0.183594 )
-texture = ExtResource( 5 )
-
-[node name="Earth\'s Moon" type="Sprite" parent="."]
-position = Vector2( 261, 68 )
-scale = Vector2( 0.3125, 0.3125 )
-texture = ExtResource( 4 )
-
-[node name="Earth" type="Sprite" parent="."]
-position = Vector2( 56, 276 )
-scale = Vector2( 1.84073, 1.84073 )
-texture = ExtResource( 6 )
-
-[node name="Ship Fleet" type="Node2D" parent="."]
-
-[node name="Ship" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 136, 128 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship2" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 171, 113 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship3" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 175, 155 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship4" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 209, 134 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship5" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 149, 184 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship6" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 214, 183 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship7" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 75, 148 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
-
-[node name="Ship8" type="Sprite" parent="Ship Fleet"]
-position = Vector2( 173, 228 )
-scale = Vector2( 0.203125, 0.203125 )
-texture = ExtResource( 7 )
+stream = ExtResource( 10 )
 
 [node name="Skip_Button" parent="." instance=ExtResource( 8 )]
 margin_left = 509.0
@@ -226,7 +472,7 @@ button_text = "Skip Cutscene"
 margin_top = 254.0
 margin_right = 641.0
 margin_bottom = 360.0
-color = Color( 0.0235294, 0.329412, 0.623529, 0.745098 )
+color = Color( 0.0235294, 0.329412, 0.623529, 0.584314 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -246,8 +492,8 @@ __meta__ = {
 }
 
 [node name="FadeTransition" type="ColorRect" parent="."]
-margin_right = 644.0
-margin_bottom = 363.0
+margin_right = 640.0
+margin_bottom = 360.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
