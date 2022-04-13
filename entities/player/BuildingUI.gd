@@ -146,7 +146,7 @@ func start_building(bldg_key: String):
 	
 	# Set the building_node based on type
 	building_node = load(base_bldg_path + "Building.tscn").instance()
-	building_node.init(bldg_key, Global.buildings[bldg_key])
+	building_node.init(bldg_key, Global.buildings[bldg_key], true)
 	
 	building_node.get_node("StaticBody2D/CollisionShape2D").disabled = true
 	building_node.modulate.a = 0.75
