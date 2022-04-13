@@ -351,24 +351,29 @@ func _on_SaveGame_Button_pressed():
 
 func _on_BldgMove_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
-		bldg.move_mode = true
-		bldg.move_icon.visible = true
-		bldg.scrap_mode = false
-		bldg.repair_mode = false
+		if is_instance_valid(bldg):
+			bldg.move_mode = true
+			bldg.move_icon.visible = true
+			bldg.scrap_mode = false
+			bldg.repair_mode = false
 	
 	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgRepair_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
-		bldg.repair_mode = true
-		bldg.repair_icon.visible = true
-		bldg.scrap_mode = false
-		bldg.move_mode = false
+		if is_instance_valid(bldg):
+			bldg.repair_mode = true
+			bldg.repair_icon.visible = true
+			bldg.scrap_mode = false
+			bldg.move_mode = false
 	
 	Global.is_in_mode_to_use_esc = true
 
 func _on_BldgScrap_Button_pressed():
 	for bldg in get_tree().get_current_scene().base_mgr.buildings:
+		if not is_instance_valid(bldg):
+			return
+		
 		if bldg.bldg_key == "HQ":
 			bldg.scrap_mode = false
 		else:
