@@ -28,38 +28,6 @@
 [ext_resource path="res://ui/fonts/Montserrat.ttf" type="DynamicFontData" id=26]
 [ext_resource path="res://entities/player/TradeUI.gd" type="Script" id=27]
 
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1152, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1152, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1152, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1152, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1248, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1248, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1248, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=52]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1248, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1344, 96, 96 )
@@ -91,134 +59,6 @@ region = Rect2( 192, 1440, 96, 96 )
 [sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 1440, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 768, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 864, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 96, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 960, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 1056, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 384, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 480, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 1 )
-region = Rect2( 288, 480, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
@@ -252,6 +92,102 @@ region = Rect2( 192, 288, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 288, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 384, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 480, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1152, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1248, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 960, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 1056, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 1056, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 576, 96, 96 )
@@ -284,31 +220,80 @@ region = Rect2( 192, 672, 96, 96 )
 atlas = ExtResource( 1 )
 region = Rect2( 288, 672, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 96, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 864, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 864, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
-"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
-"loop": true,
-"name": "downIdle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
 "loop": true,
 "name": "downRun",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
 "loop": true,
-"name": "upIdle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "leftIdle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "upRun",
+"name": "leftRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ) ],
@@ -316,15 +301,30 @@ animations = [ {
 "name": "rightIdle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": true,
-"name": "leftRun",
+"name": "downIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "upRun",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "rightRun",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "leftIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "upIdle",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -714,7 +714,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Metal by Any Means"
 research_description = "Unlocks Mining Operation"
 
-[node name="research_7" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_6" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 72.0
@@ -725,7 +725,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Natural Gas is Natural"
 research_description = "Unlocks Gas Power Plant"
 
-[node name="research_8" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_7" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 72.0
@@ -736,7 +736,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Oil is What We Know"
 research_description = "Unlocks Oil Power Plan t"
 
-[node name="research_9" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_8" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 168.0
@@ -747,7 +747,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Efficient Engineering"
 research_description = "Increases build speed by 2.0x"
 
-[node name="research_10" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_9" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 168.0
@@ -758,7 +758,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Advanced Manufacturing"
 research_description = "Increases build speed by 3.0x"
 
-[node name="research_11" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_10" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 168.0
@@ -769,7 +769,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "This is What We've Become"
 research_description = "Pollution damage to player and colonists' health halved"
 
-[node name="research_12" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_11" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
@@ -780,7 +780,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Careful Extraction"
 research_description = "Unlocks Smeltery"
 
-[node name="research_14" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_12" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
@@ -791,7 +791,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness Our Planet's Energy"
 research_description = "Unlocks Geothermal Power Plant"
 
-[node name="research_15" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_13" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 480.0
@@ -802,7 +802,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Harness the Power of the Stars"
 research_description = "Unlocks Nuclear Power Plant"
 
-[node name="research_16" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_14" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 384.0
@@ -813,7 +813,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Advanced Solar Cells"
 research_description = "Increases solar production by 1.5x"
 
-[node name="research_17" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_15" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 384.0
@@ -824,7 +824,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Maximizing Nature's Bounty"
 research_description = "Increases food production by 1.5x"
 
-[node name="research_18" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_16" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 384.0
@@ -835,7 +835,7 @@ rect_scale = Vector2( 0.35, 0.35 )
 research_name = "Maximizing Nature's Bounty II"
 research_description = "Increases metal received from metal deposits by 2.0x"
 
-[node name="research_19" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
+[node name="research_17" parent="UI/ResearchUI/Research_Panel/Research_Btn_Container" instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 280.0

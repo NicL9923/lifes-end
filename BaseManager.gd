@@ -145,7 +145,7 @@ func handle_pollution_damage():
 # Medbay just going to heal colonists - player heals over time
 func handle_medbay():
 	for bldg in buildings:
-		if bldg.daily_colonist_healing_amt != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
+		if is_instance_valid(bldg) and bldg.daily_colonist_healing_amt != null and not bldg.isBeingPlaced and not bldg.isBeingBuilt:
 			# If we find a/the medbay (which will have the above property), go ahead and heal colonists (daily)
 			change_colonists_health(bldg.daily_colonist_healing_amt * Global.modifiers.medbayHealing)
 			return
