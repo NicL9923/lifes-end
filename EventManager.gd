@@ -5,7 +5,7 @@ onready var rain_particles := $ParticleFX/Rain_Particles
 onready var pol_particles := $ParticleFX/Pollution_Particles
 
 const events = {
-	npc_raid = { event_name = "NPC raid", chance = 0.3 },
+	#npc_raid = { event_name = "NPC raid", chance = 0.3 },
 	solar_flare = { event_name = "Solar flare", chance = 0.2 },
 	heat_wave = { event_name = "Heat wave", chance = 0.1 },
 	acidic_rain = { event_name = "Acidic rain", chance = 0.15 },
@@ -46,7 +46,7 @@ func handle_new_day():
 		if Global.playerBaseData.planet == "Mercury" and rand_range(0, 1.0) < events.heat_wave.chance:
 			event_heat_wave()
 			return
-		elif Global.playerBaseData.planet == "Venus" and rand_range(0, 1.0) < events.acidic_rain.chance:
+		elif Global.playerBaseData.planet == "Venus" and rand_range(0, 1.0) < events.acidic_rain.chance * 2: # x2 represents higher chance of natural events on Venus
 			event_acidic_rain()
 			return
 		elif Global.playerBaseData.planet == "Pluto" and rand_range(0, 1.0) < events.intense_freeze.chance:
@@ -56,8 +56,8 @@ func handle_new_day():
 		if rand_range(0, 1.0) < events.solar_flare.chance:
 			event_solar_flare()
 			return
-		else:
-			event_npc_raid()
+		#else:
+			#event_npc_raid()
 
 func clean_up_prev_event():
 	rain_particles.emitting = false
