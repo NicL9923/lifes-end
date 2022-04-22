@@ -27,7 +27,7 @@ func display_planet(planet_index):
 			trait1_lbl.text = "-Sol Amplexus (2.5x solar production)"
 			trait2_lbl.text = "-Resource rich"
 		"Venus":
-			trait1_lbl.text = "-Volatile (more natural events - less raids)"
+			trait1_lbl.text = "-Volatile (more natural events)"
 			trait2_lbl.text = ""
 		"Earth's Moon":
 			trait1_lbl.text = "-Dark Side of the Moon (.75x solar production)"
