@@ -62,6 +62,11 @@ func handle_new_day():
 func clean_up_prev_event():
 	rain_particles.emitting = false
 
+# Solar flare -> energy == 0
+# Heat wave -> daily water cost 2.0x
+# Intense freeze -> movement speed 0.5x; build_speed 0.5x; daily food cost 1.5x
+# Acidic rain -> water production 0.75x; food 0.25x
+
 func event_npc_raid():
 	Global.push_player_notification("Your colony is under attack!")
 
