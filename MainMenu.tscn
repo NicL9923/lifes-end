@@ -2,7 +2,7 @@
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://objects/$plz.png" type="Texture" id=2]
-[ext_resource path="res://audio/music/MainMenu_Song.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/music/LETheme.wav" type="AudioStream" id=3]
 [ext_resource path="res://ui/gameTitle.png" type="Texture" id=4]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/buttons/LE_Arrow_Button.tscn" type="PackedScene" id=6]
@@ -252,9 +252,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -17.479
+autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
@@ -269,7 +274,11 @@ current = true
 position = Vector2( 320, 180 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 47 )
+<<<<<<< Updated upstream
 frame = 7
+=======
+frame = 8
+>>>>>>> Stashed changes
 playing = true
 
 [node name="MainMenuContainer" type="Control" parent="."]
