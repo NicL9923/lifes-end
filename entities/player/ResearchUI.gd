@@ -7,18 +7,18 @@ const research_tree = [
 	{ id = 3, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY } }, # advanced_healthcare
 	{ id = 4, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER } }, # carbon_scrubbing
 	{ id = 5, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION } }, # metal_by_any_means
-	{ id = 7, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [6] }, # natural_gas_is_natural
-	{ id = 8, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [7] }, # oil_is_what_we_know
-	{ id = 9, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_engineering
-	{ id = 10, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 3.0 }, prereqs = [9] }, # advanced_manufacturing
-	{ id = 11, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [10] }, # this_is_what_weve_become
-	{ id = 12, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } }, # careful_extraction
-	{ id = 14, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER }, prereqs = [13] }, # harness_our_planets_energy
-	{ id = 15, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER }, prereqs = [14] }, # harness_the_power_of_the_stars
-	{ id = 16, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } }, # advanced_solar_cells
-	{ id = 17, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.FOOD, value = 1.5 }, prereqs = [16] }, # maximizing_natures_bounty
-	{ id = 18, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE, value = 2.0 }, prereqs = [17] }, # maximizing_natures_bounty_2
-	{ id = 19, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[8, 11], [15, 18]] } # discover_your_fate
+	{ id = 6, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER }, prereqs = [5] }, # natural_gas_is_natural
+	{ id = 7, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER }, prereqs = [6] }, # oil_is_what_we_know
+	{ id = 8, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 2.0 } }, # efficient_engineering
+	{ id = 9, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.BUILD_SPEED, value = 3.0 }, prereqs = [8] }, # advanced_manufacturing
+	{ id = 10, cur_progress = 0, pts_to_complete = 3500, effect = { id = Global.RESEARCH_EFFECTS.POLLUTION_DMG, value = 0.5 }, prereqs = [9] }, # this_is_what_weve_become
+	{ id = 11, cur_progress = 0, pts_to_complete = 1000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY } }, # careful_extraction
+	{ id = 12, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER }, prereqs = [11] }, # harness_our_planets_energy
+	{ id = 13, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER }, prereqs = [12] }, # harness_the_power_of_the_stars
+	{ id = 14, cur_progress = 0, pts_to_complete = 2000, effect = { id = Global.RESEARCH_EFFECTS.SOLAR, value = 1.5 } }, # advanced_solar_cells
+	{ id = 15, cur_progress = 0, pts_to_complete = 3000, effect = { id = Global.RESEARCH_EFFECTS.FOOD, value = 1.5 }, prereqs = [14] }, # maximizing_natures_bounty
+	{ id = 16, cur_progress = 0, pts_to_complete = 4000, effect = { id = Global.RESEARCH_EFFECTS.METAL_DEPOSIT_VALUE, value = 2.0 }, prereqs = [15] }, # maximizing_natures_bounty_2
+	{ id = 17, cur_progress = 0, pts_to_complete = 5000, effect = { id = Global.RESEARCH_EFFECTS.DISCOVER_YOUR_FATE }, ending_prereqs = [[7, 10], [14, 17]] } # discover_your_fate
 ]
 
 export var daily_research_points := 350
@@ -135,11 +135,9 @@ func handle_building_unlock(effect_id):
 		Global.RESEARCH_EFFECTS.UNLOCK_MEDBAY: Global.playerBaseData.unlockedBuildings.append("Medbay")
 		Global.RESEARCH_EFFECTS.UNLOCK_CARBON_SCRUBBER: Global.playerBaseData.unlockedBuildings.append("Carbon_Scrubber")
 		Global.RESEARCH_EFFECTS.UNLOCK_MINING_OPERATION: Global.playerBaseData.unlockedBuildings.append("Mining_Operation")
-		Global.RESEARCH_EFFECTS.UNLOCK_FACTORY: Global.playerBaseData.unlockedBuildings.append("Factory")
 		Global.RESEARCH_EFFECTS.UNLOCK_GAS_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Gas")
 		Global.RESEARCH_EFFECTS.UNLOCK_OIL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Industrial_Oil")
 		Global.RESEARCH_EFFECTS.UNLOCK_SMELTERY: Global.playerBaseData.unlockedBuildings.append("Smeltery")
-		Global.RESEARCH_EFFECTS.UNLOCK_WORKSHOP: Global.playerBaseData.unlockedBuildings.append("Workshop")
 		Global.RESEARCH_EFFECTS.UNLOCK_GEOTHERMAL_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Geothermal")
 		Global.RESEARCH_EFFECTS.UNLOCK_NUCLEAR_POWER: Global.playerBaseData.unlockedBuildings.append("Power_Sustainable_Nuclear")
 	
