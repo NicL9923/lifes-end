@@ -77,6 +77,7 @@ func connect_research_buttons():
 func connect_to_daynight_cycle():
 	# warning-ignore:return_value_discarded
 	get_tree().get_current_scene().get_node("DayNightCycle").connect("day_has_passed", self, "handle_new_day")
+	print('connected to DN cycle')
 
 func handle_new_day():
 	update_current_research()
@@ -145,6 +146,8 @@ func handle_building_unlock(effect_id):
 
 func handle_ending_trigger():
 	# TODO: fade out to white then fade in to ending cinematic
+	
+	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")

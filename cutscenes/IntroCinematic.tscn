@@ -398,7 +398,7 @@ position = Vector2( 320, 180 )
 scale = Vector2( 1.99995, 2.00842 )
 frames = SubResource( 67 )
 animation = "ctsn1"
-frame = 15
+frame = 11
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

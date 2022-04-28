@@ -281,6 +281,7 @@ button_text = "Skip Cutscene"
 margin_top = 254.0
 margin_right = 641.0
 margin_bottom = 360.0
+mouse_filter = 2
 color = Color( 0.0235294, 0.329412, 0.623529, 0.392157 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -303,6 +304,7 @@ __meta__ = {
 [node name="Credits_BG" type="ColorRect" parent="."]
 margin_right = 640.0
 margin_bottom = 362.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 
 [node name="Credits_Lbl" type="Label" parent="."]
