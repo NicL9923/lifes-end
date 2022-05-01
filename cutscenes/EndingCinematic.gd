@@ -7,6 +7,10 @@ extends Node2D
 # Figure out how to show effect of sub (humanity) ending...smoke effects etc on other planets if bad?
 
 func _ready():
+	# TEMPORARY: For final demo, just default showing good-good main/sub endings
+	Global.mainEndingIsGood = true
+	Global.subEndingIsGood = true
+	
 	if Global.mainEndingIsGood:
 		$AnimationPlayer.play("goodMainEnding")
 		yield($AnimationPlayer, "animation_finished")

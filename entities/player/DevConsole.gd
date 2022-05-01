@@ -107,10 +107,11 @@ func execute_dev_commands():
 			3: get_tree().get_current_scene().event_mgr.event_solar_flare()
 	elif cmdTxt[0] == "load_scene" and cmdTxt[1] != null: #load_scene MainWorld
 		var path = "res://" + cmdTxt[1] + ".tscn"
-# warning-ignore:return_value_discarded
-		get_tree().change_scene(path)
+		Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
+		# warning-ignore:return_value_discarded
+		Global.get_tree().change_scene(path)
 		output_to_add.append("Loaded scene " + path)
-		get_tree().paused = false
+		Global.get_tree().paused = false
 	elif cmdTxt[0] == "clear_saves":
 		var file_deleter = Directory.new()
 		file_deleter.open("user://")

@@ -68,7 +68,7 @@ func load_npc_colony():
 		are_enemies_present = true
 		Global.player.toggle_combat(are_enemies_present)
 		
-		if npcColony.isGood:
+		if not npcColony.isGood:
 			Global.add_player_humanity(10)
 			Global.push_player_notification("Your humanity increased by 10!")
 		else:
