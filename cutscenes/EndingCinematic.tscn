@@ -2,7 +2,7 @@
 
 [ext_resource path="res://cutscenes/EndingCinematic.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DynamicFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ui/EmptySpace_Background.png" type="Texture" id=3]
+[ext_resource path="res://cutscenes/stars.png" type="Texture" id=3]
 [ext_resource path="res://ui/buttons/LE_Button.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=7]
@@ -54,6 +54,54 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -1, 376 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ColorRect:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Stars1:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.02031, 2 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Stars2:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.733, 0.716 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Stars3:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.75 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -167,6 +215,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( -1, 376 ), Vector2( 0, -318 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "goodBadSubEnding"
@@ -223,6 +283,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.0, 1.0, 1.0, 0.0, 1.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stars1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2.02031, 2 ), Vector2( 3.25, 3.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Stars2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.733, 0.716 ), Vector2( 0.85, 0.85 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Stars3:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.95 ), Vector2( 0.5, 0.75 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "goodMainEnding"
@@ -265,17 +361,38 @@ anims/goodBadSubEnding = SubResource( 4 )
 anims/goodGoodSubEnding = SubResource( 5 )
 anims/goodMainEnding = SubResource( 6 )
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 320, 180 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
 [node name="Skip_Button" parent="." instance=ExtResource( 4 )]
 margin_left = 509.0
 margin_top = 10.0
 margin_right = 509.0
 margin_bottom = 10.0
 button_text = "Skip Cutscene"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 643.0
+margin_bottom = 361.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars1" type="Sprite" parent="."]
+position = Vector2( 326.5, 180 )
+scale = Vector2( 2.02031, 2 )
+texture = ExtResource( 3 )
+
+[node name="Stars2" type="Sprite" parent="."]
+position = Vector2( 320, 180 )
+scale = Vector2( 0.733, 0.716 )
+texture = ExtResource( 3 )
+
+[node name="Stars3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.521569 )
+position = Vector2( 320, 180 )
+scale = Vector2( 0.5, 0.75 )
+texture = ExtResource( 3 )
 
 [node name="SubtitleBackground" type="ColorRect" parent="."]
 margin_top = 254.0
@@ -333,5 +450,8 @@ Credit to Kenny.nl for button sounds!
 "
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="button_pressed" from="Skip_Button" to="." method="_on_Skip_Button_button_pressed"]
