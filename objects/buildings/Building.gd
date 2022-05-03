@@ -79,7 +79,7 @@ func init(b_key, bldg_template_obj, is_player_bldg := false):
 		if "popup_activation_distance" in bldg_template_obj:
 			popup_activation_distance = bldg_template_obj.popup_activation_distance # TODO: add this to buildings that need something other than the default
 		else:
-			popup_activation_distance = 75
+			popup_activation_distance = 164
 	
 	if "cost_to_recruit_colonist" in bldg_template_obj:
 		cost_to_recruit_colonist = bldg_template_obj.cost_to_recruit_colonist

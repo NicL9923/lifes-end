@@ -150,7 +150,7 @@ func handle_ending_trigger():
 	Global.player.get_parent().remove_child(Global.player) # Necessary to make sure the player node doesn't get automatically freed (aka destroyed)
 	
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
+	Global.get_tree().change_scene("res://cutscenes/EndingCinematic.tscn")
 
 func _on_Close_Button_button_pressed():
 	self.visible = false
